@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,5 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use('/api', routerUsers)
 
 module.exports = app;
