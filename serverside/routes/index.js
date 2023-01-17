@@ -1,17 +1,15 @@
-var express = require('express');
-var router = express.Router();
+var express = require("express");
 const {
   Register,
   Login,
+  Test,
+  Admin,
 } = require("../controllers/users.controllers");
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
 const { AddProfile, FindAllProfiles, FindSingleProfile, DeleteProfile } = require("../controllers/profile.controllers");
-const { Test } = require('../controller/users.controller');
 
-/*test*/
-router.post("/test",Test);
 /* users routes. */
 router.post("/register", Register);
 router.post("/login", Login);
@@ -36,4 +34,3 @@ inRole(ROLES.ADMIN),
 DeleteProfile);
 
 module.exports = router;
-
