@@ -3,7 +3,6 @@ const validator = require("validator");
 
 module.exports = function ValidateRegister(data) {
   let errors = {};
-
   data.name = !isEmpty(data.name) ? data.name : "";
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
