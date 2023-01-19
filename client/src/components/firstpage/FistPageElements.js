@@ -9,7 +9,7 @@ export const Container = styled.div`
   padding: 0 30px;
   height: 800px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   
 `;
 
@@ -22,6 +22,7 @@ export const HeroBg = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
+
 
 `;
 
