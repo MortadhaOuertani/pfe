@@ -36,8 +36,8 @@ export const NavMenu = styled.div`
   margin-right: 10%;
 `
 export const Image = styled.img`
-   height: 130%;
+   height: 210%;
    width: auto;
    margin-left: 70%;
-   margin-top: 15px;
+   margin-bottom: 0px;
 `

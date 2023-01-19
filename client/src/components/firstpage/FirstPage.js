@@ -1,14 +1,21 @@
 import React from 'react';
-import homeimg from '../../images/home.svg';
-import { Container, Left, Right } from './FistPageElements';
+import { Button } from 'semantic-ui-react';
+import Video from '../../video/video.mp4';
+import { Container, HeroBg, VideoBg, HeroContent, HeroH1, HeroBtn, HeroP } from './FistPageElements';
 
 const FirstPage = () => {
   return (
     <Container>
-      <Left>
-        Welcome to our website
-      </Left>
-      <Right src={homeimg}/>
+      <HeroBg>
+        <VideoBg autoPlay loop muted src={Video} type='video/mp4' />
+      </HeroBg>
+      <HeroContent>
+        <HeroH1>Find your job on Hire Lab</HeroH1>
+        <HeroP>Sign up for new account and find a job .</HeroP>
+        <HeroBtn>
+          <Button>Get started</Button>
+        </HeroBtn>
+      </HeroContent>
       
     </Container>
   )
