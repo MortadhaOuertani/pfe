@@ -1,16 +1,29 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink as Link } from 'react-router-dom';
+
 
 export const Container = styled.div`
   background: #0c0c0c;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 30px;
-  height: 800px;
+  height: 100vh;
   position: relative;
-  z-index: 2;
-  
+  z-index: 1;
+  :before{
+    position: relative;
+    content:"";
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    right:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100% ),
+    linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 100%);
+    z-index:2;
+  }
+
 `;
 
 export const HeroBg = styled.div`
@@ -32,6 +45,7 @@ export const VideoBg = styled.video`
   -o-object-fit: cover;
   object-fit: cover;
   background: #232a34;
+  filter: blur(3px);
 
 `;
 
@@ -43,6 +57,7 @@ export const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 `;
 
 export const HeroH1 = styled.div`
@@ -71,14 +86,23 @@ export const HeroP = styled.div`
   }
 `
 export const HeroBtn = styled.div`
-  margin-top: 32px;
-  display: flex;
-  flex-direction:column;
-  align-items: center;
+margin-top:30px;
+
+`
+export const Button = styled(Link)`
+text-decoration: none;
+transition: all 0.1s ease-in-out;
+padding: 10px 20px;
+color: black;
+border-radius: 50px;
+z-index: 4;
+background-color:white;
+&:hover{
   border-radius: 50px;
-  cursor: pointer;
-  justify-content: center;
-  transition: all 0.2 ease-in-out;
-  background:black;
+  transition: all 0.1s ease-in-out;
+  background-color: black;
+  color:white;
+
+}
 
 `

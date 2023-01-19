@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
 import Video from '../../video/video.mp4';
-import { Container, HeroBg, VideoBg, HeroContent, HeroH1, HeroBtn, HeroP } from './FistPageElements';
+import { Container, HeroBg, VideoBg, HeroContent, HeroH1, HeroBtn, HeroP, Button } from './FistPageElements';
 
 const FirstPage = () => {
   return (
