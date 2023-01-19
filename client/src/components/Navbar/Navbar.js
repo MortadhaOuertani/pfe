@@ -5,7 +5,7 @@ import {
   NavMenu,
   Image
 } from './NavbarElements';
-import logo from '../../images/logo.jpg';
+import logo from '../../images/logo.png';
 
 
 const Navbar = () => {
