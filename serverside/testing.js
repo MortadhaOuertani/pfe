@@ -3,9 +3,9 @@ const fs = require('fs');
 const pdf = require('pdf-parse');
 
 
-let dataBuffer = fs.readFileSync('./Mariem.pdf');
+let dataBuffer = fs.readFileSync('./Mariem.pdf');  //read pdf files
  
-pdf(dataBuffer).then(function(data) {
+pdf(dataBuffer).then(function(data) {  
  
     let text = data.text.split(" ");
     let s=0
@@ -16,13 +16,9 @@ pdf(dataBuffer).then(function(data) {
         }
     }
 
-    console.log(data.text);
-    console.log(text);
-    console.log(" React existe: "+s+" fois");
-    console.log("\t ")
-    console.log("\t ")
-    console.log("\t ")
-    console.log("\t ")
-    console.log("\t ")
+    console.log(data.text); //afficher tous les textes de pdf
+    console.log(text); //afficher les textes séparées par une espace 
+    console.log(" React existe: "+s+" fois"); 
+    
 
 });
