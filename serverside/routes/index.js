@@ -1,4 +1,5 @@
 var express = require("express");
+const aaa = require("../testing")
 const {
   Register,
   Login,
@@ -12,6 +13,7 @@ const { AddProfile, FindAllProfiles, FindSingleProfile, DeleteProfile } = requir
 
 /* users routes. */
 router.post("/register", Register);
+router.get("/aaa",aaa);
 router.post("/login", Login);
 
 /* add profile route */
