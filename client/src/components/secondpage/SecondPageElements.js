@@ -28,12 +28,16 @@ export const Right = styled.div`
 `;
 
 export const Left = styled.div`
+transition: all 4s ease-in-out;
   width: 100%;
+  position: relative;
+  
   display: flex;
   text-align: start;
   padding-top: 70px;
   padding-left: 30px;
   flex-direction:column;
+  
 `
 ;
 
@@ -41,14 +45,27 @@ export const Image = styled.img`
   width: auto;
   height: 300px;
   border-radius: 10px;
+  opacity:${({show}) => (show?"1":"0")} ;
+  top:${({show}) => (show?"0px":"50px")};
+  transition: all 2s;
+  position: relative;
 `;
 
 export const Title1 = styled.h2`
   font-size: 30px;
-  color: black;
+  transition: all 2s;
+  position: relative;
+  color: #29aacd;
+  opacity:${({show}) => (show?"1":"0")} ;
+  top:${({show}) => (show?"0px":"50px")};
   margin-left: 15px;
 `;
 
 export const Parag1 = styled.h4`
 margin-left: 30px;
+margin-top: 30px;
+transition: all 2s;
+position: relative;
+opacity:${({show}) => (show?"1":"0")} ;
+top:${({show}) => (show?"0px":"50px")};
 `;
