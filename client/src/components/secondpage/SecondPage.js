@@ -12,6 +12,8 @@ const SecondPage = () => {
     if (window.scrollY>=200){
       setShow(true)
     }
+    else
+    setShow(false)
   
   }
 useEffect(()=>{

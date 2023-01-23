@@ -28,7 +28,7 @@ export const Right = styled.div`
 `;
 
 export const Left = styled.div`
-transition: all 4s ease-in-out;
+transition: all 2s ease-in-out;
   width: 100%;
   position: relative;
   
@@ -47,13 +47,13 @@ export const Image = styled.img`
   border-radius: 10px;
   opacity:${({show}) => (show?"1":"0")} ;
   top:${({show}) => (show?"0px":"50px")};
-  transition: all 2s;
+  transition: all 1.5s;
   position: relative;
 `;
 
 export const Title1 = styled.h2`
   font-size: 30px;
-  transition: all 2s;
+  transition: all 1.5s;
   position: relative;
   color: #29aacd;
   opacity:${({show}) => (show?"1":"0")} ;
@@ -64,7 +64,7 @@ export const Title1 = styled.h2`
 export const Parag1 = styled.h4`
 margin-left: 30px;
 margin-top: 30px;
-transition: all 2s;
+transition: all 1.5s;
 position: relative;
 opacity:${({show}) => (show?"1":"0")} ;
 top:${({show}) => (show?"0px":"50px")};
