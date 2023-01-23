@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { MdLocationOn,MdEmail } from 'react-icons/md';
+import { MdLocationOn,MdEmail,MdPhoneIphone } from 'react-icons/md';
 import { Container, Copyright, Info, Line } from './ThirdPageElements';
 
 const ThirdPage = () => {
@@ -15,10 +15,10 @@ const ThirdPage = () => {
           <MdLocationOn style={{color:"white"}}/><p style={{color:"white"}}>Tunisia , Centre Urbain Nord</p>
         </Line>
         <Line>
-        <MdEmail style={{color:"white"}}/><p style={{color:"white"}}>+216 71852741</p>
+        <MdPhoneIphone style={{color:"white"}}/><p style={{color:"white"}}>+216 71852741</p>
         </Line>
         <Line>
-        <MdLocationOn style={{color:"white"}}/><p style={{color:"white"}}>hirelab@gmail.com</p>
+        <MdEmail style={{color:"white"}}/><p style={{color:"white"}}>hirelab@gmail.com</p>
         </Line>
       </Info>
       <Copyright>

@@ -18,14 +18,14 @@ border-radius: 20px;
 background-color:#343434 ;   
 flex-direction: column;
 row-gap: 10px;
-`
+`;
 export const Line= styled.div`
 display: flex;
 flex-direction: row;
 column-gap: 20px;
-`
+`;
 export const Copyright = styled.div`
 display:flex;
 margin-top:20px;
 flex-direction: row;
-`
+`;
