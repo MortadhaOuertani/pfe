@@ -1,6 +1,6 @@
 import React from 'react'
 import image from '../../images/register.svg';
-import { Container, Form, H1, Header, Image, Input, LeftSide, RightSide, SmallerContainer, BtnRadio, Inputcontainer, Label, InputRadio, BtnSubmit } from './RegisterElements';
+import { Container, Form, H1, Header, Image, Input, LeftSide, RightSide, SmallerContainer, BtnRadio, Inputcontainer, Label, InputRadio, BtnSubmit, P, Link } from './RegisterElements';
 const Register = () => {
   return (
     <Container>
@@ -21,7 +21,7 @@ const Register = () => {
         </LeftSide>
         <RightSide>
           <Image src={image} />
-
+            <P>If you have an account<Link to='/login'>Click Here</Link></P>
         </RightSide>
       </SmallerContainer>
     </Container>

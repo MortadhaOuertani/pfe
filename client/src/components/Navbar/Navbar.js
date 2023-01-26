@@ -11,7 +11,7 @@ import logo from '../../images/logo.png';
 const Navbar = () => {
   return (
     <Nav>
-      <NavLink>
+      <NavLink to='/' >
         <Image src={logo} />
       </NavLink>
       <NavMenu>

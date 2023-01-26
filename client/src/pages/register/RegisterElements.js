@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { NavLink as Links } from 'react-router-dom';
+
 
 
 export const Container = styled.div`
@@ -9,6 +11,7 @@ export const Container = styled.div`
  height:100vh ;
  width: 100%;
 `;
+
 
 export const SmallerContainer = styled.div`
  display: flex;
@@ -50,6 +53,7 @@ export const RightSide = styled.div`
  align-items: center;
  display: flex ;
  justify-content: center;
+ flex-direction: column;
 
 `;
 
@@ -115,4 +119,12 @@ export const BtnSubmit=styled.button`
   border: transparent;
   margin-right: 20%;
   cursor: pointer;
-`
+`;
+
+export const P =styled.p`
+ 
+`;
+
+export const Link = styled(Links)`
+  margin-left: 10px;
+`;
