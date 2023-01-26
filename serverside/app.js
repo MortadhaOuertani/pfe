@@ -7,9 +7,11 @@ var cors= require("cors");
 const mongoose = require('mongoose')
 var indexRouter = require('./routes/index');
 const passport = require('passport')
-
+var corsOptions = {
+    origin: ['http://localhost:3000'],
+  }
 var app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,7 +25,8 @@ require('./security/passport')(passport)
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("connected to db"))
 .catch(err=>console.log(err))
-app.use('/api', indexRouter);
+
+app.use('/api', indexRouter); //pour utiliser les routes qui existent dans indexRouter 
 
 
 module.exports = app;

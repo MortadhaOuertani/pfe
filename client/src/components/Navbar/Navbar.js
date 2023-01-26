@@ -8,10 +8,11 @@ import {
 import logo from '../../images/logo.png';
 
 
-const Navbar = () => {
+const Navbar = ({user}) => {
   return (
     <Nav>
       <NavLink>
+       {user.role === "ADMIN"?"ADMIN":""}
         <Image src={logo} />
       </NavLink>
       <NavMenu>
