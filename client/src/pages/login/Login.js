@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault(); //ne refraichir pas la page pour ne perdre pas les données 
     dispatch(LoginAction(form, navigate))//appeler la fonction loginAction qui se trouve dans le store 
   }
-  
+
   return (
     <>
       <Container><FormContainer>
@@ -29,13 +29,6 @@ const Login = () => {
           </Header>
           <Form onSubmit={onSubmit}>
 
-                <Input onChange={onChangeHandler} name="email"
-               type='email' required placeholder='Email' />
-               {errors.email}
-            <br/>
-            <Input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' />
-            <br/>
-            <InputBtn type="submit" value="Login"/>
             <Input onChange={onChangeHandler} name="email"
               type='email' required placeholder='Email' />
             {errors.email}
