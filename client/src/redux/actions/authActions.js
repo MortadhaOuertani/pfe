@@ -23,10 +23,10 @@ export const LoginAction = (form, navigate)=>dispatch  => {
     })
         .then(res => {
             navigate('/')
-            const { token } = res.data
-            localStorage.setItem('jwt', token)
-            const decode = jwt_decode(token)
-            dispatch(setUser(decode))
+            const { token } = res.data //met le token (backend) dans un variable appelée token(frontend) de type objet {}
+            localStorage.setItem('jwt', token)//met le token dans localstorage (browser) clé : jwt   valeur : token
+            const decode = jwt_decode(token)//décriptage de token pour accéder aux email,name,...
+            dispatch(setUser(decode))//envoyer le nom,email,...
             setAuth(token)
         })
         .catch(err => {
