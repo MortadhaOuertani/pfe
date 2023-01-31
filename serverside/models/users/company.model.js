@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserModel = new Schema({
+const CompanyModel = new Schema(
+  {
     email: {
         type: "string",
         trim: true,
@@ -12,6 +13,12 @@ const UserModel = new Schema({
     confirm:"string",
     logo:"string",
     role:"string",
-}, {timestamps: true})
+    address:"string",
+    phone:"string"
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model("users", UserModel);
+module.exports = mongoose.model("company", CompanyModel);
