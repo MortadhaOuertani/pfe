@@ -28,13 +28,11 @@ const Login = () => {
           </Header>
           <Form onSubmit={onSubmit}>
 
-            <Input onChange={onChangeHandler} name="email" type='email' required placeholder='Email' />
                 <Input onChange={onChangeHandler} name="email"
                type='email' required placeholder='Email' />
                {errors.email}
             <br/>
-            <input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' />
-            {/* <Input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' /> */}
+            <Input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' />
             <br/>
             <InputBtn type="submit" value="Login"/>
 
