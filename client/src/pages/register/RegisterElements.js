@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { NavLink as Links } from 'react-router-dom';
 
 
-export const Container = styled.div`
+
+export const Container = styled.div` 
  display: flex;
  justify-content: center;
  align-items: center;
@@ -9,6 +11,7 @@ export const Container = styled.div`
  height:100vh ;
  width: 100%;
 `;
+
 
 export const SmallerContainer = styled.div`
  display: flex;
@@ -37,6 +40,7 @@ export const Form = styled.form`
 `;
 
 
+
 export const Header = styled.div`
   display: flex;
   width:100%;
@@ -50,6 +54,7 @@ export const RightSide = styled.div`
  align-items: center;
  display: flex ;
  justify-content: center;
+ flex-direction: column;
 
 `;
 
@@ -67,20 +72,7 @@ export const Image = styled.img`
  margin-right: 50px;
 `;
 
-export const Input = styled.input`
-  margin-left: 30px;
-  align-self: flex-start;
-  margin-top: 40px;
-  border-top: transparent;
-  border-left: transparent;
-  border-right: transparent;
-  border-bottom: 1px solid grey ;
-  width:50%;
-  &:focus{
-    outline:none;
-  }
 
-`;
 
 export const BtnRadio=styled.div`
   display: flex;
@@ -115,4 +107,12 @@ export const BtnSubmit=styled.button`
   border: transparent;
   margin-right: 20%;
   cursor: pointer;
-`
+`;
+
+export const P =styled.p`
+ 
+`;
+
+export const Link = styled(Links)`
+  margin-left: 10px;
+`;

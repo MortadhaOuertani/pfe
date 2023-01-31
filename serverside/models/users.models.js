@@ -6,7 +6,7 @@ const UserModel = new Schema({
         type: "string",
         trim: true,
         unique: true,
-      },
+      }, 
     name : "string",
     password: "string",
     confirm:"string",

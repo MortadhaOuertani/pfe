@@ -7,7 +7,7 @@ const UserProfile = new Schema(
       type: Schema.Types.ObjectId,
       ref: "users",
       required: true
-    },
+    }, //clé étrangère de la table mère user 
     tel: "string",
     city: "string",
     country: "string",

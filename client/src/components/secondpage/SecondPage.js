@@ -18,13 +18,13 @@ const SecondPage = () => {
   }
 useEffect(()=>{
   setShow(false)
-  window.addEventListener("scroll",Changeview)
+  window.addEventListener("scroll",Changeview) //when you scroll the page the view change
 },[])
   return (
     <Container>
       <SmallerContainer>
       <Left ref={ref} className={inView?"animatebox":""}>
-        <Title1 show={show}>ABOUT US</Title1> 
+        <Title1 show={show}>ABOUT US</Title1>  
         <Parag1 show={show}>We are a company thatLorem Ipsum is simply dummy text of the printing
            and typesetting industry. Lorem Ipsum has been the industry's standard
             dummy text ever since the 1500s, when an unknown printer took
