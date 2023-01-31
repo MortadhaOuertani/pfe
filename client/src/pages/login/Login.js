@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, InputBtn, Form, FormContainer, H1, Header, Img, Input, Left, Right, Span, P, Link } from './LoginElements'
+import { Container, InputBtn, Form, FormContainer, H1, Header, Img, Input, Left, Right, Span } from './LoginElements'
 import login from '../../images/login.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -19,7 +19,6 @@ const Login = () => {
     e.preventDefault(); //ne refraichir pas la page pour ne perdre pas les données 
     dispatch(LoginAction(form, navigate))//appeler la fonction loginAction qui se trouve dans le store 
   }
-  
   return (
     <>
       <Container><FormContainer>
@@ -29,13 +28,6 @@ const Login = () => {
           </Header>
           <Form onSubmit={onSubmit}>
 
-                <Input onChange={onChangeHandler} name="email"
-               type='email' required placeholder='Email' />
-               {errors.email}
-            <br/>
-            <Input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' />
-            <br/>
-            <InputBtn type="submit" value="Login"/>
             <Input onChange={onChangeHandler} name="email"
               type='email' required placeholder='Email' />
             {errors.email}
@@ -49,8 +41,7 @@ const Login = () => {
         </Left>
         <Right>
           <Img src={login}></Img>
-          <P>If you don't have an account<Link to='/register'>Click Here</Link></P>
-
+          <p><Span></Span></p>
         </Right>
       </FormContainer></Container>
     </>
