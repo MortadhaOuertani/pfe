@@ -7,7 +7,12 @@ module.exports = function ValidateRegister(data) {
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
   data.confirm = !isEmpty(data.confirm) ? data.confirm : "";
-//nzyd les champs ely zednehom fel front 
+  data.logo = !isEmpty(data.logo) ? data.logo : "";
+  data.address = !isEmpty(data.address) ? data.address : "";
+  data.phone = !isEmpty(data.phone) ? data.phone : "";
+
+
+
   if (validator.isEmpty(data.name)) {
     errors.name = "Required name";
   }
@@ -22,6 +27,12 @@ module.exports = function ValidateRegister(data) {
   }
   if(!validator.equals(data.password, data.confirm)){
     errors.confirm = "Passwords not matches";
+  }
+  if (validator.isEmpty(data.address)) {
+    errors.address = "Required address";
+  }
+  if (validator.isEmpty(data.phone)) {
+    errors.phone = "Required phone";
   }
   if (validator.isEmpty(data.confirm)) {
     errors.confirm = "Required confirm";
