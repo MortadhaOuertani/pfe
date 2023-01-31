@@ -5,7 +5,7 @@ import { setAuth } from "../../util/setAuth"
 
 export const Registration = (form, navigate) => dispatch => {
     axios.post('http://localhost:3600/api/register').then(res => {
-        navigate('/login')
+        navigate('/')
         dispatch({ type: ERRORS, payload: {} })
     }).catch(err => {
         dispatch({
