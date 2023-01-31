@@ -3,7 +3,7 @@ import { NavLink as Links } from 'react-router-dom';
 
 
 
-export const Container = styled.div`
+export const Container = styled.div` 
  display: flex;
  justify-content: center;
  align-items: center;
@@ -40,6 +40,7 @@ export const Form = styled.form`
 `;
 
 
+
 export const Header = styled.div`
   display: flex;
   width:100%;
@@ -71,20 +72,7 @@ export const Image = styled.img`
  margin-right: 50px;
 `;
 
-export const Input = styled.input`
-  margin-left: 30px;
-  align-self: flex-start;
-  margin-top: 40px;
-  border-top: transparent;
-  border-left: transparent;
-  border-right: transparent;
-  border-bottom: 1px solid grey ;
-  width:50%;
-  &:focus{
-    outline:none;
-  }
 
-`;
 
 export const BtnRadio=styled.div`
   display: flex;

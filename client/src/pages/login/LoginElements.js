@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { NavLink as Links } from 'react-router-dom';
+
 
 export const Container = styled.div`
 height: 100vh;
@@ -37,6 +39,7 @@ height: 80%;
 display: flex;
 justify-content:center;
 align-items: center;
+flex-direction: column;
 `
 
 export const Header = styled.div`
@@ -90,4 +93,13 @@ color: white;
 border: transparent;
 margin-right: 20%;
 cursor: pointer;
-`
+`;
+export const P =styled.p`
+  margin-top: 10px;
+
+`;
+
+export const Link = styled(Links)`
+  margin-left: 10px;
+
+`;

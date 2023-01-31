@@ -10,13 +10,9 @@ import logo from '../../images/logo.png';
 
 const Navbar = ({user}) => {
   return (
-    <Nav>
-<<<<<<< HEAD
-      <NavLink to='/' >
-=======
-      <NavLink>
+    <Nav> 
+      <NavLink to='/'>
        {user.role === "ADMIN"?"ADMIN":""}
->>>>>>> 584e09d840f4f6bb64970885e51fb5affcd03243
         <Image src={logo} />
       </NavLink>
       <NavMenu>

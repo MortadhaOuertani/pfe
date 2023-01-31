@@ -7,7 +7,7 @@ module.exports = function ValidateRegister(data) {
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
   data.confirm = !isEmpty(data.confirm) ? data.confirm : "";
-
+//nzyd les champs ely zednehom fel front 
   if (validator.isEmpty(data.name)) {
     errors.name = "Required name";
   }
