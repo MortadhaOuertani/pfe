@@ -44,7 +44,6 @@ const RegisterCompany = async (req, res) => {
     res.status(404).json(error.message);
   }
 };
-
 const Login = async(req, res)=>{
   const {errors, isValid} = ValidateLogin(req.body)
  try {
@@ -52,10 +51,12 @@ const Login = async(req, res)=>{
      res.status(404).json(errors)
     }else{
       UserModel.findOne({email: req.body.email})
+      CompanyModel.findOne({email: req.body.email})
     .then(user=>{
       if(!user){
         errors.email = "user not found "
         res.status(404).json(errors)
+
       }else{
         bcrypt.compare(req.body.password, user.password)
         .then(isMatch=>{

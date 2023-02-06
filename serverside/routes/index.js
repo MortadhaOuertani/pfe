@@ -1,7 +1,6 @@
 var express = require("express");
 //const aaa = require("../controllers/testing")
 const {
-  Register,
   Login,
   Test,
   Admin,
@@ -19,7 +18,8 @@ router.post("/register/company", RegisterCompany);
 
 
 //router.get("/aaa",aaa);
-router.post("/login", Login);
+
+router.post("/login",Login);
 
 /* add profile route */
 router.post("/profiles", 
