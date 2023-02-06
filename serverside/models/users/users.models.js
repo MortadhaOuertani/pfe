@@ -20,4 +20,4 @@ const UserModel = new Schema({
     niveauEtude:"string",
   }, {timestamps: true})
 
-module.exports = mongoose.model("users", UserModel);
+module.exports = mongoose.model("candidates", UserModel);

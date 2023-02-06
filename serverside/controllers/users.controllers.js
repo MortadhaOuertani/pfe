@@ -1,9 +1,10 @@
-const UserModel = require("../models/users.models");
-const ValidateLogin = require("../validation/Login");
+const UserModel = require("../models/users/users.models");
+const CompanyModel = require("../models/users/company.model");
+const ValidateLogin = require("../validation/Login")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const Register = async (req, res) => {
-  try {
+const RegisterCandidate = async (req, res) => {
+  try { 
       UserModel.findOne({ email: req.body.email }).then(async(exist) => {
         if (exist) {
           errors.email = "user exist";
@@ -14,6 +15,27 @@ const Register = async (req, res) => {
           req.body.password = hash;
           req.body.role = "USER";
           await UserModel.create(req.body);
+          res.status(200).json({ message: "success" });
+        }
+      });
+    }
+   catch (error) {
+    res.status(404).json(error.message);
+  }
+};
+
+const RegisterCompany = async (req, res) => {
+  try { 
+      CompanyModel.findOne({ email: req.body.email }).then(async(exist) => {
+        if (exist) {
+          errors.email = "user exist";
+          res.status(404).json(errors);
+        } else {
+          const salt =  bcrypt.genSaltSync(10)
+          const hash =   bcrypt.hashSync(req.body.password, salt)//hashed password
+          req.body.password = hash;
+          req.body.role = "USER";
+          await CompanyModel.create(req.body);
           res.status(200).json({ message: "success" });
         }
       });
@@ -70,7 +92,8 @@ const Admin = (req, res)=>{
 }
 
 module.exports = {
-  Register,
+  RegisterCandidate,
+  RegisterCompany,
   Login,
   Test,
   Admin

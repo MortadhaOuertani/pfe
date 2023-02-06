@@ -5,6 +5,8 @@ const {
   Login,
   Test,
   Admin,
+  RegisterCompany,
+  RegisterCandidate,
 } = require("../controllers/users.controllers");
 var router = express.Router();
 const passport = require("passport");
@@ -12,7 +14,10 @@ const { ROLES, inRole } = require("../security/Rolemiddleware");
 const { AddProfile, FindAllProfiles, FindSingleProfile, DeleteProfile } = require("../controllers/profile.controllers");
 
 /* users routes. */
-router.post("/register", Register);
+router.post("/register/candidate", RegisterCandidate);
+router.post("/register/company", RegisterCompany);
+
+
 //router.get("/aaa",aaa);
 router.post("/login", Login);
 
