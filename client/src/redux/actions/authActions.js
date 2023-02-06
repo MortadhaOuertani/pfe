@@ -3,10 +3,10 @@ import { ERRORS, SET_USER } from "../types"
 import jwt_decode from 'jwt-decode'
 import { setAuth } from "../../util/setAuth"
 
-export const Registration = (form, navigate) => dispatch => {
-    axios.post('http://localhost:3600/api/register').then(res => {
+export const RegistrationCandidate = (form, navigate) => dispatch => {
+    axios.post('http://localhost:3600/api/register/candidate',form).then(res => {
         navigate('/')
-        dispatch({ type: ERRORS, payload: {} })
+        dispatch({ type:ERRORS, payload: {} })
     }).catch(err => {
         dispatch({
             type: ERRORS,
@@ -14,7 +14,19 @@ export const Registration = (form, navigate) => dispatch => {
 
         })
     })
-}
+} 
+export const RegistrationCompany = (form, navigate) => dispatch => {
+    axios.post('http://localhost:3600/api/register/company',form).then(res => {
+        navigate('/')
+        dispatch({ type:ERRORS, payload: {} })
+    }).catch(err => {
+        dispatch({
+            type: ERRORS,
+            payload: err.response.data
+
+        })
+    })
+} 
 export const LoginAction = (form, navigate)=>dispatch  => {
     axios.post('http://localhost:3600/api/login', form, {
         headers: {
@@ -23,10 +35,10 @@ export const LoginAction = (form, navigate)=>dispatch  => {
     })
         .then(res => {
             navigate('/')
-            const { token } = res.data //met le token (backend) dans un variable appelée token(frontend) de type objet {}
-            localStorage.setItem('jwt', token)//met le token dans localstorage (browser) clé : jwt   valeur : token
-            const decode = jwt_decode(token)//décriptage de token pour accéder aux email,name,...
-            dispatch(setUser(decode))//envoyer le nom,email,...
+            const { token } = res.data
+            localStorage.setItem('jwt', token)
+            const decode = jwt_decode(token)
+            dispatch(setUser(decode))
             setAuth(token)
         })
         .catch(err => {
