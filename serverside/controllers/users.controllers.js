@@ -54,7 +54,7 @@ const Login = async(req, res)=>{
       UserModel.findOne({email: req.body.email})
     .then(user=>{
       if(!user){
-        errors.email = "not found user"
+        errors.email = "user not found "
         res.status(404).json(errors)
       }else{
         bcrypt.compare(req.body.password, user.password)

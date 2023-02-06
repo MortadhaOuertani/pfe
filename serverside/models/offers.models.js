@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AdminModel = new Schema({
+const OfferModule = new Schema({
     dateE:Date,
     dateD:Date,
     nbrRecrute:Number,
@@ -17,4 +17,4 @@ const AdminModel = new Schema({
 
   }, {timestamps: true})
 
-module.exports = mongoose.model("admin", AdminModel);
+module.exports = mongoose.model("admin", OfferModule);
