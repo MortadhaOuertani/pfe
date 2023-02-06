@@ -27,6 +27,7 @@ export const RegistrationCompany = (form, navigate) => dispatch => {
         })
     })
 } 
+
 export const LoginAction = (form, navigate)=>dispatch  => {
     axios.post('http://localhost:3600/api/login', form, {
         headers: {

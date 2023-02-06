@@ -15,6 +15,7 @@ import jwt_decode from "jwt-decode";
 import { setAuth } from './util/setAuth.js';
 import OffersPage from './pages/offerspage/offerspage.js';
 import OfferDetails from './pages/offerspage/offerDetails.js';
+import Post from './pages/postingoffers/post.js';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -47,7 +48,7 @@ function App() {
         <Route path='/formCompany' element={<FormCompany />} />
         <Route path='/offers' element={<OffersPage/>} />
         <Route path='/offerdetails' element={<OfferDetails/>} />
-       
+        <Route path='/postoffer' element={<Post/>} />
       </Routes>
     </Router>
   )
