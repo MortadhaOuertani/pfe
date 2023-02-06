@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const OfferModule = new Schema({
+const OffersModule = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "users",
+    required: true
+  }, //clé étrangère de la table mère user 
     dateE:Date,
     dateD:Date,
     nbrRecrute:Number,
@@ -17,4 +22,4 @@ const OfferModule = new Schema({
 
   }, {timestamps: true})
 
-module.exports = mongoose.model("admin", OfferModule);
+module.exports = mongoose.model("offers", OffersModule);
