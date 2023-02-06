@@ -14,6 +14,7 @@ import store from './redux/store';
 import jwt_decode from "jwt-decode";
 import { setAuth } from './util/setAuth.js';
 import OffersPage from './pages/offerspage/offerspage.js';
+import OfferDetails from './pages/offerspage/offerDetails.js';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -45,6 +46,8 @@ function App() {
         <Route path='/formCandidate' element={<FormCandidate />} />
         <Route path='/formCompany' element={<FormCompany />} />
         <Route path='/offers' element={<OffersPage/>} />
+        <Route path='/offerdetails' element={<OfferDetails/>} />
+       
       </Routes>
     </Router>
   )
