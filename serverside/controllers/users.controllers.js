@@ -1,4 +1,4 @@
-const UserModel = require("../models/users.models");
+const UserModel = require("../models/users/users.models");
 const ValidateLogin = require("../validation/Login");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
@@ -22,7 +22,6 @@ const Register = async (req, res) => {
     res.status(404).json(error.message);
   }
 };
-
 const Login = async(req, res)=>{
   const {errors, isValid} = ValidateLogin(req.body)
  try {
@@ -32,7 +31,7 @@ const Login = async(req, res)=>{
       UserModel.findOne({email: req.body.email})
     .then(user=>{
       if(!user){
-        errors.email = "not found user"
+        errors.email = "user not found "
         res.status(404).json(errors)
       }else{
         bcrypt.compare(req.body.password, user.password)
