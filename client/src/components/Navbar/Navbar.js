@@ -12,7 +12,7 @@ const Navbar = ({user}) => {
   return (
     <Nav> 
       <NavLink to='/'>
-       {user.role === "ADMIN"?"ADMIN":"Admin"}
+       {user.role === "ADMIN"?"ADMIN":""}
         <Image src={logo} />
       </NavLink>
       <NavMenu>

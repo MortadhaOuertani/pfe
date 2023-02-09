@@ -10,7 +10,7 @@ const {
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
-const { AddProfile, FindAllProfiles, FindSingleProfile, DeleteProfile } = require("../controllers/profile.controllers");
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers } = require("../controllers/offer.controllers");
 
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
@@ -21,23 +21,19 @@ router.post("/register/company", RegisterCompany);
 
 router.post("/login",Login);
 
-/* add profile route */
-router.post("/profiles", 
+/* add offers route */
+router.post("/offers",passport.authenticate("jwt",{ session: false }),Addoffers);//passport pour donné l'autorisation
+/* get all offers */
+router.get("/offers", 
 passport.authenticate("jwt", { session: false }),
-AddProfile);
-/* get all profiles */
-router.get("/profiles", 
+FindAlloffers);
+/* get one offers */
+router.get("/offers", 
 passport.authenticate("jwt", { session: false }),
-inRole(ROLES.ADMIN),
-FindAllProfiles);
-/* get one profiles */
-router.get("/profile", 
+FindSingleoffers);
+/* delete offers */
+router.delete("/offers/:id", 
 passport.authenticate("jwt", { session: false }),
-FindSingleProfile);
-/* delete profiles */
-router.delete("/profiles/:id", 
-passport.authenticate("jwt", { session: false }),
-inRole(ROLES.ADMIN),
-DeleteProfile);
+Deleteoffers);
 
 module.exports = router;
