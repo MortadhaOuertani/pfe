@@ -22,9 +22,7 @@ router.post("/register/company", RegisterCompany);
 router.post("/login",Login);
 
 /* add offers route */
-router.post("/offers", 
-passport.authenticate("jwt", { session: false }),
-Addoffers);
+router.post("/offers",passport.authenticate("jwt",{ session: false }),Addoffers);//passport pour donné l'autorisation
 /* get all offers */
 router.get("/offers", 
 passport.authenticate("jwt", { session: false }),
@@ -36,7 +34,6 @@ FindSingleoffers);
 /* delete offers */
 router.delete("/offers/:id", 
 passport.authenticate("jwt", { session: false }),
-inRole(ROLES.ADMIN),
 Deleteoffers);
 
 module.exports = router;

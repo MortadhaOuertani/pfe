@@ -15,7 +15,7 @@ import jwt_decode from "jwt-decode";
 import { setAuth } from './util/setAuth.js';
 import OffersPage from './pages/offerspage/offerspage.js';
 import OfferDetails from './pages/offerspage/offerDetails.js';
-import Post from './pages/postingoffers/post.js';
+import Post from './pages/offerspage/offerspage.js';
 
 function App() {
   const auth = useSelector(state => state.auth)

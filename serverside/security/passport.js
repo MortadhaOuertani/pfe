@@ -1,15 +1,14 @@
-const UserModel = require("../models/users/users.models");
+const CompanyModel = require("../models/users/company.model");
 
 var JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.PRIVATE_KEY;
-
+opts.secretOrKey ="HDYHHSY6";
 module.exports = (passport) => {
   passport.use(
     new JwtStrategy(opts, function (jwt_payload, done) {
-      UserModel.getUserById( jwt_payload._id , function (err, user) {
+      CompanyModel.findOne( {_id: jwt_payload.id }, function (err, user) {
         if (err) {
           return done(err, false);
         }

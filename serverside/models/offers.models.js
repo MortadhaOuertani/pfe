@@ -2,23 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const OffersModule = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
-    required: true
-  }, //clé étrangère de la table mère user 
+  company:String
+, //clé étrangère de la table mère user 
     dateE:Date,
     dateD:Date,
     nbrRecrute:Number,
-    contract:"string",
-    salary:"string",
-    study:"string",
-    language:"string",
-    experience:"string",
-    title:"string",
-    descripion:"string",
-    search:[],
-    title:"string",
+    contract:String,
+    salary:String,
+    study:String,
+    language:String,
+    experience:String,
+    title:String,
+    descripion:String,
+    search:[{
+      type:String
+    }],
+    title:String,
 
   }, {timestamps: true})
 
