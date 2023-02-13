@@ -4,9 +4,9 @@ const companyModel = require('../models/users/company.model')
 const Addoffers = async (req, res) => {
     try {
         
-        req.body.company = req.user.id //creation d'un champ company et l"effectuer  l'id de la company qui a crée l'offre(req.user.id from passport)
+        req.body.company = req.user.id //creation d'un champ company et l"effectuer l'id de la company qui a crée l'offre(req.user.id from passport)
         OffersModule.create(req.body, (err, data) => {
-            if (err) res.status(400).json({ message: "bad request" })
+            if (err) res.status(400).json(err.message)
          else  {res.status(200).json({ message: "success" })}
         })
     } catch (error) {

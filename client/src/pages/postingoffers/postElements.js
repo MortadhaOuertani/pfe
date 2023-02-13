@@ -9,6 +9,13 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 `
-export const Input = styled.input`
+export const Form = styled.form`
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+`;
 
+export const Input = styled.input`
+ 
 `

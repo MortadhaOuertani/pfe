@@ -6,7 +6,6 @@ export const Addoffer = (form)=>dispatch=>{
     axios
       .post("http://localhost:3600/api/offers", form)
       .then(res => {
-        console.log("tooo")
         dispatch({
             type: ERRORS,
             payload: {}

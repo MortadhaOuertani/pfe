@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const OffersModule = new Schema({
-  company:String
-, //clé étrangère de la table mère user 
-    dateE:Date,
-    dateD:Date,
+  company:String, //clé étrangère de la table mère user 
+    dateExpiration:Date,
     nbrRecrute:Number,
     contract:String,
     salary:String,
@@ -14,10 +12,7 @@ const OffersModule = new Schema({
     experience:String,
     title:String,
     descripion:String,
-    search:[{
-      type:String
-    }],
-    title:String,
+    search:[[]],
 
   }, {timestamps: true})
 
