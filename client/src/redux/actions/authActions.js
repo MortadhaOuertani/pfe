@@ -28,8 +28,8 @@ export const RegistrationCompany = (form, navigate) => dispatch => {
     })
 } 
 
-export const LoginAction = (form, navigate)=>dispatch  => {
-    axios.post('http://localhost:3600/api/login', form, {
+export const LoginActionCandidate = (form, navigate)=>dispatch  => {
+    axios.post('http://localhost:3600/api/logincandidate', form, {
         headers: {
             'Content-Type': 'application/json'
         } //transforme FORM on json (pour axios)
@@ -41,6 +41,27 @@ export const LoginAction = (form, navigate)=>dispatch  => {
             const decode = jwt_decode(token)
             dispatch(setUser(decode))
             setAuth(token)
+        })
+        .catch(err => {
+           console.log(err)
+        })
+}
+
+export const LoginActionCompany = (form, navigate)=>dispatch  => {
+    axios.post('http://localhost:3600/api/logincompany', form, {
+        headers: {
+            'Content-Type': 'application/json'
+        } //transforme FORM on json (pour axios)
+    })
+        .then(res => {
+            const { token } = res.data
+            localStorage.setItem('jwt', token)
+            const decode = jwt_decode(token)
+            dispatch(setUser(decode))
+            console.log(token)
+            setAuth(token)
+            navigate('/')
+
         })
         .catch(err => {
            console.log(err)
