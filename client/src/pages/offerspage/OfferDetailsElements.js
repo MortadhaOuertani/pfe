@@ -22,14 +22,17 @@ export const Container = styled.div`
  flex-direction: column;
 `;
 
-export const topContainer = styled.div`
+export const TopContainer = styled.div`
  background-color:#f4f4f4 ;
  padding-bottom: 30px;
 `;
 
-export const bottomContainer = styled.div`
- background-color:#f4f4f4 ;
+export const BottomContainer = styled.div`
+ width: 100px;
 `;
+export const H3= styled.h3`
+color:black
+`
 
 export const Button= styled.button`
   background-color: #6c63ff;

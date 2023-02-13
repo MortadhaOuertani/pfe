@@ -39,9 +39,9 @@ export const GetOffers = ()=>dispatch=>{
       });
 }
 
-/*export const GetOneOffer = ()=>dispatch=>{
+export const GetOneOffer = (id)=>dispatch=>{
     axios
-      .get("http://localhost:3600/api/offers")
+      .get(`http://localhost:3600/api/offers/${id}`)
       .then(res => {
           dispatch({
               type: SET_OFFERS,
@@ -55,7 +55,7 @@ export const GetOffers = ()=>dispatch=>{
           })
       });
 }
-*/
+
 export const DeleteOffers = (id)=>dispatch=>{
    if(window.confirm("are you sure to delete this user?")){
     axios
