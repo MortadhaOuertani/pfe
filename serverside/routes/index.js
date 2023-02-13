@@ -25,15 +25,12 @@ router.post("/login",Login);
 router.post("/offers",passport.authenticate("jwt",{ session: false }),Addoffers);//passport pour donné l'autorisation
 /* get all offers */
 router.get("/offers", 
-passport.authenticate("jwt", { session: false }),
 FindAlloffers);
 /* get one offers */
-router.get("/offers", 
-passport.authenticate("jwt", { session: false }),
+router.get("/offers/:id",
 FindSingleoffers);
 /* delete offers */
-router.delete("/offers/:id", 
-passport.authenticate("jwt", { session: false }),
+router.delete("/offers/:id",
 Deleteoffers);
 
 module.exports = router;
