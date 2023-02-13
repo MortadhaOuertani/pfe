@@ -15,7 +15,7 @@ import jwt_decode from "jwt-decode";
 import { setAuth } from './util/setAuth.js';
 import OffersPage from './pages/offerspage/offerspage.js';
 import OfferDetails from './pages/offerspage/offerDetails.js';
-import Post from './pages/offerspage/offerspage.js';
+import Post from './pages/postingoffers/post';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -52,6 +52,6 @@ function App() {
     </Router>
   )
 
-}
+} 
 
 export default App;
