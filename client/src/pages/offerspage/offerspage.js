@@ -2,8 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import OfferContainer from '../../components/offerContainer/OfferContainer'
-import { GetOffers } from '../../redux/actions/offerActions'
+    import { GetOffers } from '../../redux/actions/offerActions'
 import Offer from './offer/offer'
 import { Container, Header, Number, Offers, OffersCount, SearchJob, SearchPlace } from './offerspageElements'
 
@@ -20,6 +19,7 @@ const OffersPage = () => {
 
   return (
     <>
+    
       <Container>
         <Header>
           <SearchJob />
