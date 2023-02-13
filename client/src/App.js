@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FormCandidate from './pages/candidate/FormCandidate.js';
 import FormCompany from './pages/company/FormCompany.js';
 import { useEffect } from 'react';
@@ -19,7 +19,6 @@ import Post from './pages/postingoffers/post';
 
 function App() {
   const auth = useSelector(state => state.auth)
-
   useEffect(() => {
     if (window.localStorage.jwt) {
       const decode = jwt_decode(window.localStorage.jwt)
@@ -47,7 +46,7 @@ function App() {
         <Route path='/formCandidate' element={<FormCandidate />} />
         <Route path='/formCompany' element={<FormCompany />} />
         <Route path='/offers' element={<OffersPage/>} />
-        <Route path='/offerdetails' element={<OfferDetails/>} />
+        <Route path='/offers/:id' element={<OfferDetails/>}/>
         <Route path='/postoffer' element={<Post/>} />
       </Routes>
     </Router>

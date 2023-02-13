@@ -29,7 +29,4 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/api', indexRouter); //pour utiliser les routes qui existent dans indexRouter 
 
-app.get('/aa', passport.authenticate('jwt',{session:false}),);
-
-
 module.exports = app;
