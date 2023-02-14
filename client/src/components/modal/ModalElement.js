@@ -10,5 +10,14 @@ bottom: 0;
 display: flex;
 flex-direction: inherit;
 align-items: center;
-
+`
+export const Div = styled.div`
+ background: white;
+ align-self: center;
+ top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  padding: 20px; 
+  width:20%;
+  height:30%;
+position:absolute;
 `
