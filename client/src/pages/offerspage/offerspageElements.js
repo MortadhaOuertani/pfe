@@ -13,14 +13,15 @@ export const OffersCount = styled.div`
 export const Number = styled.h1`
 `
 export const Offers = styled.div`
-    width: 100%;
+    width: 90%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 10px;
-    background-color: blue;
+    background-color: #e8e7f7;
+    border-radius: 20px;
 `
 export const SearchJob = styled.input`
 `
