@@ -17,7 +17,11 @@ export const Div = styled.div`
  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);  padding: 20px; 
-  width:20%;
-  height:30%;
+  width:30%;
+  height:70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 position:absolute;
 `

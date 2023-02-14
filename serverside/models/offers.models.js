@@ -15,6 +15,6 @@ const OffersModule = new Schema({
     search:[[]],
     logo:String
 
-  }, {timestamps: true})
+}, { timestamps: true })
 
 module.exports = mongoose.model("offers", OffersModule);

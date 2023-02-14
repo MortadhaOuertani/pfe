@@ -5,29 +5,28 @@ import ModalComponent from '../../components/modal/Modal'
 import { GetOneOffer } from '../../redux/actions/offerActions'
 import { Container, TopContainer, BottomContainer, Button, NavbarDiv, H2, H3 } from './OfferDetailsElements'
 
-const OfferDetails = (props) => {
+const OfferDetails = () => {
+    const [modalShow, setModalShow] = useState(false);
     const dispatch = useDispatch()
     const offer = useSelector(state => state.offers)
     const { id } = useParams()
-    const [modalShow, setModalShow] = useState(true);
-    const handleModal = (state) => {
-        setModalShow(!state);
-      };
+    
     useEffect(() => {
         dispatch(GetOneOffer(id))
     }, [])
     return (
         <>
-            <ModalComponent
-                handleModal={handleModal}
-                modal={modalShow}
-            />
+        {modalShow?
+    <ModalComponent  setModalShow={setModalShow} modalShow={modalShow} />:null
+    }
+            
             <NavbarDiv></NavbarDiv>
             <Container>
                 <TopContainer>
                     <H2> Le titre d'entreprise</H2>
                     <p>Nom d'entreprise </p>
-                    <p onClick={handleModal(!modalShow)}>Emplacement</p>
+                    <p >Emplacement</p>
+                    <button onClick={()=>setModalShow(!modalShow)}>apply</button>
                 </TopContainer>
                 <BottomContainer>
                     <H3>{offer.OFFERS.experience}</H3>
