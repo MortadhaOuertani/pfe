@@ -29,7 +29,7 @@ export const SearchPlace = styled.input`
 export const Container = styled.div`
 height: 100vh;
 width: 100%;
-background-color: red;
+background-color: #f2f2f2;
 display: flex;
 flex-direction: column;
 justify-content: center;
