@@ -46,9 +46,9 @@ const Offer = ({ experience, _id,company }) => {
                 <MiddleSide></MiddleSide>
                 <RightSide>
                     {resultdate? <p>klll</p> :null}
-                    <Button variant="primary" onClick={() => setModalShow(true)}>
+                    <Link to={`/offers/${_id}`}><Button variant="primary" onClick={() => setModalShow(true)}>
                         Voir plus
-                    </Button>
+                    </Button></Link>
                     {companydata.map(item => ( <p key={item.id}>{item.email}</p> ))}  </RightSide>
             </Container>
         </>)
