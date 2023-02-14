@@ -8,7 +8,7 @@ const ModalComponent = (props) => {
   <>
 
  <Background onClick={()=>props.setModalShow(!(props.modalShow))}>
-        <Div>
+        <Div onClick={()=>props.setModalShow(props.modalShow)}>
           <h2>Modal Title</h2>
           <p>Modal Content</p>
           <button onClick={()=>props.setModalShow(!(props.modalShow))}>Close</button>
