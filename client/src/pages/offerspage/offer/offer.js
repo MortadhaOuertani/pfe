@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Button, Container, LeftSide, MiddleSide, RightSide } from './offerElement'
+import ModalComponent from '../../../components/modal/Modal'
 
 
 const Offer = ({ experience, _id, company }) => {
-  const [modalShow, setModalShow] = useState(false);
   const [resultdate, setResultdate] = useState(false);
   const [companydata, setCompanydata] = useState([])
   useEffect(() => {
@@ -40,7 +40,7 @@ const Offer = ({ experience, _id, company }) => {
         <RightSide>
           {resultdate ? <p>klll</p> : null}
           <Link to={`/offers/${_id}`}>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
+            <Button variant="primary">
               Voir plus
             </Button></Link> 
           {companydata.map(item => (<p key={item.id}>{item.email}</p>))}  </RightSide>
