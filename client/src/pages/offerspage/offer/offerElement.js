@@ -18,6 +18,7 @@ export const Button = styled.button`
     background-color: lightgreen;
     cursor: pointer;
 `
+
 export const Background = styled.div`
 background-color: rgba(0,0,0,0.3);
 position: absolute;

@@ -7,7 +7,6 @@ import { BtnSubmit, Form, Input } from './FormCandidateElements'
 const FormCandidate = () => {
     const [form, setForm] = useState({})
     const dispatch = useDispatch()
-    const errors = useSelector(state => state.errors)
     const navigate = useNavigate()
     const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
         setForm({

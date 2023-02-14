@@ -3,7 +3,7 @@ import { Container, InputBtn, Form, FormContainer, H1, Header, Img, Input, Left,
 import login from '../../images/login.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { LoginAction } from '../../redux/actions/authActions'
+import { LoginActionCandidate, LoginActionCompany } from '../../redux/actions/authActions'
 const Login = () => {
   const [form, setForm] = useState({})
   const dispatch = useDispatch()
@@ -17,7 +17,10 @@ const Login = () => {
   }
   const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
     e.preventDefault(); //ne refraichir pas la page pour ne perdre pas les données 
-    dispatch(LoginAction(form, navigate))//appeler la fonction loginAction qui se trouve dans le store 
+
+    dispatch(LoginActionCandidate(form, navigate))//appeler la fonction loginActionCandidate qui se trouve dans le store 
+    dispatch(LoginActionCompany(form, navigate))//appeler la fonction loginActionCompany qui se trouve dans le store 
+
   }
 
   return (

@@ -10,12 +10,14 @@ import { Container, Header, Number, Offers, OffersCount, SearchJob, SearchPlace 
 
 const OffersPage = () => {
   const dispatch = useDispatch()
-  const offers = useSelector(state=>state.offers)
+  const offers = useSelector(state => state.offers)
 
 
   useEffect(() => {
     dispatch(GetOffers())
-},[])
+  }, [])
+
+  
 
   return (
     <>
@@ -27,11 +29,11 @@ const OffersPage = () => {
         </Header>
         <OffersCount>
           <Number>0</Number>
-        </OffersCount>  
+        </OffersCount>
         <Offers>
-        { offers.OFFERSS.map(({_id,experience}) =>(
-          <Offer _id={_id} experience={experience}/>
-      ))} 
+          {offers.OFFERSS.map(({ _id,company,nbrRecrute,contract,salary,study,language,experience,title,descripion,}) => (
+            <Offer _id={_id} company={company} experience={experience} />
+          ))}
         </Offers>
       </Container>
     </>
