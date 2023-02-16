@@ -22,7 +22,7 @@ export const Button = styled.button`
     color: white;
     font-size: 18px;
     font-weight: 400;
-`
+` 
 
 export const Background = styled.div`
 background-color: rgba(0,0,0,0.3);

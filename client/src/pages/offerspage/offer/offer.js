@@ -30,7 +30,7 @@ const Offer = ({ experience, _id, company }) => {
       })
       .catch(err => {
         console.log(err.message)
-      });
+      }); 
   }
   return (
     <>

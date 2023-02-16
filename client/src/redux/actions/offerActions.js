@@ -54,6 +54,12 @@ export const GetOneOffer = (id)=>dispatch=>{
           })
       });
 }
+export const UpdateOffers = (form)=>dispatch=>{
+    dispatch({
+        type:SET_OFFERSS ,
+        payload: form
+    })
+}
 
 export const DeleteOffers = (id)=>dispatch=>{
    if(window.confirm("are you sure to delete this user?")){

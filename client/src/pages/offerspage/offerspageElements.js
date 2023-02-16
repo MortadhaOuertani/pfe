@@ -28,6 +28,7 @@ export const SearchJob = styled.input`
 export const SearchPlace = styled.input`
 `
 export const Container = styled.div`
+padding-top: 150px;
 height: 100vh;
 width: 100%;
 background-color: #f2f2f2;

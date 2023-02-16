@@ -8,14 +8,16 @@ import { AiOutlineSearch } from "react-icons/ai";
 
 const Post = () => {
   const [form, setForm] = useState({});
-  const [search, setSearch] = useState({});
   const [inputValues, setInputValues] = useState({});
   const [counter, setCounter] = useState(0);
   const [words, setWords] = useState([]);
   const errors = useSelector(state => state.errors)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   useEffect(() => {
 
-    
+
   }, [])
   const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
     setForm({
@@ -27,8 +29,8 @@ const Post = () => {
 
 
   const handleAddWord = () => {
-    const wordInput = document.getElementById("wordInput");
-    const word=wordInput.value.trim.split(" ")
+    const wordInput = document.getElementById("wordInput"); //wordInput: elle va prendre l'input a partir son id 
+    const word = wordInput.value.split(" ") //split : pour diviser les phrases par des espaces
     for (let i = 0; i < word.length; i++) {
       words.push(word[i]);
     }
@@ -38,12 +40,12 @@ const Post = () => {
   const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
     handleAddWord();
     e.preventDefault();//ne refraichir pas la page pour ne perdre pas les données 
-    form.search=words
-   
+    form.search = words
+
     console.log(form)
 
-    
-    // dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
+
+    dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
   }
 
   return (
