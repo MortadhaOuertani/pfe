@@ -9,20 +9,14 @@ import { AiOutlineSearch } from "react-icons/ai";
 const Post = () => {
   const [form, setForm] = useState({});
   const [search, setSearch] = useState({});
-  const [name, setName] = useState('');
   const [inputValues, setInputValues] = useState({});
   const [counter, setCounter] = useState(0);
-  const dispatch = useDispatch()
+  const [words, setWords] = useState([]);
   const errors = useSelector(state => state.errors)
-  const navigate = useNavigate()
-  let nextId = 0;
   useEffect(() => {
 
-    setForm({
-      ...form,
-      search: search
-    })
-  }, [search])
+    
+  }, [])
   const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
     setForm({
       ...form, //setForm va prendre la formulaire(form)
@@ -31,29 +25,27 @@ const Post = () => {
   }
 
 
-  const handleOnChange = (e) => {
-    const abc = {};
-    abc[e.target.className] = e.target.value;
-    setInputValues({ ...inputValues, ...abc });
+
+  const handleAddWord = () => {
+    const wordInput = document.getElementById("wordInput");
+    const word=wordInput.value.trim.split(" ")
+    for (let i = 0; i < word.length; i++) {
+      words.push(word[i]);
+    }
+    wordInput.value = "";
   };
 
   const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
-    setSearch({
-      ...search,
-      search: inputValues
-    });
-    setForm({
-      ...form,
-      search: search
-    })
-
+    handleAddWord();
     e.preventDefault();//ne refraichir pas la page pour ne perdre pas les données 
-    console.log(form, search)
+    form.search=words
+   
+    console.log(form)
+
+    
     // dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
   }
-  const handleClick = () => {
-    setCounter(counter + 1);
-  };
+
   return (
     <>
       <Container>
@@ -66,28 +58,7 @@ const Post = () => {
           <Input onChange={onChangeHandler} placeholder="language" name="language" type="text" required />
           <Input onChange={onChangeHandler} placeholder="title" name="title" type="text" required />
           <Input onChange={onChangeHandler} placeholder="description" name="description" type="text" required />
-          <div>
-
-            {Object.keys(inputValues).map((c) => {
-              return null;
-            })}
-            <Input type="button" value="+" onClick={handleClick} />
-
-            {Array.from(Array(counter)).map((c, index) => {
-              return (
-                <div>
-                  <AiOutlineSearch  /><input
-                    onChange={(e) => { handleOnChange(e); }}
-                    key={c}
-                    className={index}
-                    type="text"
-                    placeholder='search'
-                  ></input>
-                  
-                </div>
-              );
-            })}
-          </div>
+          <Input type="text" id="wordInput" />
           <Input type="submit" value="Envoyer" />
         </Form>
 
