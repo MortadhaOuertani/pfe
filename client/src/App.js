@@ -16,6 +16,7 @@ import { setAuth } from './util/setAuth.js';
 import OffersPage from './pages/offerspage/offerspage.js';
 import OfferDetails from './pages/offerspage/offerDetails.js';
 import Post from './pages/postingoffers/post';
+import CompanyHomePage from './pages/company Interface/CompanyHomePage.js';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -48,6 +49,8 @@ function App() {
         <Route path='/offers' element={<OffersPage/>} />
         <Route path='/offers/:id' element={<OfferDetails/>}/>
         <Route path='/postoffer' element={<Post/>} />
+        <Route path='/company' element={<CompanyHomePage/>} />
+
       </Routes>
     </Router>
   )

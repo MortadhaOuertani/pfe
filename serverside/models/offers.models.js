@@ -12,7 +12,7 @@ const OffersModule = new Schema({
     experience:String,
     title:String,
     descripion:String,
-    search:[[]],
+    search:[],
     logo:String
 
 }, { timestamps: true })

@@ -81,3 +81,17 @@ export const DeleteOffers = (id)=>dispatch=>{
 }
 
 
+export const GetCompanyoffers = ()=>dispatch=>{
+    axios
+    .get(`http://localhost:3600/api/getcompanyoffers`).then(res=>{
+        dispatch({
+            type:SET_OFFERSS,
+            payload:res.data
+        })
+    }
+
+    )
+    .catch(err=>{
+        console.log(err.message)
+    })
+}

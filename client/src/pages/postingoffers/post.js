@@ -44,7 +44,9 @@ const Post = () => {
 
     console.log(form)
 
-
+    form.search=words
+    console.log(form)
+    
     dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
   }
 
