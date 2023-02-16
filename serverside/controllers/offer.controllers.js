@@ -1,3 +1,4 @@
+const offersModels = require('../models/offers.models')
 const OffersModule = require('../models/offers.models')
 const companyModel = require('../models/users/company.model')
 
@@ -83,7 +84,15 @@ const FindDate = (req, res) => {
     }
 }
 
+const GetCompanyoffers = (req, res) => {
+
+    offersModels.find({company:req.user.id},(err,data)=>{
+    if(err) res.status(404).json(err.message)
+    if(data) res.status(200).json(data)
+    })
+}
 module.exports = {
+    GetCompanyoffers,
     Addoffers,
     FindAlloffers,
     FindSingleoffers,

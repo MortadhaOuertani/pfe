@@ -13,6 +13,8 @@ const Post = () => {
   const [counter, setCounter] = useState(0);
   const [words, setWords] = useState([]);
   const errors = useSelector(state => state.errors)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   useEffect(() => {
 
     
@@ -28,7 +30,7 @@ const Post = () => {
 
   const handleAddWord = () => {
     const wordInput = document.getElementById("wordInput");
-    const word=wordInput.value.trim.split(" ")
+    const word=wordInput.value.split(" ")
     for (let i = 0; i < word.length; i++) {
       words.push(word[i]);
     }
@@ -39,11 +41,9 @@ const Post = () => {
     handleAddWord();
     e.preventDefault();//ne refraichir pas la page pour ne perdre pas les données 
     form.search=words
-   
     console.log(form)
-
     
-    // dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
+    dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
   }
 
   return (
