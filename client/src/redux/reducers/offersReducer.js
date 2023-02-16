@@ -1,8 +1,8 @@
 import { DELETE_OFFERS, SET_OFFERS, SET_OFFERSS } from "../types";
 
 const intitialState = {
-  OFFERSS: [],
-  OFFERS: {},
+  OFFERSS: [],//get plusiers offres
+  OFFERS: {},//get un offres
 };
 export default function (state = intitialState, action) {
   switch (action.type) {
