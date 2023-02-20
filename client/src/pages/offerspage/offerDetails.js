@@ -6,34 +6,45 @@ import { GetOneOffer } from '../../redux/actions/offerActions'
 import { Container, TopContainer, BottomContainer, Button, NavbarDiv, H2, H3 } from './OfferDetailsElements'
 
 const OfferDetails = () => {
-    const [modalShow, setModalShow] = useState(false);
-    const dispatch = useDispatch()
-    const offer = useSelector(state => state.offers)
-    const { id } = useParams()
-    
-    useEffect(() => {
-        dispatch(GetOneOffer(id))
-    }, [])
-    return (
-        <>
-        {modalShow?
-    <ModalComponent  setModalShow={setModalShow} modalShow={modalShow} />:null
-    }
-            
-            <NavbarDiv></NavbarDiv>
-            <Container>
-                <TopContainer>
-                    <H2> Le titre d'entreprise</H2>
-                    <p>Nom d'entreprise </p>
-                    <p >Emplacement</p>
-                    <button onClick={()=>setModalShow(!modalShow)}>apply</button>
-                </TopContainer>
-                <BottomContainer>
-                    <H3>{offer.OFFERS.experience}</H3>
-                </BottomContainer>
-            </Container>
-        </>
-    )
-}
+  const [modalShow, setModalShow] = useState(false);
+  const [isFrozen, setIsFrozen] = useState(false);
+  const dispatch = useDispatch();
+  const offer = useSelector(state => state.offers);
+  const { id } = useParams();
+  const containerStyle = isFrozen ? { overflow: 'hidden', height: '100%', boxSizing: 'border-box' }
+    : { boxSizing: 'border-box', height: '100%' };
 
-export default OfferDetails
+ 
+  useEffect(() => {
+    dispatch(GetOneOffer(id));
+
+
+  }, []);
+
+  const setModalShowAndUpdateFreeze = (value) => {
+    setModalShow(value);
+    setIsFrozen(value);
+  }
+
+  return (
+    <>
+      {modalShow ?
+        <ModalComponent setModalShow={setModalShowAndUpdateFreeze} modalShow={modalShow} previsFrozen={isFrozen} /> : null
+      }
+
+      <NavbarDiv></NavbarDiv>
+      <Container style={containerStyle}>
+        <TopContainer>
+          <H2> Le titre d'entreprise</H2>
+          <p>Nom d'entreprise </p>
+          <p >Emplacement</p>
+          <button onClick={() => setModalShowAndUpdateFreeze(!modalShow)}>apply</button>
+        </TopContainer>
+        <BottomContainer>
+          <H3>{offer.OFFERS.experience}</H3>
+        </BottomContainer>
+      </Container>
+    </>
+  );
+};
+export default OfferDetails;

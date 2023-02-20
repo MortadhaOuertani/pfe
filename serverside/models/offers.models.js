@@ -13,6 +13,7 @@ const OffersModule = new Schema({
     title:String,
     descripion:String,
     search:[],
+    candidates:[],
     logo:String
 
 }, { timestamps: true })

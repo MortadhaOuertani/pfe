@@ -13,7 +13,7 @@ const {
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate ,GetCompanyData, GetCompanyoffers} = require("../controllers/offer.controllers");
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers } = require("../controllers/offer.controllers");
 
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
@@ -22,22 +22,24 @@ router.post("/register/admin", RegisterAdmin);
 
 //router.get("/aaa",aaa);
 
-router.post("/logincandidate",LoginCandidate);
-router.post("/logincompany",LoginCompany);
+router.post("/logincandidate", LoginCandidate);
+router.post("/logincompany", LoginCompany);
 router.post("/loginadmin",LoginAdmin);
 
 /* add offers route */
-router.post("/offers",passport.authenticate("jwt",{ session: false }),Addoffers);//passport pour donné l'autorisation
+router.post("/offers", passport.authenticate("jwt", { session: false }), Addoffers);//passport pour donné l'autorisation
 /* get all offers */
 router.get("/offers", FindAlloffers);
 /* get one offers */
 router.get("/offers/:id",
-FindSingleoffers);
-/* delete offers */
+  FindSingleoffers);
 router.delete("/offers/:id",
-Deleteoffers);
-router.get("/date",passport.authenticate("jwt",{ session: false }),FindDate);
+  Deleteoffers);
+router.get("/date", passport.authenticate("jwt", { session: false }), FindDate);
 router.get("/companydata/:id", GetCompanyData);  /* get the data of a company */
-router.get("/getcompanyoffers",passport.authenticate("jwt",{ session: false }),GetCompanyoffers);
+router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false }), GetCompanyoffers);
+router.get("/offers/:id",
+  FindSingleoffers);
+router.post("/applyforOffer/:id", passport.authenticate("jwt", { session: false }), ApplyForOffers);
 
 module.exports = router;

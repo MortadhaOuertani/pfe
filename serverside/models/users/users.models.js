@@ -18,6 +18,10 @@ const UserModel = new Schema({
     address:"string",
     phone:"string",
     niveauEtude:"string",
+    letter:String,
+    cv:String
+
+
   }, {timestamps: true})
 
 module.exports = mongoose.model("candidates", UserModel);
