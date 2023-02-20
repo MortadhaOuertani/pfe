@@ -4,13 +4,13 @@ import SecondPage from '../../components/secondpage/SecondPage';
 import ThirdPage from '../../components/thirdpage/ThirdPage';
 import { Container } from './HomeElements';
 
-const Home = () => {
+const Home = ({user}) => {
   return(
    <Container>
         <FirstPage>
             
         </FirstPage>
-        <SecondPage>
+        <SecondPage user={user}>
 
         </SecondPage>
         <ThirdPage>

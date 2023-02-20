@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ERRORS, SET_OFFERS, SET_OFFERSS, DELETE_OFFERS, SUCCESS } from '../types';
-
+import "./alert.css"
 
 export const Addoffer = (form)=>dispatch=>{
     axios
@@ -80,23 +80,23 @@ export const DeleteOffers = (id)=>dispatch=>{
    }
 }
 
-export const ApplyForOffer = (id,form)=>dispatch=>{
-
+export const ApplyForOffer = (id, form) => dispatch => {
     axios
-      .post(`http://localhost:3600/api/applyforOffer/${id}`,form)
+      .post(`http://localhost:3600/api/applyforOffer/${id}`, form)
       .then(res => {
-          dispatch({
-              type: SUCCESS,
-              payload: res.data
-          })
+        console.log(res.data.message)
+        dispatch({
+          type: SUCCESS,
+          payload: res.data.message
+        });
       })
       .catch(err => {
-          dispatch({
-              type: ERRORS,
-              payload: err.response.data
-          })
+        dispatch({
+          type: ERRORS,
+          payload: err.response.data.error
+        });
       });
-}
+  }
 
 
 export const GetCompanyoffers = ()=>dispatch=>{

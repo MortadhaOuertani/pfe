@@ -1,14 +1,14 @@
 var express = require("express");
 //const aaa = require("../controllers/testing")
 const {
-  Login,
-  Test,
-  Admin,
   RegisterCompany,
   RegisterCandidate,
   LoginCandidate,
   LoginCompany,
+  RegisterAdmin,
+  LoginAdmin,
 } = require("../controllers/users.controllers");
+
 
 var router = express.Router();
 const passport = require("passport");
@@ -18,12 +18,13 @@ const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetC
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
 router.post("/register/company", RegisterCompany);
-
+router.post("/register/admin", RegisterAdmin);
 
 //router.get("/aaa",aaa);
 
 router.post("/logincandidate", LoginCandidate);
 router.post("/logincompany", LoginCompany);
+router.post("/loginadmin",LoginAdmin);
 
 /* add offers route */
 router.post("/offers", passport.authenticate("jwt", { session: false }), Addoffers);//passport pour donné l'autorisation

@@ -3,7 +3,7 @@ import { Container, InputBtn, Form, FormContainer, H1, Header, Img, Input, Left,
 import login from '../../images/login.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { LoginActionCandidate, LoginActionCompany } from '../../redux/actions/authActions'
+import { LoginActionCandidate, LoginActionCompany, LoginAdmin } from '../../redux/actions/authActions'
 const Login = () => {
   const [form, setForm] = useState({})
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const Login = () => {
 
     dispatch(LoginActionCandidate(form, navigate))//appeler la fonction loginActionCandidate qui se trouve dans le store 
     dispatch(LoginActionCompany(form, navigate))//appeler la fonction loginActionCompany qui se trouve dans le store 
-
+    dispatch(LoginAdmin(form, navigate))
   }
 
   return (

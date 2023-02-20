@@ -28,6 +28,8 @@ export const RegistrationCompany = (form, navigate) => dispatch => {
     })
 } 
 
+
+
 export const LoginActionCandidate = (form, navigate)=>dispatch  => {
     axios.post('http://localhost:3600/api/logincandidate', form, {
         headers: {
@@ -67,6 +69,28 @@ export const LoginActionCompany = (form, navigate)=>dispatch  => {
            console.log(err)
         })
 }
+
+export const LoginAdmin = (form, navigate)=>dispatch  => {
+    axios.post('http://localhost:3600/api/loginadmin', form, {
+        headers: {
+            'Content-Type': 'application/json'
+        } //transforme FORM on json (pour axios)
+    })
+        .then(res => {
+            const { token } = res.data
+            localStorage.setItem('jwt', token)
+            const decode = jwt_decode(token)
+            dispatch(setUser(decode))
+            console.log(token)
+            setAuth(token)
+            navigate('/admin')
+
+        })
+        .catch(err => {
+           console.log(err)
+        })
+}
+
 export const Logout = () => dispatch => {
     localStorage.removeItem('jwt')
     dispatch({

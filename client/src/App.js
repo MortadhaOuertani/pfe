@@ -4,7 +4,6 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
-import Register from './pages/register/Register';
 import { useDispatch, useSelector } from 'react-redux';
 import FormCandidate from './pages/candidate/FormCandidate.js';
 import FormCompany from './pages/company/FormCompany.js';
@@ -17,6 +16,7 @@ import OffersPage from './pages/offerspage/offerspage.js';
 import OfferDetails from './pages/offerspage/offerDetails.js';
 import Post from './pages/postingoffers/post';
 import CompanyHomePage from './pages/company Interface/CompanyHomePage.js';
+import Admin from './pages/admin/Admin.js';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -41,16 +41,15 @@ function App() {
     <Router>
       <Navbar user={user} />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home user={user}/>} />
         <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
         <Route path='/formCandidate' element={<FormCandidate />} />
         <Route path='/formCompany' element={<FormCompany />} />
         <Route path='/offers' element={<OffersPage/>} />
         <Route path='/offers/:id' element={<OfferDetails/>}/>
         <Route path='/postoffer' element={<Post/>} />
         <Route path='/company' element={<CompanyHomePage/>} />
-
+        <Route path='/admin' element={<Admin/>} />
       </Routes>
     </Router>
   )
