@@ -22,9 +22,10 @@ router.post("/register/admin", RegisterAdmin);
 
 //router.get("/aaa",aaa);
 
-router.post("/logincandidate", LoginCandidate);
-router.post("/logincompany", LoginCompany);
+router.post("/logincandidate",LoginCandidate);
+router.post("/logincompany",LoginCompany);
 router.post("/loginadmin",LoginAdmin);
+
 
 /* add offers route */
 router.post("/offers", passport.authenticate("jwt", { session: false }), Addoffers);//passport pour donné l'autorisation

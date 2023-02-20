@@ -12,7 +12,7 @@ const FirstPage = () => {
         <HeroH1>Find your job on Hire Lab</HeroH1>
         <HeroP>Sign up for new account and find a job .</HeroP>
         <HeroBtn>
-          <Button to='/register'>Get started</Button>
+          <Button to='/offers'>Get started</Button>
         </HeroBtn>
       </HeroContent>
       

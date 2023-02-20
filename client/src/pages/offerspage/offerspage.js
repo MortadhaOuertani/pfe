@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { GetOffers } from '../../redux/actions/offerActions'
 import Offer from './offer/offer'
+import { NavbarDiv } from './OfferDetailsElements'
 import { Container, Header, Number, Offers, OffersCount, SearchJob, SearchPlace } from './offerspageElements'
 
 const OffersPage = () => {
@@ -12,7 +13,7 @@ const OffersPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredOffers, setFilteredOffers] = useState([]);
   const [count, setCount] = useState(0);
-  
+
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
     setSearchTerm(value);
@@ -30,7 +31,7 @@ const OffersPage = () => {
       setFilteredOffers(filtered);
     }
   };
-  
+
   useEffect(() => {
     dispatch(GetOffers());
   }, [dispatch]);
@@ -40,11 +41,12 @@ const OffersPage = () => {
   }, [offers]);
 
   useEffect(() => {
-    setCount(filteredOffers.length);
+    setCount(filteredOffers.length); //length is : the number of all the offers , filteredOffers is just a state 
   }, [filteredOffers]);
 
   return (
     <>
+      <NavbarDiv />
       <Container>
         <Header>
           <SearchJob placeholder='searchjob' type="text" value={searchTerm} onChange={handleSearch} />
