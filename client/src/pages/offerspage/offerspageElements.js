@@ -9,6 +9,9 @@ flex-direction: row;
 align-items: center;
 `
 export const OffersCount = styled.div`
+display: flex;
+column-gap: 20px;
+flex-direction: row;
 `
 export const Number = styled.h1`
 `
