@@ -25,30 +25,28 @@ const Login = () => {
 
   return (
     <>
-      <Container><FormContainer>
-        <Left>
-          <Header>
-            <H1>Login</H1>
-          </Header>
-          <Form onSubmit={onSubmit}>
-
-            <Input onChange={onChangeHandler} name="email"
-              type='email' required placeholder='Email' />
-            {errors.email}
-            <br />
-            <Input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' />
-            <br />
-            <InputBtn type="submit" value="Login" />
-
-          </Form>
-
-        </Left>
-        <Right>
-          <Img src={login}></Img>
-          <P>If you don't have an account<Link to='/register'>Click Here</Link></P>
-
-        </Right>
-      </FormContainer></Container>
+      <Container>
+        <FormContainer>
+          <Left>
+            <Header>
+              <H1>Login</H1>
+            </Header>
+            <Form onSubmit={onSubmit}>
+              <Input onChange={onChangeHandler} name="email"
+                type='email' required placeholder='Email' />
+              {errors.email}
+              <br />
+              <Input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' />
+              <br />
+              <InputBtn type="submit" value="Login" />
+            </Form>
+          </Left>
+          <Right>
+            <Img src={login}></Img>
+            <P>If you don't have an account<Link to='/register'>Click Here</Link></P>
+          </Right>
+        </FormContainer>
+      </Container>
     </>
   )
 }

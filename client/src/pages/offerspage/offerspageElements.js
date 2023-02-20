@@ -9,24 +9,29 @@ flex-direction: row;
 align-items: center;
 `
 export const OffersCount = styled.div`
+display: flex;
+column-gap: 20px;
+flex-direction: row;
 `
 export const Number = styled.h1`
 `
 export const Offers = styled.div`
-    width: 100%;
+    width: 90%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 10px;
-    background-color: blue;
+    background-color: #e8e7f7;
+    border-radius: 20px;
 `
 export const SearchJob = styled.input`
 `
 export const SearchPlace = styled.input`
 `
 export const Container = styled.div`
+padding-top: 150px;
 height: 100vh;
 width: 100%;
 background-color: #f2f2f2;

@@ -12,7 +12,8 @@ const OffersModule = new Schema({
     experience:String,
     title:String,
     descripion:String,
-    search:[[]],
+    search:[],
+    candidates:[],
     logo:String
 
 }, { timestamps: true })

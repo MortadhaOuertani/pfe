@@ -35,12 +35,12 @@ export const LoginActionCandidate = (form, navigate)=>dispatch  => {
         } //transforme FORM on json (pour axios)
     })
         .then(res => {
-            navigate('/')
             const { token } = res.data
             localStorage.setItem('jwt', token)
             const decode = jwt_decode(token)
             dispatch(setUser(decode))
             setAuth(token)
+            navigate('/')
         })
         .catch(err => {
            console.log(err)

@@ -3,21 +3,26 @@ import { NavLink as Links } from 'react-router-dom';
 
 
 export const Container = styled.div`
-width: 70%;
+width: 80%;
 margin-top: 20px;
-height: 100px;
+height: 130px;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-background-color: lightblue;
+background-color: whitesmoke;
 color: black;
 `
 export const Button = styled.button`
-    padding: 10px 20px;
+    margin-right: 20px;
+    padding: 10px 10px ;
     border: none;
-    background-color: lightgreen;
+    background-color: #7367f0;
     cursor: pointer;
-`
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+` 
 
 export const Background = styled.div`
 background-color: rgba(0,0,0,0.3);
