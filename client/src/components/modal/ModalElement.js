@@ -15,8 +15,8 @@ export const Div = styled.div`
  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);  padding: 20px; 
-  width:40%;
-  height:70%;
+  width:25%;
+  height:60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,5 +50,25 @@ border: transparent;
 cursor: pointer;
 `
 export const H1 = styled.h1`
-color: #6c63ff;
+color: black;
+`
+export const ResultError = styled.div`
+ display: flex;
+    align-items: center;
+    width: 100%;
+    height:200%;
+    border:1px solid #ebccd1;
+    font-weight: bold;
+    background-color: #f2dede;
+    color: #a94b5b;
+    border-radius: 5px;
+
+`
+export const ResultSuccess = styled.div`
+ display: flex;
+    align-items: center;
+    width: 100%;
+    border-color: #ebccd1;
+    border-radius: 20px;
+    font-weight: bold;
 `

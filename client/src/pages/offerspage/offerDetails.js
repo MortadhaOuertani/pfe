@@ -29,7 +29,7 @@ const OfferDetails = () => {
   return (
     <>
       {modalShow ?
-        <ModalComponent setModalShow={setModalShowAndUpdateFreeze} modalShow={modalShow} previsFrozen={isFrozen} /> : null
+        <ModalComponent offer={offer}setModalShow={setModalShowAndUpdateFreeze} modalShow={modalShow} previsFrozen={isFrozen} /> : null
       }
 
       <NavbarDiv></NavbarDiv>
