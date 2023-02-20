@@ -14,7 +14,14 @@ export const NavLink = styled(Link)`
    color: #29aacd;
   }
 
-`
+`;
+
+export const Icon = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+`;
 
 export const Nav = styled.nav`
   z-index: 5;
@@ -40,4 +47,53 @@ export const Image = styled.img`
    width: auto;
    margin-left: 70%;
    margin-top: 10px;
-`
+`;
+export const BtnRadio = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  margin-right: 10px;
+`;
+
+export const Inputcontainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  margin-top: 40px;
+
+`;
+export const InputRadio = styled.input`
+  margin-left: 30px;
+  border-bottom: 1px solid grey ;
+`;
+export const Label = styled.label`
+text-align: center;
+margin-left: 10px;
+`;
+export const Form = styled.form`
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+`;
+
+export const Div = styled.div`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  column-gap: 100px;
+`;
+export const Div2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  column-gap: 20px;
+
+`; 
+

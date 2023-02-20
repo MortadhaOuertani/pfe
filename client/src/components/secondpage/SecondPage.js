@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { ThemeProvider } from 'styled-components';
 
 
-const SecondPage = () => {
+const SecondPage = ({user}) => {
   const { ref/*rename*/, inView } = useInView();
   const[show,setShow]=useState(false)
   const Changeview=()=>{
@@ -19,6 +19,8 @@ const SecondPage = () => {
 useEffect(()=>{
   setShow(false)
   window.addEventListener("scroll",Changeview) //when you scroll the page the view change
+  console.log(user.role)
+
 },[])
   return (
     <Container>
