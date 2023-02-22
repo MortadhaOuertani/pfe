@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink as Link } from 'react-router-dom';
 
-
 export const Container = styled.div`
   background: #0c0c0c;
   display: flex;

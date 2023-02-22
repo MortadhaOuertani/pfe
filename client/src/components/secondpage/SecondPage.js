@@ -9,7 +9,7 @@ const SecondPage = ({user}) => {
   const { ref/*rename*/, inView } = useInView();
   const[show,setShow]=useState(false)
   const Changeview=()=>{
-    if (window.scrollY>=200){
+    if (window.scrollY>=140){
       setShow(true)
     }
     else

@@ -13,13 +13,12 @@ const OfferDetails = () => {
   const { id } = useParams();
   const containerStyle = isFrozen ? { overflow: 'hidden', height: '100%', boxSizing: 'border-box' }
     : { boxSizing: 'border-box', height: '100%' };
-
- 
   useEffect(() => {
     dispatch(GetOneOffer(id));
 
+    console.log(modalShow)
 
-  }, []);
+  }, [modalShow]);
 
   const setModalShowAndUpdateFreeze = (value) => {
     setModalShow(value);
@@ -32,13 +31,12 @@ const OfferDetails = () => {
         <ModalComponent offer={offer}setModalShow={setModalShowAndUpdateFreeze} modalShow={modalShow} previsFrozen={isFrozen} /> : null
       }
 
-      <NavbarDiv></NavbarDiv>
       <Container style={containerStyle}>
         <TopContainer>
           <H2> Le titre d'entreprise</H2>
           <p>Nom d'entreprise </p>
           <p >Emplacement</p>
-          <button onClick={() => setModalShowAndUpdateFreeze(!modalShow)}>apply</button>
+          <button onClick={() =>{setModalShowAndUpdateFreeze(!modalShow);}}>apply</button>
         </TopContainer>
         <BottomContainer>
           <H3>{offer.OFFERS.experience}</H3>

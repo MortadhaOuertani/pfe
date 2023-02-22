@@ -46,7 +46,6 @@ const OffersPage = () => {
 
   return (
     <>
-      <NavbarDiv />
       <Container>
         <Header>
           <SearchJob placeholder='searchjob' type="text" value={searchTerm} onChange={handleSearch} />
@@ -58,7 +57,7 @@ const OffersPage = () => {
         </OffersCount>
         <Offers>
           {filteredOffers.map((offer) => (
-            <Offer key={offer._id} _id={offer._id} company={offer.company} experience={offer.experience} />
+            <Offer key={offer._id}local={offer.local}title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
           ))}
         </Offers>
       </Container>

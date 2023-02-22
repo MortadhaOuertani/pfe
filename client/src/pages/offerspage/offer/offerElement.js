@@ -3,25 +3,24 @@ import { NavLink as Links } from 'react-router-dom';
 
 
 export const Container = styled.div`
-width: 80%;
-margin-top: 20px;
-height: 130px;
+width:300px;
+height:300px;
 display: flex;
-flex-direction: row;
-justify-content: space-between;
+box-shadow: -2px -2px 5px 0.5px #b0afd9 ;
+flex-direction: column;
+border-radius: 8px;
 background-color: whitesmoke;
 color: black;
 `
 export const Button = styled.button`
-    margin-right: 20px;
-    padding: 10px 10px ;
+    padding: 10px 30px ;
     border: none;
     background-color: #7367f0;
     cursor: pointer;
     border-radius: 10px;
     color: white;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
 ` 
 
 export const Background = styled.div`
@@ -34,9 +33,46 @@ bottom: 0;
 
 `
 
-export const LeftSide = styled.div`
+export const Topside = styled.div`
+display: flex;
+width: 100%;
+height: 30%;
+flex-direction: row;
 `
-export const MiddleSide = styled.div`
+export const Imgdiv = styled.div`
+width: 40%;
+height: 80%;
 `
-export const RightSide = styled.div`
+export const Info = styled.div`
+display: flex;
+flex-direction: column;
+row-gap: 5px;
+
+`
+export const H2 = styled.h3`
+`
+export const H3 = styled.h3`
+`
+export const Img = styled.img`
+`
+export const Middleside = styled.div`
+width: 100%;
+height: 50%;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+column-gap: 50px;
+`
+
+export const Item = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`
+export const Footer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
 `
