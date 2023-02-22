@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import image from '../../images/register.svg';
-import { Container, Form, H1, Header, Image,  LeftSide, RightSide, SmallerContainer, BtnRadio, Inputcontainer, Label, InputRadio, BtnSubmit, P, Link} from './RegisterElements';
+import { Container, Form, H1, Header, Image, LeftSide, RightSide, SmallerContainer, BtnRadio, Inputcontainer, Label, InputRadio, BtnSubmit, P, Link } from './RegisterElements';
 const Register = () => {
   const navigate = useNavigate()
   const SubmitForm = (e) => {
@@ -27,7 +27,6 @@ const Register = () => {
               <Inputcontainer><InputRadio onChange={HandleChange} checked={typeUser === "company"} type="radio" name="radio" value="company" required /><Label>Company</Label></Inputcontainer>
               <Inputcontainer><InputRadio onChange={HandleChange} checked={typeUser === "candidate"} type="radio" name="radio" value="candidate" required /><Label>Candidate</Label></Inputcontainer>
             </BtnRadio>
-
             <BtnSubmit type="submit" >Register</BtnSubmit>
           </Form>
         </LeftSide>

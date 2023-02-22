@@ -17,6 +17,7 @@ import OfferDetails from './pages/offerspage/offerDetails.js';
 import Post from './pages/postingoffers/post';
 import CompanyHomePage from './pages/company Interface/CompanyHomePage.js';
 import Admin from './pages/admin/Admin.js';
+import ForgotPasswordForm from './pages/login/forgot password/ForgotPasswordForm.js';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -50,6 +51,7 @@ function App() {
         <Route path='/postoffer' element={<Post/>} />
         <Route path='/company' element={<CompanyHomePage/>} />
         <Route path='/admin' element={<Admin/>} />
+        <Route path='/forgotpassword' element={<ForgotPasswordForm/>} />
       </Routes>
     </Router>
   )

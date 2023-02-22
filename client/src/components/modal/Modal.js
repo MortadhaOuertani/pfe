@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ApplyForOffer } from '../../redux/actions/offerActions';
-import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess } from './ModalElement';
+import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess, Topside, Hr } from './ModalElement';
+import { FaTimes } from 'react-icons/fa';
 
 const ModalComponent = (props) => {
 
@@ -24,9 +25,9 @@ const ModalComponent = (props) => {
 
   const [file, setFile] = useState(null);
   const [Letter, setLetter] = useState("");
- useEffect(()=>{
-console.log(props.offer.OFFERS.title)
- },[])
+  useEffect(() => {
+    console.log(props.modalShow)
+  }, [props.modalShow])
 
   const form = new FormData();
   form.append("cv", file);
@@ -36,8 +37,11 @@ console.log(props.offer.OFFERS.title)
     <>
       <Background onClick={() => props.setModalShow(!(props.modalShow))}>
       </Background>
-      <Div>
-       <H1>{props.offer.OFFERS.title}</H1>
+      <Div isOpen={props.modalShow}>
+        <Topside>       <FaTimes onClick={() => props.setModalShow(!(props.modalShow))} style={{ color: "#b6b6b6", cursor: "pointer" }} />
+        </Topside>
+        <H1>{props.offer.OFFERS.title}</H1>
+        <Hr />
         {formSubmitted ? (
           <div>
             {error == "You have already applied for this offer"
@@ -50,10 +54,8 @@ console.log(props.offer.OFFERS.title)
             <Input accept=".pdf" type="file" id="fileInput" name='cv' onChange={event => { const file = event.target.files[0]; setFile(file) }} required />
             <InputText type="textarea" id="textInput" name='letter'
               onChange={event => { const { value } = event.target; setLetter(value) }} />
-            <Button type='submit'>Apply</Button>
           </Form>
         )}
-        <Button onClick={() => props.setModalShow(!(props.modalShow))}>Close</Button>
       </Div>
     </>
   )

@@ -39,38 +39,40 @@ const Navbar = ({ user }) => {
     store.dispatch(Logout())
   }
   return (
-    <Nav>
-      <Div>
-        <NavLink to='/'>
-          {user.role === "ADMIN" ? "ADMIN" : ""}
-          <Image src={logo} />
-        </NavLink>
-        {user.role === "ADMIN" ? "" :
-          <Div2>
-            <Icon><BsPersonFill color="white" style={{ marginRight: "-10px" }} /><NavLink to='/formCandidate'>Candidate platform</NavLink></Icon>
-            <Icon><CgWorkAlt color="white" style={{ marginRight: "-10px" }} /><NavLink to='/formCompany'>Company platform</NavLink></Icon>
-          </Div2>
-        }
-      </Div>
-
-      <NavMenu>
-
-
-        <NavLink to='/'>
-          Home
-        </NavLink>
-        {user.isConnected ? <NavLink onClick={LogoutFunction} to='/'>
-          Logout
-        </NavLink> : <> <NavLink to='/register'>
-          Register
-        </NavLink>
-          <NavLink to='/login'>
-            Login
+    <>
+      <Nav>
+        <Div>
+          <NavLink to='/'>
+            {user.role === "ADMIN" ? "ADMIN" : ""}
+            <Image src={logo} />
           </NavLink>
-        </>
-        }
-      </NavMenu>
-    </Nav>
+          {user.role === "ADMIN" ? "" :
+            <Div2>
+              <Icon><BsPersonFill color="black" style={{ marginRight: "-10px" }} /><NavLink to='/formCandidate'>Candidate platform</NavLink></Icon>
+              <Icon><CgWorkAlt color="black" style={{ marginRight: "-10px" }} /><NavLink to='/formCompany'>Company platform</NavLink></Icon>
+            </Div2>
+          }
+        </Div>
+
+        <NavMenu>
+
+
+          <NavLink to='/'>
+            Home
+          </NavLink>
+          {user.isConnected ? <NavLink onClick={LogoutFunction} to='/'>
+            Logout
+          </NavLink> : <> <NavLink to='/register'>
+            Register
+          </NavLink>
+            <NavLink to='/login'>
+              Login
+            </NavLink>
+          </>
+          }
+        </NavMenu>
+      </Nav>
+    </>
   )
 }
 

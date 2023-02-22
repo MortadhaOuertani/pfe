@@ -16,6 +16,7 @@ export const Container = styled.div`
   height: 100vh;
   align-items: center;
   display: flex;
+  z-index: 1000;
   background-color: black;
   justify-content: center;
 `;

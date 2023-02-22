@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Container, InputBtn, Form, FormContainer, H1, Header, Img, Input, Left, Right, Span, P, Link } from './LoginElements'
+import { Container, InputBtn, Form, FormContainer, H1, Header, Img, Input, Left, Right, Span, Link } from './LoginElements'
 import login from '../../images/login.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LoginActionCandidate, LoginActionCompany, LoginAdmin } from '../../redux/actions/authActions'
+import { NavbarDiv } from '../offerspage/OfferDetailsElements'
 const Login = () => {
   const [form, setForm] = useState({})
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ const Login = () => {
 
   return (
     <>
+      <NavbarDiv />
       <Container>
         <FormContainer>
           <Left>
@@ -38,12 +40,13 @@ const Login = () => {
               <br />
               <Input name="password" onChange={onChangeHandler} type='password' required placeholder='Password' />
               <br />
+              <Link to='/forgotpassword'>Forgot password ?</Link>
               <InputBtn type="submit" value="Login" />
             </Form>
           </Left>
           <Right>
             <Img src={login}></Img>
-            <P>If you don't have an account<Link to='/register'>Click Here</Link></P>
+            
           </Right>
         </FormContainer>
       </Container>

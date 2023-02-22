@@ -8,14 +8,13 @@ const OffersModule = new Schema({
     contract:String,
     salary:String,
     study:String,
+    local:String,
     language:String,
     experience:String,
     title:String,
     descripion:String,
     search:[],
     candidates:[],
-    logo:String
-
 }, { timestamps: true })
 
 module.exports = mongoose.model("offers", OffersModule);
