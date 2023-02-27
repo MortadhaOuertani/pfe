@@ -9,6 +9,9 @@ const {
   LoginAdmin,
   ForgotPassword,
   ResetPassword,
+  ForgotCompanyPassword,
+  ResetCompanyPassword,
+
 } = require("../controllers/users.controllers");
 
 
@@ -29,6 +32,9 @@ router.post("/logincompany",LoginCompany);
 router.post("/loginadmin",LoginAdmin);
 router.post("/forgotpassword",ForgotPassword);
 router.post('/reset-password',ResetPassword);
+router.post('/forgotcompanypassword',ForgotCompanyPassword);
+router.post('/reset-company-password',ResetCompanyPassword);
+
 
 
 
