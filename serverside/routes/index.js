@@ -7,6 +7,8 @@ const {
   LoginCompany,
   RegisterAdmin,
   LoginAdmin,
+  ForgotPassword,
+  ResetPassword,
 } = require("../controllers/users.controllers");
 
 
@@ -25,6 +27,10 @@ router.post("/register/admin", RegisterAdmin);
 router.post("/logincandidate",LoginCandidate);
 router.post("/logincompany",LoginCompany);
 router.post("/loginadmin",LoginAdmin);
+router.post("/forgotpassword",ForgotPassword);
+router.post('/reset-password',ResetPassword);
+
+
 
 
 /* add offers route */
