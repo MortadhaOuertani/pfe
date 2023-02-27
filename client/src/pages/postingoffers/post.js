@@ -58,7 +58,6 @@ const Post = () => {
           <Input onChange={onChangeHandler} placeholder="experience" name="experience" type="text" required />
           <Input onChange={onChangeHandler} placeholder="dateExpiration" name="dateExpiration" type="date" required />
           <Input onChange={onChangeHandler} placeholder="salary" name="salary" type="text" required />
-          <Input onChange={onChangeHandler} placeholder="study" name="study" type="text" required />
           <Input onChange={onChangeHandler} placeholder="language" name="language" type="text" required />
           <Input onChange={onChangeHandler} placeholder="title" name="title" type="text" required />
           <Input onChange={onChangeHandler} placeholder="description" name="description" type="text" required />
