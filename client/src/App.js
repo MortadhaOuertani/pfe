@@ -16,7 +16,9 @@ import Post from './pages/postingoffers/post';
 import CompanyHomePage from './pages/company Interface/CompanyHomePage.js';
 import Admin from './pages/admin/Admin.js';
 import ForgotPasswordForm from './pages/login/forgot password/ForgotPasswordForm.js';
-
+import Appling from './pages/OffersAppliedTo/Appling'
+import Nnavbar from './components/Navbar/Nnavbar'
+import ResetPasswordForm from './pages/login/forgot password/ResetPasswordForm'
 function App() {
   const auth = useSelector(state => state.auth)
   useEffect(() => {

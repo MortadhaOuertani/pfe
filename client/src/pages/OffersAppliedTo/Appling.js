@@ -16,7 +16,7 @@ const Appling = () => {
                 setOffer(res.data)
                 setLoading(false);
 
-            }).catch(err=>console.log(err))
+            }).catch(err => console.log(err))
     }
     useEffect(() => {
         GetCandidates(id)
@@ -27,7 +27,7 @@ const Appling = () => {
     return (
         <>
             <Container>
-                <Header><h1>{offer.title}</h1></Header>
+                <Header><h1>{offer.title}</h1><h1>{offer.title}</h1></Header>
                 <Middle>
                     {offer && offer.candidates.map(({ cv, email, name, letter }) => (
                         <CandidateInfo key={name} cv={cv} />
