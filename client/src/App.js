@@ -16,8 +16,6 @@ import Post from './pages/postingoffers/post';
 import CompanyHomePage from './pages/company Interface/CompanyHomePage.js';
 import Admin from './pages/admin/Admin.js';
 import ForgotPasswordForm from './pages/login/forgot password/ForgotPasswordForm.js';
-import Nnavbar from './components/Navbar/Nnavbar.js';
-import Appling from './pages/OffersAppliedTo/Appling';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -54,6 +52,8 @@ function App() {
         <Route path='/admin' element={<Admin/>} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm/>} />
         <Route path='/appliedOffer/:id' element={<Appling/>} />
+        <Route path='/reset-password/:id/:token' element={<ResetPasswordForm/>} />
+
       </Routes>
     </Router>
   )
