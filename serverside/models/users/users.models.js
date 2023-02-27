@@ -19,8 +19,12 @@ const UserModel = new Schema({
     phone:"string",
     niveauEtude:"string",
     letter:String,
-    cv:String
-
+    cv: {
+      data:String,
+      contentType: String,
+    },
+  
+  
 
   }, {timestamps: true})
 

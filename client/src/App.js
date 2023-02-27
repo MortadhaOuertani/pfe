@@ -1,5 +1,3 @@
-
-import Navbar from './components/Navbar/Navbar.js';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
@@ -18,6 +16,8 @@ import Post from './pages/postingoffers/post';
 import CompanyHomePage from './pages/company Interface/CompanyHomePage.js';
 import Admin from './pages/admin/Admin.js';
 import ForgotPasswordForm from './pages/login/forgot password/ForgotPasswordForm.js';
+import Nnavbar from './components/Navbar/Nnavbar.js';
+import Appling from './pages/OffersAppliedTo/Appling';
 
 function App() {
   const auth = useSelector(state => state.auth)
@@ -33,14 +33,15 @@ function App() {
       }
     }
   }, [])
-  const user ={
+
+  const user = {
     isConnected: auth.isConnected,
     role:auth.user.role
   }
   
   return (
     <Router>
-      <Navbar user={user} />
+      <Nnavbar user={user}/>
       <Routes>
         <Route path='/' element={<Home user={user}/>} />
         <Route path='/login' element={<Login />} />
@@ -52,6 +53,7 @@ function App() {
         <Route path='/company' element={<CompanyHomePage/>} />
         <Route path='/admin' element={<Admin/>} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm/>} />
+        <Route path='/appliedOffer/:id' element={<Appling/>} />
       </Routes>
     </Router>
   )

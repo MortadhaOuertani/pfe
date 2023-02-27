@@ -13,7 +13,7 @@ const {
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers } = require("../controllers/offer.controllers");
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates } = require("../controllers/offer.controllers");
 
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
@@ -42,5 +42,6 @@ router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false })
 router.get("/offers/:id",
   FindSingleoffers);
 router.post("/applyforOffer/:id", passport.authenticate("jwt", { session: false }), ApplyForOffers);
+router.get("/GetOfferApplicants/:id", passport.authenticate("jwt", { session: false }), GetCandidates);
 
 module.exports = router;
