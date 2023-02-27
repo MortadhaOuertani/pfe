@@ -190,15 +190,18 @@ const ForgotPassword = async (req, res) => {
   try {
     UserModel.findOne({ email: req.body.email }, (err, user) => {  //find user by email
       if (err) {
-        errors.email = "user not found";
         res.status(404).json(err.message);
-      } else {
+      } 
+     else if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      else {
         var token = jwt.sign({           //generate token 
           id: user._id,
           name: user.name,
           email: user.email,
           role: user.role
-        }, "HDYHHSY6", { expiresIn: '5m' });
+        }, "HDYHHSY6", { expiresIn: '15m' });
         res.status(200).json({
           message: "An email has been sent to your account",
           token: "Bearer " + token
@@ -237,16 +240,104 @@ const ForgotPassword = async (req, res) => {
 };
 
 
-const ResetPassword = (req, res) => {
+const ResetPassword = (req, res) => {  //Reset candidate's password 
   try {
     // Verify JWT token
     const { token, password } = req.body;
     const { email } = jwt.verify(token, process.env.PRIVATE_KEY);
     console.log(email);
     // Find user by email
+
     UserModel.findOne({ email }, (err, user) => {
       if (err) {
         return res.status(400).json({ message: 'User not found' });
+      }
+      else if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Update user's password
+      const salt = bcrypt.genSaltSync(10)
+      const hash = bcrypt.hashSync(password, salt)//hashed password
+      user.password = hash;
+      user.save();
+
+      res.status(200).json({ message: 'Password updated successfully' });
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error updating password' });
+  }
+};
+
+const ForgotCompanyPassword = async (req, res) => {
+  try {
+    CompanyModel.findOne({ email: req.body.email }, (err, user) => {  //find user by email
+      if (err) {
+        res.status(404).json(err.message);
+      } 
+     else if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      else {
+        var token = jwt.sign({           //generate token 
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role
+        }, "HDYHHSY6", { expiresIn: '15m' });
+        res.status(200).json({
+          message: "An email has been sent to your account",
+          token: "Bearer " + token
+        })
+
+        // Send password reset email to user
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: "projetpfe885@gmail.com",
+            pass: "mkogokrpyiovokvw"
+          }
+        });
+
+        const mailOptions = {
+          from: "projetpfe885@gmail.com",
+          to: user.email,
+          subject: 'Reset your password',
+          text: `Click on this link to reset your password: ${process.env.CLIENT_URL}/reset-password/${user._id}/${token}`
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Error sending email' });
+          }
+          console.log(`Email sent: ${info.response}`);
+          res.status(200).json({ message: 'Password reset email sent' });
+        });
+
+      }
+    }
+    )
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+};
+
+
+const ResetCompanyPassword = (req, res) => {  //Reset candidate's password 
+  try {
+    // Verify JWT token
+    const { token, password } = req.body;
+    const { email } = jwt.verify(token, process.env.PRIVATE_KEY);
+    console.log(email);
+    // Find user by email
+    CompanyModel.findOne({ email }, (err, user) => {
+      if (err) {
+        return res.status(400).json({ message: 'User not found' });
+      }
+      else if (!user) {
+        return res.status(404).json({ message: "User not found" });
       }
       
       // Update user's password
@@ -265,7 +356,6 @@ const ResetPassword = (req, res) => {
 }
 
 
-
 module.exports = {
   RegisterCandidate,
   RegisterCompany,
@@ -275,4 +365,6 @@ module.exports = {
   LoginAdmin,
   ForgotPassword,
   ResetPassword,
+  ForgotCompanyPassword,
+  ResetCompanyPassword
 };

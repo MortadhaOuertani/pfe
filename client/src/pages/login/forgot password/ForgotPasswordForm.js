@@ -8,22 +8,45 @@ const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await ForgotPasswordCandidate();
+    } catch {
+      try {
+        await ForgotPasswordCompany();
+      } catch (error) {
+        setErrorMessage(error.response.data.message);
+        setSuccessMessage(null);
+      }
+    }
+  };
+
+  const ForgotPasswordCandidate = async () => {
     try {
       const response = await axios.post('http://localhost:3600/api/forgotpassword', { email });
       setSuccessMessage(response.data.message);
       setErrorMessage(null);
     } catch (error) {
-      setErrorMessage(error.response.data.message);
-      setSuccessMessage(null);
+      throw error;
     }
   };
 
+  const ForgotPasswordCompany = async () => {
+    try {
+      const response = await axios.post('http://localhost:3600/api/forgotcompanypassword', { email });
+      setSuccessMessage(response.data.message);
+      setErrorMessage(null);
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-  }
+  };
+
   return (
     <>
       <NavbarDiv />
@@ -45,14 +68,13 @@ const ForgotPasswordForm = () => {
             {errorMessage && <div className="error">{errorMessage}</div>}
             {successMessage && <div className="success">{successMessage}</div>}
             <Button type="submit">Reset password</Button>
-
           </Form>
           <ImgContainer><Img src={password}></Img></ImgContainer>
-
         </Div>
       </Container>
     </>
   );
-}
+};
 
-export default ForgotPasswordForm
+export default ForgotPasswordForm;
+

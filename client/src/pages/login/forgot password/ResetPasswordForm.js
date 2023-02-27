@@ -8,7 +8,8 @@ const ResetPasswordForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate= useNavigate();
+  const [success, setSuccess] = useState(false); // flag variable
+  const navigate = useNavigate();
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -19,23 +20,46 @@ const ResetPasswordForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (password !== confirmPassword) {
       setMessage('Passwords do not match');
       return;
+    };
+    let successFlag = false; // initialize flag to false
+    await ResetPasswordCandidate();
+    await ResetPasswordCompany();
+    if (successFlag === false) {
+      setMessage('An error occurred'); // set error message if neither function was successful
     }
 
-    try {
-      const response = await axios.post('http://localhost:3600/api/reset-password', {
-        token,
-        password,
-      });
-      setMessage(response.data.message);
-      navigate('/offers');
-    } catch (error) {
-      setMessage(error.response.data.message);
+    async function ResetPasswordCandidate() {
+      try {
+        const response = await axios.post('http://localhost:3600/api/reset-password', {
+          token,
+          password,
+        });
+        setMessage(response.data.message);
+        navigate('/offers');
+        setSuccess(true); // update flag variable
+      } catch (error) {
+        console.log(error)
+        //setMessage(error.response.data.message);
+      }
     }
 
+    async function ResetPasswordCompany() {
+      try {
+        const response = await axios.post('http://localhost:3600/api/reset-company-password', {
+          token,
+          password,
+        });
+        setMessage(response.data.message);
+        navigate('/offers');
+        setSuccess(true); // update flag variable
+      } catch (error) {
+       // setMessage(error.response.data.message);
+       console.log(error)
+      }
+    }
   };
 
   return (
@@ -62,7 +86,7 @@ const ResetPasswordForm = () => {
             />
           </Div2>
           <Button type="submit">Reset Password</Button>
-          {message && <div>{message}</div>}
+          {message && !success && <div>{message}</div>} {/* show error message if flag is false */}
         </Form>
       </Div>
     </Container>
