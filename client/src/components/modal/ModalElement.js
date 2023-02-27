@@ -4,7 +4,7 @@
   export const Div = styled.div`
   background: white;
   align-self: center;
-  top: ${({ modalShow }) => (modalShow ? '50%' : '-50%')};
+  top: ${({ isOpen }) => (isOpen ? '50%' : '-50%')};
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;

@@ -9,13 +9,16 @@ const {
   LoginAdmin,
   ForgotPassword,
   ResetPassword,
+  ForgotCompanyPassword,
+  ResetCompanyPassword,
+
 } = require("../controllers/users.controllers");
 
 
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers } = require("../controllers/offer.controllers");
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates } = require("../controllers/offer.controllers");
 
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
@@ -29,6 +32,9 @@ router.post("/logincompany",LoginCompany);
 router.post("/loginadmin",LoginAdmin);
 router.post("/forgotpassword",ForgotPassword);
 router.post('/reset-password',ResetPassword);
+router.post('/forgotcompanypassword',ForgotCompanyPassword);
+router.post('/reset-company-password',ResetCompanyPassword);
+
 
 
 
@@ -48,5 +54,6 @@ router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false })
 router.get("/offers/:id",
   FindSingleoffers);
 router.post("/applyforOffer/:id", passport.authenticate("jwt", { session: false }), ApplyForOffers);
+router.get("/GetOfferApplicants/:id", passport.authenticate("jwt", { session: false }), GetCandidates);
 
 module.exports = router;

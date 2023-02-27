@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const Header = styled.div`
 width: 100%;
-height: 40%;
+height: 50%;
 display: flex;
 justify-content: center;
-align-items: center;
+align-items: flex-end;
 `
 export const Body = styled.div`
 width: 100%;

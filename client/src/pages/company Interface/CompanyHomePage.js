@@ -6,6 +6,7 @@ import Offer from '../offerspage/offer/offer'
 import { Offers } from '../offerspage/offerspageElements'
 import { Container } from '../postingoffers/postElements'
 import { Body, CompanyNavbar, Header, Nav } from './CompanyHomePageElements'
+import OfferCompany from '../offerspage/offer/OfferCompany'
 
 const CompanyHomePage = () => {
   const offers = useSelector(state => state.offers)
@@ -39,14 +40,15 @@ const CompanyHomePage = () => {
   },[offers])
   return (
     <>
-        <Nav></Nav>
       <Container>
-        <CompanyNavbar></CompanyNavbar>
-        <Header></Header>
+        <Header>
+        <input onChange={handleSearch} placeholder='Search'></input>
+        </Header>
         <Body>
           <Offers>
-          <input onChange={handleSearch} placeholder='Search'></input>
-        {filteredOffers.map((offer) => <Offer key={offer._id} _id={offer._id} company={offer.company} experience={offer.experience} />)}
+          {filteredOffers.map((offer) => (
+            <OfferCompany style={{textDecoration:"none",color:"inherit"}} key={offer._id}local={offer.local}title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
+          ))}
           </Offers>
         </Body>
       </Container>
