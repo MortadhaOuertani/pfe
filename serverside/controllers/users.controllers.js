@@ -5,9 +5,13 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const adminModel = require("../models/users/admin.model");
+const fs = require('fs');
 
 const RegisterCandidate = async (req, res) => {
   try {
+    console.log(req.body)
+    // Convert image to base64-encoded string
+
     UserModel.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
         errors.email = "user exist";
@@ -191,8 +195,8 @@ const ForgotPassword = async (req, res) => {
     UserModel.findOne({ email: req.body.email }, (err, user) => {  //find user by email
       if (err) {
         res.status(404).json(err.message);
-      } 
-     else if (!user) {
+      }
+      else if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
       else {
@@ -255,7 +259,7 @@ const ResetPassword = (req, res) => {  //Reset candidate's password
       else if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      
+
       // Update user's password
       const salt = bcrypt.genSaltSync(10)
       const hash = bcrypt.hashSync(password, salt)//hashed password
@@ -276,8 +280,8 @@ const ForgotCompanyPassword = async (req, res) => {
     CompanyModel.findOne({ email: req.body.email }, (err, user) => {  //find user by email
       if (err) {
         res.status(404).json(err.message);
-      } 
-     else if (!user) {
+      }
+      else if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
       else {
@@ -339,7 +343,7 @@ const ResetCompanyPassword = (req, res) => {  //Reset candidate's password
       else if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      
+
       // Update user's password
       const salt = bcrypt.genSaltSync(10)
       const hash = bcrypt.hashSync(password, salt)//hashed password

@@ -23,9 +23,7 @@ const UserModel = new Schema({
       data:String,
       contentType: String,
     },
-  
-  
-
+    profile:String
   }, {timestamps: true})
 
 module.exports = mongoose.model("candidates", UserModel);
