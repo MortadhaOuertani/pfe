@@ -14,7 +14,11 @@ const OffersModule = new Schema({
     title:String,
     descripion:String,
     search:[],
+    keywords:[],
     candidates:[],
+    technicalTest:[],
+    accepted:[],
+
 }, { timestamps: true })
 
 module.exports = mongoose.model("offers", OffersModule);

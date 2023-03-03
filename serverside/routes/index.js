@@ -18,7 +18,7 @@ const {
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates } = require("../controllers/offer.controllers");
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, acceptCandidate } = require("../controllers/offer.controllers");
 
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
@@ -43,6 +43,7 @@ router.post('/reset-company-password',ResetCompanyPassword);
 router.post("/offers", passport.authenticate("jwt", { session: false }), Addoffers);//passport pour donné l'autorisation
 /* get all offers */
 router.get("/offers", FindAlloffers);
+router.post("/accept/:id",acceptCandidate)
 /* get one offers */
 router.get("/offers/:id",
   FindSingleoffers);
