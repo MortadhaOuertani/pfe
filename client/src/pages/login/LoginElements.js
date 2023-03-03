@@ -22,7 +22,21 @@ border-radius: 10px;
 `
 export const Span = styled.span`
 
-`
+`;
+
+export const InputDiv = styled.div`
+width: 100%;
+display: flex;
+flex-direction: row;
+`;
+export const IconBtn = styled.div`
+height:40px;
+margin-top: 50px;
+margin-left: -25px;
+z-index: 3;
+width: 30px;
+`;
+
 export const Left = styled.div`
 width: 100% ;
 height: 80%;
@@ -68,7 +82,7 @@ border-left:transparent ;
 border-right: transparent;
 border-bottom: 1px solid black;
 position: relative;
-
+height: 40px;
 width:50%;
 &:focus{
   outline: none;
