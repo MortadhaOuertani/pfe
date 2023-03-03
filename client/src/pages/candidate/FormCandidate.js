@@ -15,10 +15,24 @@ const FormCandidate = () => {
             [e.target.name]: e.target.value //elle va prendre la valeur d'un input à partir le nom de l'input
         })
     }
-    const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
-        e.preventDefault(); //ne refraichir pas la page pour ne perdre pas les données 
-        dispatch(RegistrationCandidate(form, navigate))//appeler la fonction loginAction qui se trouve dans le store 
-    }
+    const onSubmit = (e) => {
+        e.preventDefault();
+      
+        // Read the selected file and convert it to base64
+        const reader = new FileReader();
+        const file = e.target.profile.files[0];
+      
+        reader.readAsDataURL(file);
+        reader.onload = async () => {
+          const base64Image = reader.result.split(",")[1];
+      
+          // Add the base64-encoded image to the form data
+          const formData = { ...form, profile: base64Image };
+      console.log(formData.profile)
+          // Dispatch the registration action with the updated form data
+          dispatch(RegistrationCandidate(formData, navigate));
+        };
+      };
     return (
         <>
             <NavbarDiv />
@@ -37,6 +51,7 @@ const FormCandidate = () => {
                         <Input onChange={onChangeHandler} type='date' name='anneeObtentienDiplome' placeholder='year of graduation' required />
                         <Input onChange={onChangeHandler} type='text' name='diplome' placeholder='diploma' required />
                         <Input onChange={onChangeHandler} type='text' name='age' placeholder='age' required />
+                        <Input onChange={onChangeHandler} type='file' accept="image/png, image/jpeg" name='profile' placeholder='Profile Picture' required />
                     </Div>
                     <BtnSubmit type="submit" >Register</BtnSubmit>
                 </Form>

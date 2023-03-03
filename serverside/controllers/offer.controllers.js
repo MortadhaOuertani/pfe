@@ -99,70 +99,100 @@ const GetCompanyoffers = (req, res) => {
 
 const ApplyForOffers = async (req, res) => {
     try {
-      //call uploadFile middleware(multer)
-      await uploadFile(req, res);
-  
-      // Check if there is a file uploaded
-      offersModels.findOne({ _id: req.params.id }, async (err, data) => {
-        if (err) {
-          return res.status(404).json({ error: err.message });
-        }
-  
-        const candidate = await usersModels.findOne({ _id: req.user.id });
-        if (data.candidates.some((c) => c._id.equals(candidate._id))) {
-          return res.status(409).json({ error: "You have already applied for this offer" });
-        } else {
-          // Add the CV file to the candidate
-          const Filename = req.file.filename;
-          
-          candidate.cv = {
-            data:Filename,
-            contentType: req.file.mimetype,
-          };
-  
-          // Add the letter text to the candidate
-          candidate.letter = req.body.letter;
-  
-          // Push the candidate to the data candidates array
-          data.candidates.push(candidate);
-  
-          // Save the data to the database
-          data.save((err) => {
+        //call uploadFile middleware(multer)
+        await uploadFile(req, res);
+
+        // Check if there is a file uploaded
+        offersModels.findOne({ _id: req.params.id }, async (err, data) => {
             if (err) {
-              return res.status(500).json({ error: err.message });
+                return res.status(404).json({ error: err.message });
             }
-  
-            return res.status(200).json({ message: "You have successfully applied for this offer" });
-          });
-        }
-      });
+
+            const candidate = await usersModels.findOne({ _id: req.user.id });
+            if (data.candidates.some((c) => c._id.equals(candidate._id))) {
+                return res.status(409).json({ error: "You have already applied for this offer" });
+            } else {
+                // Add the CV file to the candidate
+                const Filename = req.file.filename;
+
+                candidate.cv = {
+                    data: Filename,
+                    contentType: req.file.mimetype,
+                };
+
+                // Add the letter text to the candidate
+                candidate.letter = req.body.letter;
+
+                // Push the candidate to the data candidates array
+                data.candidates.push(candidate);
+
+                // Save the data to the database
+                data.save((err) => {
+                    if (err) {
+                        return res.status(500).json({ error: err.message });
+                    }
+
+                    return res.status(200).json({ message: "You have successfully applied for this offer" });
+                });
+            }
+        });
     } catch (err) {
         console.log(req.file)
 
-      res.status(500).send({
-        message: `Could not upload the file: ${req.file.originalname}. ${err}`,
-      });
+        res.status(500).send({
+            message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+        });
     }
-  };
-  
+};
+
 
 const GetCandidates = (req, res) => {
-    try{
-        offersModels.findOne({_id:req.params.id},(err,offer)=>{
-            if(err)res.status(404).json(err.message)
+    try {
+        offersModels.findOne({ _id: req.params.id }, (err, offer) => {
+            if (err) res.status(404).json(err.message)
             res.status(200).json(offer)
         })
     }
-    catch(err){
+    catch (err) {
         res.status(404).json(err)
     }
 }
 
+const refuseCandidate = (req,res)=>{
+    offersModels.findOne({ _id: req.params.id }, (err, offer) => {
+        if (err) res.status(409).json(err.message)
+        offer.candidates.findOneAndRemove({ _id: req.params.id }, (err, candidate) => {
+            if (err) res.status(410).json(err.message)
+            res.status(200).json({message:"Candidate Refused"})
+            
+        })
+
+    })
+}
+
+const acceptCandidate = (req, res) => {
+    offersModels.findOne({ _id: req.params.id }, (err, offer) => {
+        if (err) res.status(409).json(err.message)
+        offer.candidates.findOneAndRemove({ _id: req.params.id }, (err, candidate) => {
+            if (err) res.status(410).json(err.message)
+            if (!candidate) {
+                offer.technicalTest.findOneAndRemove({ _id: req.params.id }, (err, TechnicalCandidate) => {
+                    if (err) res.status(411).json(err.message)
+                    offer.accepted.push(TechnicalCandidate)
+                })
+            }
+            else { offer.technicalTest.push(candidate) }
+
+        })
+
+    })
+}
 
 module.exports = {
     GetCandidates,
     GetCompanyoffers,
     Addoffers,
+    acceptCandidate,
     FindAlloffers,
     FindSingleoffers,
     Deleteoffers,
