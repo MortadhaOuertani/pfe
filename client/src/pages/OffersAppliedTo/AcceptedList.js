@@ -1,14 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { BsFillPersonFill, BsFillPersonCheckFill } from 'react-icons/bs';
+import { BsFillPersonCheckFill, BsFillPersonFill } from 'react-icons/bs';
 import CandidateInfo from '../../components/CandidateInfo/CandidateInfo';
 import { Container, Header, LinkS, Middle, RH, Technical, Templates } from './ApplingElements'
 import { Document, Page } from "react-pdf";
 import { FaCog } from 'react-icons/fa';
 import './reacticons.css'
+import AcceptedInfo from '../../components/CandidateInfo/acceptedinfo';
 
-const Appling = () => {
+const Accepted = () => {
     const { id } = useParams();
     const [offer, setOffer] = useState([])
     const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ const Appling = () => {
             <Container>
                 <Header><h1>{offer.title}</h1>
                     <Templates>
-                        <LinkS to={`/appliedOffer/${id}`}>
+                    <LinkS to={`/appliedOffer/${id}`}>
                             <Technical>
                                 <BsFillPersonFill className='iconz' size={30}></BsFillPersonFill>
                             </Technical>
@@ -51,11 +52,9 @@ const Appling = () => {
                     </Templates>
                 </Header>
                 <Middle>
-
-                        {offer && offer.candidates.map(({ _id, cv, profile, phone, email, diplome, lastName, age, name, letter }) => (
-                            <CandidateInfo key={_id} profile={profile} cadidatId={_id} phone={phone} diplome={diplome} age={age} lastName={lastName} letter={letter} email={email} name={name} cv={cv} />
-                        ))}
-
+                    {offer && offer.accepted.map(({ _id, cv, profile, phone, email, diplome, lastName, age, name, letter }) => (
+                        <AcceptedInfo key={_id} profile={profile} cadidatId={_id} phone={phone} diplome={diplome} age={age} lastName={lastName} letter={letter} email={email} name={name} cv={cv} />
+                    ))}
                 </Middle>
 
             </Container>
@@ -63,4 +62,4 @@ const Appling = () => {
     )
 }
 
-export default Appling
+export default Accepted

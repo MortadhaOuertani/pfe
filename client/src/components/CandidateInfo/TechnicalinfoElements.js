@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -22,14 +21,6 @@ padding-top: 20px;
 display: flex;
 flex-direction: column;
 text-align: center;
-
-`
-export const LinkS = styled(Link)`
-text-decoration: none;
-color: inherit;
-width: 100%;
-height:40%;
-display: flex;
 
 `
 export const P = styled.p`

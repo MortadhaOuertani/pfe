@@ -1,14 +1,17 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { BsFillPersonFill, BsFillPersonCheckFill } from 'react-icons/bs';
 import CandidateInfo from '../../components/CandidateInfo/CandidateInfo';
-import { Container, Header, LinkS, Middle, RH, Technical, Templates } from './ApplingElements'
+import { Container, Header, LinkS, Middle, Templates } from './technicalElements'
 import { Document, Page } from "react-pdf";
+import Technicalinfo from '../../components/CandidateInfo/Technicalinfo';
+import { RH, TechnicalD } from './technicalElements';
 import { FaCog } from 'react-icons/fa';
 import './reacticons.css'
+import { BsFillPersonCheckFill, BsFillPersonFill } from 'react-icons/bs';
 
-const Appling = () => {
+
+const Technical = () => {
     const { id } = useParams();
     const [offer, setOffer] = useState([])
     const [loading, setLoading] = useState(true);
@@ -33,9 +36,10 @@ const Appling = () => {
                 <Header><h1>{offer.title}</h1>
                     <Templates>
                         <LinkS to={`/appliedOffer/${id}`}>
-                            <Technical>
-                                <BsFillPersonFill className='iconz' size={30}></BsFillPersonFill>
-                            </Technical>
+                            <TechnicalD>
+                                <BsFillPersonFill className='iconz' size={30}>
+                                </BsFillPersonFill>
+                            </TechnicalD>
                         </LinkS>
                         <LinkS to={`/technicaltest/${id}`}>
                             <RH>
@@ -44,18 +48,16 @@ const Appling = () => {
                             </RH>
                         </LinkS>
                         <LinkS to={`/accepted/${id}`}>
-                            <Technical>
+                            <TechnicalD>
                                 <BsFillPersonCheckFill className='iconz' size={30}></BsFillPersonCheckFill>
-                            </Technical>
+                            </TechnicalD>
                         </LinkS>
                     </Templates>
                 </Header>
                 <Middle>
-
-                        {offer && offer.candidates.map(({ _id, cv, profile, phone, email, diplome, lastName, age, name, letter }) => (
-                            <CandidateInfo key={_id} profile={profile} cadidatId={_id} phone={phone} diplome={diplome} age={age} lastName={lastName} letter={letter} email={email} name={name} cv={cv} />
+                        {offer && offer.technicalTest.map(({ _id, cv, profile, phone, email, diplome, lastName, age, name, letter }) => (
+                            <Technicalinfo key={_id} profile={profile} cadidatId={_id} phone={phone} diplome={diplome} age={age} lastName={lastName} letter={letter} email={email} name={name} cv={cv} />
                         ))}
-
                 </Middle>
 
             </Container>
@@ -63,4 +65,4 @@ const Appling = () => {
     )
 }
 
-export default Appling
+export default Technical;

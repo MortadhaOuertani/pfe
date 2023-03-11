@@ -79,5 +79,6 @@ align-items: center;
 export const LinkR = styled(Links)`
     text-decoration: none;
      color: inherit;
+     
 
 `
