@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { NavLink as Link } from 'react-router-dom';
 
 export const SidebarContainer = styled.div`
-  width: 200px;
+  width: 300px;
   height: 100vh;
   background-color: #f5f5f5;
   display: flex;
@@ -13,7 +14,8 @@ export const SidebarHeader = styled.h2`
   padding: 16px;
 `;
 
-export const SidebarLink = styled.a`
+export const SidebarLink = styled(Link)`
+  text-decoration:none;
   display: block;
   padding: 12px 16px;
   align-items: center;

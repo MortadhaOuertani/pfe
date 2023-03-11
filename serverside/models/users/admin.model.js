@@ -8,6 +8,7 @@ const AdminModel = new Schema({
         unique: true,
       }, 
     password: "string",
+    acceptList : [] ,
     role :String,
 
   }, {timestamps: true})

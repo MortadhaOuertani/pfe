@@ -19,6 +19,9 @@ import ForgotPasswordForm from './pages/login/forgot password/ForgotPasswordForm
 import Appling from './pages/OffersAppliedTo/Appling'
 import Nnavbar from './components/Navbar/Nnavbar'
 import ResetPasswordForm from './pages/login/forgot password/ResetPasswordForm';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminUsers from './pages/admin/AdminUsers';
+import AdminSettings from './pages/admin/AdminSettings';
 
 
 
@@ -58,7 +61,9 @@ function App() {
         <Route path='/forgotpassword' element={<ForgotPasswordForm/>} />
         <Route path='/appliedOffer/:id' element={<Appling/>} />
         <Route path='/reset-password/:id/:token' element={<ResetPasswordForm/>} />
-
+        <Route path='/admin/dashboard' element={<AdminDashboard/>} />
+        <Route path='/admin/users' element={<AdminUsers/>} />
+        <Route path='/admin/settings' element={<AdminSettings/>} />
       </Routes>
     </Router>
   )

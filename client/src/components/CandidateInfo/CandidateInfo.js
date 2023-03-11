@@ -8,7 +8,7 @@ const CandidateInfo = ({ cv, phone, diplome,age, profile, email, name, lastName,
   useEffect(() => {
     console.log(profile)
     async function fetchPdf() {
-      const { default: file } = await import(`./${cv.data}`);
+      const { default: file } = await import(`./${cv.data}`);  //import dynamique : sabina library tkhallina naamlou import dynamique
       setPdfFile(file);
     }
     fetchPdf();

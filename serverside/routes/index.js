@@ -18,7 +18,7 @@ const {
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, acceptCandidate } = require("../controllers/offer.controllers");
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, GetCompanies, acceptCandidate, GetAllCandidates, AddToAdmin, GetAdmin } = require("../controllers/offer.controllers");
 
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
@@ -40,15 +40,14 @@ router.post('/reset-company-password',ResetCompanyPassword);
 
 
 /* add offers route */
-router.post("/offers", passport.authenticate("jwt", { session: false }), Addoffers);//passport pour donné l'autorisation
+router.post("/offers", Addoffers);//passport pour donné l'autorisation
 /* get all offers */
 router.get("/offers", FindAlloffers);
 router.post("/accept/:id",acceptCandidate)
 /* get one offers */
 router.get("/offers/:id",
   FindSingleoffers);
-router.delete("/offers/:id",
-  Deleteoffers);
+router.delete("/offers/:id",Deleteoffers);
 router.get("/date", passport.authenticate("jwt", { session: false }), FindDate);
 router.get("/companydata/:id", GetCompanyData);  /* get the data of a company */
 router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false }), GetCompanyoffers);
@@ -56,5 +55,8 @@ router.get("/offers/:id",
   FindSingleoffers);
 router.post("/applyforOffer/:id", passport.authenticate("jwt", { session: false }), ApplyForOffers);
 router.get("/GetOfferApplicants/:id", passport.authenticate("jwt", { session: false }), GetCandidates);
-
+router.get("/getCandidates",GetAllCandidates);
+router.get("/getcompanies", GetCompanies); //zedt hedhy
+router.post("/posttoadmin", passport.authenticate("jwt", { session: false }),AddToAdmin); // envoyer les offres à postuler à l'admin
+router.get("/getAdmin",GetAdmin);
 module.exports = router;
