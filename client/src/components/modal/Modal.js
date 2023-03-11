@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { ApplyForOffer } from '../../redux/actions/offerActions';
 import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess, Topside, Hr } from './ModalElement';
 import { FaTimes } from 'react-icons/fa';
+import axios from 'axios';
 
 const ModalComponent = (props) => {
 
@@ -13,12 +14,19 @@ const ModalComponent = (props) => {
   const { id } = useParams();
 
   const [formSubmitted, setFormSubmitted] = useState(false); // Track whether the form has been submitted
+  
+  const Test = (form) => {
+    axios.post("http://localhost:3600/api/testPDf", form).then(res => {
+      console.log(res.data)
+    }).catch(console.log("error"))
 
+  }
   const Apply = (event) => {
     event.preventDefault();
 
-    dispatch(ApplyForOffer(id, form));
+     dispatch(ApplyForOffer(id, form));
     console.log(form);
+    //Test(form)
 
     setFormSubmitted(true); // Set the formSubmitted state to true when the form is submitted
   };

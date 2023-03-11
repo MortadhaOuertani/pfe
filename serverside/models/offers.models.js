@@ -18,7 +18,8 @@ const OffersModule = new Schema({
     candidates:[],
     technicalTest:[],
     accepted:[],
-
-}, { timestamps: true })
+    refused:[],
+    
+  }, { timestamps: true })
 
 module.exports = mongoose.model("offers", OffersModule);

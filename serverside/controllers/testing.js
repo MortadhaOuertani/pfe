@@ -1,24 +1,22 @@
-//npm install pdf-parse
 const fs = require('fs');
 const pdf = require('pdf-parse');
 
-
-let dataBuffer = fs.readFileSync('./Mariem.pdf');  //read pdf files
+  const CountReactInPDF =(req,res)=> {
+  let dataBuffer = fs.readFileSync(req.file.destination+filename);
  
-pdf(dataBuffer).then(function(data) {  
- 
+  return pdf(dataBuffer).then(function(data) {  
     let text = data.text.split(" ");
-    let s=0
+    let count = 0;
     for(let i = 0; i < text.length; i++){
-        if(text[i].toUpperCase().includes("react".toUpperCase())){
-            s++
-            break
+        if(text[i].toUpperCase().includes("REACT".toUpperCase())){
+            count++;
         }
     }
+res.status(200).json(count)
+  });
+}
 
-    console.log(data.text); //afficher tous les textes de pdf
-    console.log(text); //afficher les textes séparées par une espace 
-    console.log(" React existe: "+s+" fois"); 
-    
 
-});
+module.exports = {
+  CountReactInPDF
+}

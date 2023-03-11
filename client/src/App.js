@@ -19,6 +19,9 @@ import ForgotPasswordForm from './pages/login/forgot password/ForgotPasswordForm
 import Appling from './pages/OffersAppliedTo/Appling'
 import Nnavbar from './components/Navbar/Nnavbar'
 import ResetPasswordForm from './pages/login/forgot password/ResetPasswordForm';
+import Technical from './pages/OffersAppliedTo/technical';
+import Accepted from './pages/OffersAppliedTo/AcceptedList';
+import CV from './components/CandidateInfo/CV';
 
 
 
@@ -58,7 +61,9 @@ function App() {
         <Route path='/forgotpassword' element={<ForgotPasswordForm/>} />
         <Route path='/appliedOffer/:id' element={<Appling/>} />
         <Route path='/reset-password/:id/:token' element={<ResetPasswordForm/>} />
-
+        <Route path='/technicaltest/:id' element={<Technical/>} />
+        <Route path='/accepted/:id' element={<Accepted/>} />
+        <Route path='/:id/candidate' element={<CV/>} />
       </Routes>
     </Router>
   )

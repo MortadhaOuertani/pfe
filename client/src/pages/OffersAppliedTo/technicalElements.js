@@ -56,7 +56,7 @@ display: flex;
 justify-content: center;
 align-items: center ;
 `
-export const Technical = styled.div`
+export const TechnicalD = styled.div`
 width: 100%;
 display: flex;
 justify-content: center;
@@ -65,13 +65,6 @@ height: 100%;
 cursor: pointer;
 `
 export const LinkS = styled(Link)`
-text-decoration: none;
-color: inherit;
+width: 50%;
 height: 100%;
-width: 100%;
-display: flex;
-
-
-`
-export const LinkR = styled(Link)`
 `
