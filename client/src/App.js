@@ -22,6 +22,9 @@ import ResetPasswordForm from './pages/login/forgot password/ResetPasswordForm';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminSettings from './pages/admin/AdminSettings';
+import Technical from './pages/OffersAppliedTo/technical';
+import Accepted from './pages/OffersAppliedTo/AcceptedList';
+import CV from './components/CandidateInfo/CV';
 
 
 
@@ -64,6 +67,9 @@ function App() {
         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
         <Route path='/admin/users' element={<AdminUsers/>} />
         <Route path='/admin/settings' element={<AdminSettings/>} />
+        <Route path='/technicaltest/:id' element={<Technical/>} />
+        <Route path='/accepted/:id' element={<Accepted/>} />
+        <Route path='/:id/candidate' element={<CV/>} />
       </Routes>
     </Router>
   )

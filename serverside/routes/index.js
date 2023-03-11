@@ -1,5 +1,4 @@
 var express = require("express");
-//const aaa = require("../controllers/testing")
 const {
   RegisterCompany,
   RegisterCandidate,
@@ -18,22 +17,26 @@ const {
 var router = express.Router();
 const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, GetCompanies, acceptCandidate, GetAllCandidates, AddToAdmin, GetAdmin } = require("../controllers/offer.controllers");
+
+
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, acceptCandidate, refuseCandidate, acceptCandidateTechnical, refuseCandidateTechnical, CountWordsInPDF, GetAdmin, AddToAdmin, GetCompanies, GetAllCandidates,
+} = require("../controllers/offer.controllers");
+
 
 /* users routes. */
 router.post("/register/candidate", RegisterCandidate);
 router.post("/register/company", RegisterCompany);
 router.post("/register/admin", RegisterAdmin);
+router.post("/testPDf", CountWordsInPDF,
+);
 
-//router.get("/aaa",aaa);
-
-router.post("/logincandidate",LoginCandidate);
-router.post("/logincompany",LoginCompany);
-router.post("/loginadmin",LoginAdmin);
-router.post("/forgotpassword",ForgotPassword);
-router.post('/reset-password',ResetPassword);
-router.post('/forgotcompanypassword',ForgotCompanyPassword);
-router.post('/reset-company-password',ResetCompanyPassword);
+router.post("/logincandidate", LoginCandidate);
+router.post("/logincompany", LoginCompany);
+router.post("/loginadmin", LoginAdmin);
+router.post("/forgotpassword", ForgotPassword);
+router.post('/reset-password', ResetPassword);
+router.post('/forgotcompanypassword', ForgotCompanyPassword);
+router.post('/reset-company-password', ResetCompanyPassword);
 
 
 
@@ -43,11 +46,15 @@ router.post('/reset-company-password',ResetCompanyPassword);
 router.post("/offers", Addoffers);//passport pour donné l'autorisation
 /* get all offers */
 router.get("/offers", FindAlloffers);
-router.post("/accept/:id",acceptCandidate)
 /* get one offers */
 router.get("/offers/:id",
   FindSingleoffers);
-router.delete("/offers/:id",Deleteoffers);
+router.delete("/offers/:id",
+  Deleteoffers);
+router.post("/refuse/:offerId/:candidateId", refuseCandidate)
+router.post("/refuseTechnical/:offerId/:candidateId", refuseCandidateTechnical)
+router.post("/accept/:offerId/:candidateId", acceptCandidate)
+router.post("/acceptTechnical/:offerId/:candidateId", acceptCandidateTechnical)
 router.get("/date", passport.authenticate("jwt", { session: false }), FindDate);
 router.get("/companydata/:id", GetCompanyData);  /* get the data of a company */
 router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false }), GetCompanyoffers);
