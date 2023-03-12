@@ -110,6 +110,7 @@ cursor: pointer;
 `;
 
 export const Link = styled(Links)`
+  text-decoration:none;
   margin-left: 10px;
   align-self: flex-start;
   margin-left: 20%;

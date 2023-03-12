@@ -1,0 +1,40 @@
+.content-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 25px 0;
+    min-width: 600px;
+    height: 100px;
+    font-size: 0.9rem;
+    align-self: center;
+
+}
+
+.content-table tbody {
+    height: 50px;
+    text-align: left;
+    font-weight: bold;
+    padding: 10px;
+}
+
+tbody {
+    height: 100%;
+    /* set the height of the table body */
+    overflow: scroll;
+    /* make the table body scrollable */
+}
+
+
+
+td {
+    width: 30px;
+    margin-top: 0;
+    padding-top: 10px;
+    padding-left: 10px;
+    height: auto;
+    border: 1px solid black;
+
+}
+
+.icons-container {
+   
+}

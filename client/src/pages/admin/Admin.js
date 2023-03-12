@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
 import { Container, LeftSide, RightSide } from './AdminElements'
-import Sidebar from './Sidebar'
+import AdminHomePage from './AdminHomePage'
+import Sidebar from './Sidebar/Sidebar'
+
 const Admin = () => {
 
 
@@ -10,6 +12,7 @@ const Admin = () => {
             <NavbarDiv />
             <Container>
                 <Sidebar />
+                <AdminHomePage />
             </Container>
         </>
     )

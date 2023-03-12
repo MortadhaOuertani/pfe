@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import image from '../../images/aboutUs.jpg';
 import { Container, Image, Left, Left2, Parag1, Right, SmallerContainer, Title1 } from './SecondPageElements';
 import { useInView } from 'react-intersection-observer';
-import { ThemeProvider } from 'styled-components';
+
 
 
 const SecondPage = ({user}) => {

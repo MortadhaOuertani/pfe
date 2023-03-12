@@ -1,117 +1,171 @@
 import axios from 'axios'
-import { ERRORS, SET_OFFERS, SET_OFFERSS, DELETE_OFFERS, SUCCESS } from '../types';
+import { ERRORS, SET_OFFERS, SET_OFFERSS, DELETE_OFFERS, SUCCESS, SET_COMPANIES, SET_CANDIDATES } from '../types';
 import "./alert.css"
 
-export const Addoffer = (form)=>dispatch=>{
-    axios
-      .post("http://localhost:3600/api/offers", form)
-      .then(res => {
-        dispatch({
-            type: ERRORS,
-            payload: {}
-        })
-        setTimeout(() => {
-        }, 4000);
-      })
-      .catch(err => {
-          dispatch({
-              type: ERRORS,
-              payload: err.response.data
-          })
-      });
-}
-
-export const GetOffers = ()=>dispatch=>{
-    axios
-      .get("http://localhost:3600/api/offers")
-      .then(res => {
-          dispatch({
-              type: SET_OFFERSS  ,
-              payload: res.data
-          })
-      })
-      .catch(err => {
-          dispatch({
-              type: ERRORS,
-              payload: err.response.data
-          })
-      });
-}
-
-export const GetOneOffer = (id)=>dispatch=>{
-    axios
-      .get(`http://localhost:3600/api/offers/${id}`)
-      .then(res => {
-          dispatch({
-              type: SET_OFFERS,
-              payload: res.data
-          })
-      })
-      .catch(err => {
-          dispatch({
-              type: ERRORS,
-              payload: err.response.data
-          })
-      });
-}
-export const UpdateOffers = (form)=>dispatch=>{
-    dispatch({
-        type:SET_OFFERSS ,
-        payload: form
-    })
-}
-
-export const DeleteOffers = (id)=>dispatch=>{
-   if(window.confirm("are you sure to delete this user?")){
-    axios
-    .delete(`http://localhost:3600/api/offers/${id}`)
+export const AddCompanyOffer = (form) => dispatch => {
+  axios.post("http://localhost:3600/api/offers", form)
     .then(res => {
-        dispatch({
-            type: DELETE_OFFERS,
-            payload: id
-        })
+      dispatch({
+        type: ERRORS,
+        payload: {}
+      })
+      setTimeout(() => {
+      }, 4000);
     })
     .catch(err => {
-        dispatch({
-            type: ERRORS,
-            payload: err.response.data
-        })
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data
+      })
     });
-   }
 }
 
-export const ApplyForOffer = (id, form) => dispatch => {
+
+export const Addoffer = (form) => dispatch => {
+  axios
+    .post("http://localhost:3600/api/posttoadmin", form)
+    .then(res => {
+      dispatch({
+        type: ERRORS,
+        payload: {}
+      })
+      setTimeout(() => {
+      }, 4000);
+    })
+    .catch(err => {
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data
+      })
+    });
+}
+
+export const GetOffers = () => dispatch => {
+  axios
+    .get("http://localhost:3600/api/offers")
+    .then(res => {
+      dispatch({
+        type: SET_OFFERSS,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data
+      })
+    });
+};
+
+
+export const getAllCandidates = () => dispatch => {
+  axios
+    .get('http://localhost:3600/api/getCandidates')
+    .then(res => {
+      dispatch({
+        type: SET_CANDIDATES,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data
+      })
+    });
+}
+
+export const getCompanies = () => (dispatch) => {
+  axios
+    .get('http://localhost:3600/api/getcompanies')  //zedt hedhy 
+    .then((res) => {
+      dispatch({
+        type: SET_COMPANIES,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const GetOneOffer = (id) => dispatch => {
+  axios
+    .get(`http://localhost:3600/api/offers/${id}`)
+    .then(res => {
+      dispatch({
+        type: SET_OFFERS,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data
+      })
+    });
+}
+export const UpdateOffers = (form) => dispatch => {
+  dispatch({
+    type: SET_OFFERSS,
+    payload: form
+  })
+}
+
+export const DeleteOffers = (id) => dispatch => {
+  if (window.confirm("are you sure to delete this user?")) {
     axios
-      .post(`http://localhost:3600/api/applyforOffer/${id}`, form)
+      .delete(`http://localhost:3600/api/offers/${id}`)
       .then(res => {
-        console.log(res.data.message)
         dispatch({
-          type: SUCCESS,
-          payload: res.data.message
-        });
+          type: DELETE_OFFERS,
+          payload: id
+        })
       })
       .catch(err => {
         dispatch({
           type: ERRORS,
-          payload: err.response.data.error
-        });
+          payload: err.response.data
+        })
       });
   }
+}
 
-
-export const GetCompanyoffers = ()=>dispatch=>{
-    axios
-      .get("http://localhost:3600/api/getcompanyoffers")
-      .then(res => {
-          dispatch({
-              type: SET_OFFERSS  ,
-              payload: res.data
-          })
-      })
-      .catch(err => {
-          dispatch({
-              type: ERRORS,
-              payload: err.response.data
-          })
+export const ApplyForOffer = (id, form) => dispatch => {
+  axios
+    .post(`http://localhost:3600/api/applyforOffer/${id}`, form)
+    .then(res => {
+      console.log(res.data.message)
+      dispatch({
+        type: SUCCESS,
+        payload: res.data.message
       });
+    })
+    .catch(err => {
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data.error
+      });
+    });
+}
+
+
+export const GetCompanyoffers = () => dispatch => {
+  axios
+    .get("http://localhost:3600/api/getcompanyoffers")
+    .then(res => {
+      dispatch({
+        type: SET_OFFERSS,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: ERRORS,
+        payload: err.response.data
+      })
+    });
 }

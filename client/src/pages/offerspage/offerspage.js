@@ -24,8 +24,8 @@ const OffersPage = () => {
       const filtered = offers.OFFERSS.filter(
         (offer) =>
           offer.search &&
-          Array.isArray(offer.search) &&
-          offer.search.some((search) =>
+          Array.isArray(offer.search) && 
+          offer.search.some((search) =>    //some : return true or false 
             search.toLowerCase().includes(value)
           )
       );
