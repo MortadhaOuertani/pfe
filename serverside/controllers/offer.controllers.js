@@ -9,19 +9,36 @@ const { Blob } = require('buffer');
 const adminModel = require('../models/users/admin.model');
 const pdf = require('pdf-parse');
 
-const Addoffers = async (req, res) => {
+const AdminSettingsRemove = async(req, res) => {
     try {
+        await adminModel.updateOne(
+            {},
+            { $pull: { acceptList: { title: req.body.title, company: req.body.company } } }
+        );
 
-        req.body.company = req.user.id //creation d'un champ company et l"effectuer l'id de la company qui a crée l'offre(req.user.id from passport)
-        OffersModule.create(req.body, (err, data) => {
-            if (err) res.status(400).json(err.message)
-            else { res.status(200).json({ message: "success" }) }
-
-        })
-    } catch (error) {
-        res.status(404).json(error.message)
+        res.status(200).json({ message: "success" });
+    }
+    catch (err) {
+        res.status(404).json(err.message);
     }
 }
+const Addoffers = async (req, res) => {
+    try {
+        // create the offer using the object in req.body
+        const offer = await OffersModule.create(req.body);
+
+        // remove the object from adminModel.acceptList
+        await adminModel.updateOne(
+            {},
+            { $pull: { acceptList: { title: req.body.title, company: req.body.company } } }
+        );
+
+        res.status(200).json({ message: "success" });
+    } catch (error) {
+        res.status(404).json(error.message);
+    }
+};
+
 
 
 const AddToAdmin = async (req, res) => {
@@ -363,5 +380,6 @@ module.exports = {
     FindDate,
     GetCompanyData,
     ApplyForOffers,
+    AdminSettingsRemove,
     refuseCandidate,
 }

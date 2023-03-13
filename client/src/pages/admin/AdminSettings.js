@@ -9,18 +9,27 @@ import './AdminSettings.css'
 
 const AdminSettings = () => {
     const [adminModel, setAdminModel] = useState({ acceptList: [] });
+    const [updateFlag, setUpdateFlag] = useState(false); // state variable to trigger re-render
 
-
+    const AdminSettingsRemove = (item) => {
+        axios.post("http://localhost:3600/api/offersdelete", item)
+            .then(
+                (res) => {
+                    console.log(res.data)
+                    setUpdateFlag(!updateFlag); // set the update flag to trigger re-render
+                }
+            )
+            .catch(console.log("error"))
+    }
 
     const onAddOffer = (item) => {
         axios.post("http://localhost:3600/api/offers", item)
             .then((res) => {
                 console.log(res.data)
+                setUpdateFlag(!updateFlag); // set the update flag to trigger re-render
             })
             .catch(console.log("error"))
-
     }
-
 
     const getAdmin = () => {
         axios.get("http://localhost:3600/api/getAdmin")
@@ -32,8 +41,8 @@ const AdminSettings = () => {
 
     useEffect(() => {
         getAdmin();
-    }, [])
-
+    }, [updateFlag]); // re-run only when updateFlag changes
+    
     return (
         <>
             <NavbarDiv />
@@ -62,11 +71,11 @@ const AdminSettings = () => {
 
                                 <td className='icons-container'>
                                     <FcPlus
-                                        className="text-success" style={{ marginLeft: '30px' ,height: '20px' , width: '20px'}}
+                                        className="text-success" style={{ marginLeft: '30px', height: '20px', width: '20px' }}
                                         onClick={() => { onAddOffer(item) }}
                                     />
                                     <FcFullTrash
-                                        className="text-danger" style={{ marginLeft: '80px' ,height: '20px' , width: '20px'}}
+                                        className="text-danger" onClick={()=>{AdminSettingsRemove(item)}} style={{ marginLeft: '80px', height: '20px', width: '20px' }}
                                     //  onClick={() => onDeleteOffer(offer)}
                                     />
                                 </td>

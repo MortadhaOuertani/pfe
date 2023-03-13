@@ -19,7 +19,7 @@ const passport = require("passport");
 const { ROLES, inRole } = require("../security/Rolemiddleware");
 
 
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, acceptCandidate, refuseCandidate, acceptCandidateTechnical, refuseCandidateTechnical, CountWordsInPDF, GetAdmin, AddToAdmin, GetCompanies, GetAllCandidates,
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, acceptCandidate, refuseCandidate, acceptCandidateTechnical, refuseCandidateTechnical, CountWordsInPDF, GetAdmin, AddToAdmin, GetCompanies, GetAllCandidates, AdminSettingsRemove,
 } = require("../controllers/offer.controllers");
 
 
@@ -43,7 +43,8 @@ router.post('/reset-company-password', ResetCompanyPassword);
 
 
 /* add offers route */
-router.post("/offers", Addoffers);//passport pour donné l'autorisation
+router.post("/offers", Addoffers);
+router.post("/offersdelete", AdminSettingsRemove);
 /* get all offers */
 router.get("/offers", FindAlloffers);
 /* get one offers */

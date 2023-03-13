@@ -8,7 +8,12 @@
     align-self: center;
 
 }
-
+.text-danger{
+    cursor: pointer;
+}
+.text-success{
+    cursor: pointer;
+}
 .content-table tbody {
     height: 50px;
     text-align: left;
@@ -35,6 +40,3 @@ td {
 
 }
 
-.icons-container {
-   
-}
