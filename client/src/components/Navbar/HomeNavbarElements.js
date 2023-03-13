@@ -16,6 +16,15 @@ export const NavLink = styled(Link)`
 
 `;
 
+export const Span = styled.span`
+  color: white ; 
+  font-size: large;
+`;
+
+export const H2= styled.h3`
+  color: #42CCA6 ; 
+
+`;
 export const Icon = styled.div`
   display: flex;
   flex-direction: row;
