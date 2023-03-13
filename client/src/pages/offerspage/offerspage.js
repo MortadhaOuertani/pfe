@@ -27,7 +27,7 @@ const OffersPage = () => {
     setSearchPlaceTerm(value);
     filterOffers(searchJobTerm, value);
   };
-
+  
   const filterOffers = (searchJob, searchPlace) => {
     if (searchJob === "" && searchPlace === "") {
       setFilteredOffers(offers.OFFERSS);
