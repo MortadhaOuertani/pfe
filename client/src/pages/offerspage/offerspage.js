@@ -11,23 +11,31 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 const OffersPage = () => {
   const dispatch = useDispatch()
   const offers = useSelector(state => state.offers)
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchJobTerm, setSearchJobTerm] = useState("");
+  const [searchPlaceTerm, setSearchPlaceTerm] = useState("");
   const [filteredOffers, setFilteredOffers] = useState([]);
   const [count, setCount] = useState(0);
 
-  const handleSearch = (event) => {
+  const handleSearchJob = (event) => {
     const value = event.target.value.toLowerCase();
-    setSearchTerm(value);
-    if (value === "") {
+    setSearchJobTerm(value);
+    filterOffers(value, searchPlaceTerm);
+  };
+
+  const handleSearchPlace = (event) => {
+    const value = event.target.value.toLowerCase();
+    setSearchPlaceTerm(value);
+    filterOffers(searchJobTerm, value);
+  };
+
+  const filterOffers = (searchJob, searchPlace) => {
+    if (searchJob === "" && searchPlace === "") {
       setFilteredOffers(offers.OFFERSS);
     } else {
       const filtered = offers.OFFERSS.filter(
         (offer) =>
-          offer.search &&
-          Array.isArray(offer.search) && 
-          offer.search.some((search) =>    //some : return true or false 
-            search.toLowerCase().includes(value)
-          )
+          (searchJob === "" || (offer.search && Array.isArray(offer.search) && offer.search.some((search) => search.toLowerCase().includes(searchJob)))) &&
+          (searchPlace === "" || (offer.local && offer.local.toLowerCase().includes(searchPlace)))
       );
       setFilteredOffers(filtered);
     }
@@ -42,19 +50,18 @@ const OffersPage = () => {
   }, [offers]);
 
   useEffect(() => {
-    setCount(filteredOffers.length); //length is : the number of all the offers , filteredOffers is just a state 
+    setCount(filteredOffers.length);
   }, [filteredOffers]);
 
   return (
     <>
-
       <Container>
         <Header>
-          <SearchJob placeholder='searchjob' type="text" value={searchTerm} onChange={handleSearch} style={{
+          <SearchJob placeholder='searchjob' type="text" value={searchJobTerm} onChange={handleSearchJob} style={{
             backgroundImage: `url(data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`)})`
           }}
           />
-          <SearchPlace placeholder='searchplace' icon={<FaMapMarkerAlt />} />
+          <SearchPlace placeholder='searchplace' type="text" value={searchPlaceTerm} onChange={handleSearchPlace} icon={<FaMapMarkerAlt />} />
         </Header>
         <OffersCount>
           <h1>Number of Offers</h1>
