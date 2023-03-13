@@ -1,5 +1,5 @@
 import React from 'react'
-import { Div, Div2, Icon, Image, Nav, NavLink, NavMenu } from './HomeNavbarElements'
+import { Div, Div2, H2, Icon, Image, Nav, NavLink, NavMenu, Span } from './HomeNavbarElements'
 import { useEffect, useState } from 'react';
 import logo from '../../images/logo.png';
 import { Logout } from '../../redux/actions/authActions';
@@ -35,7 +35,8 @@ const HomeNavbar = ({user}) => {
                 <Div>
                     <NavLink to='/'>
                         {user.role === "ADMIN" ? "ADMIN" : ""}
-                        <Image src={logo} />
+                        <H2> <Span>HIRE </Span>LAB</H2>
+
                     </NavLink>
                     {user.role === "ADMIN" ? "" :
                         <Div2>

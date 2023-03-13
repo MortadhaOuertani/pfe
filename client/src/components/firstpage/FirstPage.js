@@ -15,7 +15,6 @@ const FirstPage = () => {
           <Button to='/offers'>Get started</Button>
         </HeroBtn>
       </HeroContent>
-      
     </Container>
   )
 }

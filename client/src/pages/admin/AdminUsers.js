@@ -9,17 +9,9 @@ import axios from 'axios';
 
 
 const AdminUsers = () => {
-  const [Offers, setOffers] = useState();
   const [Companies, setCompanies] = useState();
   const [Candidates, setCandidates] = useState();
 
-  const getOffers = () => {
-    axios.get("http://localhost:3600/api/offers")
-      .then((res) => {
-        setOffers(res.data);
-      })
-      .catch(console.log("error"))
-  }
 
   const getCandidates = () => {
     axios.get("http://localhost:3600/api/getCandidates")
@@ -37,9 +29,6 @@ const AdminUsers = () => {
       .catch(console.log("error"))
   }
 
-  useEffect(() => {
-    getOffers();
-  }, [])
 
   useEffect(() => {
     getCandidates();
@@ -56,30 +45,6 @@ const AdminUsers = () => {
         <Notif><MdNotifications style={{ height: '30px', width: '30px' }} /></Notif>
         <Sidebar2 />
         <Div>
-          {Offers && (
-            <table className="content-table">
-              <caption>Offers table :</caption>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Title</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Offers.map((item, index) => (
-                  <tr key={item.index}>
-                    <td>{index + 1}</td>  {/* auto increment  */}
-                    <td>{item.title}</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>)}
           {Candidates && (
             <table className="content-table">
               <caption>Candidates table :</caption>
