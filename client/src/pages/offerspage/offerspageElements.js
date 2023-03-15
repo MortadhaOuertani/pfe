@@ -1,14 +1,25 @@
 import styled from 'styled-components';
 import { NavLink as Links } from 'react-router-dom';
 
-export const Header = styled.div`
+export const ContainerOne = styled.div`
 width: 100%;
+height: 100%;
+background-color: #e5f3ff;
+display: flex;
+align-items: center;
+justify-content: center;
+
+`;
+
+export const Header = styled.div`
+width: 85%;
 height: 100px;
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
 column-gap: 10px;
+box-shadow: 1px 1px 7px 0px black;
 `
 export const OffersCount = styled.div`
 display: flex;
@@ -18,7 +29,7 @@ flex-direction: row;
 export const Number = styled.h1`
 `
 export const Offers = styled.div`
-    width:auto;
+    width:77%;
     box-shadow: 0px 0px 3px 0px grey ;
     height: 100%;
     padding: 4%;
@@ -26,14 +37,13 @@ export const Offers = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 10px;
-    background-color: #e8e7f7;
+    background-color: white;
     column-gap: 20px;
     row-gap: 20px;
 
     border-radius: 20px;
     @media (max-width: 768px) {
-        height: auto;
+        height: 80%;
         flex-direction: column;
     };
 `
@@ -84,10 +94,10 @@ export const SearchPlace = styled.input`
 export const Container = styled.div`
 padding-top: 150px;
 height: 100%;
-width: 100%;
-background-color: #f2f2f2;
+width: 95%;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+background-color: white ;
 `

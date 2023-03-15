@@ -9,13 +9,14 @@ display: flex;
 box-shadow: -2px -2px 5px 0.5px #b0afd9 ;
 flex-direction: column;
 border-radius: 8px;
-background-color: whitesmoke;
+background-color: white;
 color: black;
+
 `
 export const Button = styled.button`
     padding: 10px 30px ;
     border: none;
-    background-color: #7367f0;
+    background-color: #42CCA6;
     cursor: pointer;
     border-radius: 10px;
     color: white;
