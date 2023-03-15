@@ -4,7 +4,7 @@ import { NavLink as Link } from 'react-router-dom';
 export const SidebarContainer = styled.div`
   width: 300px;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #42cca6;
   display: flex;
   flex-direction: column;
 `;

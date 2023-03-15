@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { GetOffers } from '../../redux/actions/offerActions'
 import Offer from './offer/offer'
 import { NavbarDiv } from './OfferDetailsElements'
-import { Container, Header, Number, Offers, OffersCount, SearchJob, SearchPlace } from './offerspageElements'
+import { Container, Header, Number, Offers, OffersCount, SearchJob, SearchPlace, ContainerOne } from './offerspageElements'
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
 const OffersPage = () => {
@@ -54,7 +54,7 @@ const OffersPage = () => {
   }, [filteredOffers]);
 
   return (
-    <>
+    <ContainerOne>
       <Container>
         <Header>
           <SearchJob placeholder='searchjob' type="text" value={searchJobTerm} onChange={handleSearchJob} style={{
@@ -73,7 +73,7 @@ const OffersPage = () => {
           ))}
         </Offers>
       </Container>
-    </>
+    </ContainerOne>
   )
 }
 
