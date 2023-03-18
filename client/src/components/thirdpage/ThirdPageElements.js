@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const Container= styled.div`
   width: 100%;
-  height:250px;
+  height:auto;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -26,6 +26,7 @@ column-gap: 20px;
 `;
 export const Copyright = styled.div`
 display:flex;
-margin-top:20px;
+justify-content: center;
+align-items: center;
 flex-direction: row;
 `;
