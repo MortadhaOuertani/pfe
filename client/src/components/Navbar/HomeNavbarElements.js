@@ -14,6 +14,20 @@ export const NavLink = styled(Link)`
   &:hover{
     color: #42CCA6;
   }
+  `
+  export const NavLinkR = styled(Link)`
+  color: white;
+  font-weight: 600;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+  &:hover{
+    color: #42CCA6;
+  }
 
 `;
 export const NavLinkz = styled(Link)`
@@ -29,13 +43,14 @@ export const NavLinkz = styled(Link)`
 
 `;
 export const Span = styled.span`
-  color: white ; 
-  font-size: 22px;
+  font-size: 25px;
+  margin-right: 2px;
 `;
 
 export const H2 = styled.h2`
-  color: #42CCA6 ; 
-
+  color:white ; 
+margin-left: 2px;
+font-size: 20px;
 `;
 export const Icon = styled.div`
   display: flex;
@@ -60,10 +75,9 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   border: none;
-
 `
 export const Button = styled.button`
-  padding: 20px 40px;
+  padding: 10px 30px;
   background-color: transparent;
   color: white;
   border: 2px solid white;
@@ -73,17 +87,41 @@ export const Button = styled.button`
     transition: all 0.05s ease-in-out;
     box-shadow: 0px 0px 8px 2px white;  }
 `;
-
+export const ButtonR = styled.button`
+  padding: 10px 30px;
+  background-color: transparent;
+  color: white;
+  font-weight:bolder;
+  border-radius: 2px;
+  border: 2px solid white;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: transparent;
+    transition: all 0.05s ease-in-out;
+    box-shadow: 0px 0px 8px 2px white;  }
+`;
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 10%;
+  @media screen and (max-width:768px ) {
+    display:none
+    }
+`
+export const Sandwich = styled.div`
+display:none;
+width: auto;
+
+@media screen and (max-width:768px ) {
+    display: flex;
+align-items: center;
+justify-content: center;
+    }
 `
 export const Image = styled.img`
-   height: 100%;
+   height: 40%;
    width: auto;
    margin-left: 70%;
-   margin-top: 10px;
 `;
 export const BtnRadio = styled.div`
   display: flex;
@@ -123,14 +161,25 @@ export const Div = styled.div`
   justify-content: center;
   display: flex;
   justify-content: flex-start;
+  background-color: red;
   width: 100%;
   column-gap: 100px;
+`;
+export const Div4 = styled.div`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 `;
 export const Div2 = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 20px;
   column-gap: 20px;
-
+  @media screen and (max-width:768px ) {
+    display:none
+    }
 `;
 

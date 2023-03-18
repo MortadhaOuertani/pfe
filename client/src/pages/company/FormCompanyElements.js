@@ -1,21 +1,10 @@
 import styled from "styled-components";
 
-
-export const Container = styled.div`
- background-color:#f0f3f4;
- display: flex;
- justify-content: center;
- width: 100%;
- height: 100vh;
- padding-bottom: 20px;
-
-`;
-
 export const Div = styled.div`
  display: flex;
- justify-content: center;
- width: 80%;
+ width: 100%;
  height: 100%;
+ justify-content: center;
  align-items: center;
  flex-direction: column;
 `;
@@ -23,49 +12,74 @@ export const Div = styled.div`
 export const Header = styled.div`
   width:100%;
   height: 20px;
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: -30px;
 `;
 
 export const H1 = styled.h1`
- color: #6c63ff;
- margin-left: 50px;
+  color:black;
+ font-weight:bolder;
+ 
+ margin-left:-100px;
 `;
 
 export const Form = styled.form`
- margin-top: 100px;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- width: 80%;
- background-color: white;
+ width: 100%;
+  display: flex;
+  flex-direction:column;
+
 `;
 
 export const Input = styled.input`
-  margin-left: 30px;
-  align-self: flex-start;
   margin-top: 40px;
   border-top: transparent;
   border-left: transparent;
   border-right: transparent;
   border-bottom: 1px solid grey ;
   width:50%;
+  height: 25px;
   &:focus{
     outline:none;
   }
 `;
+export const ButtonsConatainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  column-gap: 30px;
+  padding-bottom: 30px;
+
+`
+export const Button = styled.button`
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+background-color:#617E95;
+border: none;
+border-radius: 5px;
+margin-top: 30px;
+padding: 20px 10px;
+font-size: 17px;
+
+`
 
 export const BtnSubmit = styled.button`
-  background-color: #6c63ff;
+  background-color: #43CBA6;
   font-size: 17px;
   font-weight: bold;
   align-self: flex-end;
-  padding: 10px 15px;
-  border-radius: 10px;
+  padding: 5px 10px;
+  border-radius: 3px;
   color: white;
   border: transparent;
   margin-right: 20%;
-  margin-bottom: 5px;
+  position: relative;
   cursor: pointer;
+  top:80px
 `;
 

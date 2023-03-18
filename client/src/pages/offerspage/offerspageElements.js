@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { NavLink as Links } from 'react-router-dom';
 
 export const ContainerOne = styled.div`
@@ -8,18 +8,83 @@ background-color: #e5f3ff;
 display: flex;
 align-items: center;
 justify-content: center;
-
 `;
 
+export const Icon = styled.div`
+height: 30px;
+cursor: pointer;
+width: 30px;
+margin-left:-50px;
+`
+const slideDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+export const Ul = styled.ul`
+  animation: ${({ showDropdown }) => (showDropdown ? css`${slideDown} 0.3s ease` : '')};
+  position: absolute;
+  top: 50px; 
+  left: -50px;
+  width: 200px; 
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border: 1px solid #ccc; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  overflow-y: scroll;
+  max-height: ${({ showDropdown }) => (showDropdown ? '200px' : '0')};
+`
+export const Button = styled.button`
+width: 100%;
+height: 40px;
+background-color:white;
+display: flex;
+flex-direction: row;
+text-align: center;
+align-items:center;
+border:none;
+padding-left: 70px;
+font-size: 16px;
+font-weight: 500;
+cursor: pointer;
+&:hover{
+  background-color: rgb(0,145,242);
+}
+`
+export const P = styled.p`
+color:black;
+margin-left: 10px;
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+&:hover{
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+`
+export const Li = styled.li`
+border: none;
+color: white;
+`
 export const Header = styled.div`
-width: 85%;
+width: 30%;
 height: 100px;
+padding-bottom: 100px;
 display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: center;
 column-gap: 10px;
-box-shadow: 1px 1px 7px 0px black;
+border: none;
 `
 export const OffersCount = styled.div`
 display: flex;
@@ -53,12 +118,13 @@ export const SearchJob = styled.input`
   background-position: 10px center;
   padding-left: 30px;
   padding: 12px 20px;
+  padding-bottom: 5px;
   border-top:none ;
   border-left:none ;
   border-right:none ;
   border-radius: 4px;
-  height: 10% ;
-  width: 25%;
+  height:30px ;
+  width: 100%;
   &::placeholder{
     text-indent: 10px;
   }
@@ -78,7 +144,7 @@ export const SearchPlace = styled.input`
   border-right:none ;
   border-radius: 4px;
   height: 10% ;
-  width: 25%;
+  width: 5%;
  &::placeholder {
     content: "";
     display: inline-block;

@@ -38,7 +38,8 @@ export const Nav = styled.nav`
   justify-content: space-between;
   border: none;
   border-bottom:2px solid grey;
-
+  @media screen and (max-width:1000px ) {
+    display:none}
 `
 
 export const NavMenu = styled.div`

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import HomeNavbar from './HomeNavbar';
-import Navbar from './Navbar';
 
 const Nnavbar = ({ user }) => {
   const location = useLocation();

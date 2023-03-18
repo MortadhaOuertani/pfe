@@ -1,20 +1,28 @@
 import React from 'react';
-import Video from '../../video/video.mp4';
-import { Container, HeroBg, VideoBg, HeroContent, HeroH1, HeroBtn, HeroP, Button } from './FistPageElements';
-
+import { BsArrowDownCircle } from 'react-icons/bs';
+import { Container, HeroBg, VideoBg, HeroContent, HeroH1, HeroBtn, HeroP, Button, ImageHero, Div, ElementsContainer, Shape, Icon, Image, P } from './FistPageElements';
+import image from '../../images/bg.png'
 const FirstPage = () => {
   return (
     <Container>
-      <HeroBg>
-        <VideoBg autoPlay loop muted src={Video} type='video/mp4' />
-      </HeroBg>
-      <HeroContent>
-        <HeroH1>Find your job on Hire Lab</HeroH1>
-        <HeroP>Sign up for new account and find a job .</HeroP>
-        <HeroBtn>
-          <Button to='/offers'>Get started</Button>
-        </HeroBtn>
-      </HeroContent>
+      <ElementsContainer>
+        <HeroContent>
+          <Div>
+            <HeroH1><P>Find your job on Hire Lab</P></HeroH1>
+            <HeroP>Welcome to HireLab , where we connect
+              talented individuals with exceptional job opportunities. Our platform is
+              designed to simplify the job search process and help both job seekers and
+              employers find the perfect match. Whether you're a recent graduate,
+              a seasoned professional, or looking to switch careers,
+              we've got you covered. </HeroP>
+            <HeroBtn>
+              <Button to='/offers'>Get started</Button>
+            </HeroBtn>
+          </Div>
+        </HeroContent>
+        <ImageHero><Image src={image}/></ImageHero>
+      </ElementsContainer>
+      <Shape><Icon><BsArrowDownCircle color='white' style={{fontSize:"26px"}}/></Icon></Shape>
     </Container>
   )
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { RegistrationCompany } from '../../redux/actions/authActions'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
-import { BtnSubmit, Container, Div, Form, H1, Header, Input } from './FormCompanyElements'
+import { BtnSubmit, Button, ButtonsConatainer, Container, Div, Form, H1, Header, Input } from './FormCompanyElements'
 
 const FormCompany = () => {
     const [form, setForm] = useState({})
@@ -22,24 +22,22 @@ const FormCompany = () => {
     }
     return (
         <>
-            <NavbarDiv />
-            <Container>
-                <Form onSubmit={onSubmit}>
-                    <Div>
-                        <Header><H1>Create an account </H1></Header>
-                        <Input onChange={onChangeHandler} type='name' name='name' placeholder='Your name' required />
-                        <Input onChange={onChangeHandler} type='address' name='address' placeholder='Your address' required />
-                        <Input onChange={onChangeHandler} type='text' name='phone' placeholder='Your mobile number' required />
-                        <Input onChange={onChangeHandler} type='email' name='email' placeholder='Your Email' required />
-                        <Input onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
-                        <Input onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
-                        <Input onChange={onChangeHandler} type="file"
-                            id="avatar" name="logo"
-                            accept="image/png, image/jpeg, image/svg" />
-                        <BtnSubmit type="submit" >Register</BtnSubmit>
-                    </Div>
-                </Form>
-            </Container>
+            <Form onSubmit={onSubmit}>
+                <Header><H1>Create an account as a employer </H1></Header>
+                <Div>
+
+                    <Input onChange={onChangeHandler} type='name' name='name' placeholder='Your name' required />
+                    <Input onChange={onChangeHandler} type='address' name='address' placeholder='Your address' required />
+                    <Input onChange={onChangeHandler} type='text' name='phone' placeholder='Your mobile number' required />
+                    <Input onChange={onChangeHandler} type='email' name='email' placeholder='Your Email' required />
+                    <Input onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
+                    <Input onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
+                    <Input onChange={onChangeHandler} type="file"
+                        id="avatar" name="logo"
+                        accept="image/png, image/jpeg, image/svg" />
+                    <BtnSubmit type="submit" >Register</BtnSubmit>
+                </Div>
+            </Form>
         </>
     )
 
