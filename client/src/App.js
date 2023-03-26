@@ -45,35 +45,35 @@ function App() {
 
   const user = {
     isConnected: auth.isConnected,
-    role:auth.user.role
+    role: auth.user.role
   }
-  
+
   return (
     <Router>
-      <Nnavbar user={user}/>
+      <Nnavbar user={user} />
       <Routes>
-        <Route path='/' element={<Home user={user}/>} />
+        <Route path='/' element={<Home user={user} />} />
         <Route path='/login' element={<Login />} />
         <Route path='/formCandidate' element={<FormCandidate />} />
         <Route path='/formCompany' element={<FormCompany />} />
-        <Route path='/offers' element={<OffersPage/>} />
-        <Route path='/offers/:id' element={<OfferDetails/>}/>
-        <Route path='/postoffer' element={<Post/>} />
-        <Route path='/company' element={<CompanyHomePage/>} />
-        <Route path='/admin' element={<Admin/>} />
-        <Route path='/forgotpassword' element={<ForgotPasswordForm/>} />
-        <Route path='/appliedOffer/:id' element={<Appling/>} />
-        <Route path='/reset-password/:id/:token' element={<ResetPasswordForm/>} />
-        <Route path='/admin/dashboard' element={<AdminDashboard/>} />
-        <Route path='/admin/users' element={<AdminUsers/>} />
-        <Route path='/admin/settings' element={<AdminSettings/>} />
-        <Route path='/technicaltest/:id' element={<Technical/>} />
-        <Route path='/accepted/:id' element={<Accepted/>} />
-        <Route path='/:id/candidate' element={<CV/>} />
+        <Route path='/offers' element={<OffersPage />} />
+        <Route path='/offers/:id' element={<OfferDetails />} />
+        <Route path='/postoffer' element={<Post />} />
+        <Route path='/company' element={<CompanyHomePage />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
+        <Route path='/appliedOffer/:id' element={<Appling />} />
+        <Route path='/reset-password/:id/:token' element={<ResetPasswordForm />} />
+        <Route path='/admin/dashboard' element={<AdminDashboard />} />
+        <Route path='/admin/users' element={<AdminUsers />} />
+        <Route path='/admin/settings' element={<AdminSettings />} />
+        <Route path='/technicaltest/:id' element={<Technical />} />
+        <Route path='/accepted/:id' element={<Accepted />} />
+        <Route path='/:id/candidate' element={<CV />} />
       </Routes>
     </Router>
   )
 
-} 
+}
 
 export default App;

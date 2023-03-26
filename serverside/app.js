@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const indexRouter = require('./routes/index');
 const passport = require('passport');
 const upload = require("./middleware/multer");
+const { checkForExpiredOffers } = require('./controllers/offer.controllers');
 
 const corsOptions = {
   origin: ['http://localhost:3000'],
@@ -15,6 +16,9 @@ const corsOptions = {
 
 const app = express();
 
+/*check for expired offers to remove hourly*/
+checkForExpiredOffers()
+/*middlewares*/
 app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(express.urlencoded({ limit: '50mb',extended: true }));

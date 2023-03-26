@@ -94,7 +94,7 @@ top:575px;
 height: 50px;
 margin-bottom: -30px;
 rotate: 45deg;
-z-index: 222222222222;
+z-index: 2222222;
 `
 export const HeroContent = styled.div`
   z-index: 7;

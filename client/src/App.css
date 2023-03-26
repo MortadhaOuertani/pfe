@@ -17,6 +17,13 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.backg{
+  background-color:#9EE1CD;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+}
 
 .App-header {
   background-color: #282c34;

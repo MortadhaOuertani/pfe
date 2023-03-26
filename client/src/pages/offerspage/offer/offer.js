@@ -9,11 +9,12 @@ import { FcCalendar ,  FcBusiness,FcDocument } from "react-icons/fc";
 const Offer = ({ experience, _id, title, createdAt, company, logo, contract, local }) => {
   const [resultdate, setResultdate] = useState(false);
   const [companydata, setCompanydata] = useState([]);
-  const base64Image = `data:image/jpeg;base64,${logo}`;
+  const base64Image = `data:image/jpeg;base64,${companydata[0]?.logo}`;
 
   useEffect(() => {
-    GetOfferDate()
     GetCompanyData(company)
+    console.log(base64Image)
+    console.log(companydata.logo)
 
   }, [])
 
@@ -24,17 +25,7 @@ const Offer = ({ experience, _id, title, createdAt, company, logo, contract, loc
         setCompanydata(res.data)
       })
   }
-  const GetOfferDate = () => {
-    axios
-      .get("http://localhost:3600/api/date")
-      .then(res => {
-        console.log(res.data.result)
-        setResultdate(res.data.result)
-      })
-      .catch(err => {
-        console.log(err.message)
-      });
-  }
+  
   return (
     <>
       <Container>

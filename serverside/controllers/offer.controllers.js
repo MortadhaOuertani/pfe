@@ -9,7 +9,7 @@ const { Blob } = require('buffer');
 const adminModel = require('../models/users/admin.model');
 const pdf = require('pdf-parse');
 
-const AdminSettingsRemove = async(req, res) => {
+const AdminSettingsRemove = async (req, res) => {
     try {
         await adminModel.updateOne(
             {},
@@ -142,6 +142,36 @@ const GetCompanyoffers = (req, res) => {
         if (err) res.status(404).json(err.message)
         if (data) res.status(200).json(data)
     })
+}
+const checkForExpiredOffers = () => {
+    setInterval(() => {
+        offersModels.find({}, (err, offers) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+
+            offers.forEach(offer => {
+
+                const expirationDate = new Date(offer.dateExpiration);
+                const currentDate = new Date();
+
+                if (currentDate >= expirationDate) {
+
+                    offersModels.findByIdAndRemove(offer._id, (err) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+
+                        console.log(`Offer with ID ${offer._id} has been removed.`);
+                    });
+                }
+            });
+        });
+    }, 3600000); // Check for expired offers every 1 hour
+
+
 }
 
 const CountWordsInPDF = async (req, res, array) => {
@@ -382,4 +412,5 @@ module.exports = {
     ApplyForOffers,
     AdminSettingsRemove,
     refuseCandidate,
+    checkForExpiredOffers,
 }

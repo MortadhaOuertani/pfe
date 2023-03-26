@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import image from '../../images/aboutUs.jpg';
-import { Container, Form, Image, Left, Left2, Parag1, Right, SmallerContainer, Title1, VL } from './SecondPageElements';
+import { Container, Form, Hr, Image, Left, Left2, Parag1, Right, SmallerContainer, Title1, VL } from './SecondPageElements';
 import { useInView } from 'react-intersection-observer';
 import FormCompany from '../../pages/company/FormCompany';
 import FormCandidate from '../../pages/candidate/FormCandidate';
@@ -29,6 +29,7 @@ const SecondPage = ({ user }) => {
       <FormCompany/>
       </Left>
       <VL></VL>
+      <Hr></Hr>
       <Right>
         <FormCandidate/>
       </Right>

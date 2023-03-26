@@ -26,20 +26,31 @@ const slideDown = keyframes`
     transform: translateY(0);
   }
 `;
+const slideUp = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+`;
 export const Ul = styled.ul`
-  animation: ${({ showDropdown }) => (showDropdown ? css`${slideDown} 0.3s ease` : '')};
+  animation: ${({ showDropdown }) => (showDropdown ? css`${slideDown} 0.3s ease` : css`${slideUp} 0.3s ease`)};
   position: absolute;
   top: 50px; 
   left: -50px;
   width: 200px; 
   padding: 0;
-  margin: 0;
+  transition: all 0.5s ease-in-out; 
+   margin: 0;
   list-style: none;
   border: 1px solid #ccc; 
   border-radius: 10px; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   overflow-y: scroll;
-  max-height: ${({ showDropdown }) => (showDropdown ? '200px' : '0')};
+  max-height: ${({ showDropdown }) => (showDropdown ? '200px' : '200px')};
 `
 export const Button = styled.button`
 width: 100%;

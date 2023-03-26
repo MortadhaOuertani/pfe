@@ -52,6 +52,49 @@ export const H2 = styled.h2`
 margin-left: 2px;
 font-size: 20px;
 `;
+export const SideBAR = styled.div`
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  height: 100vh;
+  top: ${props => props.isOpen ? '0' : '-100vh'};
+  opacity: ${props => props.isOpen ? '1' : '0'};
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  background-color: black;
+  flex-direction: column;
+  align-items: center;
+
+`;
+export const SideDiv = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+export const SideIcon = styled.div`
+ width: 100%;
+ align-items: flex-end;
+ margin-right: 40px;
+ padding-top: 10px;
+ justify-content: end;
+ display: flex;
+`
+export const SideNav = styled(Link)`
+  color: white;
+  font-weight: 600;
+  display: flex;
+  font-size: 40px;
+  text-decoration: none;
+  padding: 0 1rem;
+  margin-top: 30px;
+  cursor: pointer;
+  &:hover{
+    color: #42CCA6;
+  }
+  `
 export const Icon = styled.div`
   display: flex;
   flex-direction: row;
@@ -61,9 +104,8 @@ export const Icon = styled.div`
 
   }
 `;
-
 export const Nav = styled.nav`
-  z-index: 5;
+  z-index: 1111111111;
   background-color:rgba(0,0,0);
   position: absolute; 
   border: 2px solid  #e8e7f7;
@@ -111,11 +153,14 @@ export const NavMenu = styled.div`
 export const Sandwich = styled.div`
 display:none;
 width: auto;
+cursor: pointer;
 
 @media screen and (max-width:768px ) {
     display: flex;
 align-items: center;
 justify-content: center;
+cursor: pointer;
+
     }
 `
 export const Image = styled.img`

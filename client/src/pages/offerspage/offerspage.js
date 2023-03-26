@@ -1,11 +1,11 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { GetOffers } from '../../redux/actions/offerActions'
 import Offer from './offer/offer'
-import {  NavbarDiv } from './OfferDetailsElements'
-import { Container, Button,ContainerOne, Header, Icon, Li, Number, Offers, OffersCount, SearchJob, SearchPlace, Ul, P } from './offerspageElements'
+import { NavbarDiv } from './OfferDetailsElements'
+import { Container, Button, ContainerOne, Header, Icon, Li, Number, Offers, OffersCount, SearchJob, SearchPlace, Ul, P } from './offerspageElements'
 import { FaMapMarkerAlt, FaSearchLocation } from 'react-icons/fa';
 import { GrMapLocation } from 'react-icons/gr'
 
@@ -17,6 +17,7 @@ const OffersPage = () => {
   const [filteredOffers, setFilteredOffers] = useState([]);
   const [count, setCount] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleSearchJob = (event) => {
     const value = event.target.value.toLowerCase();
@@ -55,17 +56,26 @@ const OffersPage = () => {
     setCount(filteredOffers.length);
   }, [filteredOffers]);
 
-  const handleDropdownClick = () => {
-    setShowDropdown(!showDropdown);
-  }
-  const governates = ["Tunis","EZJ","Ariana", "Ben Arous", "Manouba", "Nabeul", "Zaghouan", "Bizerte", "Béja", "Jendouba", "Kef", "Siliana", "Sousse", "Monastir", "Mahdia", "Sfax", "Kairouan", "Kasserine", "Sidi Bouzid", "Gabès", "Medenine", "Tataouine", "Tozeur", "Kebili"];
 
+  const governates = ["Tunis", "Ariana", "Ben Arous", "Manouba", "Nabeul", "Zaghouan", "Bizerte", "Béja", "Jendouba", "Kef", "Siliana", "Sousse", "Monastir", "Mahdia", "Sfax", "Kairouan", "Kasserine", "Sidi Bouzid", "Gabès", "Medenine", "Tataouine", "Tozeur", "Kebili"];
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {//dropdownRef.current is checking whether the dropdownRef is currently pointing to a DOM element, which is determined by the presence of the current property. !dropdownRef.current.contains(event.target) is checking whether the event.target (i.e., the element that triggered the mousedown event) is NOT a descendant of the element pointed to by dropdownRef. The contains() method is called on the element that dropdownRef points to, and it returns true if the argument passed to it is a descendant of that element, and false otherwise.
+      setShowDropdown(false);
+    }
+    // overall, this line is checking whether the mousedown event occurred outside of the dropdown menu (i.e., whether the clicked element is NOT a descendant of the dropdown menu). If that's the case, it sets the showDropdown state to false, which closes the dropdown menu.
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
 
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
   return (
     <>
       <ContainerOne>
-        <Container>
-          <Header>
+        <Container >
+          <Header >
             <SearchJob
               placeholder='searchplace'
               type="text"
@@ -80,23 +90,24 @@ const OffersPage = () => {
               }}
             />
 
-<div style={{ position: "relative" }}>
-  <Icon onClick={() => setShowDropdown(!showDropdown)}>
-    <GrMapLocation size={30} />
-  </Icon>
-  {showDropdown && (
-    <Ul showDropdown={showDropdown}>
-      {governates.map((gov) => (
-        //add number of offer infront of gov
-        <Li key={gov}>
-          <Button onClick={() => handleSearchPlace(gov)}>
-            <FaMapMarkerAlt color='black' /> <P>{gov}</P>
-          </Button>
-        </Li>
-      ))}
-    </Ul>
-  )}
-</div>
+            <div style={{ position: "relative" }} ref={dropdownRef}>
+              <Icon onClick={() => setShowDropdown(!showDropdown)}>
+                <GrMapLocation size={30} />
+              </Icon>
+              {showDropdown && (
+                <Ul showDropdown={showDropdown}>
+                  {governates.map((gov) => (
+                    //add number of offer infront of gov
+                    <Li key={gov}>
+                      <Button onClick={() => handleSearchPlace(gov)}>
+                        <FaMapMarkerAlt color='black' /> <P>{gov}</P>
+                      </Button>
+                    </Li>
+                  ))}
+                </Ul>
+              )}
+            </div>
+
 
           </Header>
           <OffersCount>
@@ -116,4 +127,3 @@ const OffersPage = () => {
 
 export default OffersPage
 
-//<SearchPlace placeholder='searchplace' type="text" value={searchPlaceTerm} onChange={handleSearchPlace} icon={<FaMapMarkerAlt />} />
