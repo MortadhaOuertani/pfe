@@ -18,14 +18,26 @@ const FormCompany = () => {
     }
     const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
         e.preventDefault(); //ne refraichir pas la page pour ne perdre pas les données 
-        dispatch(RegistrationCompany(form, navigate))
+        e.preventDefault();
+
+        // Read the selected file and convert it to base64
+        const reader = new FileReader();
+        const file = e.target.logo.files[0];
+
+        reader.readAsDataURL(file);
+        reader.onload = async () => {
+            const base64Image = reader.result.split(",")[1];
+
+            // Add the base64-encoded image to the form data
+            const formData = { ...form, logo: base64Image };
+            dispatch(RegistrationCompany(formData, navigate))
+        }
     }
     return (
         <>
             <Form onSubmit={onSubmit}>
-                <Header><H1>Create an account as a employer </H1></Header>
+                <Header><H1>Register as a employer </H1></Header>
                 <Div>
-
                     <Input onChange={onChangeHandler} type='name' name='name' placeholder='Your name' required />
                     <Input onChange={onChangeHandler} type='address' name='address' placeholder='Your address' required />
                     <Input onChange={onChangeHandler} type='text' name='phone' placeholder='Your mobile number' required />
@@ -33,7 +45,7 @@ const FormCompany = () => {
                     <Input onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
                     <Input onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
                     <Input onChange={onChangeHandler} type="file"
-                        id="avatar" name="logo"
+                        id="avatar" name="logo" placeholder='Profile Picture'
                         accept="image/png, image/jpeg, image/svg" />
                     <BtnSubmit type="submit" >Register</BtnSubmit>
                 </Div>

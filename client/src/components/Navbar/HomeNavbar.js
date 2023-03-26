@@ -1,16 +1,20 @@
 import React from 'react'
-import { Button, ButtonR, Div, Div2, H2, Icon, Image, Nav, NavLink, NavLinkR, NavLinkz, NavMenu, Sandwich, Span } from './HomeNavbarElements'
+import { Button, ButtonR, Div, Div2, H2, Icon, Image, Nav, NavLink, NavLinkR, NavLinkz, NavMenu, Sandwich, SideBAR, SideDiv, SideIcon, SideNav, Span } from './HomeNavbarElements'
 import { useEffect, useState } from 'react';
 import logo from '../../images/logo.png';
 import { Logout } from '../../redux/actions/authActions';
 import store from '../../redux/store';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CgWorkAlt } from "react-icons/cg";
 import { BsPersonFill } from "react-icons/bs";
-import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { H1 } from '../../pages/company/FormCompanyElements';
+import { animateScroll } from 'react-scroll';
 
 const HomeNavbar = ({ user }) => {
+  const location = useLocation();
+  const currentUrl = location.pathname;
+  const [showSidebar, setShowSideBar] = useState(false);
   const navigate = useNavigate()
   const SubmitForm = (e) => {
     e.preventDefault();
@@ -26,32 +30,48 @@ const HomeNavbar = ({ user }) => {
     setTypeUser(e.target.value)
   }
   useEffect(() => {
-    console.log(user)
+    console.log(currentUrl)
   }, [])
 
+
+  const ToggleSidebar = () => {
+    setShowSideBar(!showSidebar);
+  };
   const LogoutFunction = () => {
     store.dispatch(Logout())
   }
+
   return (
     <Nav>
-        <NavLinkz to='/'>
-          {user.role === "ADMIN" ? "ADMIN" : ""}
-          <Image src={logo}/><H2><Span>Hire</Span>Lab</H2>
+      <SideBAR isOpen={showSidebar}>
+        <SideIcon >
+          <AiOutlineClose onClick={ToggleSidebar} style={{ color: 'white', fontSize: '40px', cursor: 'pointer' }} />
+        </SideIcon>
+        <SideDiv>
+          <SideNav to='/offers' onClick={ToggleSidebar}>Offers</SideNav>
+          <SideNav to='/' onClick={() => { currentUrl == "/" ? animateScroll.scrollTo(550) : animateScroll.scrollTo(2100); ToggleSidebar() }} >Register</SideNav>
+          <SideNav to="/login" onClick={ToggleSidebar}>Login</SideNav>
+          <SideNav to='/' onClick={() => { currentUrl == "/" ? animateScroll.scrollTo(8050) : animateScroll.scrollTo(8100); ToggleSidebar() }}>ContactUs</SideNav>
+        </SideDiv>
+      </SideBAR>
+      <NavLinkz to='/'>
+        {user.role === "ADMIN" ? "ADMIN" : ""}
+        <Image src={logo} /><H2><Span>Hire</Span>Lab</H2>
 
-        </NavLinkz>
-        {user.role === "ADMIN" ? "" :
-          <Div2>
-            <NavLink to='/offers'>
-              Offers
-            </NavLink>
-            <NavLink to='/'>
-              Contact Us
-            </NavLink>
-            {/*
+      </NavLinkz>
+      {user.role === "ADMIN" ? "" :
+        <Div2>
+          <NavLink to='/offers'>
+            Offers
+          </NavLink>
+          <NavLink to="/" onClick={() => currentUrl == "/" ? animateScroll.scrollTo(8000) : animateScroll.scrollTo(9000)}>
+            Contact Us
+          </NavLink>
+          {/*
             <Icon><BsPersonFill color="white" style={{ marginRight: "-10px" }} /><NavLink to='/formCandidate'>Candidate platform</NavLink></Icon>
             <Icon><CgWorkAlt color="white" style={{ marginRight: "-10px" }} /><NavLink to='/formCompany'>Company platform</NavLink></Icon>
           */}</Div2>
-        }
+      }
       <NavMenu>
 
         {user.isConnected ? <NavLink onClick={LogoutFunction} to='/'>
@@ -61,15 +81,15 @@ const HomeNavbar = ({ user }) => {
             <NavLink to='/login'>
               Login
             </NavLink>
-            <NavLinkR to='/'>
-              <ButtonR>
+            <NavLinkR to='/' onClick={() => currentUrl == "/" ? animateScroll.scrollTo(550) : animateScroll.scrollTo(2300)}>
+              <ButtonR >
                 Register
               </ButtonR>
             </NavLinkR>
           </>
         }
       </NavMenu>
-      <Sandwich><AiOutlineMenu style={{color:"white",fontSize:"40px",cursor:"pointer"}}/></Sandwich>
+      <Sandwich ><AiOutlineMenu onClick={ToggleSidebar} style={{ color: "white", fontSize: "40px", cursor: "pointer" }} /></Sandwich>
 
     </Nav>
   )

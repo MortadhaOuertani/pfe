@@ -50,12 +50,17 @@ align-items: center;
 justify-content: center;
 `
 export const Input = styled.input`
-  margin-top: 40px;
+  margin-top: 30px;
   border-top: transparent;
   border-left: transparent;
   border-right: transparent;
   border-bottom: 1px solid grey ;
   width:50%;
+  height: 45px;
+   font-size: 18px;
+  &::placeholder {
+  font-size: 18px; /*change the font-size value to make it bigger*/
+}
   &:focus{
     outline:none;
   }
@@ -68,6 +73,11 @@ export const InputD = styled.input`
   border-right: transparent;
   border-bottom: 1px solid grey ;
   width:30%;
+  height: 45px;
+   font-size: 18px;
+  &::placeholder {
+  font-size: 18px; /*change the font-size value to make it bigger*/
+}
   &:focus{
     outline:none;
   }

@@ -1,24 +1,28 @@
 import React from 'react';
+import ContactUs from '../../components/Contactus/ContactUs';
 import FirstPage from '../../components/firstpage/FirstPage';
 import SecondPage from '../../components/secondpage/SecondPage';
 import ThirdPage from '../../components/thirdpage/ThirdPage';
 import { Container } from './HomeElements';
 
-const Home = ({user}) => {
-  return(
-   <Container>
-        <FirstPage>
-            
-        </FirstPage>
-        <SecondPage user={user}>
+const Home = ({ user }) => {
+  return (
+    <Container>
+      <FirstPage>
 
-        </SecondPage>
-        <ThirdPage>
+      </FirstPage>
+      <SecondPage user={user}>
 
-        </ThirdPage>
-        
+      </SecondPage>
+      <ContactUs >
 
-   </Container> 
+      </ContactUs>
+      <ThirdPage>
+
+      </ThirdPage>
+
+
+    </Container>
   )
 }
 
