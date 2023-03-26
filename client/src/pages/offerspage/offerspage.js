@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { GetOffers } from '../../redux/actions/offerActions'
 import Offer from './offer/offer'
-import {  NavbarDiv } from './OfferDetailsElements'
-import { Container, Button,ContainerOne, Header, Icon, Li, Number, Offers, OffersCount, SearchJob, SearchPlace, Ul, P } from './offerspageElements'
+import { NavbarDiv } from './OfferDetailsElements'
+import { Container, Button, ContainerOne, Header, Icon, Li, Number, Offers, OffersCount, SearchJob, SearchPlace, Ul, P } from './offerspageElements'
 import { FaMapMarkerAlt, FaSearchLocation } from 'react-icons/fa';
 import { GrMapLocation } from 'react-icons/gr'
 
@@ -58,7 +58,7 @@ const OffersPage = () => {
   const handleDropdownClick = () => {
     setShowDropdown(!showDropdown);
   }
-  const governates = ["Tunis","EZJ","Ariana", "Ben Arous", "Manouba", "Nabeul", "Zaghouan", "Bizerte", "Béja", "Jendouba", "Kef", "Siliana", "Sousse", "Monastir", "Mahdia", "Sfax", "Kairouan", "Kasserine", "Sidi Bouzid", "Gabès", "Medenine", "Tataouine", "Tozeur", "Kebili"];
+  const governates = ["Tunis", "EZJ", "Ariana", "Ben Arous", "Manouba", "Nabeul", "Zaghouan", "Bizerte", "Béja", "Jendouba", "Kef", "Siliana", "Sousse", "Monastir", "Mahdia", "Sfax", "Kairouan", "Kasserine", "Sidi Bouzid", "Gabès", "Medenine", "Tataouine", "Tozeur", "Kebili"];
 
 
   return (
@@ -80,23 +80,23 @@ const OffersPage = () => {
               }}
             />
 
-<div style={{ position: "relative" }}>
-  <Icon onClick={() => setShowDropdown(!showDropdown)}>
-    <GrMapLocation size={30} />
-  </Icon>
-  {showDropdown && (
-    <Ul showDropdown={showDropdown}>
-      {governates.map((gov) => (
-        //add number of offer infront of gov
-        <Li key={gov}>
-          <Button onClick={() => handleSearchPlace(gov)}>
-            <FaMapMarkerAlt color='black' /> <P>{gov}</P>
-          </Button>
-        </Li>
-      ))}
-    </Ul>
-  )}
-</div>
+            <div style={{ position: "relative" }}>
+              <Icon onClick={() => setShowDropdown(!showDropdown)}>
+                <GrMapLocation size={30} />
+              </Icon>
+              {showDropdown && (
+                <Ul showDropdown={showDropdown}>
+                  {governates.map((gov) => (
+                    //add number of offer infront of gov
+                    <Li key={gov}>
+                      <Button onClick={() => handleSearchPlace(gov)}>
+                        <FaMapMarkerAlt color='black' /> <P>{gov}</P>
+                      </Button>
+                    </Li>
+                  ))}
+                </Ul>
+              )}
+            </div>
 
           </Header>
           <OffersCount>
@@ -105,7 +105,7 @@ const OffersPage = () => {
           </OffersCount>
           <Offers>
             {filteredOffers.map((offer) => (
-              <Offer key={offer._id} local={offer.local} title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
+              <Offer key={offer._id} date={offer.createdAt} local={offer.local} title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
             ))}
           </Offers>
         </Container>

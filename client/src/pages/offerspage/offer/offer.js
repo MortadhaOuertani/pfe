@@ -6,13 +6,12 @@ import {GrLocation } from 'react-icons/gr'
 import { FcCalendar ,  FcBusiness,FcDocument } from "react-icons/fc";
 
 
-const Offer = ({ experience, _id, title, createdAt, company, logo, contract, local }) => {
+const Offer = ({ experience,date, _id, title, createdAt, company, logo, contract, local }) => {
   const [resultdate, setResultdate] = useState(false);
   const [companydata, setCompanydata] = useState([]);
   const base64Image = `data:image/jpeg;base64,${logo}`;
 
   useEffect(() => {
-    GetOfferDate()
     GetCompanyData(company)
 
   }, [])
@@ -24,17 +23,7 @@ const Offer = ({ experience, _id, title, createdAt, company, logo, contract, loc
         setCompanydata(res.data)
       })
   }
-  const GetOfferDate = () => {
-    axios
-      .get("http://localhost:3600/api/date")
-      .then(res => {
-        console.log(res.data.result)
-        setResultdate(res.data.result)
-      })
-      .catch(err => {
-        console.log(err.message)
-      });
-  }
+ 
   return (
     <>
       <Container>
@@ -42,7 +31,7 @@ const Offer = ({ experience, _id, title, createdAt, company, logo, contract, loc
           <Imgdiv><div><Img src={base64Image} /></div></Imgdiv><Info><H2>{title}</H2>{companydata.map(item => (<div key={item.id}>
             <H3>{item.name}</H3>
             <div style={{ display: 'flex', alignItems: 'center'  }}>
-              <FcCalendar /><p>{new Date(item.createdAt).toISOString().substring(0, 10)}</p>
+              <FcCalendar /><p>{new Date(date).toISOString().substring(0, 10)}</p>
             </div>
           </div>))}</Info>
         </Topside>
@@ -54,7 +43,7 @@ const Offer = ({ experience, _id, title, createdAt, company, logo, contract, loc
         <Footer>
           <Link to={`/offers/${_id}`}>
             <Button variant="primary">
-              Voir plus
+               View more
             </Button>
           </Link>
         </Footer>

@@ -8,7 +8,7 @@ width: 100%;
 display: flex;
 justify-content:center;
 align-items: center;
-background:#e9ebee;
+background:#e5f3ff;
 `
 export const FormContainer = styled.div`
 display: flex;
@@ -66,7 +66,7 @@ justify-content: center;
 `
 
 export const H1 = styled.h1`
-color: #6c63ff;
+color:  #43CBA6;
 position: absolute;
 width: 100%;
 position: relative;
@@ -97,7 +97,7 @@ flex-direction:column;
 position: relative;
 `
 export const InputBtn = styled.input`
-background-color: #6c63ff;
+background-color:  #43CBA6;
 font-size: 17px;
 font-weight: bold;
 align-self:flex-end;

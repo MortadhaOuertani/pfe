@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, Container, Div, Div1, Div2, Form, H2, Input } from './ResetPasswordFormElements';
+import { Button, Container, Div, Div1, Div2, Form, H2, Input, Input1, Input2, Label, Label1, Label2 } from './ResetPasswordFormElements';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ResetPasswordForm = () => {
@@ -68,8 +68,8 @@ const ResetPasswordForm = () => {
         <Form onSubmit={handleSubmit}>
           <H2>Reset Password</H2>
           <Div1>
-            <label htmlFor="password">New Password</label>
-            <Input
+            <Label1 htmlFor="password">New Password</Label1>
+            <Input1
               type="password"
               id="password"
               value={password}
@@ -77,8 +77,8 @@ const ResetPasswordForm = () => {
             />
           </Div1>
           <Div2>
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <Input
+            <Label2 htmlFor="confirm-password">Confirm Password</Label2> 
+            <Input2
               type="password"
               id="confirm-password"
               value={confirmPassword}
