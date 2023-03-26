@@ -9,10 +9,12 @@ import { FcCalendar ,  FcBusiness,FcDocument } from "react-icons/fc";
 const Offer = ({ experience,date, _id, title, createdAt, company, logo, contract, local }) => {
   const [resultdate, setResultdate] = useState(false);
   const [companydata, setCompanydata] = useState([]);
-  const base64Image = `data:image/jpeg;base64,${logo}`;
+  const base64Image = `data:image/jpeg;base64,${companydata[0]?.logo}`;
 
   useEffect(() => {
     GetCompanyData(company)
+    console.log(base64Image)
+    console.log(companydata.logo)
 
   }, [])
 
@@ -23,7 +25,9 @@ const Offer = ({ experience,date, _id, title, createdAt, company, logo, contract
         setCompanydata(res.data)
       })
   }
- 
+
+
+  
   return (
     <>
       <Container>

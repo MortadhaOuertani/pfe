@@ -28,7 +28,10 @@ export const Form = styled.form`
  width: 100%;
   display: flex;
   flex-direction:column;
-
+  @media screen and (max-width:900px ) {
+    padding-bottom: 50px;
+  
+  }
 `;
 
 export const Input = styled.input`
@@ -37,8 +40,13 @@ export const Input = styled.input`
   border-left: transparent;
   border-right: transparent;
   border-bottom: 1px solid grey ;
-  width:50%;
-  height: 25px;
+  width:60%;
+  height: 45px;
+   font-size: 18px;
+  &::placeholder {
+  font-size: 18px; /*change the font-size value to make it bigger*/
+}
+
   &:focus{
     outline:none;
   }
@@ -80,6 +88,11 @@ export const BtnSubmit = styled.button`
   margin-right: 20%;
   position: relative;
   cursor: pointer;
-  top:80px
+  top:80px;
+  
+  @media screen and (max-width:900px ) {
+    top:20px;
+  
+  }
 `;
 

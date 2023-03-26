@@ -14,20 +14,36 @@ export const SmallerContainer = styled.div`
 export const Container = styled.div`
   width: 100%;
   height: 700px;
-  overflow-y: scroll;
   align-items: center;
   padding-bottom: 40px;
   display: flex;
   background-color: white;
   justify-content: center;
   z-index: 8;
+  @media screen and (max-width:900px ) {
+  flex-direction: column;
+  height: 100%;
+  padding-top: 50px;
+
+  }
 `;
 
 export const VL = styled.div`
 align-self: center;
   border-left: 2px solid lightgrey;
-  height: 450px;
-  margin-top: 20px;
+  height: 650px;
+  margin-top: 30px;
+  @media screen and (max-width:900px ) {
+    display: none;
+  }
+`
+export const Hr = styled.hr`
+  border: 1px solid lightgrey;
+  display: none;
+  width: 80%;
+  @media screen and (max-width:900px ) {
+    display: block;
+  }
 `
 export const Right = styled.div`
   width: 100%;
