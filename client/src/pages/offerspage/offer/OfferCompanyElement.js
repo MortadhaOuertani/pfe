@@ -65,7 +65,21 @@ justify-content: center;
 align-items: center;
 column-gap: 50px;
 `
+export const ButtonDelete = styled.div`
+    width: 30px;
+    height: 30px;
+    border: none;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(205,41,57);
+    cursor: pointer;
+    border-radius: 3px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
 
+` 
 export const Item = styled.div`
 display: flex;
 flex-direction: column;

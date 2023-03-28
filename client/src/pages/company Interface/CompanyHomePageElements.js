@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import { NavLink as Links } from 'react-router-dom';
+import { Link, NavLink as Links } from 'react-router-dom';
 
 export const ContainerOne = styled.div`
 width: 100%;
@@ -49,18 +49,44 @@ const slideIn = keyframes`
 
 export const UpperSide = styled.div`
   width: 100%;
+  white-space: nowrap;
   height: 100px;
-  background-color: orange;
+  background-image: linear-gradient(to right, rgb(65,194,233), lightblue);
   border-bottom-left-radius: 100px;
   border-top-left-radius: 100px;
   align-items: center;
   display: flex;
   animation: ${slideIn} 0.3s ease-out forwards;
-
+  flex-direction: row;
 `
+export const LinkS = styled(Link)`
+color: inherit;
+text-decoration: none;
+display: block;
+  margin: 0 auto;
+  max-width: 100%;
+`
+
+export const BtnAddOffer = styled.button`
+  color: black;
+  font-size: 23px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: white;
+  border: none;
+  padding: 5px 60px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  &:hover{
+    box-shadow: -1px 2px 5px black;
+  }
+`;
+
 export const H1 = styled.h1`
-color: black;
-font-weight: 500;
+color: white;
+font-weight: 600;
 margin-left: 40px;
 `
 export const H1Name = styled.h1`

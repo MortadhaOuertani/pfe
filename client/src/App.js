@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +25,8 @@ import AdminSettings from './pages/admin/AdminSettings';
 import Technical from './pages/OffersAppliedTo/technical';
 import Accepted from './pages/OffersAppliedTo/AcceptedList';
 import CV from './components/CandidateInfo/CV';
+import ProtectedRoute from './components/protection/protection';
+import ProtectedAdmin from './components/protection/protectionAdmin';
 
 
 
@@ -47,6 +49,7 @@ function App() {
     isConnected: auth.isConnected,
     role: auth.user.role
   }
+  console.log(user.isConnected)
 
   return (
     <Router>
@@ -54,22 +57,26 @@ function App() {
       <Routes>
         <Route path='/' element={<Home user={user} />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/formCandidate' element={<FormCandidate />} />
-        <Route path='/formCompany' element={<FormCompany />} />
         <Route path='/offers' element={<OffersPage />} />
-        <Route path='/offers/:id' element={<OfferDetails />} />
-        <Route path='/postoffer' element={<Post />} />
-        <Route path='/company' element={<CompanyHomePage />} />
-        <Route path='/admin' element={<Admin />} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
-        <Route path='/appliedOffer/:id' element={<Appling />} />
         <Route path='/reset-password/:id/:token' element={<ResetPasswordForm />} />
-        <Route path='/admin/dashboard' element={<AdminDashboard />} />
-        <Route path='/admin/users' element={<AdminUsers />} />
-        <Route path='/admin/settings' element={<AdminSettings />} />
-        <Route path='/technicaltest/:id' element={<Technical />} />
-        <Route path='/accepted/:id' element={<Accepted />} />
-        <Route path='/:id/candidate' element={<CV />} />
+        <Route element={<ProtectedRoute auth={user} />}>
+          <Route path='/offers/:id' element={<OfferDetails />} />
+          <Route path='/postoffer' element={<Post />} />
+          <Route path='/company' element={<CompanyHomePage />} />
+          <Route path='/appliedOffer/:id' element={<Appling />} />
+          <Route path='/technicaltest/:id' element={<Technical />} />
+          <Route path='/accepted/:id' element={<Accepted />} />
+          <Route path='/:id/candidate' element={<CV />} />
+        </Route>
+        <Route element={<ProtectedAdmin auth={user} />}>
+          <Route path='/admin' element={<Admin />} />
+          <Route path='/admin/dashboard' element={<AdminDashboard />} />
+          <Route path='/admin/users' element={<AdminUsers />} />
+          <Route path='/admin/settings' element={<AdminSettings />} />
+        </Route>
+
+
       </Routes>
     </Router>
   )
