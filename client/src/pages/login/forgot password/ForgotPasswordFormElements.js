@@ -16,7 +16,7 @@ width: 100%;
 display: flex;
 justify-content:center;
 align-items: center;
-background-color: #e9ebee;
+background-color: #e5f3ff;
 `;
 
 export const Div = styled.div`
@@ -30,7 +30,7 @@ flex-direction: row;
 `;
 
 export const Button = styled.button`
-background-color: #6c63ff;
+background-color: #42cca6;
 font-size: 14px;
 font-weight: bold;
 align-self: center;

@@ -23,10 +23,11 @@ const AdminSettingsRemove = async (req, res) => {
     }
 }
 const Addoffers = async (req, res) => {
+    
     try {
         // create the offer using the object in req.body
         const offer = await OffersModule.create(req.body);
-
+      
         // remove the object from adminModel.acceptList
         await adminModel.updateOne(
             {},
@@ -97,11 +98,12 @@ const GetCompanyData = (req, res) => { //
 
 const FindSingleoffers = (req, res) => {
     try {
-        OffersModule.findOne({ _id: req.params.id }, (err, data) => {
+        OffersModule.findOne({ _id: req.params.id }, async (err, data) => {
             if (err) res.status(404).json({ message: "not found" })
             else {
-                const company = companyModel.findOne({ _id: data.company })
-                data.company = company
+                const company = await companyModel.findOne({ _id: data.company })
+                const cpid = company._id
+                data.company = cpid
                 res.status(200).json(data)
             }
         })

@@ -22,8 +22,24 @@ export const Button = styled.button`
     color: white;
     font-size: 18px;
     font-weight: 600;
+    margin-left: 50%;
+    white-space: nowrap;
 ` 
+export const ButtonDelete = styled.div`
+    width: 30px;
+    height: 30px;
+    border: none;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(205,41,57);
+    cursor: pointer;
+    border-radius: 3px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
 
+` 
 export const Background = styled.div`
 background-color: rgba(0,0,0,0.3);
 position: absolute;
@@ -74,6 +90,8 @@ align-items: center;
 `
 export const Footer = styled.div`
 display: flex;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
+width: 100%;
+flex-direction:row;
 `

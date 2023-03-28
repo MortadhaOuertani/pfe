@@ -8,41 +8,105 @@ height: 60px;
 background-color: black;
 `;
 export const H2=styled.h2`
- 
+ padding-top: 10px;
+ padding-left: 20px;
+ padding-bottom: 20px;
 `;
+export const Hr = styled.hr`
+width: 90%;
+display: inline-block;
+align-self: center;
+margin-top: 20px;
+margin-bottom: 20px;
+border: 0.7px solid #F1EFF1;
+margin-left: 5%;
+` 
+export const Li=styled.li`
+ font-size: 17px;
+ font-weight: 500;
+`;
+export const ContainerOne = styled.div`
+width: 100%;
+height: 100%;
+background-color: #e5f3ff;
+display: flex;
+align-items: center;
+justify-content: center;
+`;
+
 export const Container = styled.div`
- background-color: #f1f1f1;
+ background-color: white ;
  display: flex;
  align-items: flex-start;
  padding-left: 50px;
- padding-top: 30px;
- width: 100%;
- height: 100vh;
+ padding-top: 10%;
+ height: 100%;
+ width: 95%;
  display: flex;
  flex-direction: column;
 `;
 
+export const SearchDiv = styled.div`
+ width: 100%;
+ height: 30px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color:#f2f2f2 ;   
+ margin: 5px;
+ padding-left: 10px;
+ padding-right: 10px;
+ border: solid 1px #d0d0d0;
+ border-radius: 3px;
+`;
+
+export const DIV = styled.div`
+
+display: flex;
+flex-direction: row;
+`;
+
 export const TopContainer = styled.div`
- background-color:#f4f4f4 ;
+ background-color: white;
+ box-shadow: 0px 0px 3px 0px grey ;
  padding-bottom: 30px;
+ width: 90%;
+ 
 `;
 
 export const BottomContainer = styled.div`
- width: 100px;
+ display: flex;
+ flex-direction: column;
+ margin-top: 20px;
+ width: 90%;
+ background-color: white;
+ box-shadow: 0px 0px 3px 0px grey ;
 `;
-export const H3= styled.h3`
-color:black
-`
+export const Button = styled.button`
+   margin-left: 70%;
+   padding: 10px 110px ;
+    border: none;
+    background-color: #38B5EC;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+`; 
 
-export const Button= styled.button`
-  background-color: #6c63ff;
-  font-size: 17px;
-  font-weight: bold;
-  padding: 10px 15px;
-  border-radius: 10px;
-  color: white;
-  border: transparent;
-  margin-right: 20%;
-  cursor: pointer;
-  align-self: flex-end;
-`
+export const P = styled.p`
+ padding-left: 20px;
+
+`;
+export const Div = styled.div`
+ padding-left: 20px;
+ padding-bottom: 30px;
+`;
+
+export const H3= styled.h3`
+color:black;
+padding-left: 20px;
+padding-top: 10px;
+margin-right: 10px;
+`;
+

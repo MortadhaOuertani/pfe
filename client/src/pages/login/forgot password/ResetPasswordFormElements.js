@@ -9,14 +9,14 @@ flex-direction: column;
 row-gap: 20px;
 width: 100%;
 height: 100%;
-`; 
+`;
 export const Container = styled.div`
 height: 100vh;
 width: 100%;
 display: flex;
 justify-content:center;
 align-items: center;
-background-color: #e9ebee;
+background-color: #e5f3ff;
 `;
 
 export const Div = styled.div`
@@ -30,7 +30,7 @@ flex-direction: row;
 `;
 
 export const Button = styled.button`
-background-color: #6c63ff;
+background-color: #42cca6;
 font-size: 14px;
 font-weight: bold;
 align-self: center;
@@ -41,6 +41,15 @@ border: transparent;
 cursor: pointer;
 `;
 
+export const Label1 = styled.h4`
+
+padding-left: 10px;
+margin-right: 20px;
+`
+export const Label2 = styled.h4`
+padding-right: 20px;
+`
+
 export const H2 = styled.h1`
 position: absolute;
 width: 100%;
@@ -48,11 +57,23 @@ position: relative;
 text-align: center;
 `;
 
-export const Input = styled.input`
-width:200px; `;
+export const Input1 = styled.input`
+width:220px; 
+margin-left: 15px;
+
+`;
+
+export const Input2 = styled.input`
+width:200px; 
+padding-right: 20px;
+`;
 
 export const Div1 = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Div2 = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Button, Container, Footer, H2, H3, Img, Imgdiv, Info, Item, LeftSide, Middleside, MiddleSide, RightSide, Topside } from './OfferCompanyElement'
+import { Button, ButtonDelete, Container, Footer, H2, H3, Img, Imgdiv, Info, Item, LeftSide, Middleside, MiddleSide, RightSide, Topside } from './OfferCompanyElement'
 import { GrLocation } from 'react-icons/gr'
 import { FcCalendar, FcBusiness, FcDocument } from "react-icons/fc";
+import { AiOutlineClose } from 'react-icons/ai'
 
 
 const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contract, local }) => {
@@ -35,6 +36,15 @@ const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contra
         console.log(err.message)
       });
   }
+  const Deleteoffer = (id) => {
+    axios.delete(`http://localhost:3600/api/offers/${id}`)
+      .then(res => {
+        console.log("deleted successfuly")
+      })
+      .catch(err => {
+        console.log("error")
+      })
+  }
   return (
     <>
       <Container>
@@ -57,6 +67,9 @@ const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contra
               Voir plus
             </Button>
           </Link>
+          <ButtonDelete onClick={()=>{Deleteoffer(_id)}}>
+              <AiOutlineClose color={"white"} size={20} />
+            </ButtonDelete>: null
         </Footer>
       </Container>
     </>)

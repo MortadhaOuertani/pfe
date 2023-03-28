@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, InputBtn, Form, FormContainer, H1, Header, Img, Input, Left, Right, Span, Link, IconBtn, InputDiv } from './LoginElements'
-import login from '../../images/login.svg'
+import login from '../../images/loginpic.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LoginActionCandidate, LoginActionCompany, LoginAdmin } from '../../redux/actions/authActions'

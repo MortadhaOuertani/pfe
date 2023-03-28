@@ -46,7 +46,7 @@ const OffersPage = () => {
 
   useEffect(() => {
     dispatch(GetOffers());
-  }, [dispatch]);
+  }, [dispatch,filteredOffers]);
 
   useEffect(() => {
     setFilteredOffers(offers.OFFERSS || []);
@@ -116,7 +116,7 @@ const OffersPage = () => {
           </OffersCount>
           <Offers>
             {filteredOffers.map((offer) => (
-              <Offer key={offer._id} local={offer.local} title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
+              <Offer key={offer._id} date={offer.createdAt} local={offer.local} title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
             ))}
           </Offers>
         </Container>

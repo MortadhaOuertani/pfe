@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { GetCompanyoffers } from '../../redux/actions/offerActions'
 import Offer from '../offerspage/offer/offer'
-import { Container, Button, ContainerOne, Header, Icon, Li, Number, Offers, OffersCount, SearchJob, SearchPlace, Ul, P, UpperSide, H1, H1Name } from './CompanyHomePageElements'
+import { Container, Button, ContainerOne, Header, Icon, Li, Number, Offers, OffersCount, SearchJob, SearchPlace, Ul, P, UpperSide, H1, H1Name, BtnAddOffer, LinkS } from './CompanyHomePageElements'
 import OfferCompany from '../offerspage/offer/OfferCompany'
 import { FaMapMarkerAlt, FaSearchLocation } from 'react-icons/fa';
 import { GrMapLocation } from 'react-icons/gr'
@@ -70,7 +70,7 @@ const CompanyHomePage = () => {
       GetCompanyData(offers.OFFERSS[0].company);
     }
     console.log(CompanyData)
-  }, [offers.OFFERSS]);
+  }, [offers.OFFERSS,filteredOffers]);
 
   const GetCompanyData = (id) => {
     axios.get(`http://localhost:3600/api/companydata/${id}`).then((res) => {
@@ -79,9 +79,7 @@ const CompanyHomePage = () => {
 
     });
   };
-  useEffect(() => {
-    console.log(CompanyData && CompanyData[0]?.name);
-  }, [CompanyData]);
+
   return (
     <>
       <ContainerOne>
@@ -89,6 +87,9 @@ const CompanyHomePage = () => {
           <UpperSide>
             <H1>Company Interface
             </H1>
+            <LinkS to="/postoffer">
+            <BtnAddOffer>Postoffer</BtnAddOffer>
+            </LinkS>
           </UpperSide>
           <Header>
             <SearchJob
