@@ -359,6 +359,40 @@ const ResetCompanyPassword = (req, res) => {  //Reset candidate's password
   }
 }
 
+const ContactUs = (req, res) => {
+  try {
+    const name = req.body.name;
+    const email = req.body.email;
+    const content = req.body.content;
+  
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: "projetpfe885@gmail.com",
+        pass: "mkogokrpyiovokvw"
+      }
+    });
+
+    const mailOptions = {
+      from: "projetpfe885@gmail.com",
+      to: "hirelabContacus@gmail.com",
+      subject: `New contact us submission from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\nContent: ${content}`
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Error sending email' });
+      }
+      console.log(`Email sent: ${info.response}`);
+      res.status(200).json({ message: 'Email sent successfully ' });
+    })
+  } catch {
+    console.log(error);
+    res.status(500).json({ message: 'Error' });
+  }
+}
+
 
 module.exports = {
   RegisterCandidate,
@@ -370,5 +404,6 @@ module.exports = {
   ForgotPassword,
   ResetPassword,
   ForgotCompanyPassword,
-  ResetCompanyPassword
+  ResetCompanyPassword,
+  ContactUs
 };
