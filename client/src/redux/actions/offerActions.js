@@ -21,6 +21,7 @@ export const AddCompanyOffer = (form) => dispatch => {
 }
 
 
+
 export const Addoffer = (form) => dispatch => {
   axios
     .post("http://localhost:3600/api/posttoadmin", form)

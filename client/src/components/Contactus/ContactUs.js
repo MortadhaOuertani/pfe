@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { H1, Input, Container, Left, Right, Textarea, Line, ContainerBg, Video, Img, InputBtn } from './ContactUsElements'
 import image from '../../images/bg.jpg'
+import axios from 'axios'
 const ContactUs = () => {
     const [form, setForm] = useState({email: '', name: '', content: '' })
 
@@ -11,13 +12,8 @@ const ContactUs = () => {
         })
     }
     const onSubmit = (e) => {
-        fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(form),
-          })
+        axios.post('http://localhost:3600/api/ContactUs', form)
+        
             .then((response) => response.json())
             .then((data) => {
               console.log(data)

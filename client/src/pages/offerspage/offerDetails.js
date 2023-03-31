@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ModalComponent from '../../components/modal/Modal'
 import { GetOneOffer } from '../../redux/actions/offerActions'
-import { Container, TopContainer, BottomContainer, Button, NavbarDiv,Hr, H2, H3, ContainerOne, Div, P, DIV, SearchDiv, Li } from './OfferDetailsElements'
+import { Container, TopContainer, BottomContainer, Button, NavbarDiv, Hr, H2, H3, ContainerOne, Div, P, DIV, SearchDiv, Li } from './OfferDetailsElements'
 
 const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contract, local }) => {
   const [companydata, setCompanydata] = useState([]);
@@ -61,15 +61,15 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
       <ContainerOne>
         <Container style={containerStyle}>
           <TopContainer>
-            <H2> {offer.OFFERS?.title}</H2>
+            <H2>{offer.OFFERS?.title}</H2>
             {companydata.map(item => (
               <div key={item.id}>
-                <P> {item.name}</P>
-                <P>{new Date(item.createdAt).toISOString().substring(0, 10)}</P>
+                <DIV><h4 style={{ marginLeft: '20px' }}>Company's name : </h4><P> {item.name}</P></DIV>
+                <DIV><h4 style={{ marginLeft: '20px' }}>Date of creation : </h4> <P>{new Date(item.createdAt).toISOString().substring(0, 10)}</P></DIV>
               </div>
             ))}
             <P>{offer.OFFERS?.local}</P>
-          <Hr /> 
+            <Hr />
 
             <Button onClick={() => { setModalShowAndUpdateFreeze(!modalShow); }}>Apply</Button>
           </TopContainer>

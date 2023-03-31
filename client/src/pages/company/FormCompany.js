@@ -44,10 +44,14 @@ const FormCompany = () => {
                     <Input onChange={onChangeHandler} type='email' name='email' placeholder='Your Email' required />
                     <Input onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
                     <Input onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
-                    <Input onChange={onChangeHandler} type="file"
-                        id="avatar" name="logo" placeholder='Profile Picture'
-                        accept="image/png, image/jpeg, image/svg" />
-                    <BtnSubmit type="submit" >Register</BtnSubmit>
+                    <div>
+                        <label for="profile">Profile Picture : </label>
+                        <Input onChange={onChangeHandler} type="file"
+                            id="avatar" name="logo" placeholder='Profile Picture'
+                            accept="image/png, image/jpeg, image/svg" />
+                        <BtnSubmit type="submit" >Register</BtnSubmit>
+                    </div>
+
                 </Div>
             </Form>
         </>

@@ -4,7 +4,6 @@ import { Container, Div, Icon, Notif, Numbers } from './AdminDashboardElements'
 import Sidebar1 from './Sidebar/Sidebar1'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCandidates, getCompanies, GetOffers } from '../../redux/actions/offerActions'
-import { MdNotifications } from "react-icons/md"
 import { FcOrganization , FcConferenceCall, FcDocument} from "react-icons/fc";
 
 
@@ -47,7 +46,7 @@ const AdminDashboard = () => {
             <NavbarDiv />
             <Container>
                 <Sidebar1 />
-                <Notif><MdNotifications style={{ height: '30px' , width: '30px'}} /></Notif>
+                
 
                 <Numbers>
                     <Div>

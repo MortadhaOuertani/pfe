@@ -42,7 +42,7 @@ export const LoginActionCandidate = (form, navigate)=>dispatch  => {
             const decode = jwt_decode(token)
             dispatch(setUser(decode))
             setAuth(token)
-            navigate('/')
+            navigate('/offers')
         })
         .catch(err => {
            console.log(err)
@@ -62,7 +62,7 @@ export const LoginActionCompany = (form, navigate)=>dispatch  => {
             dispatch(setUser(decode))
             console.log(token)
             setAuth(token)
-            navigate('/')
+            navigate('/company')
 
         })
         .catch(err => {
