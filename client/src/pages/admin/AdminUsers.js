@@ -3,7 +3,6 @@ import { NavbarDiv } from '../offerspage/OfferDetailsElements'
 import { Container, Notif } from './AdminDashboardElements'
 import Sidebar2 from './Sidebar/Sidebar2'
 import { Div } from './AdminUsersElements';
-import { MdNotifications } from 'react-icons/md';
 import './AdminSettings.css'
 import axios from 'axios';
 
@@ -42,7 +41,6 @@ const AdminUsers = () => {
     <>
       <NavbarDiv />
       <Container>
-        <Notif><MdNotifications style={{ height: '30px', width: '30px' }} /></Notif>
         <Sidebar2 />
         <Div>
           {Candidates && (

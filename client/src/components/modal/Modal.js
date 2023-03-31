@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ApplyForOffer } from '../../redux/actions/offerActions';
-import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess, Topside, Hr } from './ModalElement';
+import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess, Topside, Hr, Label, Btn } from './ModalElement';
 import { FaTimes } from 'react-icons/fa';
 import axios from 'axios';
 
@@ -14,7 +14,7 @@ const ModalComponent = (props) => {
   const { id } = useParams();
 
   const [formSubmitted, setFormSubmitted] = useState(false); // Track whether the form has been submitted
-  
+
   const Test = (form) => {
     axios.post("http://localhost:3600/api/testPDf", form).then(res => {
       console.log(res.data)
@@ -24,7 +24,7 @@ const ModalComponent = (props) => {
   const Apply = (event) => {
     event.preventDefault();
 
-     dispatch(ApplyForOffer(id, form));
+    dispatch(ApplyForOffer(id, form));
     console.log(form);
     //Test(form)
 
@@ -59,9 +59,16 @@ const ModalComponent = (props) => {
           </div>
         ) : (
           <Form onSubmit={Apply}>
-            <Input accept=".pdf" type="file" id="fileInput" name='cv' onChange={event => { const file = event.target.files[0]; setFile(file) }} required />
-            <InputText type="textarea" id="textInput" name='letter'
-              onChange={event => { const { value } = event.target; setLetter(value) }} />
+            <div>
+              <Label>Upload your CV : </Label><br/>
+              <Input accept=".pdf" type="file" id="fileInput" name='cv' onChange={event => { const file = event.target.files[0]; setFile(file) }} required />
+            </div>
+            <div>
+              <Label>Cover letter :  </Label>
+              <InputText type="textarea" id="textInput" name='letter'
+                onChange={event => { const { value } = event.target; setLetter(value) }} />
+            </div> 
+            <Btn type="submit" >Send</ Btn>
           </Form>
         )}
       </Div>

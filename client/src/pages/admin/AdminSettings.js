@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
 import { Container, Notif } from './AdminDashboardElements'
 import Sidebar3 from './Sidebar/Sidebar3'
-import { MdNotifications } from "react-icons/md"
 import { FcPlus, FcFullTrash } from 'react-icons/fc';
 import axios from 'axios'
 import './AdminSettings.css'
@@ -47,7 +46,7 @@ const AdminSettings = () => {
         <>
             <NavbarDiv />
             <Container>
-                <Notif><MdNotifications style={{ height: '30px', width: '30px' }} /></Notif>
+                
                 <Sidebar3 />
 
                 <table className="content-table">

@@ -10,10 +10,15 @@ export const SidebarContainer = styled.div`
 `;
 
 export const SidebarHeader = styled.h2`
+ margin-top: 10%;
   font-size: 24px;
   padding: 16px;
 `;
 
+export const Div = styled.div`
+ display: flex;
+ flex-direction: column;
+`;
 export const SidebarLink = styled(Link)`
   text-decoration:none;
   display: block;

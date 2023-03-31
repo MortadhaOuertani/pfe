@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { H1, Input, Container, Left, Right, Textarea, Line, ContainerBg, Video, Img, InputBtn } from './ContactUsElements'
 import image from '../../images/bg.jpg'
+import axios from 'axios'
 const ContactUs = () => {
-    const [form, setForm] = useState({})
+    const [form, setForm] = useState({email: '', name: '', content: '' })
 
     const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
         setForm({
@@ -11,9 +12,19 @@ const ContactUs = () => {
         })
     }
     const onSubmit = (e) => {
+        axios.post('http://localhost:3600/api/ContactUs', form)
+        
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data)
+            })
+            .catch((error) => {
+              console.error('Error:', error)
+            })
         e.preventDefault()
 
     }
+
 
     return (
         <>
@@ -22,10 +33,10 @@ const ContactUs = () => {
             <Container>
                 <Left>
                     <H1>ContactUs</H1>
-                    <Input onChange={onChangeHandler} type="email" placeholder='Email'></Input>
-                    <Input onChange={onChangeHandler} type="text" placeholder='Full name'></Input>
-                    <Textarea onChange={onChangeHandler} placeholder='content'></Textarea>
-                    <InputBtn type="button" value="Send" />
+                    <Input onChange={onChangeHandler} name="email" type="email" placeholder='Email'></Input>
+                    <Input onChange={onChangeHandler} name="name" type="text" placeholder='Full name'></Input>
+                    <Textarea onChange={onChangeHandler} name="content" placeholder='content'></Textarea>
+                    <InputBtn onClick={onSubmit} type="button" value="Send" />
                 </Left>
                 <Right>
                     <Img src={image}>

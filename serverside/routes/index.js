@@ -10,6 +10,7 @@ const {
   ResetPassword,
   ForgotCompanyPassword,
   ResetCompanyPassword,
+  ContactUs,
 
 } = require("../controllers/users.controllers");
 
@@ -56,6 +57,7 @@ router.post("/refuse/:offerId/:candidateId", refuseCandidate)
 router.post("/refuseTechnical/:offerId/:candidateId", refuseCandidateTechnical)
 router.post("/accept/:offerId/:candidateId", acceptCandidate)
 router.post("/acceptTechnical/:offerId/:candidateId", acceptCandidateTechnical)
+router.post("/ContactUs",ContactUs) 
 router.get("/date", passport.authenticate("jwt", { session: false }), FindDate);
 router.get("/companydata/:id", GetCompanyData);  /* get the data of a company */
 router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false }), GetCompanyoffers);

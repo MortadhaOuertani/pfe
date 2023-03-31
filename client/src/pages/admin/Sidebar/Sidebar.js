@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { SidebarContainer, SidebarHeader, SidebarLink } from './SidebarElements';
+import { Div, SidebarContainer, SidebarHeader, SidebarLink } from './SidebarElements';
 import { AiOutlineHome } from "react-icons/ai";
 import { MdAccountBox, MdSettings } from "react-icons/md";
+import { FcReadingEbook } from "react-icons/fc";
 
 
 const Sidebar = () => {
@@ -11,10 +12,13 @@ const Sidebar = () => {
         setActiveLink(link);
     };
     
-
+    
     return (
         <SidebarContainer>
+            <Div>
             <SidebarHeader>Admin Dashboard</SidebarHeader>
+            < FcReadingEbook style={{width: '60px' , height: '60px' , alignSelf: 'center'}}/>
+            </Div>
             <div><SidebarLink to='/admin/dashboard' active={activeLink === 'dashboard'} onClick={() => handleLinkClick('dashboard')}><AiOutlineHome style={{ marginRight: "10px" }} />
                 Dashboard
             </SidebarLink></div>

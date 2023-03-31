@@ -55,7 +55,7 @@ const OffersPage = () => {
   useEffect(() => {
     setCount(filteredOffers.length);
   }, [filteredOffers]);
-
+ 
 
   const governates = ["Tunis", "Ariana", "Ben Arous", "Manouba", "Nabeul", "Zaghouan", "Bizerte", "Béja", "Jendouba", "Kef", "Siliana", "Sousse", "Monastir", "Mahdia", "Sfax", "Kairouan", "Kasserine", "Sidi Bouzid", "Gabès", "Medenine", "Tataouine", "Tozeur", "Kebili"];
   const handleClickOutside = (event) => {

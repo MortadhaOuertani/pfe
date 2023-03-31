@@ -60,7 +60,10 @@ const FormCandidate = () => {
                         <InputD onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
                         <InputD onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
                     </InputContainer>
-                    <Input onChange={onChangeHandler} type='file' accept="image/png, image/jpeg" name='profile' placeholder='Profile Picture' required />
+                    <div>
+                        <label for="profile">Profile Picture : </label>
+                        <Input onChange={onChangeHandler} type='file' accept="image/png, image/jpeg" name='profile' placeholder='Profile Picture' required />
+                    </div>
                 </Div>
                 <BtnSubmit type="submit" >Register</BtnSubmit>
             </Form>

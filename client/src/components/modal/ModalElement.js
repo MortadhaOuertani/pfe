@@ -1,7 +1,7 @@
-  import React, { useState } from 'react';
-  import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-  export const Div = styled.div`
+export const Div = styled.div`
   background: white;
   align-self: center;
   top: ${({ isOpen }) => (isOpen ? '50%' : '-50%')};
@@ -9,7 +9,7 @@
   transform: translate(-50%, -50%);
   padding: 20px;
   width: 40%;
-  height: 50%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   z-index: 2121212122;
@@ -19,12 +19,13 @@
 `;
 
 
-  export const Hr = styled.hr`
+export const Hr = styled.hr`
   width: 80%;
   margin-top: 30px;
 
-  `
-  export const Background = styled.div`
+  `;
+
+export const Background = styled.div`
   background-color: rgba(0,0,0,0.3);
   position: absolute;
   height: 100%;
@@ -33,12 +34,14 @@
   z-index: 212121212;
   flex-direction: inherit;
   align-items: center;
-  `
-  export const Topside = styled.div`
+  `;
+
+export const Topside = styled.div`
   align-self: flex-end;
   height: 10px;
-  `
-  export const Form = styled.form`
+  ;`
+
+export const Form = styled.form`
   display: flex;
   padding-top: 50px;
   width: 100%;
@@ -46,29 +49,44 @@
   flex-direction: column;
   row-gap: 40px;
 
-  `
-  export const Input = styled.input`
-  `
-  export const InputText = styled.input`
+  `;
+export const Btn = styled.button`
+align-self: center;
+font-size: 25px;
+background-color:  #36C2E0;
+border-radius: 5px;
+cursor: pointer;
+color:white;    
+border: none;
+margin-top: 35px;
+padding:5px 20px;
+
+  `;
+
+export const Label = styled.label`
+ font-weight: 700;
+ 
+`;
+
+
+export const Input = styled.input`
+ margin-top: 10px;
+  `;
+
+export const InputText = styled.input`
   height: 100%;
   width: 100%;
-  `
-  export const Button = styled.button`
-  align-self: flex-end;
-  background-color: #6c63ff;
-  font-size: 17px;
-  font-weight: bold;
-  padding: 10px 15px;
-  border-radius:10px;
-  color: white;
-  border: transparent;
-  cursor: pointer;
-  `
-  export const H1 = styled.h1`
+ margin-top: 10px;
+ outline: none;
+ 
+  `;
+
+export const H1 = styled.h1`
   color: black;
-  `
-  export const ResultError = styled.div`
-  display: flex;
+  `;
+
+export const ResultError = styled.div`
+    display: flex;
       align-items: center;
       width: 100%;
       height:200%;
@@ -78,12 +96,12 @@
       color: #a94b5b;
       border-radius: 5px;
 
-  `
-  export const ResultSuccess = styled.div`
+  `;
+export const ResultSuccess = styled.div`
   display: flex;
       align-items: center;
       width: 100%;
       border-color: #ebccd1;
       border-radius: 20px;
       font-weight: bold;
-  `
+  `;

@@ -8,7 +8,6 @@ const AdminHomePage = () => {
     return (
         <>
             <Container>
-                <Notif><MdNotifications style={{ height: '30px', width: '30px' }} /></Notif>
                 <Welcome>Welcome Admin !</Welcome>
             </Container>
         </>
