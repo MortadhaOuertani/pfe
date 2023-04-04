@@ -8,8 +8,10 @@ import companiesReducer from "./companiesReducer";
 import candidatesReducer from "./candidatesReducer";
 import checkReducer from "./checkReducer";
 import errorsCandidatReducer from "./errorsCandidatReducer";
+import companyerrorReducer from "./companyerrorReducer";
 export default combineReducers({
     errors: errorsReducer,
+    errorscompany:companyerrorReducer,
     errorscandidat: errorsCandidatReducer,
     auth: authReducer,
     offers:offersReducer,

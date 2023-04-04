@@ -68,9 +68,7 @@ const Login = () => {
               <H1>Login</H1>
             </Header>
             <Form onSubmit={onSubmit}>
-              {error &&
-                <P>{error}  </P>
-              }
+             
               <Input onChange={onChangeHandler} name="email"
                 type='email' required placeholder='Email' />
               <br />
@@ -81,15 +79,13 @@ const Login = () => {
                   type={showPassword ? 'text' : 'password'}
                   required
                   placeholder="Password"
-                  style={{
-                    backgroundImage: Icon,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPositionX: '98%',
-                    backgroundPositionY: '50%',
-                  }}
 
                 /> <IconBtn onClick={handleTogglePassword}>{showPassword ? <AiFillEye size={30} /> : <AiFillEyeInvisible size={30} />}</IconBtn></InputDiv>           <br />
+             {error &&
+                <P>{error}  </P>
+              }
               <Link to='/forgotpassword'>Forgot password ?</Link>
+              
               <InputBtn type="submit" value="Login" />
             </Form>
           </Left>

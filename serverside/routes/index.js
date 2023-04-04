@@ -23,7 +23,10 @@ const { ROLES, inRole } = require("../security/Rolemiddleware");
 
 
 const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, acceptCandidate, refuseCandidate, acceptCandidateTechnical, refuseCandidateTechnical, CountWordsInPDF, GetAdmin, AddToAdmin, GetCompanies, GetAllCandidates, AdminSettingsRemove,
-} = require("../controllers/offer.controllers");
+ EmailRefuse,
+ AcceptRHEmail,
+ AcceptTechnEmail,
+ EmailRefuseTech} = require("../controllers/offer.controllers");
 
 
 /* users routes. */
@@ -59,11 +62,14 @@ router.post("/refuseTechnical/:offerId/:candidateId", refuseCandidateTechnical)
 router.post("/accept/:offerId/:candidateId", acceptCandidate)
 router.post("/acceptTechnical/:offerId/:candidateId", acceptCandidateTechnical)
 router.post("/ContactUs",ContactUs) 
+router.post("/EmailRefuse/:id",EmailRefuse) 
+router.post("/EmailRefuseTech/:id",EmailRefuseTech)
+router.post("/AcceptRHEmail/:id",AcceptRHEmail) 
+router.post("/AcceptTechnEmail/:id",AcceptTechnEmail)
 router.get("/date", passport.authenticate("jwt", { session: false }), FindDate);
 router.get("/companydata/:id", GetCompanyData);  /* get the data of a company */
 router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false }), GetCompanyoffers);
-router.get("/offers/:id",
-  FindSingleoffers);
+router.get("/offers/:id",FindSingleoffers);
 router.post("/applyforOffer/:id", passport.authenticate("jwt", { session: false }), ApplyForOffers);
 router.get("/GetOfferApplicants/:id", passport.authenticate("jwt", { session: false }), GetCandidates);
 router.get("/getCandidates",GetAllCandidates);

@@ -19,6 +19,25 @@ const Technicalinfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
 
   }, [name]);
 
+  const EmailRefuseTech = (id)=>{
+    axios.post(`http://localhost:3600/api/EmailRefuseTech/${id}`)
+    .then(
+      console.log("success")
+    )
+    .catch((err)=>{
+      console.log("error")
+    })
+  }
+
+  const AcceptTechnEmail = (id)=>{
+    axios.post(`http://localhost:3600/api/AcceptTechnEmail/${id}`)
+    .then(
+      console.log("success")
+    )
+    .catch((err)=>{
+      console.log("error")
+    })
+  }
   const accept = (id, cadidatId) => {
     axios.post(`http://localhost:3600/api/acceptTechnical/${id}/${cadidatId}`)
       .then((res) => {
@@ -55,7 +74,7 @@ const Technicalinfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
 
         <Lowerside>
           <P>{letter}</P>
-          <Footer><Button onClick={() => accept(id, cadidatId)} >ACCEPT</Button><ButtonRed onClick={() => refuse(id, cadidatId)}>Refuse</ButtonRed></Footer>
+          <Footer><Button onClick={() =>{ accept(id, cadidatId) ; AcceptTechnEmail(cadidatId)}} >ACCEPT</Button><ButtonRed onClick={() =>{refuse(id, cadidatId) ; EmailRefuseTech(cadidatId)}}>Refuse</ButtonRed></Footer>
         </Lowerside>
       </Container>
     </>

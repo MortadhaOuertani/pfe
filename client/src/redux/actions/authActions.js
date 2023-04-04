@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ERRORS, ERRORSCANDIDAT, SET_USER } from "../types"
+import { ERRORS, ERRORSCANDIDAT, ERRORSCOMPANY, SET_USER } from "../types"
 import jwt_decode from 'jwt-decode'
 import { setAuth } from "../../util/setAuth"
 
@@ -26,7 +26,7 @@ export const FinishRegisterCompany = (form, navigate) => dispatch => {
         dispatch({ type: ERRORS, payload: {} })
     }).catch(err => {
         dispatch({
-            type: ERRORS,
+            type: ERRORSCOMPANY,
             payload: err.response.data
 
         })
