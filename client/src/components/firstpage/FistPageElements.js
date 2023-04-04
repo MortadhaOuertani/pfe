@@ -3,13 +3,12 @@ import { NavLink as Link } from 'react-router-dom';
 
 export const ImageHero = styled.div`
   width: 100%;
-  height: 100%;
+  height: 300px;
   z-index: 1 !important;
-  margin-left: -90px;
-  margin-bottom: -30px;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @media screen and (max-width: 908px) {
+    display: none;
+  }
   @media screen and (max-width:542px ) {
    display: none;
 
@@ -28,14 +27,20 @@ const moveDown = keyframes`
 
 export const Image = styled.img`
   width:auto;
-  border-radius: 10px;
-  height: 650px;
-  right: 20%;
-  position: absolute;
+  height: 600px;
   z-index: 555 !important;
-
+  position:relative;
+  bottom: 20%;
+  top:auto;
+left:200px;
+right: 0;
+@media screen and (max-width:1500px ) {
+    right:100px;
+    left: 0;
+  }
   @media screen and (max-width:1000px ) {
-    right:10%;
+    right:200px;
+    left: 0;
     height: 500px;
   }
 `;
@@ -60,12 +65,11 @@ export const Div = styled.div`
 
 width: auto;
 height:55vh;
-@media screen and (max-width:1000px ) {
-    font-size: 40px;
-    display: flex;
-    flex-direction: column;
+@media screen and (max-width:900px ) {
+  display: flex;
+   flex-direction: column;
    justify-content: center;
-  }
+   align-items: center;  }
    @media screen and (max-width:542px ) {
    display: flex;
    flex-direction: column;
@@ -138,7 +142,7 @@ export const HeroP = styled.div`
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   z-index: 9;
   
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 908px) {
     display: none;
   }
   

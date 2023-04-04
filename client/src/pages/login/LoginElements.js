@@ -28,8 +28,7 @@ export const Span = styled.span`
 export const P = styled.p`
 height: 0;
 width: 91%;
-padding-top: 30px;
-font-size:20px;
+font-size:17px;
 color: red;
 @media screen and (max-width:1100px ) {
   transform: translateX(24%);
@@ -146,6 +145,7 @@ export const Link = styled(Links)`
   text-decoration:none;
   align-self: flex-start;
   margin-left: 20%;
+  margin-top:30px;
   @media screen and (max-width:1100px ) {
     width: 100%;
   transform:translateX(7.5%) ;

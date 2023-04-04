@@ -10,7 +10,7 @@ const FormCompany = () => {
     const [confirm, setConfirm] = useState("")
     const [errors, setErrors] = useState();
     const dispatch = useDispatch()
-    const error = useSelector(state => (state.errors))
+    const error = useSelector(state => (state.errorscompany))
     const navigate = useNavigate()
     const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
         setErrors("")
