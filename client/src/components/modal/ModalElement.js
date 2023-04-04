@@ -31,7 +31,7 @@ export const Hr = styled.hr`
 export const Background = styled.div`
   background-color: rgba(0,0,0,0.3);
   position: absolute;
-  height: 100%;
+  height: 150vh;
   width: 100%;
   display: flex;
   z-index: 212121212;
@@ -61,9 +61,9 @@ border-radius: 5px;
 cursor: pointer;
 color:white;    
 border: none;
-padding-top:10px;
-padding-bottom:10px ;
-width: 20%;
+padding-top:5px;
+padding-bottom:5px ;
+width: 30%;
 text-align:center;
 
   `;
@@ -81,13 +81,11 @@ export const Input = styled.input`
 
 export const InputText = styled.textarea`
   height: 100px;
-    resize: none;
-
+  resize: none;
   width: 90%;
   border-left:solid;
- margin-top: 10px;
- outline: none;
- margin-left:20px;
+  margin-top: 10px;
+  outline: none;
  
   `;
 
