@@ -375,7 +375,7 @@ const ContactUs = (req, res) => {
 
     const mailOptions = {
       from: "projetpfe885@gmail.com",
-      to: "hirelabContacus@gmail.com",
+      to: "hirelabContactus@gmail.com",
       subject: `New contact us submission from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nContent: ${content}`
     };

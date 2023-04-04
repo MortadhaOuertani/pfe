@@ -18,6 +18,26 @@ const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
     fetchPdf();
   }, [name]);
 
+  const RefuseEmail = (id) =>{
+    axios.post(`http://localhost:3600/api/EmailRefuse/${id}`)
+    .then(
+      console.log("success")
+    )
+    .catch((err)=>{
+      console.log("error")
+    })
+  }
+
+  const AcceptRHEmail = (id) =>{
+    axios.post(`http://localhost:3600/api/AcceptRHEmail/${id}`)
+    .then(
+      console.log("success")
+    )
+    .catch((err)=>{
+      console.log("error")
+    })
+  }
+  
   const accept = (id, cadidatId) => {
     axios.post(`http://localhost:3600/api/accept/${id}/${cadidatId}`)
       .then((res) => {
@@ -59,7 +79,7 @@ const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
         </LinkS>
         <Lowerside>
           <P>{letter}</P>
-          <Footer><Button onClick={() => accept(id, cadidatId)} >ACCEPT</Button><ButtonRed onClick={() => refuse(id, cadidatId)}>Refuse</ButtonRed></Footer>
+          <Footer><Button onClick={() => {accept(id, cadidatId) ; AcceptRHEmail(cadidatId) }} >ACCEPT</Button><ButtonRed onClick={() => {refuse(id, cadidatId); RefuseEmail(cadidatId)}}>Refuse</ButtonRed></Footer>
         </Lowerside>
       </Container>
     </>

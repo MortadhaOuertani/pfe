@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
-height: 100%;
+height: 100vh;
 width: 100%;
-background-color:#f8f8f8;
+background-color:#e5f3ff;
 display: flex;
 align-items: center;
 flex-direction: column;

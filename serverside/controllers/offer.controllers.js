@@ -3,6 +3,7 @@ const OffersModule = require('../models/offers.models')
 const companyModel = require('../models/users/company.model')
 const usersModels = require('../models/users/users.models')
 const uploadFile = require("../middleware/multer");
+const nodemailer = require('nodemailer');
 const fs = require("fs");
 const { ObjectID } = require('mongodb');
 const { Blob } = require('buffer');
@@ -23,11 +24,11 @@ const AdminSettingsRemove = async (req, res) => {
     }
 }
 const Addoffers = async (req, res) => {
-    
+
     try {
         // create the offer using the object in req.body
         const offer = await OffersModule.create(req.body);
-      
+
         // remove the object from adminModel.acceptList
         await adminModel.updateOne(
             {},
@@ -394,6 +395,150 @@ const acceptCandidateTechnical = async (req, res) => {
     }
 };
 
+const EmailRefuse = (req, res) => {
+    try {
+        usersModels.findOne({ _id: req.params.id }, (err, data) => {
+            if (err) {
+                res.status(404).json({ message: "Candidate not found" })
+            }
+            else {
+                
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: "projetpfe885@gmail.com",
+                        pass: "mkogokrpyiovokvw"
+                    }
+                });
+
+                const mailOptions = {
+                    from: "projetpfe885@gmail.com",
+                    to: data.email,
+                    subject: 'Notification of HR Test Results',
+                    text: `Dear ${data.name},\n\nI regret to inform you that your performance in the HR test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`                };
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Error sending email' });
+                    }
+                    console.log(`Email sent: ${info.response}`);
+                    res.status(200).json({ message: 'Email sent successfully' });
+                })
+            }
+        })
+    } catch (error) {
+        res.status(404).json(error.message);
+    }
+};
+
+const EmailRefuseTech = async (req,res) =>{
+    try{
+         usersModels.findOne({_id: req.params.id} , (err,data)=>{
+            if(err){
+                res.status(404).json({message: "Candidate not found"})
+            }else{
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: "projetpfe885@gmail.com",
+                        pass: "mkogokrpyiovokvw"
+                    }
+                });
+
+                const mailOptions = {
+                    from: "projetpfe885@gmail.com",
+                    to: data.email,
+                    subject: 'Notification of Technical Test Results',
+                    text: `Dear ${data.name},\n\n I regret to inform you that your performance in the Technical Test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`};
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Error sending email' });
+                    }
+                    console.log(`Email sent: ${info.response}`);
+                    res.status(200).json({ message: 'Email sent successfully' });
+                })
+            }
+         })
+    }catch{
+
+    }
+}
+
+const AcceptRHEmail = (req, res) => {
+    try {
+        usersModels.findOne({ _id: req.params.id }, (err, data) => {
+            if (err) {
+                res.status(404).json({ message: "Candidate not found" })
+            }
+            else {
+                // Send password reset email to user
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: "projetpfe885@gmail.com",
+                        pass: "mkogokrpyiovokvw"
+                    }
+                });
+
+                const mailOptions = {
+                    from: "projetpfe885@gmail.com",
+                    to: data.email,
+                    subject: 'Congratulations! You have been selected for the HR test',
+                    text: "Congratulations on making it to the next stage of our recruitment process! You have been selected to take part in the HR test. We will be in touch soon with more details, including the date, time and location. Please prepare thoroughly for the test, as it is a crucial part of the selection process. If you perform well, we will consider you for the technical test. Thank you for your interest in the role and for taking the time to participate in our recruitment process. Best regards, "
+                };
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Error sending email' });
+                    }
+                    console.log(`Email sent: ${info.response}`);
+                    res.status(200).json({ message: 'Email sent successfully' });
+                })
+            }
+        })
+    } catch (error) {
+        res.status(404).json(error.message);
+    }
+};
+
+const AcceptTechnEmail = (req, res) => {
+    try {
+        usersModels.findOne({ _id: req.params.id }, (err, data) => {
+            if (err) {
+                res.status(404).json({ message: "Candidate not found" })
+            }
+            else {
+                // Send password reset email to user
+                const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: "projetpfe885@gmail.com",
+                        pass: "mkogokrpyiovokvw"
+                    }
+                });
+
+                const mailOptions = {
+                    from: "projetpfe885@gmail.com",
+                    to: data.email,
+                    subject: 'Congratulations! You have been selected for the Technical Test',
+                    text: "Congratulations! You have been selected for the Technical Test. We were impressed with your performance in the HR test and believe you have the potential to excel in the role. We will be in touch shortly with more details about the date, time, and location of the Technical Test. Please prepare thoroughly and give yourself the best chance of success. Best of luck!"
+                };
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                        return res.status(500).json({ message: 'Error sending email' });
+                    }
+                    console.log(`Email sent: ${info.response}`);
+                    res.status(200).json({ message: 'Email sent successfully' });
+                })
+            }
+        })
+    } catch (error) {
+        res.status(404).json(error.message);
+    }
+};
+
 module.exports = {
     CountWordsInPDF,
     refuseCandidateTechnical,
@@ -415,4 +560,8 @@ module.exports = {
     AdminSettingsRemove,
     refuseCandidate,
     checkForExpiredOffers,
+    EmailRefuse,
+    EmailRefuseTech,
+    AcceptRHEmail,
+    AcceptTechnEmail
 }
