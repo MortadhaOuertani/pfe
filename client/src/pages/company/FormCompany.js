@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { RegistrationCompany } from '../../redux/actions/authActions'
+import { FinishRegister, FinishRegisterCompany, RegistrationCompany } from '../../redux/actions/authActions'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
-import { BtnSubmit, Button, ButtonsConatainer, Container, Div, Form, H1, Header, Input } from './FormCompanyElements'
+import { BtnSubmit, Button, ButtonsConatainer, Container, Div, Form, H1, Header, Input, P } from './FormCompanyElements'
 
 const FormCompany = () => {
     const [form, setForm] = useState({})
+    const [confirm, setConfirm] = useState("")
+    const [errors, setErrors] = useState();
     const dispatch = useDispatch()
-    const errors = useSelector(state => state.errors)
+    const error = useSelector(state => (state.errors))
     const navigate = useNavigate()
     const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
+        setErrors("")
         setForm({
             ...form, //setForm va prendre la formulaire(form)
             [e.target.name]: e.target.value //elle va prendre la valeur d'un input à partir le nom de l'input
@@ -18,7 +21,12 @@ const FormCompany = () => {
     }
     const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
         e.preventDefault(); //ne refraichir pas la page pour ne perdre pas les données 
-        e.preventDefault();
+        if (form.password !== form.confirm) {
+            setConfirm("Passwords does not match");
+            return;
+        }
+        setConfirm("");
+        setErrors(error);
 
         // Read the selected file and convert it to base64
         const reader = new FileReader();
@@ -30,9 +38,15 @@ const FormCompany = () => {
 
             // Add the base64-encoded image to the form data
             const formData = { ...form, logo: base64Image };
-            dispatch(RegistrationCompany(formData, navigate))
+            dispatch(FinishRegisterCompany(formData, navigate))
         }
     }
+    useEffect(() => {
+        setErrors("")
+    }, [])
+    useEffect(() => {
+        setErrors(error)
+    }, [error])
     return (
         <>
             <Form onSubmit={onSubmit}>
@@ -42,8 +56,13 @@ const FormCompany = () => {
                     <Input onChange={onChangeHandler} type='address' name='address' placeholder='Your address' required />
                     <Input onChange={onChangeHandler} type='text' name='phone' placeholder='Your mobile number' required />
                     <Input onChange={onChangeHandler} type='email' name='email' placeholder='Your Email' required />
+                    {errors &&
+                        <P>{errors}  </P>
+                    }
                     <Input onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
                     <Input onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
+                    {confirm && <P>{confirm}</P>}
+
                     <div>
                         <label for="profile">Profile Picture : </label>
                         <Input onChange={onChangeHandler} type="file"

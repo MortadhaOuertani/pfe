@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { Button, ButtonDelete, Container, Footer, H2, H3, Img, Imgdiv, Info, Item, LeftSide, Middleside, MiddleSide, RightSide, Topside } from './OfferCompanyElement'
+import { Button, ButtonDelete, Container, Footer, H2, H3, Img, Imgdiv, Info, Item, LeftSide, LinkS, Links, Middleside, MiddleSide, RightSide, Topside } from './OfferCompanyElement'
 import { GrLocation } from 'react-icons/gr'
 import { FcCalendar, FcBusiness, FcDocument } from "react-icons/fc";
 import { AiOutlineClose } from 'react-icons/ai'
@@ -49,12 +48,15 @@ const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contra
     <>
       <Container>
         <Topside>
-          <Imgdiv><div><Img src={base64Image} /></div></Imgdiv><Info><H2>{title}</H2>{companydata.map(item => (<div key={item.id}>
-            <H3>{item.name}</H3>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <FcCalendar /><p>{new Date(item.createdAt).toISOString().substring(0, 10)}</p>
-            </div>
-          </div>))}</Info>
+          <Imgdiv><Img src={base64Image} /></Imgdiv>
+          <Info>
+            <H2>{title}</H2>
+            {companydata.map(item => (<div key={item.id}>
+              <H3>{item.name}</H3>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <FcCalendar /><p>{new Date(item.createdAt).toISOString().substring(0, 10)}</p>
+              </div>
+            </div>))}</Info>
         </Topside>
         <Middleside>
           <Item><FcBusiness style={{ color: "grey" }} /><h4 style={{ color: "grey" }}>{experience}</h4></Item>
@@ -62,14 +64,14 @@ const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contra
           <Item><GrLocation style={{ color: "grey" }} /><h4 style={{ color: "grey" }}>{local}</h4></Item>
         </Middleside>
         <Footer>
-          <Link to={`/appliedOffer/${_id}`}>
+          <LinkS to={`/appliedOffer/${_id}`}>
             <Button variant="primary">
               Voir plus
             </Button>
-          </Link>
-          <ButtonDelete onClick={()=>{Deleteoffer(_id)}}>
-              <AiOutlineClose color={"white"} size={20} />
-            </ButtonDelete>: null
+          </LinkS>
+          <ButtonDelete onClick={() => { Deleteoffer(_id) }}>
+            <AiOutlineClose color={"white"} size={20} />
+          </ButtonDelete>
         </Footer>
       </Container>
     </>)

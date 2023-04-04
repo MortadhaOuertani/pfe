@@ -8,12 +8,15 @@ export const Div = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  width: 40%;
-  height: 70%;
+  width: 500px;
+  height: 500px;
+  border-radius:10px ;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   display: flex;
   flex-direction: column;
   z-index: 2121212122;
   align-items: center;
+  justify-content:center;
   position: absolute;
   transition: top 0.5s ease-in-out;
 `;
@@ -58,8 +61,10 @@ border-radius: 5px;
 cursor: pointer;
 color:white;    
 border: none;
-margin-top: 35px;
-padding:5px 20px;
+padding-top:10px;
+padding-bottom:10px ;
+width: 20%;
+text-align:center;
 
   `;
 
@@ -71,13 +76,18 @@ export const Label = styled.label`
 
 export const Input = styled.input`
  margin-top: 10px;
+ border:none;
   `;
 
-export const InputText = styled.input`
-  height: 100%;
-  width: 100%;
+export const InputText = styled.textarea`
+  height: 100px;
+    resize: none;
+
+  width: 90%;
+  border-left:solid;
  margin-top: 10px;
  outline: none;
+ margin-left:20px;
  
   `;
 

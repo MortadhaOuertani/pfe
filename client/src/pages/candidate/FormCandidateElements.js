@@ -15,6 +15,7 @@ export const Div =styled.div`
  height: 100%;
  align-items: center;
  flex-direction: column;
+transition: all 1s ease-in;
 `;
 
 export const Header = styled.div`
@@ -48,6 +49,15 @@ column-gap: 20px;
 width: 100%;
 align-items: center;
 justify-content: center;
+transition: all 0.2s ease-in;
+`
+export const P = styled.p`
+font-size:20px;
+height: 0;
+width: 70%;
+padding-top: 10px;
+text-align:start;
+color: red;
 `
 export const Input = styled.input`
   margin-top: 30px;
@@ -55,7 +65,7 @@ export const Input = styled.input`
   border-left: transparent;
   border-right: transparent;
   border-bottom: 1px solid grey ;
-  width:50%;
+  width:70%;
   height: 45px;
    font-size: 18px;
   &::placeholder {
@@ -96,4 +106,8 @@ background-color: #43CBA6;
   margin-right: 20%;
   margin-top:30px;
   cursor: pointer;
+  &:hover{
+  background-color: black;
+    transition: all 0.2s ease-in-out;
+}
 `;

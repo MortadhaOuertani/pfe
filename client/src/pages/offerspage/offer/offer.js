@@ -44,12 +44,16 @@ const Offer = ({ experience, date, _id, title, createdAt, company, logo, contrac
     <>
       <Container>
         <Topside>
-          <Imgdiv><div><Img src={base64Image} /></div></Imgdiv><Info><H2>{title}</H2>{companydata.map(item => (<div key={item.id}>
-            <H3>{item.name}</H3>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <FcCalendar /><p>{new Date(date).toISOString().substring(0, 10)}</p>
-            </div>
-          </div>))}</Info>
+          <Imgdiv><Img src={base64Image} />
+          </Imgdiv>
+          <Info>
+            <H2>{title}</H2>
+            {companydata.map(item => (<div key={item.id}>
+              <H3>{item.name}</H3>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <FcCalendar /><p>{new Date(date).toISOString().substring(0, 10)}</p>
+              </div>
+            </div>))}</Info>
         </Topside>
         <Middleside>
           <Item><FcBusiness style={{ color: "grey" }} /><h4 style={{ color: "grey" }}>{experience}</h4></Item>
@@ -62,10 +66,10 @@ const Offer = ({ experience, date, _id, title, createdAt, company, logo, contrac
               View more
             </Button>
           </Link>
-          {user.id === company? 
-            <ButtonDelete onClick={()=>{Deleteoffer(_id)}}>
+          {user.id === company ?
+            <ButtonDelete onClick={() => { Deleteoffer(_id) }}>
               <AiOutlineClose color={"white"} size={20} />
-            </ButtonDelete>: null
+            </ButtonDelete> : null
           }
         </Footer>
       </Container>

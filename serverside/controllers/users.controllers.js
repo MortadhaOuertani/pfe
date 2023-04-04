@@ -6,22 +6,23 @@ const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const adminModel = require("../models/users/admin.model");
 const fs = require('fs');
+const usersModels = require("../models/users/users.models");
 
 const RegisterCandidate = async (req, res) => {
+  const  {token}  = req.body;
+  const account = jwt.verify(token, process.env.PRIVATE_KEY);
   try {
-    console.log(req.body)
     // Convert image to base64-encoded string
 
     UserModel.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
-        errors.email = "user exist";
-        res.status(404).json(errors);
+        res.status(404).json("User already exists");
       } else {
         const salt = bcrypt.genSaltSync(10)
-        const hash = bcrypt.hashSync(req.body.password, salt)//hashed password
-        req.body.password = hash;
-        req.body.role = "USER";
-        await UserModel.create(req.body);
+        const hash = bcrypt.hashSync(account.password, salt)//hashed password
+        account.password = hash;
+        account.role = "USER";
+        await UserModel.create(account);
         res.status(200).json({ message: "success" });
       }
     });
@@ -32,22 +33,126 @@ const RegisterCandidate = async (req, res) => {
 };
 
 const RegisterCompany = async (req, res) => {
+  const  {token}  = req.body;
+  const account = jwt.verify(token, process.env.PRIVATE_KEY);
   try {
     CompanyModel.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
-        errors.email = "user exist";
-        res.status(404).json(errors);
+        res.status(404).json("user already exists");
       } else {
         const salt = bcrypt.genSaltSync(10)
-        const hash = bcrypt.hashSync(req.body.password, salt)//hashed password
-        req.body.password = hash;
-        req.body.role = "USER";
-        await CompanyModel.create(req.body);
+        const hash = bcrypt.hashSync(account.password, salt)//hashed password
+        account.password = hash;
+        account.role = "USER";
+        await CompanyModel.create(account);
         res.status(200).json({ message: "success" });
       }
     });
   }
   catch (error) {
+    res.status(404).json(error.message);
+  }
+};
+const RegisterMailCompany = async (req, res) => {
+  try {
+    CompanyModel.findOne({ email: req.body.email }).then(async (exist) => {
+      if (exist) {
+        res.status(404).json("user already exists");
+      } else {
+        var token = jwt.sign({
+          name: req.body.name,
+          address: req.body.address,
+          phone: req.body.phone,
+          email: req.body.email,
+          role: "COMPANY",
+          password: req.body.password,
+          logo: req.body.logo,
+        }, "HDYHHSY6", { expiresIn: '15m' });
+        res.status(200).json({
+          message: "An email has been sent to your account",
+          token: "Bearer " + token
+        });
+
+        // Send password reset email to user
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: "projetpfe885@gmail.com",
+            pass: "mkogokrpyiovokvw"
+          }
+        });
+
+        const mailOptions = {
+          from: "projetpfe885@gmail.com",
+          to: req.body.email,
+          subject: 'Finish registering',
+          text: `Click on this link to Register : ${process.env.CLIENT_URL}/registercompany/${token}`
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Error sending email' });
+          }
+          console.log(`Email sent: ${info.response}`);
+          res.status(200).json({ message: 'Password reset email sent' });
+        });
+      }
+    });
+  } catch (error) {
+    res.status(404).json(error.message);
+  }
+};
+const RegisterMailCandidat = async (req, res) => {
+  try {
+    usersModels.findOne({ email: req.body.email }).then(async (exist) => {
+      if (exist) {
+        res.status(404).json("user already exists");
+      } else {
+        var token = jwt.sign({
+          name: req.body.name,
+          lastname:req.body.lastname,
+          niveauEtude:req.body.niveauEtude,
+          anneeObtentienDiplome:req.body.anneeObtentienDiplome,
+          diplome:req.body.diplome,
+          age:req.body.age,
+          address: req.body.address,
+          phone: req.body.phone,
+          email: req.body.email,
+          role: "USER",
+          password: req.body.password,
+          profile: req.body.profile,
+        }, "HDYHHSY6", { expiresIn: '15m' });
+        res.status(200).json({
+          message: "An email has been sent to your account",
+          token: "Bearer " + token
+        });
+
+        // Send password reset email to user
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: "projetpfe885@gmail.com",
+            pass: "mkogokrpyiovokvw"
+          }
+        });
+
+        const mailOptions = {
+          from: "projetpfe885@gmail.com",
+          to: req.body.email,
+          subject: 'Finish registering',
+          text: `Click on this link to Register : ${process.env.CLIENT_URL}/registercandidat/${token}`
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Error sending email' });
+          }
+          console.log(`Email sent: ${info.response}`);
+          res.status(200).json({ message: 'Password reset email sent' });
+        });
+      }
+    });
+  } catch (error) {
     res.status(404).json(error.message);
   }
 };
@@ -60,15 +165,13 @@ const LoginCandidate = async (req, res) => {
     } else {
       UserModel.findOne({ email: req.body.email }).then(user => {
         if (!user) {
-          errors.email = "user not found "
-          res.status(404).json(errors)
+          res.status(404).json("incorrect password or email")
 
         } else {
           bcrypt.compare(req.body.password, user.password)
             .then(isMatch => {
               if (!isMatch) {
-                errors.password = "incorrect password"
-                res.status(404).json(errors)
+                res.status(404).json("incorrect password or email")
               } else {
                 var token = jwt.sign({
                   id: user._id,
@@ -100,15 +203,13 @@ const LoginCompany = async (req, res) => {
       CompanyModel.findOne({ email: req.body.email })
         .then(user => {
           if (!user) {
-            errors.email = "user not found "
-            res.status(404).json(errors)
+            res.status(404).json("incorrect password or email")
 
           } else {
             bcrypt.compare(req.body.password, user.password)
               .then(isMatch => {
                 if (!isMatch) {
-                  errors.password = "incorrect password"
-                  res.status(404).json(errors)
+                  res.status(404).json("incorrect password or email")
                 } else {
                   var token = jwt.sign({
                     id: user._id,
@@ -160,15 +261,13 @@ const LoginAdmin = (req, res) => {
       adminModel.findOne({ email: req.body.email })
         .then(user => {
           if (!user) {
-            errors.email = "user not found "
-            res.status(404).json(errors)
+            res.status(404).json("incorrect password or email")
 
           } else {
             bcrypt.compare(req.body.password, user.password)
               .then(isMatch => {
                 if (!isMatch) {
-                  errors.password = "incorrect password"
-                  res.status(404).json(errors)
+                  res.status(404).json("incorrect password or email")
                 } else {
                   var token = jwt.sign({
                     id: user._id,
@@ -364,7 +463,7 @@ const ContactUs = (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const content = req.body.content;
-  
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -405,5 +504,7 @@ module.exports = {
   ResetPassword,
   ForgotCompanyPassword,
   ResetCompanyPassword,
-  ContactUs
+  ContactUs,
+  RegisterMailCompany,
+  RegisterMailCandidat,
 };
