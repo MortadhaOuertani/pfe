@@ -29,9 +29,8 @@ const moveDown = keyframes`
 export const Image = styled.img`
   width:auto;
   border-radius: 10px;
-  height: 550px;
+  height: 650px;
   right: 20%;
-  z-index: 1;
   position: absolute;
   z-index: 555 !important;
 
@@ -162,11 +161,9 @@ font-size:19px;
 font-weight: 550;
 z-index: 10 !important;
 background-color:#43CBA6;
-&:hover{
-  border-radius: 50px;
-  transition: all 0.1s ease-in-out;
-  color:white;
-
+ &:hover{
+  background-color: #37BDDC;
+    transition: all 0.5s ease-out;
 }
 
 `

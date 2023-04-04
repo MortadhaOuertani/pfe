@@ -13,6 +13,14 @@ background-color: white;
 color: black;
 
 `
+export const LinkS = styled(Links)`
+align-self:center;
+position: relative;
+left: 50%;
+transform: translateX(-50%);
+white-space:nowrap;
+`
+
 export const Button = styled.button`
     padding: 10px 30px ;
     border: none;
@@ -48,6 +56,8 @@ export const Info = styled.div`
 display: flex;
 flex-direction: column;
 row-gap: 5px;
+padding-top:10px;
+
 
 `
 export const H2 = styled.h3`
@@ -55,6 +65,12 @@ export const H2 = styled.h3`
 export const H3 = styled.h3`
 `
 export const Img = styled.img`
+width:100px;
+margin-top:5px;
+margin-left:10px;
+height: auto;
+object-fit:cover;
+object-position:center;
 `
 export const Middleside = styled.div`
 width: 100%;
@@ -78,6 +94,7 @@ export const ButtonDelete = styled.div`
     border-radius: 3px;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
+    float:right;
 
 ` 
 export const Item = styled.div`
@@ -88,6 +105,8 @@ align-items: center;
 `
 export const Footer = styled.div`
 display: flex;
-justify-content: center;
+justify-content: space-between;
+width: 100%;
 align-items: center;
+
 `

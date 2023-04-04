@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ModalComponent from '../../components/modal/Modal'
-import { GetOneOffer } from '../../redux/actions/offerActions'
+import { GetOneOffer, Seterror, Setsuccess } from '../../redux/actions/offerActions'
 import { Container, TopContainer, BottomContainer, Button, NavbarDiv, Hr, H2, H3, ContainerOne, Div, P, DIV, SearchDiv, Li } from './OfferDetailsElements'
 
 const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contract, local }) => {
@@ -11,6 +11,7 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
   const [modalShow, setModalShow] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); //state to track if the modal is open or closed
   const [isFrozen, setIsFrozen] = useState(false);
+
   const dispatch = useDispatch();
   const offer = useSelector(state => state.offers);
   const { id } = useParams();
@@ -22,11 +23,15 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
   useEffect(() => {
     dispatch(GetOneOffer(id));
     console.log(offer.OFFERS.company)
+    Seterror();
+    Setsuccess();
   }, [dispatch, id]);
 
   useEffect(() => {
     if (offer.OFFERS) {
       GetCompanyData(offer.OFFERS.company);
+      Seterror();
+      Setsuccess();
     }
   }, [offer]);
 
@@ -36,6 +41,8 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
     } else {
       document.body.style.overflow = '';
     }
+    Seterror();
+    Setsuccess();
   }, [isModalOpen]);
 
 

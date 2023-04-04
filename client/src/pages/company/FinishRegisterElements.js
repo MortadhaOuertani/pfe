@@ -20,32 +20,34 @@ background-color: #e5f3ff;
 `;
 
 export const Div = styled.div`
-width: 80%;
-height: 50%;
+width: 500px;
+height: 400px;
 background-color: white;
-text-align: center;
 border-radius: 10px;
 display: flex;
-flex-direction: row;
+flex-direction: column;
+row-gap:50px;
+padding-top:50px;
 `;
 
 export const Button = styled.button`
 background-color: #42cca6;
-font-size: 14px;
-font-weight: bold;
-align-self: center;
+font-size: 20px;
+font-weight: 600;
 padding: 10px 15px;
 border-radius: 10px;
 color: white;
 border: transparent;
 cursor: pointer;
+align-self:start;
+transform:translateX(30%);
+
 `;
 
 export const H2 = styled.h1`
-position: absolute;
-width: 100%;
-position: relative;
-text-align: center;
+font-size:60px;
+transform:translateX(10%);
+
 `;
 
 export const Input = styled.input`
@@ -54,6 +56,9 @@ width:200px;
 
 export const P =styled.h3`
 text-align: start;
+font-size:25px;
+transform:translateX(10%);
+
 `;
 export const Error =styled.h3`
 text-align: start;

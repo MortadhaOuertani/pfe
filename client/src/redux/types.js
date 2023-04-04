@@ -6,3 +6,5 @@ export const SET_CANDIDATES = "SET_CANDIDATES" ;
 export const SET_COMPANIES = "SET_COMPANIES"; 
 export const DELETE_OFFERS = "DELETE_OFFERS";
 export const SUCCESS = "SUCCESS"
+export const CHECK = "CHECK"
+export const ERRORSCANDIDAT = "ERRORSCANDIDAT"

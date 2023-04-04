@@ -11,6 +11,8 @@ const {
   ForgotCompanyPassword,
   ResetCompanyPassword,
   ContactUs,
+  RegisterMailCompany,
+  RegisterMailCandidat,
 
 } = require("../controllers/users.controllers");
 
@@ -28,6 +30,10 @@ const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetC
 router.post("/register/candidate", RegisterCandidate);
 router.post("/register/company", RegisterCompany);
 router.post("/register/admin", RegisterAdmin);
+router.post("/registercompany", RegisterMailCompany);
+router.post("/registercandidat", RegisterMailCandidat);
+
+///////////////////////////////////////
 router.post("/testPDf", CountWordsInPDF,
 );
 
@@ -37,11 +43,6 @@ router.post("/loginadmin", LoginAdmin);
 router.post("/forgotpassword", ForgotPassword);
 router.post('/reset-password', ResetPassword);
 router.post('/forgotcompanypassword', ForgotCompanyPassword);
-router.post('/reset-company-password', ResetCompanyPassword);
-
-
-
-
 
 /* add offers route */
 router.post("/offers", Addoffers);

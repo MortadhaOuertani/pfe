@@ -1,10 +1,10 @@
-import { SUCCESS } from "../types";
+import { CHECK } from "../types";
 
-const initialState ="";
+const initialState =null;
 
 export default function(state = initialState,action){
     switch(action.type){
-        case SUCCESS:
+        case CHECK:
             return action.payload;
     
         default:

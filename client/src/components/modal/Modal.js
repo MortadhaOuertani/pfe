@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { ApplyForOffer } from '../../redux/actions/offerActions';
+import { ApplyForOffer, Seterror, Setsuccess } from '../../redux/actions/offerActions';
 import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess, Topside, Hr, Label, Btn } from './ModalElement';
 import { FaTimes } from 'react-icons/fa';
 import axios from 'axios';
@@ -9,18 +9,15 @@ import axios from 'axios';
 const ModalComponent = (props) => {
 
   const dispatch = useDispatch();
+  const check = useSelector(state => state.check);
   const success = useSelector(state => state.success);
   const error = useSelector(state => state.errors);
   const { id } = useParams();
 
   const [formSubmitted, setFormSubmitted] = useState(false); // Track whether the form has been submitted
-
-  const Test = (form) => {
-    axios.post("http://localhost:3600/api/testPDf", form).then(res => {
-      console.log(res.data)
-    }).catch(console.log("error"))
-
-  }
+  Seterror();
+  Setsuccess();
+ 
   const Apply = (event) => {
     event.preventDefault();
 
@@ -35,6 +32,7 @@ const ModalComponent = (props) => {
   const [Letter, setLetter] = useState("");
   useEffect(() => {
     console.log(props.modalShow)
+    console.log(error)
   }, [props.modalShow])
 
   const form = new FormData();
@@ -52,22 +50,23 @@ const ModalComponent = (props) => {
         <Hr />
         {formSubmitted ? (
           <div>
-            {error == "You have already applied for this offer"
-              ? <ResultError>{JSON.stringify(error)}</ResultError> : null}
-            {error != "You have already applied for this offer"
-              ? <ResultSuccess>{JSON.stringify(success)}</ResultSuccess> : null}
+            {check === true ? (
+              <ResultSuccess>{success}</ResultSuccess>
+            ) : check === false ? (
+              <ResultError>{error}</ResultError>
+            ) : null}
           </div>
         ) : (
-          <Form onSubmit={Apply}>
+          <Form onSubmit={Apply} >
             <div>
-              <Label>Upload your CV : </Label><br/>
+              <Label>Upload your CV : </Label><br />
               <Input accept=".pdf" type="file" id="fileInput" name='cv' onChange={event => { const file = event.target.files[0]; setFile(file) }} required />
             </div>
             <div>
               <Label>Cover letter :  </Label>
-              <InputText type="textarea" id="textInput" name='letter'
+              <InputText id="textInput" name='letter'
                 onChange={event => { const { value } = event.target; setLetter(value) }} />
-            </div> 
+            </div>
             <Btn type="submit" >Send</ Btn>
           </Form>
         )}
