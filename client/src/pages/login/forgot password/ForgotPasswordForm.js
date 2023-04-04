@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NavbarDiv } from '../../offerspage/OfferDetailsElements';
-import { Container, Form, Div, Button, H2, Input, P, Div2, Img, ImgContainer } from './ForgotPasswordFormElements';
+import { Container, Form, Div, Button, H2, Input, P, Div2, Img, ImgContainer, Error, Success } from './ForgotPasswordFormElements';
 import password from '../../../images/password.svg'
 import axios from 'axios';
 
@@ -65,8 +65,8 @@ const ForgotPasswordForm = () => {
                 required
               />
             </Div2>
-            {errorMessage && <div className="error">{errorMessage}</div>}
-            {successMessage && <div className="success">{successMessage}</div>}
+            {errorMessage && <Error className="error">{errorMessage}</Error>}
+            {successMessage && <Success className="success">{successMessage}</Success>}
             <Button type="submit">Reset password</Button>
           </Form>
           <ImgContainer><Img src={password}></Img></ImgContainer>

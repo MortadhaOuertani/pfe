@@ -46,7 +46,7 @@ const OffersPage = () => {
 
   useEffect(() => {
     dispatch(GetOffers());
-  }, [dispatch,filteredOffers]);
+  }, [dispatch,Offers.OFFERSS]);
 
   useEffect(() => {
     setFilteredOffers(offers.OFFERSS || []);

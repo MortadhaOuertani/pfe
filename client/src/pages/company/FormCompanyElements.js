@@ -33,7 +33,14 @@ export const Form = styled.form`
   
   }
 `;
-
+export const P = styled.p`
+height: 0;
+width: 60%;
+padding-top: 10px;
+text-align:start;
+font-size:20px;
+color: red;
+`
 export const Input = styled.input`
   margin-top: 40px;
   border-top: transparent;
@@ -88,8 +95,11 @@ export const BtnSubmit = styled.button`
   margin-right: 20%;
   position: relative;
   cursor: pointer;
-  top:80px;
-  
+  top:60px;
+  &:hover{
+  background-color: black;
+    transition: all 0.2s ease-in-out;
+}
   @media screen and (max-width:900px ) {
     top:20px;
   

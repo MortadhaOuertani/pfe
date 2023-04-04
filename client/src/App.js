@@ -27,6 +27,9 @@ import Accepted from './pages/OffersAppliedTo/AcceptedList';
 import CV from './components/CandidateInfo/CV';
 import ProtectedRoute from './components/protection/protection';
 import ProtectedAdmin from './components/protection/protectionAdmin';
+import FinishRegister from './pages/company/FinishRegister';
+import FinishRegistering from './pages/candidate/FinishRegistering';
+
 
 
 
@@ -60,6 +63,8 @@ function App() {
         <Route path='/offers' element={<OffersPage />} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
         <Route path='/reset-password/:id/:token' element={<ResetPasswordForm />} />
+        <Route path='/registercompany/:token' element={<FinishRegister />} />
+        <Route path='/registercandidat/:token' element={< FinishRegistering />} />
         <Route element={<ProtectedRoute auth={user} />}>
           <Route path='/offers/:id' element={<OfferDetails />} />
           <Route path='/postoffer' element={<Post />} />

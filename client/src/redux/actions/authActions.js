@@ -1,12 +1,17 @@
 import axios from "axios"
-import { ERRORS, SET_USER } from "../types"
+import { ERRORS, ERRORSCANDIDAT, SET_USER } from "../types"
 import jwt_decode from 'jwt-decode'
 import { setAuth } from "../../util/setAuth"
 
 export const RegistrationCandidate = (form, navigate) => dispatch => {
-    axios.post('http://localhost:3600/api/register/candidate',form).then(res => {
-        navigate('/')
-        dispatch({ type:ERRORS, payload: {} })
+    axios.post('http://localhost:3600/api/register/candidate', form).then(res => {
+        navigate('/login')
+        dispatch({
+            type: ERRORS,
+            payload: ''
+
+        })
+        dispatch({ type: ERRORS, payload: {} })
     }).catch(err => {
         dispatch({
             type: ERRORS,
@@ -14,11 +19,11 @@ export const RegistrationCandidate = (form, navigate) => dispatch => {
 
         })
     })
-} 
-export const RegistrationCompany = (form, navigate) => dispatch => {
-    axios.post('http://localhost:3600/api/register/company',form).then(res => {
+}
+export const FinishRegisterCompany = (form, navigate) => dispatch => {
+    axios.post('http://localhost:3600/api/registercompany', form).then(res => {
         navigate('/')
-        dispatch({ type:ERRORS, payload: {} })
+        dispatch({ type: ERRORS, payload: {} })
     }).catch(err => {
         dispatch({
             type: ERRORS,
@@ -26,11 +31,35 @@ export const RegistrationCompany = (form, navigate) => dispatch => {
 
         })
     })
-} 
+}
+export const FinishRegisterCandidat = (form, navigate) => dispatch => {
+    axios.post('http://localhost:3600/api/registercandidat', form).then(res => {
+        navigate('/')
+        dispatch({ type: ERRORS, payload: {} })
+    }).catch(err => {
+        dispatch({
+            type: ERRORSCANDIDAT,
+            payload: err.response.data
+
+        })
+    })
+}
+export const RegistrationCompany = (token, navigate) => dispatch => {
+    axios.post('http://localhost:3600/api/register/company', token).then(res => {
+        navigate('/login')
+        dispatch({ type: ERRORS, payload: {} })
+    }).catch(err => {
+        dispatch({
+            type: ERRORS,
+            payload: err.response.data
+
+        })
+    })
+}
 
 
 
-export const LoginActionCandidate = (form, navigate)=>dispatch  => {
+export const LoginActionCandidate = (form, navigate) => dispatch => {
     axios.post('http://localhost:3600/api/logincandidate', form, {
         headers: {
             'Content-Type': 'application/json'
@@ -45,11 +74,14 @@ export const LoginActionCandidate = (form, navigate)=>dispatch  => {
             navigate('/offers')
         })
         .catch(err => {
-           console.log(err)
+            dispatch({
+                type: ERRORS,
+                payload: err.response.data
+            });
         })
 }
 
-export const LoginActionCompany = (form, navigate)=>dispatch  => {
+export const LoginActionCompany = (form, navigate) => dispatch => {
     axios.post('http://localhost:3600/api/logincompany', form, {
         headers: {
             'Content-Type': 'application/json'
@@ -66,11 +98,14 @@ export const LoginActionCompany = (form, navigate)=>dispatch  => {
 
         })
         .catch(err => {
-           console.log(err)
+            dispatch({
+                type: ERRORS,
+                payload: err.response.data
+            });
         })
 }
 
-export const LoginAdmin = (form, navigate)=>dispatch  => {
+export const LoginAdmin = (form, navigate) => dispatch => {
     axios.post('http://localhost:3600/api/loginadmin', form, {
         headers: {
             'Content-Type': 'application/json'
@@ -87,7 +122,10 @@ export const LoginAdmin = (form, navigate)=>dispatch  => {
 
         })
         .catch(err => {
-           console.log(err)
+            dispatch({
+                type: ERRORS,
+                payload: err.response.data
+            });
         })
 }
 

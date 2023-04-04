@@ -217,7 +217,7 @@ const ApplyForOffers = async (req, res) => {
                     if (data.candidates.some((c) => c._id.equals(candidate._id))) {
                         return res
                             .status(409)
-                            .json({ error: "You have already applied for this offer" });
+                            .json( "You have already applied for this offer" );
                     } else {
                         // Add the CV file to the candidate
                         const Filename = req.file.filename;
@@ -241,7 +241,7 @@ const ApplyForOffers = async (req, res) => {
 
                             return res
                                 .status(200)
-                                .json({ message: "You have successfully applied for this offer" });
+                                .json('You have successfully applied for this offer');
                         });
                     }
                 } else {

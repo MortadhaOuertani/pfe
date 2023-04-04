@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ERRORS, SET_OFFERS, SET_OFFERSS, DELETE_OFFERS, SUCCESS, SET_COMPANIES, SET_CANDIDATES } from '../types';
+import { ERRORS, SET_OFFERS, SET_OFFERSS, DELETE_OFFERS, SUCCESS, SET_COMPANIES, SET_CANDIDATES, CHECK } from '../types';
 import "./alert.css"
 
 export const AddCompanyOffer = (form) => dispatch => {
@@ -134,25 +134,58 @@ export const DeleteOffers = (id) => dispatch => {
       });
   }
 }
+export const Seterror = () => dispatch => {
+  dispatch({
+    type: ERRORS,
+    payload: {}
+  });
+}
 
+export const Setsuccess = () => dispatch => {
+  dispatch({
+    type: SUCCESS,
+    payload: ""
+  });
+}
 export const ApplyForOffer = (id, form) => dispatch => {
   axios
     .post(`http://localhost:3600/api/applyforOffer/${id}`, form)
     .then(res => {
-      console.log(res.data.message)
       dispatch({
-        type: SUCCESS,
-        payload: res.data.message
+        type: CHECK,
+        payload: true
       });
+      dispatch({
+        type: ERRORS,
+        payload: ""
+      });
+      setTimeout(() => {
+
+        dispatch({
+          type: SUCCESS,
+          payload: res.data
+        });
+      }, 1000);
     })
     .catch(err => {
       dispatch({
-        type: ERRORS,
-        payload: err.response.data.error
+        type: CHECK,
+        payload: false
       });
+      dispatch({
+        type: SUCCESS,
+        payload: ""
+      });
+      setTimeout(() => {
+
+        dispatch({
+          type: ERRORS,
+          payload: err.response.data
+        });
+      }, 1000);
+
     });
 }
-
 
 export const GetCompanyoffers = () => dispatch => {
   axios

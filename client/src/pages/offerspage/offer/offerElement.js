@@ -61,6 +61,7 @@ width: 40%;
 height: 80%;
 `
 export const Info = styled.div`
+padding-top:10px;
 display: flex;
 flex-direction: column;
 row-gap: 5px;
@@ -71,6 +72,12 @@ export const H2 = styled.h3`
 export const H3 = styled.h3`
 `
 export const Img = styled.img`
+width:100px;
+margin-top:5px;
+margin-left:10px;
+height: auto;
+object-fit:cover;
+object-position:center;
 `
 export const Middleside = styled.div`
 width: 100%;

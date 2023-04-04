@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
-export const NavbarDiv=styled.div`
+export const NavbarDiv = styled.div`
 width: 100%;
 top: 0;
 left: 0;
-height: 60px;
 background-color: black;
 `;
-export const H2=styled.h2`
+export const H2 = styled.h2`
  padding-top: 10px;
  padding-left: 20px;
  padding-bottom: 20px;
@@ -20,8 +19,8 @@ margin-top: 20px;
 margin-bottom: 20px;
 border: 0.7px solid #F1EFF1;
 margin-left: 5%;
-` 
-export const Li=styled.li`
+`
+export const Li = styled.li`
  font-size: 17px;
  font-weight: 500;
 `;
@@ -32,6 +31,10 @@ background-color: #e5f3ff;
 display: flex;
 align-items: center;
 justify-content: center;
+@media screen and (max-width:1008px ) {
+
+    margin-top:50px ;
+}
 `;
 
 export const Container = styled.div`
@@ -83,8 +86,7 @@ export const BottomContainer = styled.div`
  box-shadow: 0px 0px 3px 0px grey ;
 `;
 export const Button = styled.button`
-   margin-left: 70%;
-   padding: 10px 110px ;
+    padding: 10px 110px ;
     border: none;
     background-color: #38B5EC;
     cursor: pointer;
@@ -92,7 +94,10 @@ export const Button = styled.button`
     color: white;
     font-size: 18px;
     font-weight: 600;
-`; 
+    transform:translateX(-70%);
+    position:relative;
+    left:80%;
+`;
 
 export const P = styled.p`
  padding-left: 20px;
@@ -103,7 +108,7 @@ export const Div = styled.div`
  padding-bottom: 30px;
 `;
 
-export const H3= styled.h3`
+export const H3 = styled.h3`
 color:black;
 padding-left: 20px;
 padding-top: 10px;
