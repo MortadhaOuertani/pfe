@@ -8,6 +8,10 @@ background-color:#e5f3ff;
 display: flex;
 align-items: center;
 flex-direction: column;
+@media screen and (max-width:790px ) {
+min-width:610px;
+
+  }
 
 `
 export const Header = styled.div`
@@ -20,6 +24,12 @@ height:100px;
 justify-content:space-around;
 align-items: center;    
 display: flex;
+@media screen and (max-width:790px ) {
+min-width:610px;
+
+margin-top: 20%;
+
+  }
 
 `
 export const Middle = styled.div`
@@ -35,8 +45,9 @@ export const Middle = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border-bottom-left-radius: 20px;
-  border-top-right-radius: 20px;
+  @media screen and (max-width:790px ) {
+  min-width:610px;
+  }
 `;
 export const Templates = styled.div`
 width: 80px;
