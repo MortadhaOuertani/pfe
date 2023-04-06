@@ -29,6 +29,7 @@ import ProtectedRoute from './components/protection/protection';
 import ProtectedAdmin from './components/protection/protectionAdmin';
 import FinishRegister from './pages/company/FinishRegister';
 import FinishRegistering from './pages/candidate/FinishRegistering';
+import CandidatProfile from './pages/CandidatProfile/CandidatProfile';
 
 
 
@@ -59,6 +60,7 @@ function App() {
       <Nnavbar user={user} />
       <Routes>
         <Route path='/' element={<Home user={user} />} />
+        <Route path='/candidatProfile' element={<CandidatProfile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/offers' element={<OffersPage />} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm />} />

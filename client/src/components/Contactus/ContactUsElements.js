@@ -28,6 +28,10 @@ export const ContainerBg = styled.img`
 position: absolute;
 object-fit:cover;
 object-position:center;
+@media screen and (max-width:900px ) {
+  top:2060px;
+
+  }
 `
 export const H1 = styled.h1`
 position: relative;
