@@ -25,8 +25,7 @@ export const Div = styled.div`
 export const Hr = styled.hr`
   width: 80%;
   margin-top: 30px;
-
-  `;
+`;
 
 export const Background = styled.div`
   background-color: rgba(0,0,0,0.3);
@@ -37,12 +36,12 @@ export const Background = styled.div`
   z-index: 212121212;
   flex-direction: inherit;
   align-items: center;
-  `;
+`;
 
 export const Topside = styled.div`
   align-self: flex-end;
   height: 10px;
-  ;`
+`;
 
 export const Form = styled.form`
   display: flex;
@@ -52,32 +51,31 @@ export const Form = styled.form`
   flex-direction: column;
   row-gap: 40px;
 
-  `;
-export const Btn = styled.button`
-align-self: center;
-font-size: 25px;
-background-color:  #36C2E0;
-border-radius: 5px;
-cursor: pointer;
-color:white;    
-border: none;
-padding-top:5px;
-padding-bottom:5px ;
-width: 30%;
-text-align:center;
+`;
 
-  `;
+export const Btn = styled.button`
+  align-self: center;
+  font-size: 25px;
+  background-color:  #36C2E0;
+  border-radius: 5px;
+  cursor: pointer;
+  color:white;    
+  border: none;
+  padding-top:5px;
+  padding-bottom:5px ;
+  width: 30%;
+  text-align:center;
+`;
 
 export const Label = styled.label`
- font-weight: 700;
+  font-weight: 700;
  
 `;
 
-
 export const Input = styled.input`
- margin-top: 10px;
- border:none;
-  `;
+  margin-top: 10px;
+  border:none;
+`;
 
 export const InputText = styled.textarea`
   height: 100px;
@@ -87,29 +85,30 @@ export const InputText = styled.textarea`
   margin-top: 10px;
   outline: none;
  
-  `;
+`;
 
 export const H1 = styled.h1`
   color: black;
-  `;
+`;
 
 export const ResultError = styled.div`
-    display: flex;
-      align-items: center;
-      width: 100%;
-      height:200%;
-      border:1px solid #ebccd1;
-      font-weight: bold;
-      background-color: #f2dede;
-      color: #a94b5b;
-      border-radius: 5px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height:200%;
+  border:1px solid #ebccd1;
+  font-weight: bold;
+  background-color: #f2dede;
+  color: #a94b5b;
+  border-radius: 5px;
 
-  `;
+`;
+
 export const ResultSuccess = styled.div`
   display: flex;
-      align-items: center;
-      width: 100%;
-      border-color: #ebccd1;
-      border-radius: 20px;
-      font-weight: bold;
-  `;
+  align-items: center;
+  width: 100%;
+  border-color: #ebccd1;
+  border-radius: 20px;
+  font-weight: bold;
+`;
