@@ -20,6 +20,10 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
   const expirationDate = offer.OFFERS?.dateExpiration;
   const formattedDate = expirationDate && new Date(expirationDate).toLocaleDateString();
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   useEffect(() => {
     dispatch(GetOneOffer(id));
     console.log(offer.OFFERS.company)
@@ -78,7 +82,7 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
             <P>{offer.OFFERS?.local}</P>
             <Hr />
 
-            <Button onClick={() => { setModalShowAndUpdateFreeze(!modalShow); }}>Apply</Button>
+            <Button onClick={() => { setModalShowAndUpdateFreeze(!modalShow); handleScrollToTop() }}>Apply</Button>
           </TopContainer>
           <BottomContainer>
             <DIV><H3><label>Experience : </label></H3><p style={{ paddingTop: '12px' }}>{offer.OFFERS?.experience}</p></DIV>
