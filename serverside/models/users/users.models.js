@@ -18,6 +18,7 @@ const UserModel = new Schema({
     address:"string",
     phone:"string",
     niveauEtude:"string",
+    skills:[],
     letter:String,
     employement:String,
     cv: {

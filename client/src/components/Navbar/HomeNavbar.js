@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonR, Div, Div2, H2, Icon, Image, Nav, NavLink, NavLinkR, NavLinkz, NavMenu, Sandwich, SideBAR, SideDiv, SideIcon, SideNav, Span } from './HomeNavbarElements'
+import { Button, ButtonR, Div, Div2, H2, Icon, Image, Img, ImgBorder, Nav, NavLink, NavLinkR, NavLinkz, NavMenu, Sandwich, SideBAR, SideDiv, SideIcon, SideNav, Span } from './HomeNavbarElements'
 import { useEffect, useState } from 'react';
 import logo from '../../images/logo.png';
 import { Logout } from '../../redux/actions/authActions';
@@ -10,10 +10,16 @@ import { BsPersonFill } from "react-icons/bs";
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { H1 } from '../../pages/company/FormCompanyElements';
 import { animateScroll } from 'react-scroll';
+import { useSelector } from 'react-redux';
 
 const HomeNavbar = ({ user }) => {
+
   const location = useLocation();
+  const auth = useSelector(state => state.auth)
   const currentUrl = location.pathname;
+  const base64Image = `data:image/jpeg;base64,${auth?.user.profile}`;
+  const base64ImageCompany = `data:image/jpeg;base64,${auth?.user.logo}`;
+console.log(auth.user)
   const [showSidebar, setShowSideBar] = useState(false);
   const navigate = useNavigate()
   const SubmitForm = (e) => {
@@ -29,9 +35,7 @@ const HomeNavbar = ({ user }) => {
   const HandleChange = (e) => {
     setTypeUser(e.target.value)
   }
-  useEffect(() => {
-    console.log(currentUrl)
-  }, [])
+  
 
 
   const ToggleSidebar = () => {
@@ -55,6 +59,7 @@ const HomeNavbar = ({ user }) => {
         </SideDiv>
       </SideBAR>
       <NavLinkz to='/'>
+
         {user.role === "ADMIN" ? "ADMIN" : ""}
         <Image src={logo} /><H2><Span>Hire</Span>Lab</H2>
 
@@ -74,9 +79,14 @@ const HomeNavbar = ({ user }) => {
       }
       <NavMenu>
 
-        {user.isConnected ? <NavLink onClick={LogoutFunction} to='/'>
+        {user.isConnected ? <> <NavLink onClick={LogoutFunction} to='/'>
           Logout
-        </NavLink> :
+        </NavLink>
+          <NavLink to={`/candidatProfile/${auth.user.id}`}>
+            <ImgBorder>
+          {auth.user.role=="USER" ? <Img src={base64Image}/> : <Img src={base64ImageCompany}/>}
+            </ImgBorder>
+          </NavLink></> :
           <>
             <NavLink to='/login'>
               Login
@@ -85,7 +95,9 @@ const HomeNavbar = ({ user }) => {
               <ButtonR >
                 Register
               </ButtonR>
+
             </NavLinkR>
+
           </>
         }
       </NavMenu>
