@@ -415,7 +415,7 @@ const EmailRefuse = (req, res) => {
                     from: "projetpfe885@gmail.com",
                     to: data.email,
                     subject: 'Notification of HR Test Results',
-                    text: `Dear ${data.name},\n\nI regret to inform you that your performance in the HR test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`                };
+                    text: `Dear ${data.name},\n\nWe regret to inform you that your performance in the HR test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`                };
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                         console.log(error);

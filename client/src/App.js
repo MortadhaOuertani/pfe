@@ -60,7 +60,7 @@ function App() {
       <Nnavbar user={user} />
       <Routes>
         <Route path='/' element={<Home user={user} />} />
-        <Route path='/candidatProfile' element={<CandidatProfile />} />
+        <Route path='/candidatProfile/:id' element={<CandidatProfile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/offers' element={<OffersPage />} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm />} />

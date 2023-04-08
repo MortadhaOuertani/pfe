@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const adminModel = require("../models/users/admin.model");
 const fs = require('fs');
 const usersModels = require("../models/users/users.models");
+const companyModel = require("../models/users/company.model");
 
 const RegisterCandidate = async (req, res) => {
   const  {token}  = req.body;
@@ -43,7 +44,7 @@ const RegisterCompany = async (req, res) => {
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(account.password, salt)//hashed password
         account.password = hash;
-        account.role = "USER";
+        account.role = "COMPANY";
         await CompanyModel.create(account);
         res.status(200).json({ message: "success" });
       }
@@ -156,7 +157,32 @@ const RegisterMailCandidat = async (req, res) => {
     res.status(404).json(error.message);
   }
 };
+const EditCompany = async (req, res) => {
+  try {
+  const id = req.user.id;
+  const updatedUser = await companyModel.findByIdAndUpdate(id, req.body, {
+  new: true,
+  });
+  res.status(200).json(updatedUser);
+  } catch (error) {
+  console.error(error);
+  res.status(500).json({ message: "Server Error" });
+  }
+  };
+const EditCandidat = async (req, res) => {
+  try {
+  const id = req.user.id;
+  console.log(req.body)
 
+  const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
+  new: true,
+  });
+  res.status(200).json(updatedUser);
+  } catch (error) {
+  console.error(error);
+  res.status(500).json({ message: "Server Error" });
+  }
+  };
 const LoginCandidate = async (req, res) => {
   const { errors, isValid } = ValidateLogin(req.body)
   try {
@@ -177,7 +203,14 @@ const LoginCandidate = async (req, res) => {
                   id: user._id,
                   name: user.name,
                   email: user.email,
-                  role: user.role
+                  role: user.role,
+                  profile:user.profile,
+                  niveauEtude:user.niveauEtude,
+                  phone:user.phone,
+                  address:user.address,
+                  age:user.age,
+                  diplome:user.diplome,
+                  skills:user.skills,
                 }, "HDYHHSY6", { expiresIn: '1h' });
                 res.status(200).json({
                   message: "success",
@@ -192,7 +225,13 @@ const LoginCandidate = async (req, res) => {
     res.status(404).json(error.message);
   }
 }
-//
+const GetCandidatinfo = async (req, res) => {
+console.log(req.params.id)
+  usersModels.findById({_id:req.params.id},(err,data)=>{
+    if (err)res.status(404).json({message:"Not found"})
+    res.status(200).json(data)
+  })
+}
 
 const LoginCompany = async (req, res) => {
   const { errors, isValid } = ValidateLogin(req.body)
@@ -215,7 +254,10 @@ const LoginCompany = async (req, res) => {
                     id: user._id,
                     name: user.name,
                     email: user.email,
-                    role: user.role
+                    role: user.role,
+                    logo:user.logo,
+                    address:user.address,
+                    phone:user.phone,
                   }, "HDYHHSY6", { expiresIn: '1h' });
                   res.status(200).json({
                     message: "success",
@@ -494,6 +536,8 @@ const ContactUs = (req, res) => {
 
 
 module.exports = {
+  EditCandidat,
+  EditCompany,
   RegisterCandidate,
   RegisterCompany,
   LoginCandidate,
@@ -507,4 +551,5 @@ module.exports = {
   ContactUs,
   RegisterMailCompany,
   RegisterMailCandidat,
+  GetCandidatinfo,
 };

@@ -15,7 +15,16 @@ export const NavLink = styled(Link)`
     color: #42CCA6;
   }
   `
-  export const NavLinkR = styled(Link)`
+export const Img = styled.img`
+  width:65px;
+  height: 65px;
+  object-fit:cover;
+object-position:center;
+border-radius: 50%;
+z-index: 1;
+
+  `
+export const NavLinkR = styled(Link)`
   color: white;
   font-weight: 600;
   display: flex;
@@ -52,6 +61,29 @@ export const H2 = styled.h2`
 margin-left: 2px;
 font-size: 20px;
 `;
+export const ImgBorder = styled.div`
+  border-radius: 50%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 68px;
+  height: 68px;
+  background-color: white;
+  border:2px solid blue;
+  &:hover{
+    border: 2px solid rgb(59,191,226) ;
+  }
+  &:before{
+  content:"";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  width: 65px;
+  height: 65px;
+  background-color: black;
+  z-index: 2;
+}
+`
 export const SideBAR = styled.div`
   position: absolute;
   width: 100%;
