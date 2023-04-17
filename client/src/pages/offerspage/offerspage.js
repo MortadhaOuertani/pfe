@@ -46,7 +46,8 @@ const OffersPage = () => {
 
   useEffect(() => {
     dispatch(GetOffers());
-  }, [dispatch,Offers.OFFERSS]);
+    console.log(filteredOffers)
+  }, [dispatch, Offers.OFFERSS]);
 
   useEffect(() => {
     setFilteredOffers(offers.OFFERSS || []);
@@ -55,7 +56,7 @@ const OffersPage = () => {
   useEffect(() => {
     setCount(filteredOffers.length);
   }, [filteredOffers]);
- 
+
 
   const governates = ["Tunis", "Ariana", "Ben Arous", "Manouba", "Nabeul", "Zaghouan", "Bizerte", "Béja", "Jendouba", "Kef", "Siliana", "Sousse", "Monastir", "Mahdia", "Sfax", "Kairouan", "Kasserine", "Sidi Bouzid", "Gabès", "Medenine", "Tataouine", "Tozeur", "Kebili"];
   const handleClickOutside = (event) => {
@@ -116,6 +117,7 @@ const OffersPage = () => {
           </OffersCount>
           <Offers>
             {filteredOffers.map((offer) => (
+
               <Offer key={offer._id} date={offer.createdAt} local={offer.local} title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
             ))}
           </Offers>

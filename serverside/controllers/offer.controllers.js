@@ -88,7 +88,7 @@ const FindAlloffers = (req, res) => {
 
 const GetCompanyData = (req, res) => { //
     try {
-        companyModel.find({ _id: req.params.id }, (err, data) => {
+        companyModel.findOne({ _id: req.params.id }, (err, data) => {
             if (err) res.status(404).json({ message: "not found" })
             else { res.status(200).json(data) }
         })
@@ -212,7 +212,7 @@ const ApplyForOffers = async (req, res) => {
                 return res.status(404).json({ error: err.message });
             } else {
                 const count = await CountWordsInPDF(req, res, data.search);
-                if (count >= data.search.length) {
+                if (count >= Math.floor(data.search.length/2)) {
                     const candidate = await usersModels.findOne({ _id: req.user.id });
                     if (data.candidates.some((c) => c._id.equals(candidate._id))) {
                         return res
@@ -263,7 +263,17 @@ const ApplyForOffers = async (req, res) => {
     }
 };
 
+const EditOffer = (req, res) => {
 
+    try {
+        offersModels.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, offer) => {
+          if (err) res.status(404).json(err.message);
+          res.status(200).json("Edited successfully");
+        });
+      } catch (err) {
+        res.status(404).json(err);
+      }
+}
 
 const GetCandidates = (req, res) => {
 
@@ -563,5 +573,6 @@ module.exports = {
     EmailRefuse,
     EmailRefuseTech,
     AcceptRHEmail,
-    AcceptTechnEmail
+    AcceptTechnEmail,
+    EditOffer
 }

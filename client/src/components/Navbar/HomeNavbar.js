@@ -82,7 +82,7 @@ console.log(auth.user)
         {user.isConnected ? <> <NavLink onClick={LogoutFunction} to='/'>
           Logout
         </NavLink>
-          <NavLink to={`/candidatProfile/${auth.user.id}`}>
+          <NavLink to={`/Profile/${auth.user.id}`}>
             <ImgBorder>
           {auth.user.role=="USER" ? <Img src={base64Image}/> : <Img src={base64ImageCompany}/>}
             </ImgBorder>

@@ -22,8 +22,9 @@ export const RegistrationCandidate = (form, navigate) => dispatch => {
 }
 export const FinishRegisterCompany = (form, navigate) => dispatch => {
     axios.post('http://localhost:3600/api/registercompany', form).then(res => {
-        navigate('/')
+        navigate('/login')
         dispatch({ type: ERRORS, payload: {} })
+        alert("an email has been sent please confirm your registeration")
     }).catch(err => {
         dispatch({
             type: ERRORSCOMPANY,
@@ -36,6 +37,7 @@ export const FinishRegisterCandidat = (form, navigate) => dispatch => {
     axios.post('http://localhost:3600/api/registercandidat', form).then(res => {
         navigate('/')
         dispatch({ type: ERRORS, payload: {} })
+        alert("an email has been sent please confirm your registeration")
     }).catch(err => {
         dispatch({
             type: ERRORSCANDIDAT,
@@ -122,10 +124,14 @@ export const LoginAdmin = (form, navigate) => dispatch => {
 
         })
         .catch(err => {
-            dispatch({
-                type: ERRORS,
-                payload: err.response.data
-            });
+            if (err.response) {
+                dispatch({
+                    type: ERRORS,
+                    payload: err.response.data
+                });
+            } else {
+                    console.log("other error")
+            }
         })
 }
 

@@ -111,13 +111,13 @@ margin-right:30px;
 export const Skill = styled.div`
   width: auto;
   height: 30px;
-  background-color: lightgrey;
+  background-color: #F2F2F2;
   border-radius: 5px;
   align-items: center;
   display: flex;
   justify-content: center;
   padding: 0px 10px;
-  border: 0.5px solid black;
+  border: 0.5px solid #D0D0D0;
   font-weight: 550;
 `
 export const Button = styled.button`

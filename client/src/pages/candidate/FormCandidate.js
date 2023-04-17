@@ -59,7 +59,7 @@ const FormCandidate = () => {
                 <Div>
                     <InputContainer>
                         <InputD onChange={onChangeHandler} type='name' name='name' placeholder='Your first name' required />
-                        <InputD onChange={onChangeHandler} type='name' name='lastname' placeholder='Your last name' required />
+                        <InputD onChange={onChangeHandler} type='name' name='lastName' placeholder='Your last name' required />
                     </InputContainer>
                     <Input onChange={onChangeHandler} type='email' name='email' placeholder='Your Email' required />
                     {errors &&

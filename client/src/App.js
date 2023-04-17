@@ -29,7 +29,8 @@ import ProtectedRoute from './components/protection/protection';
 import ProtectedAdmin from './components/protection/protectionAdmin';
 import FinishRegister from './pages/company/FinishRegister';
 import FinishRegistering from './pages/candidate/FinishRegistering';
-import CandidatProfile from './pages/CandidatProfile/CandidatProfile';
+import Profile from './pages/Profile/Profile';
+import EditOffer from './pages/offerspage/EditOffer';
 
 
 
@@ -60,7 +61,7 @@ function App() {
       <Nnavbar user={user} />
       <Routes>
         <Route path='/' element={<Home user={user} />} />
-        <Route path='/candidatProfile/:id' element={<CandidatProfile />} />
+        <Route path='/Profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/offers' element={<OffersPage />} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
@@ -70,6 +71,7 @@ function App() {
         <Route element={<ProtectedRoute auth={user} />}>
           <Route path='/offers/:id' element={<OfferDetails />} />
           <Route path='/postoffer' element={<Post />} />
+          <Route path='/edit/:id' element={<EditOffer />} />
           <Route path='/company' element={<CompanyHomePage />} />
           <Route path='/appliedOffer/:id' element={<Appling />} />
           <Route path='/technicaltest/:id' element={<Technical />} />

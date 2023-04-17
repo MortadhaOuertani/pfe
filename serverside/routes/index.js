@@ -28,9 +28,10 @@ const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetC
   EmailRefuse,
   AcceptRHEmail,
   AcceptTechnEmail,
-  EmailRefuseTech } = require("../controllers/offer.controllers");
+  EmailRefuseTech, 
+  EditOffer} = require("../controllers/offer.controllers");
 
-EditCandidat
+
 /* users routes. */
 router.get("/candidat/info/:id",GetCandidatinfo);
 router.post("/register/candidate", RegisterCandidate);
@@ -76,6 +77,7 @@ router.get("/companydata/:id", GetCompanyData);  /* get the data of a company */
 router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false }), GetCompanyoffers);
 router.get("/offers/:id", FindSingleoffers);
 router.post("/applyforOffer/:id", passport.authenticate("jwt", { session: false }), ApplyForOffers);
+router.post("/editoffer/:id", EditOffer);
 router.get("/GetOfferApplicants/:id", passport.authenticate("jwt", { session: false }), GetCandidates);
 router.get("/getCandidates", GetAllCandidates);
 router.get("/getcompanies", GetCompanies); //zedt hedhy

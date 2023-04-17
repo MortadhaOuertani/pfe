@@ -72,10 +72,10 @@ export const H2 = styled.h3`
 export const H3 = styled.h3`
 `
 export const Img = styled.img`
-width:100px;
+width:auto;
 margin-top:5px;
 margin-left:10px;
-height: auto;
+height:100px;
 object-fit:cover;
 object-position:center;
 `
