@@ -73,7 +73,7 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
         <Container style={containerStyle}>
           <TopContainer>
             <H2>{offer.OFFERS?.title}</H2>
-            {companydata.map(item => (
+            {companydata.length > 0 && companydata.map(item => (
               <div key={item.id}>
                 <DIV><h4 style={{ marginLeft: '20px' }}>Company's name : </h4><P> {item.name}</P></DIV>
                 <DIV><h4 style={{ marginLeft: '20px' }}>Date of creation : </h4> <P>{new Date(item.createdAt).toISOString().substring(0, 10)}</P></DIV>
