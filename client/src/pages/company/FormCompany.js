@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { FinishRegister, FinishRegisterCompany, RegistrationCompany } from '../../redux/actions/authActions'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
-import { BtnSubmit, Button, ButtonsConatainer, Container, Div, Form, H1, Header, Input, P } from './FormCompanyElements'
+import { Alert, BtnSubmit, Button, ButtonsConatainer, Container, Div, Form, H1, H1Succ, Header, Input, P } from './FormCompanyElements'
 
 const FormCompany = () => {
     const [form, setForm] = useState({})
     const [confirm, setConfirm] = useState("")
+    const [show, setshow] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [errors, setErrors] = useState();
     const dispatch = useDispatch()
     const error = useSelector(state => (state.errorscompany))
@@ -38,7 +40,12 @@ const FormCompany = () => {
 
             // Add the base64-encoded image to the form data
             const formData = { ...form, logo: base64Image };
+            setSuccess(true);
+            setTimeout(() => setshow(true), 200)
+            setTimeout(() => setshow(false), 2000)
+            setTimeout(() => setSuccess(false), 3000)
             dispatch(FinishRegisterCompany(formData, navigate))
+           
         }
     }
     useEffect(() => {
@@ -49,6 +56,7 @@ const FormCompany = () => {
     }, [error])
     return (
         <>
+       
             <Form onSubmit={onSubmit}>
                 <Header><H1>Register as a employer </H1></Header>
                 <Div>

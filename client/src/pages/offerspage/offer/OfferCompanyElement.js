@@ -30,7 +30,7 @@ export const Button = styled.button`
     color: white;
     font-size: 18px;
     font-weight: 600;
-` 
+`
 
 export const Background = styled.div`
 background-color: rgba(0,0,0,0.3);
@@ -64,11 +64,16 @@ export const H2 = styled.h3`
 `
 export const H3 = styled.h3`
 `
+export const Buttondiv = styled.div`
+display: flex;
+flex-direction: column;
+margin-bottom: 10px;
+`
 export const Img = styled.img`
-width:100px;
+width:auto;
 margin-top:5px;
 margin-left:10px;
-height: auto;
+height: 120px;
 object-fit:cover;
 object-position:center;
 `
@@ -80,6 +85,20 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 column-gap: 50px;
+`
+export const ButtonEdit = styled(LinkS)`
+ width: 30px;
+    height: 30px;
+    border: none;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255,195,14);
+    cursor: pointer;
+    border-radius: 3px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
 `
 export const ButtonDelete = styled.div`
     width: 30px;
@@ -94,9 +113,7 @@ export const ButtonDelete = styled.div`
     border-radius: 3px;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
-    float:right;
-
-` 
+`
 export const Item = styled.div`
 display: flex;
 flex-direction: column;

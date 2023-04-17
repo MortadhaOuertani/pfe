@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GrFormClose, GrLocation } from 'react-icons/gr'
-import { AccRef, Background, Butonwraper, Button, Buttonskill, ColorTop, Edit, EditDiv, H2, H3, H4, H4age, Img, ImgWrapper, InfoWrapper, InformationBottom, InformationContainer, InformationWrapper, Input, InputImg, InputImgLabel, Inputskills, LocationWrapper, Skill, SkillDiv, SkillsContainer } from './CandidatProfileElements'
+import { AccRef, Background, Butonwraper, Button, Buttonskill, ColorTop, Edit, EditDiv, H2, H3, H4, H4age, Img, ImgWrapper, InfoWrapper, InformationBottom, InformationContainer, InformationWrapper, Input, InputImg, InputImgLabel, Inputskills, LocationWrapper, Skill, SkillDiv, SkillsContainer } from './ProfileElements'
 import profile from '../../images/profile.avif'
 import { BsBriefcase, BsTelephone } from 'react-icons/bs'
 import { SlGraduation } from 'react-icons/sl';
@@ -10,18 +10,20 @@ import { AiOutlineCheck, AiOutlinePlus } from 'react-icons/ai'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-const CandidatProfile = () => {
+const Profile = () => {
   const { id } = useParams();
   const [editing, setEditing] = useState(false);
   const [editingskills, setEditingskills] = useState(false);
-
+  const users = useSelector(state => state.auth)
   const [form, setForm] = useState({})
   const [auth, setAuth] = useState({
     user: null,
   });
+  console.log(auth)
+
   const base64Image = `data:image/jpeg;base64,${auth?.user?.profile}`;
   const base64ImageCompany = `data:image/jpeg;base64,${auth?.user?.logo}`;
-  const fetchData = async (id) => {
+  const fetchDataCandidat = async (id) => {
     try {
       const response = await axios.get(`http://localhost:3600/api/candidat/info/${id}`);
       setAuth({ user: response.data });
@@ -29,9 +31,20 @@ const CandidatProfile = () => {
       console.error(error);
     }
   }
+  const fetchDataCompany = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:3600/api/companydata/${id}`);
+      setAuth({ user: response.data });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   useEffect(() => {
-    fetchData(id)
-  }, [form]);
+    fetchDataCandidat(id)
+  }, []);
+  useEffect(() => {
+    fetchDataCompany(id);
+  }, []);
 
   const onChangeHandler = (e) => {
     setForm({
@@ -147,6 +160,9 @@ const CandidatProfile = () => {
               <InfoWrapper >
 
                 <H2>{editing ? <Input onChange={onChangeHandler} type="text" name="name" defaultValue={auth.user?.name} /> : auth.user?.name}</H2>
+                {auth.user?.role === "USER" && (
+                  <H2>{editing ? <Input onChange={onChangeHandler} type="text" name="lastname" defaultValue={auth.user?.lastname} /> : auth.user?.lastname}</H2>
+                )}
                 {auth.user?.role == "USER" ? <H4age>{editing ? <Input onChange={onChangeHandler} type="number" name="age" defaultValue={auth.user?.age} /> : auth.user?.age}</H4age> : null}
               </InfoWrapper>
               <InfoWrapper>
@@ -185,25 +201,30 @@ const CandidatProfile = () => {
               />
               <Button onClick={handleAddSkill}>
                 <AiOutlinePlus size="20px" />
-              </Button >
+              </Button>
               <Button onClick={handleCancelEditSkills}>
                 <GrFormClose color="red" size="20px" />
-              </Button >
+              </Button>
             </Butonwraper>
           ) : (
-            <Butonwraper>
-              <Buttonskill onClick={handleEditClickSkills}>Add Skill</Buttonskill >
-            </Butonwraper>
+            users.user?.id == id ? (
+              <Butonwraper>
+                <Buttonskill onClick={handleEditClickSkills}>Add Skill</Buttonskill>
+              </Butonwraper>
+            ) : null
           )}
-          <SkillDiv >
-            {auth.user?.skills.map((skill, index) => (
-              <Skill key={index}>{skill}</Skill>
-            ))}
-          </SkillDiv>
+          {auth.user?.role == "USER" ?
+            <SkillDiv >
+              {auth.user?.skills.map((skill, index) => (
+                <Skill key={index}>{skill}</Skill>
+              ))}
+            </SkillDiv>
+            : null
+          }
         </SkillsContainer>
       </Background>
     </>
   )
 }
 
-export default CandidatProfile
+export default Profile

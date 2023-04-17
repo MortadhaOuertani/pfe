@@ -10,7 +10,7 @@ const usersModels = require("../models/users/users.models");
 const companyModel = require("../models/users/company.model");
 
 const RegisterCandidate = async (req, res) => {
-  const  {token}  = req.body;
+  const { token } = req.body;
   const account = jwt.verify(token, process.env.PRIVATE_KEY);
   try {
     // Convert image to base64-encoded string
@@ -29,12 +29,12 @@ const RegisterCandidate = async (req, res) => {
     });
   }
   catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json("error");
   }
 };
 
 const RegisterCompany = async (req, res) => {
-  const  {token}  = req.body;
+  const { token } = req.body;
   const account = jwt.verify(token, process.env.PRIVATE_KEY);
   try {
     CompanyModel.findOne({ email: req.body.email }).then(async (exist) => {
@@ -51,7 +51,7 @@ const RegisterCompany = async (req, res) => {
     });
   }
   catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json("error");
   }
 };
 const RegisterMailCompany = async (req, res) => {
@@ -100,7 +100,7 @@ const RegisterMailCompany = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json("error");
   }
 };
 const RegisterMailCandidat = async (req, res) => {
@@ -111,11 +111,11 @@ const RegisterMailCandidat = async (req, res) => {
       } else {
         var token = jwt.sign({
           name: req.body.name,
-          lastname:req.body.lastname,
-          niveauEtude:req.body.niveauEtude,
-          anneeObtentienDiplome:req.body.anneeObtentienDiplome,
-          diplome:req.body.diplome,
-          age:req.body.age,
+          lastname: req.body.lastname,
+          niveauEtude: req.body.niveauEtude,
+          anneeObtentienDiplome: req.body.anneeObtentienDiplome,
+          diplome: req.body.diplome,
+          age: req.body.age,
           address: req.body.address,
           phone: req.body.phone,
           email: req.body.email,
@@ -154,124 +154,111 @@ const RegisterMailCandidat = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json("error");
   }
 };
 const EditCompany = async (req, res) => {
   try {
-  const id = req.user.id;
-  const updatedUser = await companyModel.findByIdAndUpdate(id, req.body, {
-  new: true,
-  });
-  res.status(200).json(updatedUser);
+    const id = req.user.id;
+    const updatedUser = await companyModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(200).json(updatedUser);
   } catch (error) {
-  console.error(error);
-  res.status(500).json({ message: "Server Error" });
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
   }
-  };
+};
 const EditCandidat = async (req, res) => {
   try {
-  const id = req.user.id;
-  console.log(req.body)
+    const id = req.user.id;
+    console.log(req.body)
 
-  const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
-  new: true,
-  });
-  res.status(200).json(updatedUser);
+    const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(200).json(updatedUser);
   } catch (error) {
-  console.error(error);
-  res.status(500).json({ message: "Server Error" });
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
   }
-  };
-const LoginCandidate = async (req, res) => {
-  const { errors, isValid } = ValidateLogin(req.body)
-  try {
-    if (!isValid) {
-      res.status(404).json(errors)
-    } else {
-      UserModel.findOne({ email: req.body.email }).then(user => {
-        if (!user) {
-          res.status(404).json("incorrect password or email")
-
-        } else {
-          bcrypt.compare(req.body.password, user.password)
-            .then(isMatch => {
-              if (!isMatch) {
-                res.status(404).json("incorrect password or email")
-              } else {
-                var token = jwt.sign({
-                  id: user._id,
-                  name: user.name,
-                  email: user.email,
-                  role: user.role,
-                  profile:user.profile,
-                  niveauEtude:user.niveauEtude,
-                  phone:user.phone,
-                  address:user.address,
-                  age:user.age,
-                  diplome:user.diplome,
-                  skills:user.skills,
-                }, "HDYHHSY6", { expiresIn: '1h' });
-                res.status(200).json({
-                  message: "success",
-                  token: "Bearer " + token
-                })
-              }
-            })
-        }
-      })
-    }
-  } catch (error) {
-    res.status(404).json(error.message);
-  }
+};
+const LoginCandidate = (req, res) => {
+  UserModel.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        res.status(404).json("incorrect password or email")
+      } else {
+        bcrypt.compare(req.body.password, user.password)
+          .then(isMatch => {
+            if (!isMatch) {
+              res.status(404).json("incorrect password or email")
+            } else {
+              var token = jwt.sign({
+                id: user._id,
+                name: user.name,
+                lastname: user.lastName,
+                email: user.email,
+                role: user.role,
+                profile: user.profile,
+                niveauEtude: user.niveauEtude,
+                phone: user.phone,
+                address: user.address,
+                age: user.age,
+                diplome: user.diplome,
+                skills: user.skills,
+              }, "HDYHHSY6", { expiresIn: '1h' });
+              res.status(200).json({
+                message: "success",
+                token: "Bearer " + token
+              })
+            }
+          })
+      }
+    })
+    .catch(error => {
+      res.status(500).json("error");
+    });
 }
+
 const GetCandidatinfo = async (req, res) => {
-console.log(req.params.id)
-  usersModels.findById({_id:req.params.id},(err,data)=>{
-    if (err)res.status(404).json({message:"Not found"})
+  console.log(req.params.id)
+  usersModels.findById({ _id: req.params.id }, (err, data) => {
+    if (err) res.status(404).json({ message: "Not found" })
     res.status(200).json(data)
   })
 }
 
 const LoginCompany = async (req, res) => {
-  const { errors, isValid } = ValidateLogin(req.body)
   try {
-    if (!isValid) {
-      res.status(404).json(errors)
+    const company = await CompanyModel.findOne({ email: req.body.email });
+    if (!company) {
+      res.status(401).json("Incorrect email or password");
     } else {
-      CompanyModel.findOne({ email: req.body.email })
-        .then(user => {
-          if (!user) {
-            res.status(404).json("incorrect password or email")
-
-          } else {
-            bcrypt.compare(req.body.password, user.password)
-              .then(isMatch => {
-                if (!isMatch) {
-                  res.status(404).json("incorrect password or email")
-                } else {
-                  var token = jwt.sign({
-                    id: user._id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role,
-                    logo:user.logo,
-                    address:user.address,
-                    phone:user.phone,
-                  }, "HDYHHSY6", { expiresIn: '1h' });
-                  res.status(200).json({
-                    message: "success",
-                    token: "Bearer " + token
-                  })
-                }
-              })
-          }
-        })
+      const isMatch = await bcrypt.compare(req.body.password, company.password);
+      if (!isMatch) {
+        res.status(401).json("Incorrect email or password");
+      } else {
+        const token = jwt.sign({
+          id: company._id,
+          name: company.name,
+          email: company.email,
+          role: company.role,
+          logo: company.logo,
+          address: company.address,
+          phone: company.phone,
+        }, "HDYHHSY6", { expiresIn: '1h' });
+        res.status(200).json({
+          message: "success",
+          token: "Bearer " + token
+        });
+      }
     }
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(500).json("error");
   }
-}
+};
+
 
 const RegisterAdmin = (req, res) => {
   try {
@@ -290,46 +277,45 @@ const RegisterAdmin = (req, res) => {
     });
   }
   catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json("error");
   }
 }
 
 const LoginAdmin = (req, res) => {
-  const { errors, isValid } = ValidateLogin(req.body)
-  try {
-    if (!isValid) {
-      res.status(404).json(errors)
-    } else {
-      adminModel.findOne({ email: req.body.email })
-        .then(user => {
-          if (!user) {
-            res.status(404).json("incorrect password or email")
+  adminModel.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: "incorrect password or email" })
+      }
 
-          } else {
-            bcrypt.compare(req.body.password, user.password)
-              .then(isMatch => {
-                if (!isMatch) {
-                  res.status(404).json("incorrect password or email")
-                } else {
-                  var token = jwt.sign({
-                    id: user._id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role
-                  }, "HDYHHSY6", { expiresIn: '1h' });
-                  res.status(200).json({
-                    message: "success",
-                    token: "Bearer " + token
-                  })
-                }
-              })
+      bcrypt.compare(req.body.password, user.password)
+        .then(isMatch => {
+          if (!isMatch) {
+            return res.status(404).json({ message: "incorrect password or email" })
           }
+
+          const token = jwt.sign({
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role
+          }, "HDYHHSY6", { expiresIn: '1h' });
+
+          return res.status(200).json({
+            message: "success",
+            token: "Bearer " + token
+          })
         })
-    }
-  } catch (error) {
-    res.status(404).json(error.message);
-  }
-};
+        .catch(error => {
+          console.error(error)
+          return res.status(500).json({ message: "internal server error" })
+        })
+    })
+    .catch(error => {
+      console.error(error)
+      return res.status(500).json({ message: "internal server error" })
+    })
+}
 
 const ForgotPassword = async (req, res) => {
   try {
@@ -380,7 +366,7 @@ const ForgotPassword = async (req, res) => {
     }
     )
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json("error");
   }
 };
 
@@ -465,7 +451,7 @@ const ForgotCompanyPassword = async (req, res) => {
     }
     )
   } catch (error) {
-    res.status(404).json(error.message);
+    res.status(404).json("error");
   }
 };
 

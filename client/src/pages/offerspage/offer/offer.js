@@ -9,18 +9,12 @@ import { useSelector } from 'react-redux'
 
 
 const Offer = ({ experience, date, _id, title, createdAt, company, logo, contract, local }) => {
-  const [resultdate, setResultdate] = useState(false);
-  const [companydata, setCompanydata] = useState([]);
-  const base64Image = `data:image/jpeg;base64,${companydata[0]?.logo}`;
-
+  const [companydata, setCompanydata] = useState({});
   const auth = useSelector(state => state.auth)
   const user = auth.user
-  useEffect(() => {
-    GetCompanyData(company)
-    console.log(base64Image)
-    console.log(companydata.logo)
+  const [isLoading, setIsLoading] = useState(true);
 
-  }, [])
+
   const Deleteoffer = (id) => {
     axios.delete(`http://localhost:3600/api/offers/${id}`)
       .then(res => {
@@ -31,49 +25,83 @@ const Offer = ({ experience, date, _id, title, createdAt, company, logo, contrac
       })
   }
   const GetCompanyData = (id) => {
-    axios
-      .get(`http://localhost:3600/api/companydata/${id}`)
-      .then(res => {
-        setCompanydata(res.data)
-      })
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`http://localhost:3600/api/companydata/${id}`)
+        .then(res => {
+          setCompanydata(res?.data)
+          resolve(res?.data);
+        })
+        .catch(err => {
+          setIsLoading(false)
+          console.log("error")
+          reject(err);
+        })
+    });
   }
 
+  GetCompanyData(company).then(() => {
+  }).catch(() => {
+    setIsLoading(false)
+  }).finally(() => {
+    setIsLoading(false)
+
+  })
+
+  const base64Image = `data:image/jpeg;base64,${companydata?.logo}`;
 
 
   return (
     <>
-      <Container>
-        <Topside>
-          <Imgdiv><Img src={base64Image} />
-          </Imgdiv>
-          <Info>
-            <H2>{title}</H2>
-            {companydata.map(item => (<div key={item.id}>
-              <H3>{item.name}</H3>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <FcCalendar /><p>{new Date(date).toISOString().substring(0, 10)}</p>
-              </div>
-            </div>))}</Info>
-        </Topside>
-        <Middleside>
-          <Item><FcBusiness style={{ color: "grey" }} /><h4 style={{ color: "grey" }}>{experience}</h4></Item>
-          <Item><FcDocument style={{ color: "grey" }} /><h4 style={{ color: "grey" }}>{contract}</h4></Item>
-          <Item><GrLocation style={{ color: "grey" }} /><h4 style={{ color: "grey" }}>{local}</h4></Item>
-        </Middleside>
-        <Footer>
-          <Link to={`/offers/${_id}`}>
-            <Button>
-              View more
-            </Button>
-          </Link>
-          {user.id === company ?
-            <ButtonDelete onClick={() => { Deleteoffer(_id) }}>
-              <AiOutlineClose color={"white"} size={20} />
-            </ButtonDelete> : null
-          }
-        </Footer>
-      </Container>
-    </>)
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <Container>
+          <Topside>
+            <Imgdiv>
+              {companydata.logo && <Img src={base64Image} />}
+            </Imgdiv>
+            <Info>
+              <H2>{title}</H2>
+              {companydata && (
+                <div>
+                  <H3>{companydata.name}</H3>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <FcCalendar />
+                    <p>{new Date(date).toISOString().substring(0, 10)}</p>
+                  </div>
+                </div>
+              )}
+            </Info>
+          </Topside>
+          <Middleside>
+            <Item>
+              <FcBusiness style={{ color: "grey" }} />
+              <h4 style={{ color: "grey" }}>{experience}</h4>
+            </Item>
+            <Item>
+              <FcDocument style={{ color: "grey" }} />
+              <h4 style={{ color: "grey" }}>{contract}</h4>
+            </Item>
+            <Item>
+              <GrLocation style={{ color: "grey" }} />
+              <h4 style={{ color: "grey" }}>{local}</h4>
+            </Item>
+          </Middleside>
+          <Footer>
+            <Link to={`/offers/${_id}`}>
+              <Button>View more</Button>
+            </Link>
+            {user.id === company ? (
+              <ButtonDelete onClick={() => Deleteoffer(_id)}>
+                <AiOutlineClose color={"white"} size={20} />
+              </ButtonDelete>
+            ) : null}
+          </Footer>
+        </Container>
+      )}
+    </>
+  );
 }
 
 export default Offer
