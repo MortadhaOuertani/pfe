@@ -157,6 +157,27 @@ const RegisterMailCandidat = async (req, res) => {
     res.status(404).json("error");
   }
 };
+const checkType = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const candidat = await UserModel.findById(id);
+    if (candidat) {
+      return res.json({ type: 'candidat' });
+    }
+
+    const company = await companyModel.findById(id);
+    if (company) {
+      return res.json({ type: 'company' });
+    }
+
+    return res.status(404).json({ message: 'User not found' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
 const EditCompany = async (req, res) => {
   try {
     const id = req.user.id;
@@ -538,4 +559,5 @@ module.exports = {
   RegisterMailCompany,
   RegisterMailCandidat,
   GetCandidatinfo,
+  checkType
 };

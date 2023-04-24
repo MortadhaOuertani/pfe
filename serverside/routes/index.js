@@ -16,6 +16,7 @@ const {
   EditCandidat,
   EditCompany,
   GetCandidatinfo,
+  checkType,
 
 } = require("../controllers/users.controllers");
 
@@ -70,6 +71,9 @@ router.post("/acceptTechnical/:offerId/:candidateId", acceptCandidateTechnical)
 router.post("/ContactUs", ContactUs)
 router.post("/EmailRefuse/:id", EmailRefuse)
 router.post("/EmailRefuseTech/:id", EmailRefuseTech)
+
+router.get("/checkType/:id", checkType)
+
 router.post("/AcceptRHEmail/:id", AcceptRHEmail)
 router.post("/AcceptTechnEmail/:id", AcceptTechnEmail)
 router.get("/date", passport.authenticate("jwt", { session: false }), FindDate);

@@ -23,27 +23,33 @@ const Profile = () => {
 
   const base64Image = `data:image/jpeg;base64,${auth?.user?.profile}`;
   const base64ImageCompany = `data:image/jpeg;base64,${auth?.user?.logo}`;
-  const fetchDataCandidat = async (id) => {
+  const fetchData = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3600/api/candidat/info/${id}`);
-      setAuth({ user: response.data });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  const fetchDataCompany = async (id) => {
-    try {
-      const response = await axios.get(`http://localhost:3600/api/companydata/${id}`);
-      setAuth({ user: response.data });
+      // check if the id belongs to a candidate or a company
+      const response = await axios.get(`http://localhost:3600/api/checkType/${id}`);
+      const type = response.data.type.trim();
+      console.log(type)
+
+      // call the appropriate function based on the type
+      setTimeout(async() => {
+        if (type == 'candidat') {
+          console.log("candidat")
+          const response = await axios.get(`http://localhost:3600/api/candidat/info/${id}`);
+          setAuth({ user: response.data });
+        } else if (type == "company") {
+          console.log("company")
+          const response = await axios.get(`http://localhost:3600/api/companydata/${id}`);
+          setAuth({ user: response.data });
+        }
+      }, 1000);
+
+      console.log("aze")
     } catch (error) {
       console.error(error);
     }
   }
   useEffect(() => {
-    fetchDataCandidat(id)
-  }, []);
-  useEffect(() => {
-    fetchDataCompany(id);
+    fetchData(id);
   }, []);
 
   const onChangeHandler = (e) => {
