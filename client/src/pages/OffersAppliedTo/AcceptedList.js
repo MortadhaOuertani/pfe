@@ -9,7 +9,7 @@ import { FaCog } from 'react-icons/fa';
 import './reacticons.css'
 import AcceptedInfo from '../../components/CandidateInfo/acceptedinfo';
 
-const Accepted = () => {
+const   Accepted = () => {
     const { id } = useParams();
     const [offer, setOffer] = useState([])
     const [loading, setLoading] = useState(true);

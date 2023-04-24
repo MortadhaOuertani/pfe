@@ -17,8 +17,8 @@ const ProtectedAdmin = ({ auth }) => {
     }
     const Admin = () => {
 
-        if (auth.role == "ADMIN") { return <Outlet /> }
-        if (auth.role == "USER") { return <Navigate to="/" /> }
+        if (auth.role =="ADMIN") { return <Outlet /> }
+        if (auth.role !=="ADMIN") { return <Navigate to="/" /> }
         return <Navigate to="/login" />
     }
     return Admin();

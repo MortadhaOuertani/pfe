@@ -4,6 +4,7 @@ import { FcOk } from 'react-icons/fc';
 import { Link, useParams } from 'react-router-dom';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Container, Header, Left, FullName, H4, Right, Img, H3, Information, Lowerside, Footer, P, Button, ButtonRed, LinkS, BgImg, Bg, H, Icons } from './CandidateInfoElements';
+import { useSelector } from 'react-redux';
 const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, name, lastName, letter }) => {
   const [pdfFile, setPdfFile] = useState('');
   const [message, setmessage] = useState('')
@@ -60,11 +61,12 @@ const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
         setmessage(err.response.data.message)
       })
   }
+  const auth = useSelector(state => state.auth)
   return (
     <>
       <Container>
       
-          <Left><Img src={base64Image} /></Left>
+          <Left to={`/Profile/${cadidatId}`}><Img src={base64Image} /></Left>
           <Header>
             <Right>
               <Icons>
@@ -86,12 +88,3 @@ const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
 };
 
 export default CandidateInfo;
-/* <LinkS to={{
-  pathname: `/${id}/candidate`,
-  state: {
-    pdfFile: pdfFile,
-    letter: letter
-  }
-}}>
-        </LinkS>
-*/

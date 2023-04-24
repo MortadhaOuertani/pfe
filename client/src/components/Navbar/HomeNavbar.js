@@ -19,7 +19,6 @@ const HomeNavbar = ({ user }) => {
   const currentUrl = location.pathname;
   const base64Image = `data:image/jpeg;base64,${auth?.user.profile}`;
   const base64ImageCompany = `data:image/jpeg;base64,${auth?.user.logo}`;
-console.log(auth.user)
   const [showSidebar, setShowSideBar] = useState(false);
   const navigate = useNavigate()
   const SubmitForm = (e) => {
@@ -35,7 +34,7 @@ console.log(auth.user)
   const HandleChange = (e) => {
     setTypeUser(e.target.value)
   }
-  
+
 
 
   const ToggleSidebar = () => {
@@ -82,11 +81,17 @@ console.log(auth.user)
         {user.isConnected ? <> <NavLink onClick={LogoutFunction} to='/'>
           Logout
         </NavLink>
-          <NavLink to={`/Profile/${auth.user.id}`}>
-            <ImgBorder>
-          {auth.user.role=="USER" ? <Img src={base64Image}/> : <Img src={base64ImageCompany}/>}
-            </ImgBorder>
-          </NavLink></> :
+
+          {auth.user.role === "USER" || auth.user.role === "COMPANY" ? (
+            <NavLink to={`/Profile/${auth.user.id}`}>
+              <ImgBorder>
+                {auth.user.role === "USER" && <Img src={base64Image} />}
+                {auth.user.role === "COMPANY" && <Img src={base64ImageCompany} />}
+              </ImgBorder>
+            </NavLink>
+          ) : null}
+        </>
+          :
           <>
             <NavLink to='/login'>
               Login

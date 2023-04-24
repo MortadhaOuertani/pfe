@@ -58,7 +58,6 @@ function App() {
 
   return (
     <Router>
-      <Nnavbar user={user} />
       <Routes>
         <Route path='/' element={<Home user={user} />} />
         <Route path='/Profile/:id' element={<Profile />} />
@@ -68,15 +67,18 @@ function App() {
         <Route path='/reset-password/:id/:token' element={<ResetPasswordForm />} />
         <Route path='/registercompany/:token' element={<FinishRegister />} />
         <Route path='/registercandidat/:token' element={< FinishRegistering />} />
-        <Route element={<ProtectedRoute auth={user} />}>
+        <Route element={<ProtectedRoute Role="USER" auth={user} />}>
           <Route path='/offers/:id' element={<OfferDetails />} />
+        </Route>
+        <Route element={<ProtectedRoute Role="COMPANY" auth={user} />}>
+        <Route path='/offers/:id' element={<OfferDetails />} />
           <Route path='/postoffer' element={<Post />} />
           <Route path='/edit/:id' element={<EditOffer />} />
-          <Route path='/company' element={<CompanyHomePage />} />
           <Route path='/appliedOffer/:id' element={<Appling />} />
+          <Route path='/company' element={<CompanyHomePage />} />
           <Route path='/technicaltest/:id' element={<Technical />} />
           <Route path='/accepted/:id' element={<Accepted />} />
-          <Route path='/:id/candidate' element={<CV />} />
+          <Route path='/:id/candidate' element={<CV/>} />
         </Route>
         <Route element={<ProtectedAdmin auth={user} />}>
           <Route path='/admin' element={<Admin />} />

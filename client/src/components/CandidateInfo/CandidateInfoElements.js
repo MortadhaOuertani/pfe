@@ -15,7 +15,7 @@ background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 `
-export const Left = styled.div`
+export const Left =styled(Link)`
 width:auto;
 height:50%;
 display: flex;
