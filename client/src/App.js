@@ -58,6 +58,7 @@ function App() {
 
   return (
     <Router>
+      <Nnavbar user={user} />
       <Routes>
         <Route path='/' element={<Home user={user} />} />
         <Route path='/Profile/:id' element={<Profile />} />
