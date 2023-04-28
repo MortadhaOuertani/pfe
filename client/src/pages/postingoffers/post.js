@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Addoffer } from '../../redux/actions/offerActions'
-import { Container, Input, Form, ContainerOne, H1, Header, Button, Div, Label, LabelDiv } from './postElements'
+import { Container, Input, Form, ContainerOne, H1, Header, Button, Div, Label, LabelDiv, Alert, H1Succ } from './postElements'
 import { AiOutlineSearch } from "react-icons/ai";
 import ReactQuill from 'react-quill';        //react-quill is a library to create the editor
 import 'react-quill/dist/quill.snow.css';    
@@ -12,8 +12,11 @@ const Post = () => {
   const [inputValues, setInputValues] = useState({});
   const [counter, setCounter] = useState(0);
   const [words, setWords] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const [description, setDescription] = useState('');
   const errors = useSelector(state => state.errors)
+  const [show, setshow] = useState(false);
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -61,7 +64,17 @@ const Post = () => {
     console.log(form)
 
     dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
-  }
+    setError(false);
+    setSuccess(true);
+    setTimeout(() => setshow(true), 200)
+    setTimeout(() => setshow(false), 2000)
+    setTimeout(() => setSuccess(false), 3000)
+
+    setTimeout(() => navigate("/company"), 3500)
+    
+}
+  
+  
   const modules = {    //toolbar
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -82,6 +95,11 @@ const Post = () => {
 
   return (
     <>
+      {success && (
+                <Alert success={success} show={show}>
+                    <H1Succ>we will post the offer shortly</H1Succ>
+                </Alert>
+            )}
       <ContainerOne>
         <Container>
             <Form onSubmit={onSubmit} style={{ display: "flex", flexDirection: 'column' }}>

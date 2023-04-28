@@ -11,22 +11,22 @@ const Sidebar = () => {
     const handleLinkClick = link => {
         setActiveLink(link);
     };
-    
-    
+
+
     return (
         <SidebarContainer>
             <Div>
-            <SidebarHeader>Admin Dashboard</SidebarHeader>
-            < FcReadingEbook style={{width: '60px' , height: '60px' , alignSelf: 'center'}}/>
+                <SidebarHeader>Admin Dashboard</SidebarHeader>
+                < FcReadingEbook style={{ width: '100px', height: '100px', alignSelf: 'center' }} />
             </Div>
             <div><SidebarLink to='/admin/dashboard' active={activeLink === 'dashboard'} onClick={() => handleLinkClick('dashboard')}><AiOutlineHome style={{ marginRight: "10px" }} />
-                Dashboard
+                Statistics
             </SidebarLink></div>
             <div><SidebarLink to='/admin/users' active={activeLink === 'users'} onClick={() => handleLinkClick('users')}><MdAccountBox style={{ marginRight: "10px" }} />
                 Users
             </SidebarLink></div>
             <div><SidebarLink to='/admin/settings' active={activeLink === 'settings'} onClick={() => handleLinkClick('settings')}><MdSettings style={{ marginRight: "10px" }} />
-                Settings
+                Offers resquests
             </SidebarLink></div>
         </SidebarContainer>
     );
