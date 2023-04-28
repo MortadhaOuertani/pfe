@@ -8,18 +8,19 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios'
 
 const EditOffer = () => {
-    const [words, setWords] = useState([]);
+    const [words, setWords] = useState({});
     const [offer, setOffer] = useState({});
     const navigate = useNavigate()
     const [show, setshow] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
-    const [desc, setDesct] = useState("");
     const { id } = useParams();
+    console.log(words)
     const GetOffer = (id) => {
         axios.get(`http://localhost:3600/api/GetOfferApplicants/${id}`)
             .then(res => {
                 setOffer(res.data)
+                console.log(words)
             })
             .catch(err => {
                 console.log(err.response.data)
@@ -29,14 +30,7 @@ const EditOffer = () => {
         GetOffer(id)
     }, []);
     useEffect(() => {
-        setter()
     }, [offer]);
-    const setter = () => {
-        if (offer) {
-            setDesct(offer.description?.replace(/(<([^>]+)>)/gi, ""))
-            return;
-        }
-    }
     const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
         setOffer({
             ...offer, //setForm va prendre la formulaire(form)
@@ -54,13 +48,19 @@ const EditOffer = () => {
                 setTimeout(() => setshow(false), 2000)
                 setTimeout(() => setSuccess(false), 3000)
 
-                setTimeout(() =>navigate("/company"), 1000)  
+                setTimeout(() => navigate("/company"), 1000)
             })
             .catch(err => {
                 setSuccess(false);
                 setError(true);
                 setTimeout(() => setError(false), 3000)
             });
+    }
+    const onChangeHandlerDesc = (name, value) => { // update onChangeHandler to accept name and value
+        setOffer({
+            ...offer,
+            [name]: value, // update the specified field in the form state with the new value
+        })
     }
 
     const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
@@ -81,8 +81,7 @@ const EditOffer = () => {
         'header',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet',
-        'align'
-    ];
+        'align'];
 
 
     return (
@@ -103,7 +102,7 @@ const EditOffer = () => {
                                 name="contract"
                                 type="text"
                                 required
-                                defaultValue={offer.contract || ''}
+                                value={offer.contract || ''}
                             />
                             <LabelDiv>
                                 <Label>Contract</Label>
@@ -116,7 +115,7 @@ const EditOffer = () => {
                                 name="experience"
                                 type="text"
                                 required
-                                defaultValue={offer.experience || ''}
+                                value={offer.experience || ''}
                             />
                             <LabelDiv>
                                 <Label>Experience</Label>
@@ -129,7 +128,7 @@ const EditOffer = () => {
                                 name="salary"
                                 type="text"
                                 required
-                                defaultValue={offer.salary || ''}
+                                value={offer.salary || ''}
                             />
                             <LabelDiv>
                                 <Label>Salary</Label>
@@ -142,7 +141,7 @@ const EditOffer = () => {
                                 name="language"
                                 type="text"
                                 required
-                                defaultValue={offer.language || ''}
+                                value={offer.language || ''}
                             />
                             <LabelDiv>
                                 <Label>Languages</Label>
@@ -155,7 +154,7 @@ const EditOffer = () => {
                                 name="title"
                                 type="text"
                                 required
-                                defaultValue={offer.title || ''}
+                                value={offer.title || ''}
                             />
                             <LabelDiv>
                                 <Label> Job title</Label>
@@ -168,21 +167,14 @@ const EditOffer = () => {
                                 name="local"
                                 type="text"
                                 required
-                                defaultValue={offer.local || ''}
+                                value={offer.local || ''}
                             />
                             <LabelDiv>
                                 <Label>Localisation</Label>
                             </LabelDiv>
                         </Div>
                         <Div>
-                            <InputDesc
-                                type='textarea'
-                                style={{ paddingTop: '10px', marginLeft: '30px', paddingBottom: '40px', width: '63%' }}
-                                onChange={onChangeHandler}
-                                name="description"
-                                placeholder="Enter your text here"
-                                defaultValue={desc || ''}
-                            />
+                            <ReactQuill value={offer?.description || ''} style={{ paddingTop: '10px', marginLeft: '30px', paddingBottom: '40px', width: '63%' }} theme="snow" onChange={(value) => onChangeHandlerDesc("description", value)} name="description" modules={modules} formats={formats} placeholder="Enter your text here" />
                             <LabelDiv>
                                 <Label>Job description</Label>
                             </LabelDiv>

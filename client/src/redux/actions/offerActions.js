@@ -22,7 +22,7 @@ export const AddCompanyOffer = (form) => dispatch => {
 
 
 
-export const Addoffer = (form) => dispatch => {
+export const Addoffer = (form,navigate) => dispatch => {
   axios
     .post("http://localhost:3600/api/posttoadmin", form)
     .then(res => {
@@ -30,8 +30,7 @@ export const Addoffer = (form) => dispatch => {
         type: ERRORS,
         payload: {}
       })
-      setTimeout(() => {
-      }, 4000);
+     
     })
     .catch(err => {
       dispatch({

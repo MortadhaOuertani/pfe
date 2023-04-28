@@ -6,6 +6,14 @@ export const Container = styled.div`
  width: 100%;
  height: 100vh;
 `;
+export const RightSide = styled.div`
+
+display: flex;
+height: 100vh;
+width: 80%;
+justify-content: center;
+align-items: center;
+`
 
 export const OffersCount = styled.div`
 
@@ -56,6 +64,8 @@ export const Numbers = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+  width: 80%;
+  height: 100vh;
   
 `;
 

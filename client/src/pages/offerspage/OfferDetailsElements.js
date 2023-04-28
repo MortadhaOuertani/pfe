@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const NavbarDiv = styled.div`
 width: 100%;
+height: 70px;
 top: 0;
 left: 0;
 background-color: black;

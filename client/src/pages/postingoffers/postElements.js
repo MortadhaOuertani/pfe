@@ -1,5 +1,31 @@
 import styled from 'styled-components';
 
+
+
+export const Alert = styled.div`
+  position: fixed;
+  width: 100%;
+  height:60px;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color:green;
+  color: white;
+  padding: 1rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transform: translateY(${props => (props.show ? "0" : "-100%")});
+  z-index: 2000022222;
+  transition: transform 0.3s ease-in-out;
+`;
+export const H1Succ = styled.h1`
+color: white;
+font-weight:bolder;
+
+`
+
 export const ContainerOne = styled.div`
 padding-top: 150px;
 padding-bottom: 70px;

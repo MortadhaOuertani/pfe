@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
-import { Container, Notif } from './AdminDashboardElements'
+import { Container, Notif, RightSide } from './AdminDashboardElements'
 import Sidebar3 from './Sidebar/Sidebar3'
 import { FcPlus, FcFullTrash } from 'react-icons/fc';
 import axios from 'axios'
@@ -48,7 +48,7 @@ const AdminSettings = () => {
             <Container>
                 
                 <Sidebar3 />
-
+<RightSide>
                 <table className="content-table">
                     <thead>
                         <tr>
@@ -83,6 +83,7 @@ const AdminSettings = () => {
                         ))}
                     </tbody>
                 </table>
+                </ RightSide>
             </Container>
         </>
     )
