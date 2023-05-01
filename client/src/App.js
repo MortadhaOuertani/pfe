@@ -64,16 +64,17 @@ function App() {
         <Route path='/Profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/offers' element={<OffersPage />} />
-        <Route path='/offers/:id' element={<OfferDetails/>} />
+        <Route path='/offers/:id' element={<OfferDetails />} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
         <Route path='/reset-password/:id/:token' element={<ResetPasswordForm />} />
         <Route path='/registercompany/:token' element={<FinishRegister />} />
         <Route path='/registercandidat/:token' element={< FinishRegistering />} />
+        <Route path='/edit/:id' element={<EditOffer />} />
         <Route element={<ProtectedRoute Role="USER" auth={user} />}>
+
         </Route>
         <Route element={<ProtectedRoute Role="COMPANY" auth={user} />}>
           <Route path='/postoffer' element={<Post />} />
-          <Route path='/edit/:id' element={<EditOffer />} />
           <Route path='/appliedOffer/:id' element={<Appling />} />
           <Route path='/company' element={<CompanyHomePage />} />
           <Route path='/technicaltest/:id' element={<Technical />} />

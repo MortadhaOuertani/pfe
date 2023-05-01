@@ -47,7 +47,6 @@ const EditOffer = () => {
                 setTimeout(() => setshow(true), 200)
                 setTimeout(() => setshow(false), 2000)
                 setTimeout(() => setSuccess(false), 3000)
-
                 setTimeout(() => navigate("/company"), 1000)
             })
             .catch(err => {
@@ -66,7 +65,6 @@ const EditOffer = () => {
     const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
         e.preventDefault();//ne refraichir pas la page pour ne perdre pas les données 
         handleEditOffer(id, offer)
-        //  dispatch(Addoffer(form, navigate)) //appeler la fonction loginAction qui se trouve dans le store 
     }
     const modules = {    //toolbar
         toolbar: [
