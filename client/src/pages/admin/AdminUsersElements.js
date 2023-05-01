@@ -8,6 +8,9 @@ justify-content: center;
 align-items: center;
 width:80%;
 height: 100vh;
-margin-top: 80px;
 
+`
+export const Caption =styled.caption`
+ font-size: 21px;
+ margin-bottom: 20px;
 `

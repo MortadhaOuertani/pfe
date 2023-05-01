@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
 import { Container, Notif } from './AdminDashboardElements'
 import Sidebar2 from './Sidebar/Sidebar2'
-import { Div } from './AdminUsersElements';
+import { Caption, Div } from './AdminUsersElements';
 import './AdminSettings.css'
 import axios from 'axios';
 
@@ -45,7 +45,7 @@ const AdminUsers = () => {
         <Div>
           {Candidates && (
             <table className="content-table">
-              <caption>Candidates table :</caption>
+              <Caption>Candidates table :</Caption>
               <thead>
                 <tr>
                   <th>#</th>
@@ -70,7 +70,7 @@ const AdminUsers = () => {
           )}
           {Companies && (
             <table className="content-table">
-              <caption>Companies table :</caption>
+              <Caption>Companies table :</Caption>
               <thead>
                 <tr>
                   <th>#</th>
