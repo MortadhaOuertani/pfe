@@ -17,9 +17,8 @@ const HomeNavbar = ({ user }) => {
   const location = useLocation();
   const auth = useSelector(state => state.auth)
   const currentUrl = location.pathname;
-  const base64Image = `data:image/jpeg;base64,${auth?.user.profile}`;
-  const base64ImageCompany = `data:image/jpeg;base64,${auth?.user.logo}`;
   const [showSidebar, setShowSideBar] = useState(false);
+  const [img, setImg] = useState(false);
   const navigate = useNavigate()
   const SubmitForm = (e) => {
     e.preventDefault();
@@ -37,6 +36,21 @@ const HomeNavbar = ({ user }) => {
 
 
 
+  useEffect(() => {
+    if (auth?.user?.logo) {
+      fetchImg(auth);
+    } else if (auth?.user?.profile) {
+      fetchImgCandidat(auth);
+    }
+  }, [auth]);
+  async function fetchImgCandidat(auth) {
+    const { default: file } = await import(`../../ProfilePictures/${auth?.user?.profile}`);
+    setImg(file);
+  }
+  async function fetchImg(auth) {
+    const { default: file } = await import(`../../ProfilePictures/${auth?.user?.logo}`);
+    setImg(file)
+  }
   const ToggleSidebar = () => {
     setShowSideBar(!showSidebar);
   };
@@ -71,10 +85,7 @@ const HomeNavbar = ({ user }) => {
           <NavLink to="/" onClick={() => currentUrl == "/" ? animateScroll.scrollTo(8000) : animateScroll.scrollTo(9000)}>
             Contact Us
           </NavLink>
-          {/*
-            <Icon><BsPersonFill color="white" style={{ marginRight: "-10px" }} /><NavLink to='/formCandidate'>Candidate platform</NavLink></Icon>
-            <Icon><CgWorkAlt color="white" style={{ marginRight: "-10px" }} /><NavLink to='/formCompany'>Company platform</NavLink></Icon>
-          */}</Div2>
+          </Div2>
       }
       <NavMenu>
 
@@ -85,8 +96,8 @@ const HomeNavbar = ({ user }) => {
           {auth.user.role === "USER" || auth.user.role === "COMPANY" ? (
             <NavLink to={`/Profile/${auth.user.id}`}>
               <ImgBorder>
-                {auth.user.role === "USER" && <Img src={base64Image} />}
-                {auth.user.role === "COMPANY" && <Img src={base64ImageCompany} />}
+                {auth.user.role === "USER" && <Img src={img} />}
+                {auth.user.role === "COMPANY" && <Img src={img} />}
               </ImgBorder>
             </NavLink>
           ) : null}

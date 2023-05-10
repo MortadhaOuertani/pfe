@@ -101,14 +101,28 @@ export const ResultError = styled.div`
   background-color: #f2dede;
   color: #a94b5b;
   border-radius: 5px;
-
+margin-top: 20px;
 `;
 
 export const ResultSuccess = styled.div`
   display: flex;
+  background-color: #DFF0D8;
+  color:#417A47 ;
   align-items: center;
   width: 100%;
-  border-color: #ebccd1;
-  border-radius: 20px;
+  height:200%;
+  border:1px solid #D6E9C6;
+  border-radius: 5px;
+  font-weight: bold;
+`;
+export const Alert = styled.div`
+  display: flex;
+  background-color:rgb(255,243,205);
+  color:#896804 ;
+  align-items: center;
+  width: 100%;
+  height:200%;
+  border:1px solid rgb(255,238,186);
+  border-radius: 5px;
   font-weight: bold;
 `;

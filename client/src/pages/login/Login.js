@@ -82,7 +82,7 @@ const Login = () => {
 
                 /> <IconBtn onClick={handleTogglePassword}>{showPassword ? <AiFillEye size={30} /> : <AiFillEyeInvisible size={30} />}</IconBtn></InputDiv>           <br />
              {error &&
-                <P>{error}  </P>
+                <P>Email or Password are incorrect!  </P>
               }
               <Link to='/forgotpassword'>Forgot password ?</Link>
               

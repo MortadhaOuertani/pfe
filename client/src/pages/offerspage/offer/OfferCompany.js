@@ -5,12 +5,12 @@ import { GrLocation } from 'react-icons/gr'
 import { FcCalendar, FcBusiness, FcDocument } from "react-icons/fc";
 import { AiOutlineClose, AiOutlineEdit } from 'react-icons/ai'
 
-
 const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contract, local }) => {
   const [resultdate, setResultdate] = useState(false);
   const [companydata, setCompanydata] = useState({});
   const base64Image = `data:image/jpeg;base64,${companydata?.logo}`;
   const [isLoading, setIsLoading] = useState(true);
+  const [img, setImg] = useState(null);
 
   useEffect(() => {
     GetOfferDate()
@@ -37,10 +37,19 @@ const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contra
         console.log(err.message)
       });
   }
+
+  useEffect(() => {
+    fetchImg(companydata);
+  }, [companydata]);
+  async function fetchImg(companydata) {
+    const { default: file } = await import(`../../../ProfilePictures/${companydata?.logo}`);
+    setImg(file)
+  }
   const Deleteoffer = (id) => {
     axios.delete(`http://localhost:3600/api/offers/${id}`)
       .then(res => {
         console.log("deleted successfuly")
+        window.location.reload();
       })
       .catch(err => {
         console.log("error")
@@ -54,7 +63,7 @@ const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contra
         <Container>
           <Topside>
             <Imgdiv>
-              {companydata.logo && <Img src={base64Image} />}
+              {companydata.logo && <Img src={img} />}
             </Imgdiv>
             <Info>
               <H2>{title}</H2>
@@ -83,7 +92,7 @@ const OfferCompany = ({ experience, _id, title, createdAt, company, logo, contra
           <Footer>
             <LinkS to={`/appliedOffer/${_id}`}>
               <Button variant="primary">
-                Voir plus
+                Candidates
               </Button>
             </LinkS>
             <Buttondiv>

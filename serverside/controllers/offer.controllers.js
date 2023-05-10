@@ -207,17 +207,18 @@ const ApplyForOffers = async (req, res) => {
         await uploadFile(req, res);
 
         // Check if there is a file uploaded
+        console.log(req.file)
         offersModels.findOne({ _id: req.params.id }, async (err, data) => {
             if (err) {
-                return res.status(404).json({ error: err.message });
+                return res.status(404).json(err.message);
             } else {
                 const count = await CountWordsInPDF(req, res, data.search);
-                if (count >= Math.floor(data.search.length/2)) {
+                if (count >= Math.floor(data.search.length / 2)) {
                     const candidate = await usersModels.findOne({ _id: req.user.id });
                     if (data.candidates.some((c) => c._id.equals(candidate._id))) {
                         return res
                             .status(409)
-                            .json( "You have already applied for this offer" );
+                            .json("You have already applied for this offer");
                     } else {
                         // Add the CV file to the candidate
                         const Filename = req.file.filename;
@@ -236,7 +237,7 @@ const ApplyForOffers = async (req, res) => {
                         // Save the data to the database
                         data.save((err) => {
                             if (err) {
-                                return res.status(500).json({ error: err.message });
+                                return res.status(500).json(err.message);
                             }
 
                             return res
@@ -247,19 +248,19 @@ const ApplyForOffers = async (req, res) => {
                 } else {
                     res
                         .status(409)
-                        .json({
-                            message:
-                                "You failed to match the offer's standards. Good luck next time!",
-                        });
+                        .json(
+
+                            "You failed to match the offer's standards. Good luck next time!",
+                        );
                 }
             }
         });
     } catch (err) {
         console.log(req.file);
 
-        res.status(500).send({
-            message: `Could not upload the file: ${req.file.originalname}. ${err}`,
-        });
+        res.status(500).send(
+           `Could not upload the file: ${req.file.originalname}. ${err}`,
+        );
     }
 };
 
@@ -267,15 +268,15 @@ const EditOffer = (req, res) => {
 
     try {
         offersModels.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (err, offer) => {
-          if (err) res.status(404).json(err.message);
-          res.status(200).json("Edited successfully");
+            if (err) res.status(404).json(err.message);
+            res.status(200).json("Edited successfully");
         });
-      } catch (err) {
+    } catch (err) {
         res.status(404).json(err);
-      }
+    }
 }
 
-const GetCandidates = (req, res) => {
+const GetOffer = (req, res) => {
 
     try {
         offersModels.findOne({ _id: req.params.id }, (err, offer) => {
@@ -412,7 +413,7 @@ const EmailRefuse = (req, res) => {
                 res.status(404).json({ message: "Candidate not found" })
             }
             else {
-                
+
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
@@ -425,7 +426,8 @@ const EmailRefuse = (req, res) => {
                     from: "projetpfe885@gmail.com",
                     to: data.email,
                     subject: 'Notification of HR Test Results',
-                    text: `Dear ${data.name},\n\nWe regret to inform you that your performance in the HR test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`                };
+                    text: `Dear ${data.name},\n\nWe regret to inform you that your performance in the HR test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`
+                };
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                         console.log(error);
@@ -441,12 +443,12 @@ const EmailRefuse = (req, res) => {
     }
 };
 
-const EmailRefuseTech = async (req,res) =>{
-    try{
-         usersModels.findOne({_id: req.params.id} , (err,data)=>{
-            if(err){
-                res.status(404).json({message: "Candidate not found"})
-            }else{
+const EmailRefuseTech = async (req, res) => {
+    try {
+        usersModels.findOne({ _id: req.params.id }, (err, data) => {
+            if (err) {
+                res.status(404).json({ message: "Candidate not found" })
+            } else {
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
@@ -459,7 +461,8 @@ const EmailRefuseTech = async (req,res) =>{
                     from: "projetpfe885@gmail.com",
                     to: data.email,
                     subject: 'Notification of Technical Test Results',
-                    text: `Dear ${data.name},\n\n I regret to inform you that your performance in the Technical Test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`};
+                    text: `Dear ${data.name},\n\n I regret to inform you that your performance in the Technical Test was not sufficient to proceed to the next stage of our recruitment process. We received a high volume of applications and had to make some tough decisions. Please note that this decision does not reflect on your qualifications or potential, and we encourage you to apply for other positions in the future.\n\nThank you for your interest in the role and for taking the time to participate in our recruitment process. We wish you the best of luck in your future endeavors.\n\nBest regards,`
+                };
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                         console.log(error);
@@ -469,8 +472,8 @@ const EmailRefuseTech = async (req,res) =>{
                     res.status(200).json({ message: 'Email sent successfully' });
                 })
             }
-         })
-    }catch{
+        })
+    } catch {
 
     }
 }
@@ -553,7 +556,7 @@ module.exports = {
     CountWordsInPDF,
     refuseCandidateTechnical,
     acceptCandidateTechnical,
-    GetCandidates,
+    GetOffer,
     AddToAdmin,
     GetAdmin,
     GetCompanyoffers,
