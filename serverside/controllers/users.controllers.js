@@ -409,7 +409,7 @@ const ResetPassword = (req, res) => {  //Reset candidate's password
       }
 
       // Update user's password
-      const salt = bcrypt.genSaltSync(10)
+      const salt = bcrypt.genSaltSync(10) 
       const hash = bcrypt.hashSync(password, salt)//hashed password
       user.password = hash;
       user.save();
@@ -477,7 +477,7 @@ const ForgotCompanyPassword = async (req, res) => {
 };
 
 
-const ResetCompanyPassword = (req, res) => {  //Reset candidate's password 
+const ResetCompanyPassword = (req, res) => {  //Reset company's password 
   try {
     // Verify JWT token
     const { token, password } = req.body;
