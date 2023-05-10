@@ -5,18 +5,18 @@ const path = require('path');
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => { 
-    cb(null,path.join(__dirname, '../../client/src/components/cvs  '));
+    cb(null,path.join(__dirname, '../../client/src/ProfilePictures'));
   },
   filename: (req, file, cb) => {
-    console.log(file.originalname);
+    console.log(file); // add this line
     cb(null, file.originalname);
   },
 });
 
-let uploadFile = multer({
+let uploadImage = multer({
   storage: storage,
   limits: { fileSize: maxSize },
-}).single("cv");
+}).single("logo");
 
-let uploadFileMiddleware = util.promisify(uploadFile);
+let uploadFileMiddleware = util.promisify(uploadImage);
 module.exports = uploadFileMiddleware;

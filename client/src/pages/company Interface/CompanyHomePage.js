@@ -11,7 +11,7 @@ import axios from 'axios'
 const CompanyHomePage = () => {
   const dispatch = useDispatch()
   const offers = useSelector(state => state.offers)
-  const [searchJobTerm, setSearchJobTerm] = useState("");
+  const [refreshing, setrefreshing] = useState("");
   const [searchPlaceTerm, setSearchPlaceTerm] = useState("");
   const [filteredOffers, setFilteredOffers] = useState([]);
   const [count, setCount] = useState(0);
@@ -19,6 +19,8 @@ const CompanyHomePage = () => {
   const [CompanyData, setCompanydata] = useState();
   const dropdownRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState("");
+
+
 
   const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
@@ -45,7 +47,7 @@ const CompanyHomePage = () => {
 
   useEffect(() => {
     setFilteredOffers(offers.OFFERSS || []);
-  }, [offers]);
+  }, [offers,filteredOffers]);
 
   useEffect(() => {
     setCount(filteredOffers.length);
@@ -70,7 +72,7 @@ const CompanyHomePage = () => {
       GetCompanyData(offers.OFFERSS[0].company);
     }
     console.log(CompanyData)
-  }, [offers.OFFERSS,filteredOffers]);
+  }, [offers.OFFERSS,filteredOffers,CompanyData]);
 
   const GetCompanyData = (id) => {
     axios.get(`http://localhost:3600/api/companydata/${id}`).then((res) => {
@@ -85,7 +87,8 @@ const CompanyHomePage = () => {
       <ContainerOne>
         <Container>
           <UpperSide>
-            <H1>Company Interface
+            <H1>
+              Company Interface
             </H1>
             <LinkS to="/postoffer">
             <BtnAddOffer>Postoffer</BtnAddOffer>
@@ -101,7 +104,6 @@ const CompanyHomePage = () => {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '20px 20px',
                 backgroundPosition: "0px center",
-
               }}
             />
             <H1Name>{CompanyData && CompanyData[0]?.name}</H1Name>
@@ -121,15 +123,3 @@ const CompanyHomePage = () => {
 
 export default CompanyHomePage
 
-/*  <Container>
-        <Header>
-        <input onChange={handleSearch} placeholder='Search'></input>
-        </Header>
-        <Body>
-          <Offers>
-          {filteredOffers.map((offer) => (
-            <OfferCompany style={{textDecoration:"none",color:"inherit"}} key={offer._id}local={offer.local}title={offer.title} logo={offer.logo} contract={offer.contract} _id={offer._id} company={offer.company} experience={offer.experience} />
-          ))}
-          </Offers>
-        </Body>
-      </Container>*/

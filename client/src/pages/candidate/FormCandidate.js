@@ -3,52 +3,110 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { FinishRegisterCandidat, LoginAction, RegistrationCandidate } from '../../redux/actions/authActions'
 import { NavbarDiv } from '../offerspage/OfferDetailsElements'
-import { BtnSubmit, Container, Div, Form, H1,P, Header, Input, InputContainer, InputD } from './FormCandidateElements'
+import { BtnSubmit, Container, Div, Form, H1, P, Header, Input, InputContainer, InputD } from './FormCandidateElements'
 import { Seterror } from '../../redux/actions/offerActions'
 
 const FormCandidate = () => {
-    const [form, setForm] = useState({})
-    const [confirm, setConfirm] = useState("")
+    const [name, setname] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [confirmErr, setConfirmErr] = useState('');
+    const [phone, setPhone] = useState('');
+    const [niveauEtude, setNiveauEtude] = useState('');
+    const [address, setAddress] = useState('');
+    const [anneeObtentienDiplome, setAnneeObtentienDiplome] = useState('');
+    const [diplome, setDiplome] = useState('');
+    const [age, setAge] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirm, setConfirm] = useState('');
+    const [profile, setprofile] = useState(null);
     const [errors, setErrors] = useState();
 
     const error = useSelector(state => (state.errorscandidat))
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
-        setErrors("")
-        setForm({
-            ...form, //setForm va prendre la formulaire(form)
-            [e.target.name]: e.target.value //elle va prendre la valeur d'un input à partir le nom de l'input
-        })
-    }
-    const onSubmit = (e) => {
-        e.preventDefault();
-        if (form.password !== form.confirm) {
-            setConfirm("Passwords does not match");
-            return;
+    const onChangeHandler = (e) => {
+        const { name, value, files } = e.target;
+        switch (name) {
+            case 'name':
+                setname(value);
+                break;
+            case 'lastName':
+                setLastName(value);
+                break;
+            case 'email':
+                setEmail(value);
+                break;
+            case 'phone':
+                setPhone(value);
+                break;
+            case 'niveauEtude':
+                setNiveauEtude(value);
+                break;
+            case 'address':
+                setAddress(value);
+                break;
+            case 'anneeObtentienDiplome':
+                setAnneeObtentienDiplome(value);
+                break;
+            case 'diplome':
+                setDiplome(value);
+                break;
+            case 'age':
+                setAge(value);
+                break;
+            case 'password':
+                setPassword(value);
+                break;
+            case 'confirm':
+                setConfirm(value);
+                break;
+            case 'profile':
+                setprofile(files[0]);
+                console.log(profile)
+                break;
+            default:
+                break;
         }
-        setConfirm("")
-        setErrors(error)
-
-        // Read the selected file and convert it to base64
-        const reader = new FileReader();
-        const file = e.target.profile.files[0];
-
-        reader.readAsDataURL(file);
-        reader.onload = async () => {
-            const base64Image = reader.result.split(",")[1];
-
-            // Add the base64-encoded image to the form data
-            const formData = { ...form, profile: base64Image };
-            console.log(formData.profile)
-            // Dispatch the registration action with the updated form data
-            dispatch(FinishRegisterCandidat(formData, navigate));
-        };
     };
     useEffect(() => {
+        console.log(profile)
+    },)
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log("1")
+        if (password !== confirm) {
+            setConfirmErr('Passwords do not match');
+            return;
+        }
+        console.log("2")
+
+        setConfirm("")
+        setErrors(error)
+        const formData = new FormData();
+        console.log("3")
+        formData.append('profile', profile);
+        formData.append('name', name);
+        formData.append('lastName', lastName);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('niveauEtude', niveauEtude);
+        formData.append('address', address);
+        formData.append('anneeObtentienDiplome', anneeObtentienDiplome);
+        formData.append('diplome', diplome);
+        formData.append('age', age);
+        formData.append('password', password);
+        console.log("4")
+        dispatch(FinishRegisterCandidat(formData, navigate));
+        console.log(formData)
+        // Dispatch the registration action with the updated form data
+
+    };
+
+    useEffect(() => {
         setErrors("")
-      },[])
-      useEffect(() => {
+    }, [])
+    useEffect(() => {
         setErrors(error)
     }, [error])
     return (
@@ -78,10 +136,10 @@ const FormCandidate = () => {
                         <InputD onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
                         <InputD onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
                     </InputContainer>
-                    {confirm && <P>{confirm}</P>}
+                    {confirm && <P>{confirmErr}</P>}
                     <div>
                         <label for="profile">Profile Picture : </label>
-                        <Input onChange={onChangeHandler} type='file' accept="image/png, image/jpeg" name='profile' placeholder='Profile Picture' required />
+                        <Input onChange={onChangeHandler} type='file' accept="image/png, image/jpeg, image/svg" name='profile' placeholder='Profile Picture' required />
                     </div>
                 </Div>
                 <BtnSubmit type="submit" >Register</BtnSubmit>

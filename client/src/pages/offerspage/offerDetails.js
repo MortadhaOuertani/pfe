@@ -26,7 +26,6 @@ const OfferDetails = ({ experience, _id, title, createdAt, company, logo, contra
 
   useEffect(() => {
     dispatch(GetOneOffer(id));
-    console.log(offer.OFFERS.company)
     Seterror();
     Setsuccess();
   }, [dispatch, id]);

@@ -73,7 +73,7 @@ export const Img = styled.img`
 width:auto;
 margin-top:5px;
 margin-left:10px;
-height: 120px;
+height:100px;
 object-fit:cover;
 object-position:center;
 `

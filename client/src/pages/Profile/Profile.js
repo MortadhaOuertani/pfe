@@ -13,118 +13,190 @@ import { useParams } from 'react-router-dom'
 const Profile = () => {
   const { id } = useParams();
   const [editing, setEditing] = useState(false);
-  const [editingskills, setEditingskills] = useState(false);
-  const users = useSelector(state => state.auth)
-  const [form, setForm] = useState({})
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState('');
+  const [bio, setBio] = useState('');
+  const [address, setaddress] = useState('');
+  const [company, setCompany] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [education, setEducation] = useState('');
+  const [lastname, setlastname] = useState("");
+  const [logo, setLogo] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [img, setImg] = useState(null)
   const [auth, setAuth] = useState({
     user: null,
   });
-  console.log(auth)
+  useEffect(() => {
+    fetchData(id);
+  }, []);
 
-  const base64Image = `data:image/jpeg;base64,${auth?.user?.profile}`;
-  const base64ImageCompany = `data:image/jpeg;base64,${auth?.user?.logo}`;
+
+
+  useEffect(() => {
+    if (auth?.user?.logo) {
+      fetchImg(auth);
+    } else if (auth?.user?.profile) {
+      fetchImgCandidat(auth);
+    }
+  }, [auth]);
+  async function fetchImgCandidat(auth) {
+    const { default: file } = await import(`../../ProfilePictures/${auth?.user?.profile}`);
+    setImg(file);
+  }
+  async function fetchImg(auth) {
+    const { default: file } = await import(`../../ProfilePictures/${auth?.user?.logo}`);
+    setImg(file)
+  }
+
   const fetchData = async (id) => {
     try {
       // check if the id belongs to a candidate or a company
       const response = await axios.get(`http://localhost:3600/api/checkType/${id}`);
       const type = response.data.type.trim();
-      console.log(type)
-
       // call the appropriate function based on the type
-      setTimeout(async() => {
+      setTimeout(async () => {
         if (type == 'candidat') {
-          console.log("candidat")
           const response = await axios.get(`http://localhost:3600/api/candidat/info/${id}`);
           setAuth({ user: response.data });
         } else if (type == "company") {
-          console.log("company")
           const response = await axios.get(`http://localhost:3600/api/companydata/${id}`);
           setAuth({ user: response.data });
         }
       }, 1000);
 
-      console.log("aze")
     } catch (error) {
       console.error(error);
     }
   }
-  useEffect(() => {
-    fetchData(id);
-  }, []);
+
 
   const onChangeHandler = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
-    console.log(form)
-  }
+    const { name, value, files } = e.target;
+    console.log(name, ":", value)
+    setName(auth.user.name)
+    setEmail(email || auth.user.email);
+    setPhone(phone || auth.user.phone);
+    setaddress(address || auth.user.address);
+    setBio(bio || auth.user.bio);
+    setCompany(company || auth.user.company);
+    setStartDate(startDate || auth.user.startDate);
+    setEndDate(endDate || auth.user.endDate);
+    setEducation(education || auth.user.education);
+    setlastname(lastname || auth.user.lastname);
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'phone':
+        setPhone(value);
+        break;
+      case 'address':
+        setLocation(value);
+        break;
+      case 'bio':
+        setBio(value);
+        break;
+      case 'lastname':
+        setlastname(value);
+        break;
+      case 'address':
+        setaddress(value);
+        break;
+      case 'company':
+        setCompany(value);
+        break;
+      case 'startDate':
+        setStartDate(value);
+        break;
+      case 'endDate':
+        setEndDate(value);
+        break;
+      case 'education':
+        setEducation(value);
+        break;
+      case 'logo':
+        setLogo(files[0]);
+        console.log(logo)
+        break;
+      case 'profile':
+        setProfile(files[0]);
+        console.log(profile)
 
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    console.log(logo);
+    // perform some action with the updated state
+  }, [logo]);
   const onSubmit = (e) => {
     e.preventDefault();
-    if (form.profile) {
-      const reader = new FileReader();
-      let file;
-      let formData;
+    const formData = new FormData();
+    if (profile || logo) {
+      console.log("1")
+
       if (auth?.user?.role === "USER") {
-        file = e.target.profile.files[0];
+        formData.append('profile', profile);
+        formData.append('name', name);
+        formData.append('lastname', lastname);
+        console.log(formData ,  lastname)
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('address', address);
+        formData.append('location', location);
+        formData.append('bio', bio);
+        formData.append('company', company);
+        formData.append('startDate', startDate);
+        formData.append('endDate', endDate);
+        formData.append('education', education);
       } else {
-        file = e.target.logo.files[0];
-      }
-      reader.readAsDataURL(file);
-      reader.onload = async () => {
-        const base64Image = reader.result.split(",")[1];
-        if (auth?.user?.role === "USER") {
-          formData = { ...form, profile: base64Image };
-        } else {
-          formData = { ...form, logo: base64ImageCompany };
-        }
+        formData.append('logo', logo);
+        formData.append('name', name);
+      formData.append('lastname', lastname);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('address', address);
+        formData.append('location', location);
+        formData.append('bio', bio);
+        formData.append('company', company);
+        formData.append('startDate', startDate);
+        formData.append('endDate', endDate);
+        formData.append('education', education);
         console.log(formData)
-        handleEditCheck(formData)
-        return;
+        console.log("2")
+
       }
     } else {
-      console.log(form)
-      handleEditCheck(form)
+      console.log("3")
+      formData.append('name', name);
+      formData.append('lastname', lastname);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('address', address);
+      formData.append('location', location);
+      formData.append('bio', bio);
+      formData.append('company', company);
+      formData.append('startDate', startDate);
+      formData.append('endDate', endDate);
+      formData.append('education', education);
+      handleEditCheck(formData)
     }
-    window.location.reload();
-
+    handleEditCheck(formData)
+    //window.location.reload();
   }
   const handleEditClick = () => {
     setEditing(true);
   }
-  const [editingSkills, setEditingSkills] = useState(false);
-  const [newSkill, setNewSkill] = useState("");
-
-  const handleEditClickSkills = (e) => {
-    e.preventDefault()
-
-    setEditingSkills(true);
-
-  };
-
-  const handleCancelEditSkills = (e) => {
-    e.preventDefault()
-
-    setEditingSkills(false);
-  };
-
-  const handleAddSkill = (e) => {
-    e.preventDefault()
-    if (newSkill.trim()) {
-      const newSkills = [...auth.user.skills, newSkill.trim()];
-      const formData = { ...form, skills: newSkills };
-      handleEditCheck(formData);
-      setAuth(prevState => ({
-        ...prevState,
-        user: {
-          ...prevState.user,
-          skills: newSkills
-        }
-      }));
-      setNewSkill("");
-    }
-  };
   const handleEditCheck = (formData) => {
     if (auth?.user?.role === "USER") {
       axios.put("http://localhost:3600/api/candidat/edit", formData)
@@ -148,11 +220,10 @@ const Profile = () => {
           <ColorTop />
           <InformationBottom>
             <ImgWrapper editing={editing}>
-              {auth.user?.role == "USER" ?
-                <Img editing={editing} src={base64Image} />
-                : <Img editing={editing} src={base64ImageCompany} />
+              {img ? <Img src={img} alt="Logo" /> : <p>Loading...</p>
               }
               <InputImgLabel editing={editing} htmlFor="input-img">Upload picture</InputImgLabel>
+
               {auth.user?.role == "USER" ? <InputImg onChange={onChangeHandler} editing={editing} className='input-img' id="input-img" type='file' accept="image/png, image/jpeg, image/svg" placeholder="upload picture" name='profile' /> : <InputImg onChange={onChangeHandler} editing={editing} className='input-img' id="input-img" accept="image/png, image/jpeg, image/svg" name='logo' type='file' placeholder="upload picture" />}
             </ImgWrapper>
             <EditDiv>
@@ -196,38 +267,6 @@ const Profile = () => {
             </InformationWrapper>
           </InformationBottom>
         </InformationContainer>
-        <SkillsContainer>
-          {editingSkills ? (
-            <Butonwraper>
-              <Inputskills
-                type="text"
-                placeholder="Add Skills"
-                value={newSkill}
-                onChange={(e) => setNewSkill(e.target.value)}
-              />
-              <Button onClick={handleAddSkill}>
-                <AiOutlinePlus size="20px" />
-              </Button>
-              <Button onClick={handleCancelEditSkills}>
-                <GrFormClose color="red" size="20px" />
-              </Button>
-            </Butonwraper>
-          ) : (
-            users.user?.id == id ? (
-              <Butonwraper>
-                <Buttonskill onClick={handleEditClickSkills}>Add Skill</Buttonskill>
-              </Butonwraper>
-            ) : null
-          )}
-          {auth.user?.role == "USER" ?
-            <SkillDiv >
-              {auth.user?.skills.map((skill, index) => (
-                <Skill key={index}>{skill}</Skill>
-              ))}
-            </SkillDiv>
-            : null
-          }
-        </SkillsContainer>
       </Background>
     </>
   )

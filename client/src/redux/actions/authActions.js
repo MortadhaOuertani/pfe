@@ -35,9 +35,10 @@ export const FinishRegisterCompany = (form, navigate) => dispatch => {
 }
 export const FinishRegisterCandidat = (form, navigate) => dispatch => {
     axios.post('http://localhost:3600/api/registercandidat', form).then(res => {
-        navigate('/')
         dispatch({ type: ERRORS, payload: {} })
         alert("an email has been sent please confirm your registeration")
+        navigate('/login')
+
     }).catch(err => {
         dispatch({
             type: ERRORSCANDIDAT,
