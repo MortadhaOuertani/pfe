@@ -92,7 +92,7 @@ const EditOffer = () => {
             <ContainerOne>
                 <Container>
                     <Form onSubmit={onSubmit} style={{ display: "flex", flexDirection: 'column' }}>
-                        <Header><H1>Post an offer</H1></Header>
+                        <Header><H1>Edit offer</H1></Header>
                         <Div>
                             <Input
                                 onChange={onChangeHandler}

@@ -9,6 +9,7 @@ const FinishRegistering = () => {
   const dispatch = useDispatch();
   const {token} = useParams();
   const T ={token:token}
+  console.log(T)
   useEffect(()=>{
   },[])
   return (

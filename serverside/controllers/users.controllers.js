@@ -8,6 +8,8 @@ const adminModel = require("../models/users/admin.model");
 const fs = require('fs');
 const usersModels = require("../models/users/users.models");
 const companyModel = require("../models/users/company.model");
+const uploadFileMiddleware = require("../middleware/multerImages");
+const uploadProfilepicture = require("../middleware/multerImagesCandidat");
 
 const RegisterCandidate = async (req, res) => {
   const { token } = req.body;
@@ -56,6 +58,7 @@ const RegisterCompany = async (req, res) => {
 };
 const RegisterMailCompany = async (req, res) => {
   try {
+    await uploadFileMiddleware(req, res);
     CompanyModel.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
         res.status(404).json("user already exists");
@@ -67,11 +70,11 @@ const RegisterMailCompany = async (req, res) => {
           email: req.body.email,
           role: "COMPANY",
           password: req.body.password,
-          logo: req.body.logo,
-        }, "HDYHHSY6", { expiresIn: '15m' });
+          logo: req.file.filename,
+        }, "HDYHHSY6", { expiresIn: '15m'  });
         res.status(200).json({
           message: "An email has been sent to your account",
-          token: "Bearer " + token
+          token: "Bearer "+ token
         });
 
         // Send password reset email to user
@@ -105,6 +108,9 @@ const RegisterMailCompany = async (req, res) => {
 };
 const RegisterMailCandidat = async (req, res) => {
   try {
+    await uploadProfilepicture(req, res);
+    console.log(req.files)
+
     usersModels.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
         res.status(404).json("user already exists");
@@ -121,7 +127,7 @@ const RegisterMailCandidat = async (req, res) => {
           email: req.body.email,
           role: "USER",
           password: req.body.password,
-          profile: req.body.profile,
+          profile: req.file.filename,
         }, "HDYHHSY6", { expiresIn: '15m' });
         res.status(200).json({
           message: "An email has been sent to your account",
@@ -154,7 +160,7 @@ const RegisterMailCandidat = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(404).json("error");
+    res.status(404).json(error.message);
   }
 };
 const checkType = async (req, res) => {
@@ -179,8 +185,10 @@ const checkType = async (req, res) => {
 };
 
 const EditCompany = async (req, res) => {
-  try {
+  try {         
+    await uploadFileMiddleware(req, res);
     const id = req.user.id;
+  req.body.logo=req.file.filename
     const updatedUser = await companyModel.findByIdAndUpdate(id, req.body, {
       new: true,
     });
@@ -192,7 +200,10 @@ const EditCompany = async (req, res) => {
 };
 const EditCandidat = async (req, res) => {
   try {
+    await uploadProfilepicture(req, res);
     const id = req.user.id;
+    if (req.body.profile){
+    req.body.profile=req.file.filename}
     console.log(req.body)
 
     const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
@@ -200,7 +211,7 @@ const EditCandidat = async (req, res) => {
     });
     res.status(200).json(updatedUser);
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(500).json({ message: "Server Error" });
   }
 };

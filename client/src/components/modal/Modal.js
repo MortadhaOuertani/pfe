@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { ApplyForOffer, Seterror, Setsuccess } from '../../redux/actions/offerActions';
-import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess, Topside, Hr, Label, Btn } from './ModalElement';
+import { Background, Div, Form, InputText, Input, Button, H1, Result, ResultError, ResultSuccess, Topside, Hr, Label, Btn, Alert } from './ModalElement';
 import { FaTimes } from 'react-icons/fa';
 import axios from 'axios';
 
@@ -12,20 +12,21 @@ const ModalComponent = (props) => {
   const check = useSelector(state => state.check);
   const success = useSelector(state => state.success);
   const error = useSelector(state => state.errors);
+  const [isApplying, setIsApplying] = useState(false);
   const { id } = useParams();
 
   const [formSubmitted, setFormSubmitted] = useState(false); // Track whether the form has been submitted
   Seterror();
   Setsuccess();
- 
+
   const Apply = (event) => {
     event.preventDefault();
-
     dispatch(ApplyForOffer(id, form));
-    console.log(form);
-    //Test(form)
+    setFormSubmitted(true);
+    setTimeout(() => {
+      setIsApplying(true);
+    }, 1000);
 
-    setFormSubmitted(true); // Set the formSubmitted state to true when the form is submitted
   };
 
   const [file, setFile] = useState(null);
@@ -41,6 +42,7 @@ const ModalComponent = (props) => {
 
   return (
     <>
+
       <Background onClick={() => props.setModalShow(!(props.modalShow))}>
       </Background>
       <Div isOpen={props.modalShow}>
@@ -48,13 +50,15 @@ const ModalComponent = (props) => {
         </Topside>
         <H1>{props.offer.OFFERS.title}</H1>
         <Hr />
-        {formSubmitted ? (
+        {formSubmitted && isApplying ? (
           <div>
             {check === true ? (
               <ResultSuccess>{success}</ResultSuccess>
             ) : check === false ? (
               <ResultError>{error}</ResultError>
-            ) : null}
+            ) : <div>
+              <Alert>Loading</Alert>
+            </div>}
           </div>
         ) : (
           <Form onSubmit={Apply} >
@@ -72,6 +76,7 @@ const ModalComponent = (props) => {
         )}
       </Div>
     </>
+
   )
 }
 export default ModalComponent

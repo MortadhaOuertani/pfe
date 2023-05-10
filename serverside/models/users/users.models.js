@@ -8,7 +8,7 @@ const UserModel = new Schema({
         unique: true,
       }, 
     name : "string",
-    lastName:"string",
+    lastname:"string",
     password: "string",
     confirm:"string",
     role:"string",
@@ -25,7 +25,7 @@ const UserModel = new Schema({
       data:String,
       contentType: String,
     },
-    profile:String
+    profile:"string"
   }, {timestamps: true})
 
-module.exports = mongoose.model("candidates", UserModel);
+module.exports = mongoose.model("candidate", UserModel);

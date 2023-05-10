@@ -6,55 +6,85 @@ import { NavbarDiv } from '../offerspage/OfferDetailsElements'
 import { Alert, BtnSubmit, Button, ButtonsConatainer, Container, Div, Form, H1, H1Succ, Header, Input, P } from './FormCompanyElements'
 
 const FormCompany = () => {
-    const [form, setForm] = useState({})
-    const [confirm, setConfirm] = useState("")
-    const [show, setshow] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [errors, setErrors] = useState();
-    const dispatch = useDispatch()
-    const error = useSelector(state => (state.errorscompany))
-    const navigate = useNavigate()
-    const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
-        setErrors("")
-        setForm({
-            ...form, //setForm va prendre la formulaire(form)
-            [e.target.name]: e.target.value //elle va prendre la valeur d'un input à partir le nom de l'input
-        })
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [confirmErr, setConfirmErr] = useState('');
+  const [logo, setLogo] = useState(null);
+  const [show, setShow] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState();
+  const dispatch = useDispatch();
+  const error = useSelector(state => (state.errorscompany));
+  const navigate = useNavigate();
+
+  const onChangeHandler = (e) => {
+    setErrors('');
+    const { name, value, files } = e.target;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'address':
+        setAddress(value);
+        break;
+      case 'phone':
+        setPhone(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+        case 'confirm':
+        setConfirm(value);
+        break;
+      case 'logo':
+        setLogo(files[0]);
+        console.log(logo)
+        break;
+      default:
+        break;
     }
-    const onSubmit = (e) => { //un event qui va envoyer les données au base de données 
-        e.preventDefault(); //ne refraichir pas la page pour ne perdre pas les données 
-        if (form.password !== form.confirm) {
-            setConfirm("Passwords does not match");
-            return;
-        }
-        setConfirm("");
-        setErrors(error);
+  };
 
-        // Read the selected file and convert it to base64
-        const reader = new FileReader();
-        const file = e.target.logo.files[0];
-
-        reader.readAsDataURL(file);
-        reader.onload = async () => {
-            const base64Image = reader.result.split(",")[1];
-
-            // Add the base64-encoded image to the form data
-            const formData = { ...form, logo: base64Image };
-            setSuccess(true);
-            setTimeout(() => setshow(true), 200)
-            setTimeout(() => setshow(false), 2000)
-            setTimeout(() => setSuccess(false), 3000)
-            dispatch(FinishRegisterCompany(formData, navigate))
-           
-        }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (password !== confirm) {
+      setConfirmErr('Passwords do not match');
+      return;
     }
-    useEffect(() => {
-        setErrors("")
-    }, [])
-    useEffect(() => {
-        setErrors(error)
-    }, [error])
-    return (
+    setConfirm('');
+    setErrors(error);
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('address', address);
+    formData.append('phone', phone);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('logo', logo);
+
+    setSuccess(true);
+    setTimeout(() => setShow(true), 200);
+    setTimeout(() => setShow(false), 2000);
+    setTimeout(() => setSuccess(false), 3000);
+    dispatch(FinishRegisterCompany(formData, navigate));
+  };
+
+  useEffect(() => {
+    setErrors('');
+  }, []);
+
+  useEffect(() => {
+    setErrors(error);
+  }, [error]);
+
+  return (
         <>
        
             <Form onSubmit={onSubmit}>
@@ -69,7 +99,7 @@ const FormCompany = () => {
                     }
                     <Input onChange={onChangeHandler} type='password' name='password' placeholder='Password' required />
                     <Input onChange={onChangeHandler} type='password' name='confirm' placeholder='Confirm password' required />
-                    {confirm && <P>{confirm}</P>}
+                    {confirm && <P>{confirmErr}</P>}
 
                     <div>
                         <label for="profile">Profile Picture : </label>

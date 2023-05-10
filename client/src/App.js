@@ -70,16 +70,18 @@ function App() {
         <Route path='/registercompany/:token' element={<FinishRegister />} />
         <Route path='/registercandidat/:token' element={< FinishRegistering />} />
         <Route path='/edit/:id' element={<EditOffer />} />
+        <Route path='/technicaltest/:id' element={<Technical />} />
+          <Route path='/accepted/:id' element={<Accepted />} />
+          <Route path='/:id/candidate' element={<CV />} />
         <Route element={<ProtectedRoute Role="USER" auth={user} />}>
 
+        
         </Route>
         <Route element={<ProtectedRoute Role="COMPANY" auth={user} />}>
           <Route path='/postoffer' element={<Post />} />
           <Route path='/appliedOffer/:id' element={<Appling />} />
           <Route path='/company' element={<CompanyHomePage />} />
-          <Route path='/technicaltest/:id' element={<Technical />} />
-          <Route path='/accepted/:id' element={<Accepted />} />
-          <Route path='/:id/candidate' element={<CV />} />
+         
         </Route>
         <Route element={<ProtectedAdmin auth={user} />}>
           <Route path='/admin' element={<Admin />} />

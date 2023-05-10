@@ -7,18 +7,19 @@ import { FcCalendar, FcBusiness, FcDocument } from "react-icons/fc";
 import { AiOutlineClose } from "react-icons/ai";
 import { useSelector } from 'react-redux'
 
-
 const Offer = ({ experience, date, _id, title, createdAt, company, logo, contract, local }) => {
   const [companydata, setCompanydata] = useState({});
   const auth = useSelector(state => state.auth)
   const user = auth.user
   const [isLoading, setIsLoading] = useState(true);
+  const [img, setImg] = useState(null);
+  
 
 
   const Deleteoffer = (id) => {
     axios.delete(`http://localhost:3600/api/offers/${id}`)
       .then(res => {
-        console.log("deleted successfuly")
+        console.log("delete d successfuly")
       })
       .catch(err => {
         console.log("error")
@@ -39,7 +40,13 @@ const Offer = ({ experience, date, _id, title, createdAt, company, logo, contrac
         })
     });
   }
-
+ useEffect(() => {
+    fetchImg(companydata);
+  }, [companydata]);
+  async function fetchImg(companydata) {
+    const { default: file } = await import(`../../../ProfilePictures/${companydata?.logo}`);
+    setImg(file)
+  } 
   GetCompanyData(company).then(() => {
   }).catch(() => {
     setIsLoading(false)
@@ -47,9 +54,6 @@ const Offer = ({ experience, date, _id, title, createdAt, company, logo, contrac
     setIsLoading(false)
 
   })
-
-  const base64Image = `data:image/jpeg;base64,${companydata?.logo}`;
-
 
   return (
     <>
@@ -59,7 +63,7 @@ const Offer = ({ experience, date, _id, title, createdAt, company, logo, contrac
         <Container>
           <Topside>
             <Imgdiv>
-              {companydata.logo && <Img src={base64Image} />}
+              {companydata.logo && <Img src={img} />}
             </Imgdiv>
             <Info>
               <H2>{title}</H2>

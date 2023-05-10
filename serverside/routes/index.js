@@ -1,4 +1,7 @@
 var express = require("express");
+const multer = require("multer")
+const storage = require('../middleware/multerImages');
+const uploadpicture = multer({ storage: storage })
 const {
   RegisterCompany,
   RegisterCandidate,
@@ -25,16 +28,17 @@ var router = express.Router();
 const passport = require("passport");
 
 
-const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, GetCandidates, acceptCandidate, refuseCandidate, acceptCandidateTechnical, refuseCandidateTechnical, CountWordsInPDF, GetAdmin, AddToAdmin, GetCompanies, GetAllCandidates, AdminSettingsRemove,
+const { Addoffers, FindAlloffers, FindSingleoffers, Deleteoffers, FindDate, GetCompanyData, GetCompanyoffers, ApplyForOffers, Getffer, acceptCandidate, refuseCandidate, acceptCandidateTechnical, refuseCandidateTechnical, CountWordsInPDF, GetAdmin, AddToAdmin, GetCompanies, GetAllCandidates, AdminSettingsRemove,
   EmailRefuse,
   AcceptRHEmail,
   AcceptTechnEmail,
-  EmailRefuseTech, 
-  EditOffer} = require("../controllers/offer.controllers");
+  EmailRefuseTech,
+  EditOffer,
+  GetOffer } = require("../controllers/offer.controllers");
 
 
 /* users routes. */
-router.get("/candidat/info/:id",GetCandidatinfo);
+router.get("/candidat/info/:id", GetCandidatinfo);
 router.post("/register/candidate", RegisterCandidate);
 router.post("/register/company", RegisterCompany);
 router.post("/register/admin", RegisterAdmin);
@@ -82,7 +86,7 @@ router.get("/getcompanyoffers", passport.authenticate("jwt", { session: false })
 router.get("/offers/:id", FindSingleoffers);
 router.post("/applyforOffer/:id", passport.authenticate("jwt", { session: false }), ApplyForOffers);
 router.post("/editoffer/:id", EditOffer);
-router.get("/GetOfferApplicants/:id", passport.authenticate("jwt", { session: false }), GetCandidates);
+router.get("/GetOfferApplicants/:id", passport.authenticate("jwt", { session: false }), GetOffer);
 router.get("/getCandidates", GetAllCandidates);
 router.get("/getcompanies", GetCompanies); //zedt hedhy
 router.post("/posttoadmin", passport.authenticate("jwt", { session: false }), AddToAdmin); // envoyer les offres à postuler à l'admin

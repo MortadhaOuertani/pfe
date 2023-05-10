@@ -8,10 +8,8 @@ import { useSelector } from 'react-redux';
 const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, name, lastName, letter }) => {
   const [pdfFile, setPdfFile] = useState('');
   const [message, setmessage] = useState('')
-  // <iframe src={pdfFile} width="100%" height="100%"></iframe>{/*to display file type pdf   */ }
-  const base64Image = `data:image/jpeg;base64,${profile}`;
+  const [img, setImg] = useState(null);
   const { id } = useParams()
-
   console.log(id, cadidatId)
   useEffect(() => {
     async function fetchPdf() {
@@ -20,7 +18,13 @@ const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
     }
     fetchPdf();
   }, [name]);
-
+  useEffect(() => {
+    fetchImg(profile);
+  }, [profile]);
+  async function fetchImg(profile) {
+    const { default: file } = await import(`../../ProfilePictures/${profile}`);
+    setImg(file)
+  }
   const RefuseEmail = (id) => {
     axios.post(`http://localhost:3600/api/EmailRefuse/${id}`)
       .then(
@@ -66,7 +70,7 @@ const CandidateInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, nam
     <>
       <Container>
       
-          <Left to={`/Profile/${cadidatId}`}><Img src={base64Image} /></Left>
+          <Left to={`/Profile/${cadidatId}`}><Img src={img} /></Left>
           <Header>
             <Right>
               <Icons>
