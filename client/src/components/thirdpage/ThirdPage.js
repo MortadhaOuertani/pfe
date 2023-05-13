@@ -12,7 +12,7 @@ const ThirdPage = () => {
     <Container>
       
       <Copyright>
-        <p style={{color:"lightgrey",fontSize:"12px"}}>Copyright {date} &#xA9;	 Hirelab.all rights reserved</p>
+        <p style={{color:"lightgrey",fontSize:"12px"}}>Copyright {date} &#xA9;	 Hirelab all rights reserved</p>
       </Copyright>
     </Container>
   )

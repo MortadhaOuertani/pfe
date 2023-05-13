@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 const Profile = () => {
-  const { id } = useParams();
+  const { id } = useParams();  //create state variables ..
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,12 +27,12 @@ const Profile = () => {
   const [logo, setLogo] = useState(null);
   const [profile, setProfile] = useState(null);
   const [img, setImg] = useState(null)
-  const [auth, setAuth] = useState({
-    user: null,
+  const [auth, setAuth] = useState({ //create a state variable(auth:represents the user's authentication status)
+    user: null,  //The initial value is an object with a user property set to null
   });
-  useEffect(() => {
-    fetchData(id);
-  }, []);
+  useEffect(() => {   
+    fetchData(id); // fiat appel a la fonction fetchData 
+  }, []); // [] : l'effet est appelé une seule fois
 
 
 

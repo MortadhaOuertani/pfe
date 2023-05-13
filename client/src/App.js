@@ -38,16 +38,16 @@ import EditOffer from './pages/offerspage/EditOffer';
 function App() {
   const auth = useSelector(state => state.auth)
   useEffect(() => {
-    if (window.localStorage.jwt) {
-      const decode = jwt_decode(window.localStorage.jwt)
-      store.dispatch(setUser(decode))
-      setAuth(window.localStorage.jwt)
-      const currentDate = Date.now / 1000
+    if (window.localStorage.jwt) {  //vérifie si la clé jwt existe dans le localStorage
+      const decode = jwt_decode(window.localStorage.jwt) // décoder le jeton
+      store.dispatch(setUser(decode)) //dispatch : pour envoyer une action du store 
+      setAuth(window.localStorage.jwt) // stocke le jeton dans la variable auth
+      const currentDate = Date.now / 1000 //stocke la date actuelle et la convertit en millisecondes
 
-      if (decode.exp > currentDate) {
-        store.dispatch(Logout())
+      if (decode.exp > currentDate) { //vérifier l'exipiration du jeton 
+        store.dispatch(Logout()) // si oui , l'utilisateur doit déconnecter 
       }
-    }
+    } 
   }, [])
 
   const user = {

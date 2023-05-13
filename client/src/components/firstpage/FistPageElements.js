@@ -18,7 +18,6 @@ export const Imagesvg = styled.img`
 width: auto;
 height:100%;
 `
-
 const moveDown = keyframes`
   0% { transform: translateY(-5); }
   50% { transform: translateY(10px); }
@@ -32,8 +31,8 @@ export const Image = styled.img`
   position:relative;
   bottom: 20%;
   top:auto;
-left:200px;
-right: 0;
+  left:200px;
+  right: 0;
 @media screen and (max-width:1500px ) {
     right:100px;
     left: 0;
