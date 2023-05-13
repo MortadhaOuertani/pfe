@@ -4,7 +4,8 @@ export const Container = styled.div`
  display: flex;
  flex-direction: row;
  width: 100%;
- height: 100vh;
+ height: 100%;
+ background-color: #f8f9fa;
 `;
 export const RightSide = styled.div`
 
