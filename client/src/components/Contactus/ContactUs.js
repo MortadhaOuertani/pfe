@@ -7,14 +7,13 @@ const ContactUs = () => {
 
     const onChangeHandler = (e) => {  //déclaration d'un event de nom onChangeHandler pour détecter les changements de chaque input
         setForm({
-            ...form, //setForm va prendre la formulaire(form)
+            ...form, //setForm va prendre la formulaire(form)    //... : opérateur "spread" (faire une copie du form)
             [e.target.name]: e.target.value, //elle va prendre la valeur de d'un input à partire le nom de l'input
         })
     }
     const onSubmithandler = (e) => {
         e.preventDefault(); 
         axios.post('http://localhost:3600/api/ContactUs', form)
-
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
@@ -28,7 +27,7 @@ const ContactUs = () => {
 
     return (
         <>
-            <ContainerBg src={image}></ContainerBg>
+            <ContainerBg  src={image}></ContainerBg>
             <Container>
 
                 <Left onSubmit={onSubmithandler}>

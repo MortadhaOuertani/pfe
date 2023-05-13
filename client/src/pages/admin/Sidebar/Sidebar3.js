@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SidebarContainer, SidebarHeader, SidebarLink } from './SidebarElements';
 import { AiOutlineHome } from "react-icons/ai";
 import { MdAccountBox, MdSettings } from "react-icons/md";
+import { FcReadingEbook } from 'react-icons/fc';
 
 
 const Sidebar3 = () => {
@@ -15,6 +16,7 @@ const Sidebar3 = () => {
     return (
         <SidebarContainer>
             <SidebarHeader>Admin Dashboard</SidebarHeader>
+            < FcReadingEbook style={{ width: '100px', height: '100px', alignSelf: 'center' }} />
             <div><SidebarLink to='/admin/dashboard' active={activeLink === 'dashboard'} onClick={() => handleLinkClick('dashboard')}><AiOutlineHome style={{ marginRight: "10px" }} />
             Statistics
             </SidebarLink></div>

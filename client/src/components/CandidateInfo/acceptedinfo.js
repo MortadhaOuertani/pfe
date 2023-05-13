@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'; //useParams hook is used to get the id parameter from the URL
 import { Container, Header, Left, FullName, H4, Right, Img, H3, Information, Lowerside, Footer, P, Button, ButtonRed, LinkS } from './CandidateInfoElements';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; //useSelector hook to get the auth state from Redux
 const AcceptedInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, name, lastName, letter }) => {
   const [pdfFile, setPdfFile] = useState('');
   const [message, setmessage] = useState('')
-  const base64Image = `data:image/jpeg;base64,${profile}`;
+  const base64Image = `data:image/jpeg;base64,${profile}`;  // Create a base64 encoded image string from the profile image data
   const { id } = useParams()
-  useEffect(() => {
+  useEffect(() => {  // Use the useEffect hook to fetch the PDF file
     async function fetchPdf() {
       const { default: file } = await import(`./${cv.data}`);
       setPdfFile(file);
     }
     fetchPdf();
   }, [name]);
-  const Info ={pdfFile,letter}
-  const auth = useSelector(state => state.auth)
+  const Info ={pdfFile,letter} // Define an object to hold the PDF file and the cover letter
+  const auth = useSelector(state => state.auth) // Access the auth state using the useSelector hook
 
-  return (
-    <>
+  return ( // Render the component
+    <> 
       <Container>
         <LinkS to={`/${id}/candidate`}
         state= {Info} > {// Pass the state object as props 
