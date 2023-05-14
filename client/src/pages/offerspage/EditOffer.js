@@ -68,18 +68,23 @@ const EditOffer = () => {
     }
     const modules = {    //toolbar
         toolbar: [
-            [{ 'header': [1, 2, false] }],
+            [{ 'font': [] }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            ['bold', 'italic', 'underline'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             [{ 'align': [] }],
+            [{ 'color': [] }, { 'background': [] }],
             ['clean']
         ]
     };
 
     const formats = [    //formats of text
-        'header',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'font',
+        'size',
+        'bold', 'italic', 'underline',
         'list', 'bullet',
-        'align'];
+        'align',
+        'color', 'background'];
 
 
     return (
