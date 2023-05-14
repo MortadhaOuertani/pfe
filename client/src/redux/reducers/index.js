@@ -9,6 +9,8 @@ import candidatesReducer from "./candidatesReducer";
 import checkReducer from "./checkReducer";
 import errorsCandidatReducer from "./errorsCandidatReducer";
 import companyerrorReducer from "./companyerrorReducer";
+import errorrefused from "./errorrefusedReducer";
+
 export default combineReducers({
     errors: errorsReducer,
     errorscompany:companyerrorReducer,
@@ -19,4 +21,5 @@ export default combineReducers({
     companies:companiesReducer,
     candidates:candidatesReducer,
     check:checkReducer,
+    errorrefused:errorrefused,
 })

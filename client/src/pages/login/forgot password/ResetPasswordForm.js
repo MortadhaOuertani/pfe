@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, Container, Div, Div1, Div2, Form, H2, Input, Input1, Input2, Label, Label1, Label2 } from './ResetPasswordFormElements';
+import { Button, Container, Div, Div1, Div2, Form, H2, Input, Input1, Input2, Label, Label1, Label2, Pe } from './ResetPasswordFormElements';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ResetPasswordForm = () => {
@@ -48,7 +48,7 @@ const ResetPasswordForm = () => {
 
     async function ResetPasswordCompany() {
       try {
-        const response = await axios.post('http://localhost:3600/api/reset-company-password', {
+        const response = await axios.post('http://localhost:3600/api/forgotcompanypassword', {
           token,
           password,
         });
@@ -86,7 +86,7 @@ const ResetPasswordForm = () => {
             />
           </Div2>
           <Button type="submit">Reset Password</Button>
-          {message && !success && <div>{message}</div>} {/* show error message if flag is false */}
+          {message && !success && <Pe>{message}</Pe>} {/* show error message if flag is false */}
         </Form>
       </Div>
     </Container>

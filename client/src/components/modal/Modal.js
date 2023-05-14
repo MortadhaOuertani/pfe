@@ -11,6 +11,7 @@ const ModalComponent = (props) => {
   const dispatch = useDispatch();
   const check = useSelector(state => state.check);
   const success = useSelector(state => state.success);
+  const refused = useSelector(state => state.errorrefused);
   const error = useSelector(state => state.errors);
   const [isApplying, setIsApplying] = useState(false);
   const { id } = useParams();

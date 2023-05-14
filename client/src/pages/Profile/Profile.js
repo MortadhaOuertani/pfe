@@ -30,7 +30,7 @@ const Profile = () => {
   const [auth, setAuth] = useState({ //create a state variable(auth:represents the user's authentication status)
     user: null,  //The initial value is an object with a user property set to null
   });
-  useEffect(() => {   
+  useEffect(() => {
     fetchData(id); // fiat appel a la fonction fetchData 
   }, []); // [] : l'effet est appelé une seule fois
 
@@ -149,7 +149,7 @@ const Profile = () => {
         formData.append('profile', profile);
         formData.append('name', name);
         formData.append('lastname', lastname);
-        console.log(formData ,  lastname)
+        console.log(formData, lastname)
         formData.append('email', email);
         formData.append('phone', phone);
         formData.append('address', address);
@@ -162,7 +162,7 @@ const Profile = () => {
       } else {
         formData.append('logo', logo);
         formData.append('name', name);
-      formData.append('lastname', lastname);
+        formData.append('lastname', lastname);
         formData.append('email', email);
         formData.append('phone', phone);
         formData.append('address', address);
@@ -247,8 +247,7 @@ const Profile = () => {
                 <H3>{editing ? <Input onChange={onChangeHandler} type="text" name="address" defaultValue={auth.user?.address} /> : auth.user?.address}</H3>
               </InfoWrapper>
               <InfoWrapper>
-                {auth.user?.role === "USER" ? <BsBriefcase size={23} /> : null}
-                {auth.user?.role === "USER" ? (editing ? <Input onChange={onChangeHandler} type="text" name="employement" defaultValue={auth.user?.employement} /> : <H3>{auth.user.employement ? auth.user?.employement : "unemployed"}</H3>) : null}</InfoWrapper>
+              </InfoWrapper>
               <InfoWrapper>
                 <BsTelephone size={23} />
                 {editing ? <Input onChange={onChangeHandler} type="text" name="phone" defaultValue={auth.user?.phone} /> : <H3>{auth.user?.phone}</H3>}

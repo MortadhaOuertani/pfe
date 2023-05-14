@@ -28,7 +28,9 @@ border-radius: 10px;
 display: flex;
 flex-direction: row;
 `;
-
+export const Pe = styled.p`
+color:red
+`
 export const Button = styled.button`
 background-color: #42cca6;
 font-size: 14px;

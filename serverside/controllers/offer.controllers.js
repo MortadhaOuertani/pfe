@@ -213,11 +213,12 @@ const ApplyForOffers = async (req, res) => {
                 return res.status(404).json(err.message);
             } else {
                 const count = await CountWordsInPDF(req, res, data.search);
+                console.log(count)
                 if (count >= Math.floor(data.search.length / 2)) {
                     const candidate = await usersModels.findOne({ _id: req.user.id });
                     if (data.candidates.some((c) => c._id.equals(candidate._id))) {
                         return res
-                            .status(409)
+                            .status(309)
                             .json("You have already applied for this offer");
                     } else {
                         // Add the CV file to the candidate
@@ -249,17 +250,16 @@ const ApplyForOffers = async (req, res) => {
                     res
                         .status(409)
                         .json(
-
                             "You failed to match the offer's standards. Good luck next time!",
                         );
                 }
             }
         });
     } catch (err) {
-        console.log(req.file);
+        console.log(err.message);
 
         res.status(500).send(
-           `Could not upload the file: ${req.file.originalname}. ${err}`,
+            `Could not upload the file: ${req.file.originalname}. ${err.message}`,
         );
     }
 };

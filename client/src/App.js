@@ -78,7 +78,7 @@ function App() {
         
         </Route>
         <Route element={<ProtectedRoute Role="COMPANY" auth={user} />}>
-          <Route path='/postoffer' element={<Post />} />
+          <Route path='/postoffer' element={<Post/>} />
           <Route path='/appliedOffer/:id' element={<Appling />} />
           <Route path='/company' element={<CompanyHomePage />} />
          
