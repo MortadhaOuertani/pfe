@@ -246,7 +246,7 @@ const LoginCandidate = (req, res) => {
                 age: user.age,
                 diplome: user.diplome,
                 skills: user.skills,
-              }, "HDYHHSY6", { expiresIn: '1h' });
+              }, "HDYHHSY6", { expiresIn: '5h' });
               res.status(200).json({
                 message: "success",
                 token: "Bearer " + token
@@ -286,7 +286,7 @@ const LoginCompany = async (req, res) => {
           logo: company.logo,
           address: company.address,
           phone: company.phone,
-        }, "HDYHHSY6", { expiresIn: '1h' });
+        }, "HDYHHSY6", { expiresIn: '5h' });
         res.status(200).json({
           message: "success",
           token: "Bearer " + token

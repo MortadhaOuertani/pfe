@@ -65,7 +65,7 @@ const HomeNavbar = ({ user }) => {
           <AiOutlineClose onClick={ToggleSidebar} style={{ color: 'white', fontSize: '40px', cursor: 'pointer' }} />
         </SideIcon>
         <SideDiv>
-          <SideNav to='/offers' onClick={ToggleSidebar}>Offers</SideNav>
+{auth.user.role === "COMPANY"?<SideNav to='/company' onClick={ToggleSidebar}>My Offers</SideNav> :<SideNav to='/offers' onClick={ToggleSidebar}>Offers</SideNav>}
           <SideNav to='/' onClick={() => { currentUrl == "/" ? animateScroll.scrollTo(550) : animateScroll.scrollTo(2100); ToggleSidebar() }} >Register</SideNav>
           <SideNav to="/login" onClick={ToggleSidebar}>Login</SideNav>
           <SideNav to='/' onClick={() => { currentUrl == "/" ? animateScroll.scrollTo(8050) : animateScroll.scrollTo(8100); ToggleSidebar() }}>ContactUs</SideNav>
@@ -79,9 +79,8 @@ const HomeNavbar = ({ user }) => {
       </NavLinkz>
       {user.role === "ADMIN" ? "" :
         <Div2>
-          <NavLink to='/offers'>
-            Offers
-          </NavLink>
+         {auth.user.role === "COMPANY"?<NavLink to='/company' onClick={ToggleSidebar}>My Offers</NavLink> :<SideNav to='/offers' onClick={ToggleSidebar}>Offers</SideNav>}
+
           <NavLink to="/" onClick={() => currentUrl == "/" ? animateScroll.scrollTo(8000) : animateScroll.scrollTo(9000)}>
             Contact Us
           </NavLink>

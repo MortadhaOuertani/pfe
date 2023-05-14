@@ -64,7 +64,6 @@ function App() {
         <Route path='/Profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/offers' element={<OffersPage />} />
-        <Route path='/offers/:id' element={<OfferDetails />} />
         <Route path='/forgotpassword' element={<ForgotPasswordForm />} />
         <Route path='/reset-password/:id/:token' element={<ResetPasswordForm />} />
         <Route path='/registercompany/:token' element={<FinishRegister />} />
@@ -74,8 +73,7 @@ function App() {
           <Route path='/accepted/:id' element={<Accepted />} />
           <Route path='/:id/candidate' element={<CV />} />
         <Route element={<ProtectedRoute Role="USER" auth={user} />}>
-
-        
+        <Route path='/offers/:id' element={<OfferDetails />} />
         </Route>
         <Route element={<ProtectedRoute Role="COMPANY" auth={user} />}>
           <Route path='/postoffer' element={<Post/>} />
