@@ -88,7 +88,7 @@ const FormCompany = () => {
         <>
        
             <Form onSubmit={onSubmit}>
-                <Header><H1>Register as a employer </H1></Header>
+                <Header><H1>Company's Registration</H1></Header>
                 <Div>
                     <Input onChange={onChangeHandler} type='name' name='name' placeholder='Your name' required />
                     <Input onChange={onChangeHandler} type='address' name='address' placeholder='Your address' required />

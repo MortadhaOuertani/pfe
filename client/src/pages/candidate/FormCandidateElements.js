@@ -24,6 +24,9 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
+   @media screen and (max-width:555px ){
+    margin-left: 20px;
+  }
 `;
 
 export const H1 = styled.h1`

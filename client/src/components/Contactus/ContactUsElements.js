@@ -26,8 +26,8 @@ export const ContainerBg = styled.img`
     width: 100%;
     top:1340px;
 position: absolute;
-object-fit:cover;
-object-position:center;
+object-fit:cover; //Spécifie comment redimensionner une balise <img> pour qu'elle s'adapte à son conteneur
+object-position:center; // centre l'image horizontalement et verticalement dans son conteneur
 @media screen and (max-width:900px ) {
   top:2060px;
 
@@ -64,15 +64,13 @@ display: flex;
 align-self: center;
 flex-direction: column;
 justify-content: center;
-backdrop-filter: blur(4px);
--webkit-backdrop-filter: blur(4px);
+backdrop-filter: blur(4px); //flouter l'arrière plan
 background-color: rgba(255,255,255,0.5);
 align-self: center;
-bo
 
-@media screen and (max-width:907px ) {
-  transform: translateX(0vw);
-  margin-top: 50px;
+   @media screen and (max-width:907px ) { //si taille inférieur à 907
+     transform: translateX(0vw); //déplacer l'element horizentalement 
+     margin-bottom: 61px; 
   }
 `
 export const Textarea = styled.textarea`
@@ -83,7 +81,7 @@ export const Textarea = styled.textarea`
   top: 2%;
   left: 7%;
   margin-top: 20px;
-height: 200px;
+  height: 200px;
   &::placeholder {
   font-size: 18px; /*change the font-size value to make it bigger*/
 }
@@ -95,7 +93,6 @@ object-fit:cover;
 object-position:center;
 border-radius:5px;
 object-fit:cover;
-  object-position:center;
 
 `
 export const InputBtn = styled.input`
@@ -111,24 +108,7 @@ background-color: #43CBA6;
   margin-top:30px;
   cursor: pointer;
   &:hover{
-  background-color: black;
-    transition: all 0.2s ease-in-out;
+    background-color: black;
+    transition: all 0.2s ease-in-out; 
 }
-`
-export const Right = styled.div`
-height: 100%;
-width: 100%;
-object-fit:cover;
-object-position:center;
-&:before{
-    content: "";
-    height:600px;
-    width: 66.8%;
-    background-color:rgba(0,0,0,0.5);
-    position: absolute;
-    border-radius:5px;
-}
-@media screen and (max-width:1200px ) {
-    display: none;
-  }
 `

@@ -113,7 +113,7 @@ const FormCandidate = () => {
         <>
 
             <Form onSubmit={onSubmit}>
-                <Header><H1>Register as a employee </H1></Header>
+                <Header><H1>Candidate's registration </H1></Header>
                 <Div>
                     <InputContainer>
                         <InputD onChange={onChangeHandler} type='name' name='name' placeholder='Your first name' required />

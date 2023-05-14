@@ -8,7 +8,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 width:80%;
-height: 100vh;
+height: 100%;
 
 `
 export const Caption =styled.caption`
