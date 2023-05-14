@@ -79,7 +79,7 @@ const HomeNavbar = ({ user }) => {
       </NavLinkz>
       {user.role === "ADMIN" ? "" :
         <Div2>
-         {auth.user.role === "COMPANY"?<NavLink to='/company' onClick={ToggleSidebar}>My Offers</NavLink> :<SideNav to='/offers' onClick={ToggleSidebar}>Offers</SideNav>}
+         {auth.user.role === "COMPANY"?<NavLink to='/company' onClick={ToggleSidebar}>My Offers</NavLink> :<NavLink to='/offers' onClick={ToggleSidebar}>Offers</NavLink>}
 
           <NavLink to="/" onClick={() => currentUrl == "/" ? animateScroll.scrollTo(8000) : animateScroll.scrollTo(9000)}>
             Contact Us
