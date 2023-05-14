@@ -12,20 +12,19 @@ const uploadFileMiddleware = require("../middleware/multerImages");
 const uploadProfilepicture = require("../middleware/multerImagesCandidat");
 
 const RegisterCandidate = async (req, res) => {
-  const { token } = req.body;
-  const account = jwt.verify(token, process.env.PRIVATE_KEY);
+  const { token } = req.body; //extraire le jeton 
+  const account = jwt.verify(token, process.env.PRIVATE_KEY); //vérifier le jeton à l'aide de la clé privée spécifiée dans les variables d'environnement
   try {
-    // Convert image to base64-encoded string
-
+  
     UserModel.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
         res.status(404).json("User already exists");
       } else {
-        const salt = bcrypt.genSaltSync(10)
+        const salt = bcrypt.genSaltSync(10)  //la complexité du cryptage 
         const hash = bcrypt.hashSync(account.password, salt)//hashed password
         account.password = hash;
         account.role = "USER";
-        await UserModel.create(account);
+        await UserModel.create(account); 
         res.status(200).json({ message: "success" });
       }
     });
@@ -56,14 +55,15 @@ const RegisterCompany = async (req, res) => {
     res.status(404).json("error");
   }
 };
+
 const RegisterMailCompany = async (req, res) => {
   try {
-    await uploadFileMiddleware(req, res);
+    await uploadFileMiddleware(req, res);    //pour l'upload d'image
     CompanyModel.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
         res.status(404).json("user already exists");
       } else {
-        var token = jwt.sign({
+        var token = jwt.sign({       //créer un token et en suite en va envoyer ce token par un email
           name: req.body.name,
           address: req.body.address,
           phone: req.body.phone,
@@ -77,7 +77,7 @@ const RegisterMailCompany = async (req, res) => {
           token: "Bearer "+ token
         });
 
-        // Send password reset email to user
+        // cretae a transporter 
         const transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
@@ -90,9 +90,9 @@ const RegisterMailCompany = async (req, res) => {
           from: "projetpfe885@gmail.com",
           to: req.body.email,
           subject: 'Finish registering',
-          text: `Click on this link to Register : ${process.env.CLIENT_URL}/registercompany/${token}`
+          text: `Click on this link to Register : ${process.env.CLIENT_URL}/registercompany/${token}` 
         };
-        transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, (error, info) => {  //envoi du token dans un mail
           if (error) {
             console.log(error);
             return res.status(500).json({ message: 'Error sending email' });
@@ -106,9 +106,10 @@ const RegisterMailCompany = async (req, res) => {
     res.status(404).json("error");
   }
 };
+
 const RegisterMailCandidat = async (req, res) => {
   try {
-    await uploadProfilepicture(req, res);
+    await uploadProfilepicture(req, res);  
     console.log(req.files)
 
     usersModels.findOne({ email: req.body.email }).then(async (exist) => {
@@ -134,7 +135,7 @@ const RegisterMailCandidat = async (req, res) => {
           token: "Bearer " + token
         });
 
-        // Send password reset email to user
+        // create a transporter
         const transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
@@ -163,8 +164,10 @@ const RegisterMailCandidat = async (req, res) => {
     res.status(404).json(error.message);
   }
 };
-const checkType = async (req, res) => {
-  const id = req.params.id;
+
+
+const checkType = async (req, res) => { //pour vérifier le type de l'utilisateur
+  const id = req.params.id; // a partir de son id qui est passé en paramètre
 
   try {
     const candidat = await UserModel.findById(id);
@@ -186,18 +189,20 @@ const checkType = async (req, res) => {
 
 const EditCompany = async (req, res) => {
   try {         
-    await uploadFileMiddleware(req, res);
-    const id = req.user.id;
-  req.body.logo=req.file.filename
-    const updatedUser = await companyModel.findByIdAndUpdate(id, req.body, {
-      new: true,
+    await uploadFileMiddleware(req, res); 
+    const id = req.user.id; //recupére l'id d'utilisateur 
+  req.body.logo=req.file.filename //remplace le nom de fichier du logo de l'entreprise dans le corps de la demande par le nom de fichier du logo qui a été téléchargé
+    const updatedUser = await companyModel.findByIdAndUpdate(id, req.body, { //mettre a jour les infos avec l'id
+      new: true,  //renvoie le document modifié 
     });
-    res.status(200).json(updatedUser);
+    res.status(200).json(updatedUser); //renvoie une réponse JSON avec le document mis à jour
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+
 const EditCandidat = async (req, res) => {
   try {
     await uploadProfilepicture(req, res);
@@ -215,6 +220,8 @@ const EditCandidat = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+
 const LoginCandidate = (req, res) => {
   UserModel.findOne({ email: req.body.email })
     .then(user => {

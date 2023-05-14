@@ -4,7 +4,7 @@ const maxSize = 2 * 1024 * 1024;
 const path = require('path');
 
 let storage = multer.diskStorage({
-  destination: (req, file, cb) => { 
+  destination: (req, file, cb) => {  //distination: The folder to which the file has been saved
     cb(null,path.join(__dirname, '../../client/src/components/cvs  '));
   },
   filename: (req, file, cb) => {

@@ -181,12 +181,12 @@ const CountWordsInPDF = async (req, res, array) => {
     const filePath = req.file.destination + '/' + req.file.filename;
     const dataBuffer = fs.readFileSync(filePath);
     let count = 0;
-    const data = await pdf(dataBuffer);
+    const data = await pdf(dataBuffer); //traiter le fonction pdf et récupére les données générées et les stockés dans data 
     const text = data.text.split(/[^\w]+/); // split by non-alphanumeric characters and space
     const search = array || [];
-    const found = new Set();
+    const found = new Set(); //stocke une collection des valeurs uniques (n'acceptent pas les doublons)
     for (let i = 0; i < text.length; i++) {
-        const word = text[i].toLowerCase(); // remove normalization since we're using includes
+        const word = text[i].toLowerCase(); // converte les mots en miniscules
         for (let j = 0; j < search.length; j++) {
             if (word.includes(search[j].toLowerCase())) { // use includes instead of exact match
                 if (!found.has(search[j].toLowerCase())) {
@@ -332,6 +332,7 @@ const refuseCandidate = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 const refuseCandidateTechnical = async (req, res) => {
     const { offerId, candidateId } = req.params;
     console.log(offerId, candidateId)
@@ -382,10 +383,10 @@ const acceptCandidate = async (req, res) => {
 const acceptCandidateTechnical = async (req, res) => {
     const { offerId, candidateId } = req.params;
     try {
-        const offer = await offersModels.findOne({ _id: ObjectID(offerId) });
+        const offer = await offersModels.findOne({ _id: ObjectID(offerId) }); 
         const candidateIndex = offer.technicalTest.findIndex(candidate => candidate._id.toString() === candidateId);
 
-        if (candidateIndex === -1) {
+        if (candidateIndex === -1) {  //-1 : signifie que le candidat n'est pas trouvé dans la liste des candidats réussites dans le test tech
             return res.status(404).json({ message: 'Candidate not found in technical test' });
         }
 
