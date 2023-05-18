@@ -16,7 +16,7 @@ const Sidebar = () => {
     return (
         <SidebarContainer>
             <Div>
-                <SidebarHeader>Admin Dashboard</SidebarHeader>
+                <SidebarHeader>Admin </SidebarHeader>
                 < FcReadingEbook style={{ width: '100px', height: '100px', alignSelf: 'center' }} />
             </Div>
             <div><SidebarLink to='/admin/dashboard' active={activeLink === 'dashboard'} onClick={() => handleLinkClick('dashboard')}><AiOutlineHome style={{ marginRight: "10px" }} />

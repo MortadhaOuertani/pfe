@@ -5,7 +5,7 @@ const path = require('path');
 let storage = multer.diskStorage({
 
   destination: (req, file, cb) => {  //distination: The folder to which the file has been saved
-    cb(null,path.join(__dirname, '../../client/src/components/cvs  '));
+    cb(null,path.join(__dirname, '../../client/src/components/cvs'));
 
 
   },

@@ -24,7 +24,7 @@ export const Button = styled.button`
     font-weight: 600;
     margin-left: 50%;
     white-space: nowrap;
-` 
+`
 export const ButtonDelete = styled.div`
     width: 30px;
     height: 30px;
@@ -39,7 +39,7 @@ export const ButtonDelete = styled.div`
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
 
-` 
+`
 export const Background = styled.div`
 background-color: rgba(0,0,0,0.3);
 position: absolute;
@@ -67,7 +67,14 @@ flex-direction: column;
 row-gap: 5px;
 
 `
+export const Title = styled.div`
+max-height:100px;
+overflow: hidden;
+background-color: red;
+text-overflow: ellipsis;
+`
 export const H2 = styled.h3`
+
 `
 export const H3 = styled.h3`
 `

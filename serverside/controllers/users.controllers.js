@@ -15,7 +15,7 @@ const RegisterCandidate = async (req, res) => {
   const { token } = req.body; //extraire le jeton 
   const account = jwt.verify(token, process.env.PRIVATE_KEY); //vérifier le jeton à l'aide de la clé privée spécifiée dans les variables d'environnement
   try {
-  
+
     UserModel.findOne({ email: req.body.email }).then(async (exist) => {
       if (exist) {
         res.status(404).json("User already exists");
@@ -24,7 +24,7 @@ const RegisterCandidate = async (req, res) => {
         const hash = bcrypt.hashSync(account.password, salt)//hashed password
         account.password = hash;
         account.role = "USER";
-        await UserModel.create(account); 
+        await UserModel.create(account);
         res.status(200).json({ message: "success" });
       }
     });
@@ -71,10 +71,10 @@ const RegisterMailCompany = async (req, res) => {
           role: "COMPANY",
           password: req.body.password,
           logo: req.file.filename,
-        }, "HDYHHSY6", { expiresIn: '15m'  });
+        }, "HDYHHSY6", { expiresIn: '15m' });
         res.status(200).json({
           message: "An email has been sent to your account",
-          token: "Bearer "+ token
+          token: "Bearer " + token
         });
 
         // cretae a transporter 
@@ -90,7 +90,7 @@ const RegisterMailCompany = async (req, res) => {
           from: "projetpfe885@gmail.com",
           to: req.body.email,
           subject: 'Finish registering',
-          text: `Click on this link to Register : ${process.env.CLIENT_URL}/registercompany/${token}` 
+          text: `Click on this link to Register : ${process.env.CLIENT_URL}/registercompany/${token}`
         };
         transporter.sendMail(mailOptions, (error, info) => {  //envoi du token dans un mail
           if (error) {
@@ -109,7 +109,7 @@ const RegisterMailCompany = async (req, res) => {
 
 const RegisterMailCandidat = async (req, res) => {
   try {
-    await uploadProfilepicture(req, res);  
+    await uploadProfilepicture(req, res);
     console.log(req.files)
 
     usersModels.findOne({ email: req.body.email }).then(async (exist) => {
@@ -188,10 +188,10 @@ const checkType = async (req, res) => { //pour vérifier le type de l'utilisateu
 };
 
 const EditCompany = async (req, res) => {
-  try {         
-    await uploadFileMiddleware(req, res); 
+  try {
+    await uploadFileMiddleware(req, res);
     const id = req.user.id; //recupére l'id d'utilisateur 
-  req.body.logo=req.file.filename //remplace le nom de fichier du logo de l'entreprise dans le corps de la demande par le nom de fichier du logo qui a été téléchargé
+    if (req.file) { req.body.logo = req.file.filename } //remplace le nom de fichier du logo de l'entreprise dans le corps de la demande par le nom de fichier du logo qui a été téléchargé
     const updatedUser = await companyModel.findByIdAndUpdate(id, req.body, { //mettre a jour les infos avec l'id
       new: true,  //renvoie le document modifié 
     });
@@ -207,8 +207,9 @@ const EditCandidat = async (req, res) => {
   try {
     await uploadProfilepicture(req, res);
     const id = req.user.id;
-    if (req.body.profile){
-    req.body.profile=req.file.filename}
+    if (req.body.profile) {
+      req.body.profile = req.file.filename
+    }
     console.log(req.body)
 
     const updatedUser = await UserModel.findByIdAndUpdate(id, req.body, {
@@ -427,7 +428,7 @@ const ResetPassword = (req, res) => {  //Reset candidate's password
       }
 
       // Update user's password
-      const salt = bcrypt.genSaltSync(10) 
+      const salt = bcrypt.genSaltSync(10)
       const hash = bcrypt.hashSync(password, salt)//hashed password
       user.password = hash;
       user.save();

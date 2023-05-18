@@ -23,7 +23,9 @@ const Profile = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [education, setEducation] = useState('');
+  const [diplome, setdiplome] = useState('');
   const [lastname, setlastname] = useState("");
+  const [age, setage] = useState("");
   const [logo, setLogo] = useState(null);
   const [profile, setProfile] = useState(null);
   const [img, setImg] = useState(null)
@@ -34,7 +36,28 @@ const Profile = () => {
     fetchData(id); // fiat appel a la fonction fetchData 
   }, []); // [] : l'effet est appelé une seule fois
 
-
+  const setUserData = (userData) => {
+    setName(userData?.name || "");
+    setEmail(userData?.email || "");
+    setPhone(userData?.phone || "");
+    setLocation(userData?.location || "");
+    setBio(userData?.bio || "");
+    setaddress(userData?.address || "");
+    setCompany(userData?.company || "");
+    setStartDate(userData?.startDate || "");
+    setEndDate(userData?.endDate || "");
+    setEducation(userData?.education || "");
+    setlastname(userData?.lastname || "");
+    setdiplome(userData?.diplome || "");
+    setage(userData?.age || "");
+  }
+  
+  useEffect(() => {
+    if (auth.user) {
+      setUserData(auth.user);
+    }
+  }, [auth.user]);
+  
 
   useEffect(() => {
     if (auth?.user?.logo) {
@@ -74,67 +97,44 @@ const Profile = () => {
   }
 
 
+  const stateSetterMap = {
+    name: setName,
+    email: setEmail,
+    phone: setPhone,
+    diplome:setdiplome,
+    age:setage,
+    address: setaddress,
+    bio: setBio,
+    company: setCompany,
+    startDate: setStartDate,
+    endDate: setEndDate,
+    education: setEducation,
+    lastname: setlastname,
+  };
+  
   const onChangeHandler = (e) => {
     const { name, value, files } = e.target;
-    console.log(name, ":", value)
-    setName(auth.user.name)
-    setEmail(email || auth.user.email);
-    setPhone(phone || auth.user.phone);
-    setaddress(address || auth.user.address);
-    setBio(bio || auth.user.bio);
-    setCompany(company || auth.user.company);
-    setStartDate(startDate || auth.user.startDate);
-    setEndDate(endDate || auth.user.endDate);
-    setEducation(education || auth.user.education);
-    setlastname(lastname || auth.user.lastname);
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'phone':
-        setPhone(value);
-        break;
-      case 'address':
-        setLocation(value);
-        break;
-      case 'bio':
-        setBio(value);
-        break;
-      case 'lastname':
-        setlastname(value);
-        break;
-      case 'address':
-        setaddress(value);
-        break;
-      case 'company':
-        setCompany(value);
-        break;
-      case 'startDate':
-        setStartDate(value);
-        break;
-      case 'endDate':
-        setEndDate(value);
-        break;
-      case 'education':
-        setEducation(value);
-        break;
-      case 'logo':
+    console.log(name, ":", value);
+    if (files) {
+      // If the input type is 'file'
+      if (name === "logo") {
         setLogo(files[0]);
-        console.log(logo)
-        break;
-      case 'profile':
+        console.log(logo);
+      }
+      if (name === "profile") {
         setProfile(files[0]);
-        console.log(profile)
-
-        break;
-      default:
-        break;
+        console.log(profile);
+      }
+    } else {
+      // If the input type is not 'file'
+      const stateSetter = stateSetterMap[name];
+      if (stateSetter) {
+        stateSetter(value);
+      }
     }
   };
-
+  
+  
   useEffect(() => {
     console.log(logo);
     // perform some action with the updated state
@@ -147,6 +147,8 @@ const Profile = () => {
 
       if (auth?.user?.role === "USER") {
         formData.append('profile', profile);
+        formData.append('age', age);
+        formData.append('diplome', diplome);
         formData.append('name', name);
         formData.append('lastname', lastname);
         console.log(formData, lastname)
@@ -161,8 +163,10 @@ const Profile = () => {
         formData.append('education', education);
       } else {
         formData.append('logo', logo);
+        formData.append('age', age);
         formData.append('name', name);
         formData.append('lastname', lastname);
+        formData.append('diplome', diplome);
         formData.append('email', email);
         formData.append('phone', phone);
         formData.append('address', address);
@@ -182,9 +186,11 @@ const Profile = () => {
       formData.append('lastname', lastname);
       formData.append('email', email);
       formData.append('phone', phone);
+      formData.append('diplome', diplome);
       formData.append('address', address);
       formData.append('location', location);
       formData.append('bio', bio);
+      formData.append('age', age);
       formData.append('company', company);
       formData.append('startDate', startDate);
       formData.append('endDate', endDate);
@@ -192,7 +198,9 @@ const Profile = () => {
       handleEditCheck(formData)
     }
     handleEditCheck(formData)
-    //window.location.reload();
+    setTimeout(() => {
+    window.location.reload();
+    }, 1000);
   }
   const handleEditClick = () => {
     setEditing(true);
@@ -236,32 +244,32 @@ const Profile = () => {
 
               <InfoWrapper >
 
-                <H2>{editing ? <Input onChange={onChangeHandler} type="text" name="name" defaultValue={auth.user?.name} /> : auth.user?.name}</H2>
+                <H2>{editing ? <Input onChange={onChangeHandler} type="text" name="name" value={name} /> : auth.user?.name}</H2>
                 {auth.user?.role === "USER" && (
-                  <H2>{editing ? <Input onChange={onChangeHandler} type="text" name="lastname" defaultValue={auth.user?.lastname} /> : auth.user?.lastname}</H2>
+                  <H2>{editing ? <Input onChange={onChangeHandler} type="text" name="lastname" value={lastname} /> : auth.user?.lastname}</H2>
                 )}
-                {auth.user?.role == "USER" ? <H4age>{editing ? <Input onChange={onChangeHandler} type="number" name="age" defaultValue={auth.user?.age} /> : auth.user?.age}</H4age> : null}
+                {auth.user?.role == "USER" ? <H4age>{editing ? <Input onChange={onChangeHandler} type="number" name="age" value={age} /> : auth.user?.age}</H4age> : null}
               </InfoWrapper>
               <InfoWrapper>
                 <GrLocation size={23} style={{ color: 'grey' }} />
-                <H3>{editing ? <Input onChange={onChangeHandler} type="text" name="address" defaultValue={auth.user?.address} /> : auth.user?.address}</H3>
+                <H3>{editing ? <Input onChange={onChangeHandler} type="text" name="address" value={address} /> : auth.user?.address}</H3>
               </InfoWrapper>
               <InfoWrapper>
               </InfoWrapper>
               <InfoWrapper>
                 <BsTelephone size={23} />
-                {editing ? <Input onChange={onChangeHandler} type="text" name="phone" defaultValue={auth.user?.phone} /> : <H3>{auth.user?.phone}</H3>}
+                {editing ? <Input onChange={onChangeHandler} type="text" name="phone" value={phone} /> : <H3>{auth.user?.phone}</H3>}
               </InfoWrapper>
               <InfoWrapper>
 
                 {auth.user?.role === "USER" ? <SlGraduation size={23} /> : null}
                 {auth.user?.role === "USER" ? (
-                  editing ? <Input onChange={onChangeHandler} type="text" name="diplome" defaultValue={auth.user?.diplome} /> : <H3>{auth.user?.diplome}</H3>
+                  editing ? <Input onChange={onChangeHandler} type="text" name="diplome" value={diplome} /> : <H3>{auth.user?.diplome}</H3>
                 ) : null}
               </InfoWrapper>
               <InfoWrapper>
                 <HiOutlineMail size={23} />
-                {editing ? <Input onChange={onChangeHandler} type="text" name="email" defaultValue={auth.user?.email} /> : <H3>{auth.user?.email}</H3>}
+                {editing ? <Input onChange={onChangeHandler} type="text" name="email" value={email} /> : <H3>{auth.user?.email}</H3>}
               </InfoWrapper>
             </InformationWrapper>
           </InformationBottom>

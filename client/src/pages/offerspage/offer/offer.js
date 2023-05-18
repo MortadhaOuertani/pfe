@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Button, ButtonDelete, Container, Footer, H2, H3, Img, Imgdiv, Info, Item, LeftSide, Middleside, MiddleSide, RightSide, Topside } from './offerElement'
+import { Button, ButtonDelete, Container,Title, Footer, H2, H3, Img, Imgdiv, Info, Item, LeftSide, Middleside, MiddleSide, RightSide, Topside } from './offerElement'
 import { GrLocation } from 'react-icons/gr'
 import { FcCalendar, FcBusiness, FcDocument } from "react-icons/fc";
 import { AiOutlineClose } from "react-icons/ai";
@@ -87,6 +87,7 @@ const Offer = ({ experience, date, _id, title, createdAt, company, logo, contrac
               <FcDocument style={{ color: "grey" }} />
               <h4 style={{ color: "grey" }}>{contract}</h4>
             </Item>
+
             <Item>
               <GrLocation style={{ color: "grey" }} />
               <h4 style={{ color: "grey" }}>{local}</h4>
