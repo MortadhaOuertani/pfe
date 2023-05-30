@@ -14,6 +14,7 @@ const   Accepted = () => {
     const [offer, setOffer] = useState([])
     const [loading, setLoading] = useState(true);
 
+    
     const GetCandidates = (id) => {
         axios.get(`http://localhost:3600/api/GetOfferApplicants/${id}`)
             .then((res) => {
@@ -31,7 +32,7 @@ const   Accepted = () => {
     return (
         <>
             <Container>
-                <Header><h1>{offer.title}</h1>
+                <Header><h1>{offer.title}</h1><h1>Accepted List</h1> 
                     <Templates>
                     <LinkS to={`/appliedOffer/${id}`}>
                             <Technical>

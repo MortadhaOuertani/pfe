@@ -8,6 +8,7 @@ background-color: #e5f3ff;
 display: flex;
 align-items: center;
 justify-content: center;
+padding-bottom: 60px;
 `;
 
 export const Icon = styled.div`
@@ -173,6 +174,7 @@ padding-top: 150px;
 height: 100%;
 width: 95%;
 display: flex;
+padding-bottom: 60px;
 flex-direction: column;
 justify-content: center;
 align-items: center;

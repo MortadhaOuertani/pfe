@@ -116,7 +116,7 @@ align-items: flex-start;
 row-gap: 5px;
 height:40%;
 `
-export const FullName = styled.div`
+export const FullName = styled(Link)`
 height:20%;
 position: relative;
 top:20%;

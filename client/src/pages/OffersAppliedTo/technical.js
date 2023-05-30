@@ -33,7 +33,7 @@ const Technical = () => {
     return (
         <>
             <Container>
-                <Header><h1>{offer.title}</h1>
+                <Header><h1>{offer.title}</h1> <h1>Technical Test</h1> 
                     <Templates>
                         <LinkS to={`/appliedOffer/${id}`}>
                             <TechnicalD>

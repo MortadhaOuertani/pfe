@@ -30,7 +30,7 @@ const Appling = () => {
     return (
         <>
             <Container>
-                <Header><h1>{offer.title}</h1>
+                <Header><h1>{offer.title}</h1> <h1>SoftSkills Test</h1> 
                     <Templates>
                         <LinkS to={`/appliedOffer/${id}`}>
                             <Technical>

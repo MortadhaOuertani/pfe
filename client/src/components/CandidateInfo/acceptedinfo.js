@@ -21,6 +21,7 @@ const AcceptedInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, name
   useEffect(() => {
     fetchImg(profile);
   }, [profile]);
+  const Cvcandidat = {cv:cv,letter:letter}
   const Info = { pdfFile, letter } // Define an object to hold the PDF file and the cover letter
   const auth = useSelector(state => state.auth) // Access the auth state using the useSelector hook
 
@@ -31,7 +32,7 @@ const AcceptedInfo = ({ cadidatId, cv, phone, diplome, age, profile, email, name
         <Left to={`/Profile/${cadidatId}`}><Img src={img} /></Left>
         <Header>
           <Right>
-            <FullName><H>{name} {lastName}</H>
+            <FullName to={`/${id}/candidate`} state={Cvcandidat}><H>{name} {lastName}</H>
             </FullName>
             <Information><H3>Email : {email}</H3><H3>Phone : {phone}</H3><H3>Diploma : {diplome}</H3><H3>Age : {age} years old</H3></Information>
 

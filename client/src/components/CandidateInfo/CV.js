@@ -1,12 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Container, Iframe, LeftSide, RightSide } from './CvElements';
+import { Container, H1, Iframe, LeftSide, RightSide } from './CvElements';
 
 const CV = () => {
     const location = useLocation(); //fournit des informations sur l'emplacement URL actuel de la page
-    const Info = location.state || {}; 
-
-      if (!location.state) {   //si location.state est faux : il renvoie un msg 
+    const state = location.state;
+    console.log(state)
+    const [pdfFile, setPdfFile] = useState('');
+    useEffect(() => {  // Use the useEffect hook to fetch the PDF file
+        async function fetchPdf() {
+            const { default: file } = await import(`../cvs/${state.cv.data}`);
+            setPdfFile(file);
+        }
+        fetchPdf();
+    }, []);
+    if (!location.state) {   //si location.state est faux : il renvoie un msg 
         return <div>State is null or undefined</div>;
     }
     //sinon retourne un composent qui affiche un fichier pdf et une lettre 
@@ -14,10 +22,10 @@ const CV = () => {
         <>
             <Container>
                 <LeftSide>
-                    <Iframe src={Info.pdfFile} width="100%" height="100%" frameborder="0"></Iframe>{/*to display file type pdf   */}
+                    <Iframe style={{overflowY:"scroll"}} src={pdfFile} width="100%" height="100%" frameborder="0"></Iframe>{/*to display file type pdf   */}
                 </LeftSide>
                 <RightSide>
-                    <h1> {Info.letter}</h1>
+                    <H1> {state.letter}</H1>
                 </RightSide>
             </Container>
         </>
