@@ -75,18 +75,14 @@ function App() {
         <Route element={<ProtectedRoute Role="USER" auth={user} />}>
         <Route path='/offers/:id' element={<OfferDetails />} />
         </Route>
-        <Route element={<ProtectedRoute Role="COMPANY" auth={user} />}>
           <Route path='/postoffer' element={<Post/>} />
           <Route path='/appliedOffer/:id' element={<Appling />} />
           <Route path='/company' element={<CompanyHomePage />} />
          
-        </Route>
-        <Route element={<ProtectedAdmin auth={user} />}>
           <Route path='/admin' element={<Admin />} />
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
           <Route path='/admin/users' element={<AdminUsers />} />
           <Route path='/admin/settings' element={<AdminSettings />} />
-        </Route>
 
 
       </Routes>
